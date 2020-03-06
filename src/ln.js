@@ -8,7 +8,7 @@ process.env.GRPC_SSL_CIPHER_SUITES = 'HIGH+ECDSA'
 
 //  Lnd cert is at ~/.lnd/tls.cert on Linux and
 //  ~/Library/Application Support/Lnd/tls.cert on Mac
-var lndCert = fs.readFileSync("../certs/tls.cert");
+var lndCert = fs.readFileSync('../certs/tls.cert');
 var credentials = grpc.credentials.createSsl(lndCert);
 
 var m = fs.readFileSync('../certs/admin.macaroon');
