@@ -8,6 +8,12 @@
 
 const env = require('dotenv').config()
 
+if (env.error) {
+  throw env.error
+}
+
+console.log(env.parsed)
+
 const twitterApp = {
   consumer_key: process.env.CONSUMER_KEY,
   consumer_secret: process.env.CONSUMER_SECRET,
