@@ -11,7 +11,7 @@ var m = fs.readFileSync('/home/lounes_kmt/cryptodidacte-bot/certs/admin.macaroon
 var macaroon = m.toString('hex');
 var meta = new grpc.Metadata().add('macaroon', macaroon);
 
-var lnrpcDescriptor = grpc.load('rpc.proto');
+var lnrpcDescriptor = grpc.load('/home/lounes_kmt/cryptodidacte-bot/src/rpc.proto');
 var lnrpc = lnrpcDescriptor.lnrpc;
 var client = new lnrpc.Lightning('84.100.44.54:10009', grpc.credentials.createInsecure());
 
