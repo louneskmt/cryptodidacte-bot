@@ -9,4 +9,4 @@ eventEmitter.on('dm', (message) => {
   }
 })
 
-module.exports = eventEmitter;
+module.exports.eventEmitter = eventEmitter;
