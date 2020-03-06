@@ -1,7 +1,7 @@
 const T = require('./src/Twit.js');
 const twitterApp = require('./config.js');
 const security = require('./src/security.js');
-const { eventEmitter } = require('./src/events.js');
+const events = require('./src/events.js');
 
 // Require Express (HTTP server)
 // http://expressjs.com
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
  **/
 app.post('/webhook/twitter', function(request, response) {
   if(request.body.hasOwnProperty('direct_message_events')) {
-    eventEmitter.emit('dm', request.body.direct_message_events[0].message_create)
+    events.eventEmitter.emit('dm', request.body.direct_message_events[0].message_create)
   }
 
   response.send('200 OK')
