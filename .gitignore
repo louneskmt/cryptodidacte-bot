@@ -72,6 +72,10 @@ typings/
 .env
 .env.test
 
+# certs
+tls.cert
+admin.macaroon
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
