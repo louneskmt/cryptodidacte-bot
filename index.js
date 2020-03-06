@@ -24,9 +24,9 @@ app.post('/webhook/twitter', function(request, response) {
   console.log(request.body)
   // var events = JSON.parse(request.body)
 
-  if(events.hasOwnProperty('direct_message_events')) {
+  if(request.body.hasOwnProperty('direct_message_events')) {
     console.log("Message")
-    console.log(events.direct_message_events.message_create)
+    console.log(request.body.direct_message_events.message_create)
   }
 
   // socket.io.emit(socket.activity_event, {
