@@ -1,11 +1,12 @@
 const T = require('./src/Twit.js');
 const twitterApp = require('./config.js');
 const security = require('./src/security.js');
+const { eventEmitter } = require('./src/events.js');
 
 // Require Express (HTTP server)
 // http://expressjs.com
 var express = require("express");
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const https = require('https');
 var fs = require('fs');
 var app = express();
@@ -20,20 +21,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
  * Receives Account Acitivity events
  **/
 app.post('/webhook/twitter', function(request, response) {
-  console.log("POST")
-  console.log(request.body)
-  // var events = JSON.parse(request.body)
-
   if(request.body.hasOwnProperty('direct_message_events')) {
-    console.log(request.body.direct_message_events[0].message_create)
+    eventEmitter.emit('dm', request.body.direct_message_events[0].message_create)
   }
-
-  // socket.io.emit(socket.activity_event, {
-  //   internal_id: uuid(),
-  //   event: request.body
-  // })
-  //
-
 
   response.send('200 OK')
 })
