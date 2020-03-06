@@ -11,6 +11,7 @@ const pay_ln_invoice = (invoice) => {
   console.log(invoice)
 
   lnService.getWalletInfo({lnd}, (err, result) => {
+    console.log(err)
     const nodeKey = result.public_key;
     console.log(nodeKey)
   });
