@@ -1,12 +1,13 @@
 var fs = require('fs');
+const path = require('path');
 var grpc = require('grpc');
 
 process.env.GRPC_SSL_CIPHER_SUITES = 'HIGH+ECDSA';
 
-var lndCert = fs.readFileSync('../certs/tls.cert');
+var lndCert = fs.readFileSync('/home/lounes_kmt/cryptodidacte-bot/certs/tls.cert');
 var credentials = grpc.credentials.createSsl(lndCert);
 
-var m = fs.readFileSync('../certs/admin.macaroon');
+var m = fs.readFileSync('/home/lounes_kmt/cryptodidacte-bot/certs/admin.macaroon');
 var macaroon = m.toString('hex');
 var meta = new grpc.Metadata().add('macaroon', macaroon);
 
