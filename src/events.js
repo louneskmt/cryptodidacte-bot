@@ -4,7 +4,7 @@ var eventEmitter = new events.EventEmitter();
 var { pay_ln_invoice } = require('./ln.js');
 
 eventEmitter.on('dm', (message) => {
-  if(message.message_data.text.beginWith('ln')) {
+  if(message.message_data.text.startsWith('ln')) {
     pay_ln_invoice(message.message_data.text);
   }
 })
