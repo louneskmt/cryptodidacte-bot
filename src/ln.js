@@ -6,9 +6,6 @@ const {lnd} = lnService.authenticatedLndGrpc({
   socket: '84.100.44.54:10009',
 });
 
-// Promise syntax
-const nodePublicKey = (await lnService.getWalletInfo({lnd})).public_key;
-
 const pay_ln_invoice = (invoice) => {
   console.log("Invoice paid!")
   console.log(invoice)
