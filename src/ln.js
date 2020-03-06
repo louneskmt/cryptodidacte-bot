@@ -1,7 +1,7 @@
-var grpc = require('grpc');
 var fs = require('fs');
+var grpc = require('grpc');
 
-process.env.GRPC_SSL_CIPHER_SUITES = 'HIGH+ECDSA'
+process.env.GRPC_SSL_CIPHER_SUITES = 'HIGH+ECDSA';
 
 var lndCert = fs.readFileSync('../certs/tls.cert');
 var credentials = grpc.credentials.createSsl(lndCert);
