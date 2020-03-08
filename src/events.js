@@ -1,10 +1,8 @@
 var events = require('events');
-var lightning = require('./lightning.js');
 var Twitter = require('./Twit');
+var lightning = require('./lightning.js');
 
 var eventEmitter = new events.EventEmitter();
-
-var { pay_ln_invoice } = require('./ln.js');
 
 eventEmitter.on('dm', (message) => {
   if(message.message_data.text.startsWith('ln')) {
