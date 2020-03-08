@@ -47,6 +47,8 @@ const generateInvoice = (value, memo) => {
   };
 
   lightning.addInvoice(request, function(err, response) {
+    console.log("Error : ", err);
+    console.log("Response : ", response)
     console.log("Invoice : ", response.payment_request);
     return response.payment_request;
   })
