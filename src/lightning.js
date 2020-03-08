@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require("path");
 var grpc = require('grpc');
-var lnrpc = grpc.load(path.resolve('./rpc.proto')).lnrpc;
+var lnrpc = grpc.load(path.resolve('rpc.proto')).lnrpc;
 
 process.env.GRPC_SSL_CIPHER_SUITES = 'HIGH+ECDSA'
 
