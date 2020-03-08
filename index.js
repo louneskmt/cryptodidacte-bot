@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.post('/webhook/twitter', function(request, response) {
   if(request.body.hasOwnProperty('direct_message_events')) {
     events.eventEmitter.emit('dm', request.body.direct_message_events[0].message_create)
-    console.log(request);
+    console.log(request.body);
   }
   response.send('200 OK')
 })
