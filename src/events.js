@@ -10,7 +10,7 @@ eventEmitter.on('dm', (message) => {
   }
 
   if(message.message_data.text.startsWith('Generate invoice for 200 sats')) {
-    invoice = lightning.generateInvoice("Test", 200);
+    invoice = lightning.generateInvoice(200, "Test");
     Twitter.sendTextMessage('986994912565620736', invoice);
   }
 });
