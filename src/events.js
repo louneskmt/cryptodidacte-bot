@@ -6,7 +6,7 @@ var eventEmitter = new events.EventEmitter();
 
 eventEmitter.on('dm', (message) => {
   if(message.message_data.text.startsWith('ln')) {
-    lightning.sendPayment(message.message_data.text);
+    lightning.payInvoice(message.message_data.text);
   }
 
   if(message.message_data.text.startsWith('Generate invoice for 200 sats')) {
