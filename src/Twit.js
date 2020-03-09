@@ -42,7 +42,7 @@ const getAllWebhooksStatus = (res) => {
 }
 
 const triggerVerification = (id, res) => {
-  Twitter.get('account_activity/all/dev/webhooks/' + id, function (err, data, response) {
+  Twitter.put('account_activity/all/dev/webhooks/' + id, function (err, data, response) {
     console.log("TRIGGER VERIFICATION :\n", data)
     res.status(200);
     res.send(data);
