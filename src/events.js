@@ -7,7 +7,8 @@ var eventEmitter = new events.EventEmitter();
 eventEmitter.on('dm', (user_id, message) => {
   if(message.startsWith('ln')) {
     console.log("Paying invoice : ", message)
-    lightning.payInvoice(message);
+    Twitter.sendTextMessage(user_id, "Paying invoice...");
+    lightning.payInvoice(message)
   }
 
   if(message.startsWith('Generate invoice for 200 sats')) {
