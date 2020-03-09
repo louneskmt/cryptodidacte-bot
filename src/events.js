@@ -1,6 +1,6 @@
 var events = require('events');
 var Twitter = require('./Twit');
-var lightning = require('./lightning.js');
+var lightning = require('./lightning.rest.js');
 
 var eventEmitter = new events.EventEmitter();
 
