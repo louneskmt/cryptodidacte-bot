@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
  * Receives Account Acitivity events
  **/
 app.post('/webhook/twitter', function(request, response) {
+console.log(request)
   if(request.body.hasOwnProperty('direct_message_events')) {
     events.eventEmitter.emit('dm', request.body.direct_message_events[0].message_create)
     console.log(request.body);
