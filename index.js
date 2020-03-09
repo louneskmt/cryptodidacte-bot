@@ -1,7 +1,7 @@
 const twitterApp = require('./config.js');
 const security = require('./src/security.js');
 const events = require('./src/events.js');
-var Twitter = require('./Twit');
+var Twitter = require('./src/Twit');
 
 // Require Express (HTTP server)
 // http://expressjs.com
