@@ -3,7 +3,7 @@ var path = require("path");
 var request = require('request');
 var https = require('https')
 var Agent = require('socks5-https-client/lib/Agent');
-var macaroon = fs.readFileSync(path.resolve('./admin.macaroon')).toString('hex');
+var macaroon = fs.readFileSync(path.resolve('./certs/admin.macaroon')).toString('hex');
 
 const payInvoice = (invoice) => {
   var requestBody = {
