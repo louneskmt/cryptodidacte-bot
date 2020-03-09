@@ -5,12 +5,12 @@ var lightning = require('./lightning.rest.js');
 var eventEmitter = new events.EventEmitter();
 
 eventEmitter.on('dm', (user_id, message) => {
-  if(message.message_data.text.startsWith('ln')) {
+  if(message.startsWith('ln')) {
     console.log("Paying invoice : ", message)
     lightning.payInvoice(message);
   }
 
-  if(message.message_data.text.startsWith('Generate invoice for 200 sats')) {
+  if(message.startsWith('Generate invoice for 200 sats')) {
     var invoice = lightning.generateInvoice(200, "Test");
     console.log("Generating invoice")
     Twitter.sendTextMessage(user_id, invoice);
