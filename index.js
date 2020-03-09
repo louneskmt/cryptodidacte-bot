@@ -20,10 +20,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
  * Receives Account Acitivity events
  **/
 app.post('/webhook/twitter', function(request, response) {
-console.log(request)
+  console.log(request.body);
   if(request.body.hasOwnProperty('direct_message_events')) {
     events.eventEmitter.emit('dm', request.body.direct_message_events[0].message_create)
-    console.log(request.body);
+
   }
   response.send('200 OK')
 })
@@ -55,4 +55,5 @@ https.createServer({
 }, app)
 .listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'))
+  Twitter.sendTextMessage('986994912565620736', 'Node app is running on port' + app.get('port'));
 });
