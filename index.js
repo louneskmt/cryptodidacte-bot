@@ -47,9 +47,10 @@ app.get('/webhook/twitter', function(request, response) {
 });
 
 app.get('/webhook/status', function(req, res){
-  Twitter.getSubscriptions(res);
-  Twitter.getAllWebhooksStatus(res);
-  Twitter.triggerVerification(twitterApp.webhook_id, res);
+  Twitter.getSubscriptions();
+  Twitter.getAllWebhooksStatus();
+  // Twitter.triggerVerification(twitterApp.webhook_id);
+  res.status(200).send()
 });
 
 app.get('/', function(req, res){
