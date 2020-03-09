@@ -25,27 +25,21 @@ const sendTextMessage = (user_id, text) => {
   });
 }
 
-const getSubscriptions = (res) => {
+const getSubscriptions = () => {
   Twitter.get('account_activity/all/dev/subscriptions/list', function (err, data, response) {
     console.log("SUBSCRIPTIONS :\n", data);
-    res.status(200);
-    res.send(data);
   });
 }
 
-const getAllWebhooksStatus = (res) => {
+const getAllWebhooksStatus = () => {
   Twitter.get('account_activity/all/webhooks', function (err, data, response) {
     console.log("ALL :\n", data);
-    res.status(200);
-    res.send(data);
   });
 }
 
-const triggerVerification = (id, res) => {
+const triggerVerification = (id) => {
   Twitter.put('account_activity/all/dev/webhooks/' + id, function (err, data, response) {
     console.log("TRIGGER VERIFICATION :\n", data)
-    res.status(200);
-    res.send(data);
   });
 }
 
