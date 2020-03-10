@@ -11,7 +11,7 @@ const payInvoice = (invoice) => {
   };
 
   var options = {
-    url: 'https://wbpc4nobccaml6sw.onion:10080/v1/channels/transactions',
+    url: 'https://kfmprmnblmf262qcj7vf7lh7lqzrybruj5vvzx7rkpt3kafejwtvydad.onion:10080/v1/channels/transactions',
     strictSSL: false,
   	agentClass: Agent,
     agentOptions: {
@@ -49,7 +49,7 @@ const generateInvoice = (value, memo, callback) => {
   };
 
   var options = {
-    url: 'https://wbpc4nobccaml6sw.onion:10080/v1/invoices',
+    url: 'https://kfmprmnblmf262qcj7vf7lh7lqzrybruj5vvzx7rkpt3kafejwtvydad.onion:10080/v1/invoices',
     strictSSL: false,
   	agentClass: Agent,
     agentOptions: {
