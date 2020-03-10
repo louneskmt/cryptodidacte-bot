@@ -5,7 +5,7 @@ var https = require('https')
 var Agent = require('socks5-https-client/lib/Agent');
 var macaroon = fs.readFileSync(path.resolve('./certs/admin.macaroon')).toString('hex');
 
-const payInvoice = (invoice) => {
+const payInvoice = (invoice, successCallback, errorCallback) => {
   var requestBody = {
     payment_request: invoice
   };
@@ -28,10 +28,15 @@ const payInvoice = (invoice) => {
 
   request.post(options, function(error, response, body) {
     console.log(error || body);
+    if(body && typeof successCallback === "function") {
+      successCallback();
+    } else if (error && typeof errorCallback === "function") {
+      errorCallback(error);
+    }
   });
 }
 
-const generateInvoice = (value, memo, callback) => {
+const generateInvoice = (value, memo, successCallback, errorCallback) => {
   var requestBody = {
     memo: memo,
     value: value,
@@ -66,8 +71,10 @@ const generateInvoice = (value, memo, callback) => {
 
   request.post(options, function(error, response, body) {
     console.log(error || body);
-    if(body) {
-      callback(body.payment_request);
+    if(body && typeof successCallback === "function") {
+      successCallback(body.payment_request);
+    } else if (error && typeof errorCallback === "function") {
+      errorCallback(error);
     }
   });
 }
