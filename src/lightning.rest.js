@@ -31,7 +31,7 @@ const payInvoice = (invoice) => {
   });
 }
 
-const generateInvoice = (value, memo) => {
+const generateInvoice = (value, memo, callback) => {
   var requestBody = {
     memo: memo,
     value: value,
@@ -66,7 +66,7 @@ const generateInvoice = (value, memo) => {
 
   request.post(options, function(error, response, body) {
     console.log(error || body);
-    return body.payment_request;
+    callback();
   });
 }
 
