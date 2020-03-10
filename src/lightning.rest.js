@@ -66,7 +66,9 @@ const generateInvoice = (value, memo, callback) => {
 
   request.post(options, function(error, response, body) {
     console.log(error || body);
-    callback();
+    if(body) {
+      callback(body.payment_request);
+    }
   });
 }
 
