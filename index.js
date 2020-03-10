@@ -24,7 +24,11 @@ app.post('/webhook/twitter', function(request, response) {
   console.log(request.body)
   if(request.body.hasOwnProperty('direct_message_events')) {
     console.log(request.body.direct_message_events[0].message_create);
+<<<<<<< HEAD
     events.eventEmitter.emit('dm', Object.keys(request.body.users), request.body.direct_message_events[0].message_create.message_data.text)
+=======
+    events.eventEmitter.emit('dm', Object.keys(request.body.users)[0], request.body.direct_message_events[0].message_create.message_data.text)
+>>>>>>> 572b28c115e70ead460a7fe351f0bb4704eed25d
   }
   response.send('200 OK')
 })

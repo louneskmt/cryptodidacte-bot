@@ -111,3 +111,9 @@ dist
 
 # macOS
 .DS_Store
+<<<<<<< HEAD
+=======
+
+# Utility
+bfg.jar
+>>>>>>> 572b28c115e70ead460a7fe351f0bb4704eed25d
