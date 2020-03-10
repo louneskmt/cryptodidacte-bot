@@ -18,6 +18,7 @@ eventEmitter.on('dm', (user_id, message) => {
 
   if(message.startsWith('Generate invoice for 200 sats')) {
     console.log("Generating invoice");
+    Twitter.sendTextMessage(user_id, "Generating invoice...");
     lightning.generateInvoice(200, "Test", (invoice) => {
       Twitter.sendTextMessage(user_id, "✅ Done!");
       Twitter.sendTextMessage(user_id, invoice);
