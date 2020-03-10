@@ -35,7 +35,17 @@ const generateInvoice = (value, memo) => {
   var requestBody = {
     memo: memo,
     value: value,
-    creation_date: Date.now()
+    creation_date: Date.now(),
+    route_hints: [
+      {
+        hop_hints : [
+          {
+            node_id: '03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f',
+            chan_id: '682828606770184193'
+          }
+        ]
+      }
+    ]
   };
 
   var options = {
@@ -56,6 +66,7 @@ const generateInvoice = (value, memo) => {
 
   request.post(options, function(error, response, body) {
     console.log(error || body);
+    return body.payment_request;
   });
 }
 
