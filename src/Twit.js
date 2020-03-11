@@ -74,7 +74,7 @@ const sendMenu = (user_id) => {
 
 const uploadImage = (filePath, callback) => {
   Twitter.postMediaChunked({ file_path: filePath }, function (err, data, response) {
-    console.log(data)
+    console.log(err || data)
     if(data && typeof callback === "function") {
       callback(body.media_id)
     }
