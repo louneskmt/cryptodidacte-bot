@@ -36,8 +36,10 @@ const sendMessageWithImage = (user_id, text, filePath) => {
     var message_create_object = {
       text: text,
       attachment: {
-        type: image_type,
-        media_id: media_id_string
+        type: "media",
+        media: {
+          id: media_id_string
+        }
       }
     }
     sendMessage(user_id, message_create_object);
