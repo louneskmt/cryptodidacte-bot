@@ -102,6 +102,7 @@ module.exports = {
   sendTextMessage,
   sendMenu,
   uploadImage,
+  sendMessageWithImage,
   getSubscriptions,
   getAllWebhooksStatus,
   triggerVerification
