@@ -1,10 +1,11 @@
 const Twit = require('twit');
 const twitterApp = require('../config.js');
 const Twitter = new Twit(twitterApp);
+const request = require('request');
 
 // @lounes_kmt -> 986994912565620736
 
-const sendTextMessage = (user_id, text) => {
+const sendMessage = (user_id, message_create_object) => {
   var message = {
     event: {
       type: "message_create",
@@ -12,16 +13,71 @@ const sendTextMessage = (user_id, text) => {
         target: {
           recipient_id: user_id
         },
-        message_data: {
-          text: text
-        }
+        message_data: message_create_object
       }
     }
   }
 
   Twitter.post('direct_messages/events/new', message, function (err, data, response) {
     console.log(data)
-    //console.log(response)
+  });
+}
+
+const sendTextMessage = (user_id, text) => {
+  var message_create_object = {
+    text: text
+  }
+
+  sendMessage(user_id, message_create_object);
+}
+
+const sendMessageWithImage = (user_id, text, filePath) => {
+  uploadImage(filePath, (media_id) => {
+    var message_create_object = {
+      text: text,
+      attachment: {
+        media_id: media_id
+      }
+    }
+
+    sendMessage(user_id, message_create_object);
+  })
+}
+
+const sendMenu = () => {
+  var message_create_object = {
+    text: "What do you want to do ?",
+    quick_reply: {
+      type: "options",
+      options: [
+        {
+          label: "Claim rewards",
+          description: "Claim #LNQuiz rewards if you won",
+          metadata: "claim_rewards"
+        },
+        {
+          label: "Tip Cryptodidacte",
+          description: "Generate an LN invoice to tip Cryptodidacte",
+          metadata: "generate_invoice"
+        },
+        {
+          label: "Receive sats",
+          description: "Test option for sats sending",
+          metadata: "receive_sats"
+        }
+      ]
+    }
+  }
+
+  sendMessage(user_id, message_create_object);
+}
+
+const uploadImage = (filePath, callback) => {
+  Twitter.postMediaChunked({ file_path: filePath }, function (err, data, response) {
+    console.log(data)
+    if(body && typeof callback === "function") {
+      callback(body.media_id)
+    }
   });
 }
 
