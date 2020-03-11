@@ -20,6 +20,10 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
   }
 
+  if(message === "Start") {
+    sendMenu();
+  }
+
   if(message.startsWith('ln')) {
     console.log("Paying invoice : ", message)
     Twitter.sendTextMessage(user_id, "Paying invoice...");
