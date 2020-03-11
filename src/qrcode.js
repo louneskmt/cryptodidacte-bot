@@ -9,12 +9,9 @@ const generateQRCode = (text) => {
       light: '#ffffff' // Transparent background
     }
   }, function (err) {
-      if (err) {
-        return "None";
-      }
-      return filePath;
+      if (err) throw err;
   });
-
+  return filePath;
 }
 
 generateQRCode("Coucou")
