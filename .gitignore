@@ -115,3 +115,5 @@ dist
 # Utility
 bfg.jar
 response.json
+
+assets/temp/*
