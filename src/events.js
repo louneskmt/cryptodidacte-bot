@@ -45,9 +45,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
       QRCode.generateQRCode(invoice, (QRCodePath) => {
         console.log("QRCodePath :", QRCodePath);
         if(QRCodePath !== "None") {
-          Twitter.uploadImage(QRCodePath, (media_id) => {
-            Twitter.sendMessageWithImage(user_id, invoice, QRCodePath);
-          });
+          Twitter.sendMessageWithImage(user_id, invoice, QRCodePath);
         } else {
           Twitter.sendTextMessage(user_id, invoice);
         }
