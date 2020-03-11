@@ -2,7 +2,7 @@ var QRCode = require('qrcode');
 var path = require('path')
 
 const generateQRCode = (text) => {
-  var filePath = './assets/temp/qrcode-' + text.substring(0,15).toLowerCase().replace(/ /g, '_') + '.png';
+  var filePath = path.join(__dirname, '../assets/temp/qrcode-' + text.substring(0,15).toLowerCase().replace(/ /g, '_') + '.png');
   QRCode.toFile(filePath, text, {
     color: {
       dark: '#FC0030',  // Blue dots
@@ -16,6 +16,8 @@ const generateQRCode = (text) => {
   });
 
 }
+
+generateQRCode("Coucou")
 
 module.exports = {
   generateQRCode
