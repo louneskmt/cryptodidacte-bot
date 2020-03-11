@@ -6,7 +6,20 @@ var eventEmitter = new events.EventEmitter();
 
 eventEmitter.on('dm', (user_id, message_create_object) => {
   var message = message_create_object.message_data.text;
-  
+  var message_data = message_create_object.message_data;
+
+  if(message_data.hasOwnProperty("quick_reply_response")) {
+    if(message_data.quick_reply.metadata === "receive_sats") {
+      Twitter.sendTextMessage(user_id, "You just choose to receive sats.")
+    }
+    if(message_data.quick_reply.metadata === "claim_rewards") {
+      Twitter.sendTextMessage(user_id, "You just choose to claim rewards.")
+    }
+    if(message_data.quick_reply.metadata === "generate_invoice") {
+      Twitter.sendTextMessage(user_id, "You just choose to tip Cryptodidacte and generate an invoice.")
+    }
+  }
+
   if(message.startsWith('ln')) {
     console.log("Paying invoice : ", message)
     Twitter.sendTextMessage(user_id, "Paying invoice...");
