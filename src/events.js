@@ -4,7 +4,9 @@ var lightning = require('./lightning.rest.js');
 
 var eventEmitter = new events.EventEmitter();
 
-eventEmitter.on('dm', (user_id, message) => {
+eventEmitter.on('dm', (user_id, message_create_object) => {
+  var message = message_create_object.message_data.text;
+  
   if(message.startsWith('ln')) {
     console.log("Paying invoice : ", message)
     Twitter.sendTextMessage(user_id, "Paying invoice...");
