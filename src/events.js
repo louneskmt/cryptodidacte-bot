@@ -21,7 +21,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   }
 
   if(message === "Start") {
-    sendMenu();
+    Twitter.sendMenu();
   }
 
   if(message.startsWith('ln')) {
