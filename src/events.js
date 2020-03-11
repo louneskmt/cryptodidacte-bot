@@ -1,6 +1,7 @@
 var events = require('events');
 var Twitter = require('./Twit');
 var lightning = require('./lightning.rest.js');
+var QRCode = require('./qrcode.js');
 
 var eventEmitter = new events.EventEmitter();
 
@@ -41,7 +42,14 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     Twitter.sendTextMessage(user_id, "Generating invoice...");
     lightning.generateInvoice(200, "Test", (invoice) => {
       Twitter.sendTextMessage(user_id, "✅ Done!");
-      Twitter.sendTextMessage(user_id, invoice);
+      QRCodePath = QRCode.generateQRCode(invoice);
+      if(QRCodePath !== None) {
+        Twitter.uploadImage(QRCodePath, (media_id) => {
+          Twitter.sendMessageWithImage(user_id, invoice, QRCodePath);
+        });
+      } else {
+        Twitter.sendTextMessage(user_id, invoice);
+      }
     }, (err) => {
       Twitter.sendTextMessage(user_id, "❌ Error generating invoice... Please try later.");
     });
