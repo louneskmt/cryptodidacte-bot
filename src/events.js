@@ -42,15 +42,17 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     Twitter.sendTextMessage(user_id, "Generating invoice...");
     lightning.generateInvoice(200, "Test", (invoice) => {
       Twitter.sendTextMessage(user_id, "✅ Done!");
-      var QRCodePath = QRCode.generateQRCode(invoice);
-      console.log("QRCodePath :", QRCodePath);
-      if(QRCodePath !== "None") {
-        Twitter.uploadImage(QRCodePath, (media_id) => {
-          Twitter.sendMessageWithImage(user_id, invoice, QRCodePath);
-        });
-      } else {
-        Twitter.sendTextMessage(user_id, invoice);
-      }
+      QRCode.generateQRCode(invoice, (QRCodePath) => {
+        console.log("QRCodePath :", QRCodePath);
+        if(QRCodePath !== "None") {
+          Twitter.uploadImage(QRCodePath, (media_id) => {
+            Twitter.sendMessageWithImage(user_id, invoice, QRCodePath);
+          });
+        } else {
+          Twitter.sendTextMessage(user_id, invoice);
+        }
+      });
+
     }, (err) => {
       Twitter.sendTextMessage(user_id, "❌ Error generating invoice... Please try later.");
     });
