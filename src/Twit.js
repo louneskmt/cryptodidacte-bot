@@ -32,14 +32,13 @@ const sendTextMessage = (user_id, text) => {
 }
 
 const sendMessageWithImage = (user_id, text, filePath) => {
-  uploadImage(filePath, (media_id) => {
+  uploadImage(filePath, (media_id_string) => {
     var message_create_object = {
       text: text,
       attachment: {
-        media_id: media_id
+        media_id: media_id_string
       }
     }
-
     sendMessage(user_id, message_create_object);
   })
 }
@@ -76,7 +75,7 @@ const uploadImage = (filePath, callback) => {
   Twitter.postMediaChunked({ file_path: filePath }, function (err, data, response) {
     console.log(err || data)
     if(data && typeof callback === "function") {
-      callback(body.media_id)
+      callback(data.media_id_string)
     }
   });
 }
