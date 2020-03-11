@@ -44,7 +44,7 @@ const sendMessageWithImage = (user_id, text, filePath) => {
   })
 }
 
-const sendMenu = () => {
+const sendMenu = (user_id) => {
   var message_create_object = {
     text: "What do you want to do ?",
     quick_reply: {
