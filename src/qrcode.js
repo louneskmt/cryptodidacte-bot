@@ -10,7 +10,7 @@ const generateQRCode = (text) => {
     }
   }, function (err) {
       if (err) {
-        return None;
+        return "None";
       }
       return filePath;
   });
