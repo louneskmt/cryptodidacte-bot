@@ -101,6 +101,8 @@ const triggerVerification = (id) => {
 
 module.exports = {
   sendTextMessage,
+  sendMenu,
+  uploadImage,
   getSubscriptions,
   getAllWebhooksStatus,
   triggerVerification
