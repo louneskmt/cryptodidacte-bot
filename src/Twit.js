@@ -102,6 +102,7 @@ const triggerVerification = (id) => {
 }
 
 module.exports = {
+  Twitter,
   sendTextMessage,
   sendMenu,
   uploadImage,
