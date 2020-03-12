@@ -25,7 +25,7 @@ app.post('/webhook/twitter', function(request, response) {
   if(request.body.hasOwnProperty('direct_message_events')) {
     events.eventEmitter.emit('dm', Object.keys(request.body.users)[0], request.body.direct_message_events[0].message_create)
   }
-  response.send('200 OK')
+  response.send(200)
 })
 
 app.get('/webhook/twitter', function(request, response) {
@@ -35,13 +35,11 @@ app.get('/webhook/twitter', function(request, response) {
   if (crc_token) {
     var hash = security.get_challenge_response(crc_token,twitterApp.consumer_secret)
 
-    response.status(200);
-    response.send({
+    response.status(200).send({
       response_token: 'sha256=' + hash
-    })
+    });
   } else {
-    response.status(400);
-    response.send('Error: crc_token missing from request.')
+    response.status(400).send('Error: crc_token missing from request.')
   }
 });
 
