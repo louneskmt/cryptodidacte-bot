@@ -17,8 +17,6 @@ const generateQRCode = (text, callback) => {
   return filePath;
 }
 
-generateQRCode("Coucou")
-
 module.exports = {
   generateQRCode
 }
