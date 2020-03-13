@@ -9,7 +9,6 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-http-to-https": "^1.1.4",
     "grpc": "^1.24.2",
     "qrcode": "^1.4.4",
     "socks5-https-client": "^1.2.1",

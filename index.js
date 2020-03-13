@@ -10,13 +10,17 @@ const bodyParser = require('body-parser');
 const https = require('https');
 var fs = require('fs');
 var app = express();
-var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 const portHttps = 8443;
 
 app.set('port', portHttps)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(redirectToHTTPS());
+app.use(function(request, response){
+  console.log("Redirect")
+  if(!request.secure){
+    response.redirect("https://" + request.headers.host + request.url);
+  }
+});
 
 /**
  * Receives Account Acitivity events
