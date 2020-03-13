@@ -24,7 +24,7 @@ app.post('/webhook/twitter', function(req, res) {
   if(req.body.hasOwnProperty('direct_message_events')) {
     events.eventEmitter.emit('dm', Object.keys(req.body.users)[0], req.body.direct_message_events[0].message_create)
   }
-  res.send(200)
+  res.sendStatus(200)
 })
 
 app.get('/webhook/twitter', function(req, res) {
