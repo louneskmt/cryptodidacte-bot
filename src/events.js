@@ -5,6 +5,10 @@ var QRCode = require('./qrcode.js');
 
 var eventEmitter = new events.EventEmitter();
 
+eventEmitter.on('tweet', (tweet) => {
+  Twitter.sendTextMessage(tweet.user_id, "We got your tweet!");
+});
+
 eventEmitter.on('dm', (user_id, message_create_object) => {
   var message = message_create_object.message_data.text;
   var message_data = message_create_object.message_data;
