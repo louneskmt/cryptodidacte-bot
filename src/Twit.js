@@ -1,6 +1,7 @@
 const Twit = require('twit');
-const twitterApp = require('../config.js');
-const Twitter = new Twit(twitterApp);
+const twitterConfig = require('../config.js');
+const Twitter = new Twit(twitterConfig);
+
 const request = require('request');
 
 // @lounes_kmt -> 986994912565620736
@@ -76,28 +77,10 @@ const sendMenu = (user_id) => {
 
 const uploadImage = (filePath, callback) => {
   Twitter.postMediaChunked({ file_path: filePath, media_category: "dm_image" }, function (err, data, response) {
-    console.log(err || data)
+    console.log(err || data);
     if(data && typeof callback === "function") {
       callback(data.media_id_string, data.image.image_type)
     }
-  });
-}
-
-const getSubscriptions = () => {
-  Twitter.get('account_activity/all/dev/subscriptions/list', function (err, data, response) {
-    console.log("SUBSCRIPTIONS :\n", data);
-  });
-}
-
-const getAllWebhooksStatus = () => {
-  Twitter.get('account_activity/all/webhooks', function (err, data, response) {
-    console.log("ALL :\n", data);
-  });
-}
-
-const triggerVerification = (id) => {
-  Twitter.put('account_activity/all/dev/webhooks/' + id, function (err, data, response) {
-    console.log("TRIGGER VERIFICATION :\n", data)
   });
 }
 
@@ -106,8 +89,5 @@ module.exports = {
   sendTextMessage,
   sendMenu,
   uploadImage,
-  sendMessageWithImage,
-  getSubscriptions,
-  getAllWebhooksStatus,
-  triggerVerification
+  sendMessageWithImage
 };

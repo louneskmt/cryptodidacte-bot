@@ -22,7 +22,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
   }
 
-  if(message === "Start") {
+  if(message.toLowerCase() === "start") {
     Twitter.sendMenu(user_id);
   }
 
@@ -37,7 +37,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     });
   }
 
-  if(message.startsWith('Generate invoice for 200 sats')) {
+  if(message.startsWith('Generate invoice')) {
     console.log("Generating invoice");
     Twitter.sendTextMessage(user_id, "Generating invoice...");
     lightning.generateInvoice(200, "Test", (invoice) => {
@@ -50,11 +50,10 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
           Twitter.sendTextMessage(user_id, invoice);
         }
       });
-
     }, (err) => {
       Twitter.sendTextMessage(user_id, "❌ Error generating invoice... Please try later.");
     });
   }
 });
 
-module.exports.eventEmitter = eventEmitter;
+module.exports = eventEmitter;
