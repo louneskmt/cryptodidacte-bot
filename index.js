@@ -15,17 +15,6 @@ const portHttps = 8443;
 app.set('port', portHttps)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(function (req, res, next) {
-  if (req.secure) {
-    // request was via https, so do no special handling
-    console.log("secure")
-    next();
-  } else {
-    // request was via http, so redirect to https
-    console.log("not secure")
-    res.redirect('https://louneskmt.com' + req.url);
-  }
-});
 
 /**
  * Receives Account Acitivity events
@@ -71,3 +60,11 @@ https.createServer({
 .listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'))
 });
+
+// Redirect from http port 80 to https
+var http = require('http');
+http.createServer(function (req, res) {
+    console.log("not secure")
+    res.redirect('https://louneskmt.com' + req.url);
+    res.end();
+}).listen(8080);
