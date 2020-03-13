@@ -11,12 +11,14 @@ const Twitter = require('./src/Twit');
 const express = require("express");
 const bodyParser = require('body-parser');
 const https = require('https');
+const helmet = require('helmet');
 
 // HTTPS Server config
 var app = express();
 app.set('port', 8443)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(helmet())
 
 /**
  * Receives Account Activity events
