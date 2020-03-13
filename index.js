@@ -60,11 +60,3 @@ https.createServer({
 .listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'))
 });
-
-// Redirect from http port 80 to https
-var http = require('http');
-http.createServer(function (req, res) {
-    console.log("not secure")
-    res.redirect('https://louneskmt.com' + req.url);
-    res.end();
-}).listen(8080);
