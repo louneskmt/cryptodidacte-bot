@@ -18,9 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(function (req, res, next) {
   if (req.secure) {
     // request was via https, so do no special handling
+    console.log("secure")
     next();
   } else {
     // request was via http, so redirect to https
+    console.log("not secure")
     res.redirect('https://louneskmt.com' + req.url);
   }
 });
