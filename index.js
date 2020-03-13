@@ -8,16 +8,15 @@ var Twitter = require('./src/Twit');
 var express = require("express");
 const bodyParser = require('body-parser');
 const https = require('https');
-const htpp = require('http');
 var fs = require('fs');
 var app = express();
-
+var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 const portHttps = 8443;
-const portHttp = 8080;
 
 app.set('port', portHttps)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(redirectToHTTPS());
 
 /**
  * Receives Account Acitivity events
@@ -55,19 +54,6 @@ app.get('/webhook/status', function(req, res){
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
-
-var http = express.createServer();
-
-// set up a route to redirect http to https
-http.get('*', function(req, res) {
-    res.redirect('https://' + req.headers.host + req.url);
-
-    // Or, if you don't want to automatically detect the domain name from the request header, you can hard code it:
-    // res.redirect('https://example.com' + req.url);
-})
-
-// have it listen on 8080
-http.listen(portHttp);
 
 https.createServer({
   key: fs.readFileSync('./certs/privkey.pem'),
