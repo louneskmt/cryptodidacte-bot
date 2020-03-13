@@ -32,7 +32,7 @@ app.post('/webhook/twitter', function(req, res) {
     var tweet = {
       id: req.body.tweet_create_events[0].id_str,
       user_id: req.body.tweet_create_events[0].user.id,
-      text: req.body.direct_message_events[0].text
+      text: req.body.tweet_create_events[0].text
     }
     eventEmitter.emit('tweet', tweet);
   }
