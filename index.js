@@ -34,6 +34,8 @@ app.post('/webhook/twitter', function(req, res) {
       user_id: req.body.tweet_create_events[0].user.id,
       text: req.body.tweet_create_events[0].text
     }
+    console.log(tweet)
+    console.log(req.body.tweet_create_events[0].user)
     eventEmitter.emit('tweet', tweet);
   }
   res.sendStatus(200);
