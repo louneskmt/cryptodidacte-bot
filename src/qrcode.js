@@ -10,7 +10,10 @@ const generateQRCode = (text, callback) => {
     }
   }, function (err) {
       if(typeof callback === "function") {
-        if(err) callback("None")
+        if(err) {
+          callback("None");
+          console.log(err)
+        }
         else callback(filePath);
       }
   });
