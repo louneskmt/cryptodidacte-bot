@@ -8,7 +8,6 @@ var Twitter = require('./src/Twit');
 var express = require("express");
 const bodyParser = require('body-parser');
 const https = require('https');
-var httpsRedirect = require('express-https-redirect');
 var fs = require('fs');
 var app = express();
 const portHttps = 8443;
@@ -16,7 +15,15 @@ const portHttps = 8443;
 app.set('port', portHttps)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use('/', httpsRedirect());
+app.use(function (req, res, next) {
+  if (req.secure) {
+    // request was via https, so do no special handling
+    next();
+  } else {
+    // request was via http, so redirect to https
+    res.redirect('https://louneskmt.com' + req.url);
+  }
+});
 
 /**
  * Receives Account Acitivity events
