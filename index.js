@@ -28,6 +28,14 @@ app.post('/webhook/twitter', function(req, res) {
     var message_create_object = req.body.direct_message_events[0].message_create;
     eventEmitter.emit('dm', user_id, message_create_object);
   }
+  if(req.body.hasOwnProperty('tweet_create_events')) {
+    var tweet = {
+      id: req.body.tweet_create_events[0].id_str,
+      user_id: req.body.tweet_create_events[0].user.id,
+      text: req.body.direct_message_events[0].text
+    }
+    eventEmitter.emit('tweet', tweet);
+  }
   res.sendStatus(200);
 })
 
