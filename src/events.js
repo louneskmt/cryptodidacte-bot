@@ -57,6 +57,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
     if(message_data.quick_reply_response.metadata === "claim_rewards") {
       Twitter.sendTextMessage(user_id, "You just choose to claim rewards.")
+      ln.claimRewards(user_id);
     }
     if(message_data.quick_reply_response.metadata === "generate_invoice") {
       Twitter.sendTextMessage(user_id, "You just choose to tip Cryptodidacte and generate an invoice.")

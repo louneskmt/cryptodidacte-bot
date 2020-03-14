@@ -1,14 +1,26 @@
 const lightning = require('./lightning.rest');
 const db = require('./database');
+const Twitter = require('./Twit.js')
 
-const claimRewards = () => {
+const claimRewards = (user_id) => {
+  db.findDocuments("rewards", { user_id: user_id }, (result) => {
+    var totalToPay = 0;
 
+    if(result.length === 0) {
+      Twitter.sendTextMessage(user_id, "You have nothing to claim.");
+      return;
+    }
+    result.forEach((elmt) => {
+      totalToPay += elmt.reward;
+    })
+    Twitter.sendTextMessage(user_id, "Please, send an invoice for " + totalToPay + " sats.");
+  })
 }
 
 const defaultRewards = {
-  question: 15000,
-  writing: 30000,
-  random: 15000,
+  question: 150,
+  writing: 300,
+  random: 150,
 }
 
 const defaultWinners = {
@@ -26,17 +38,17 @@ const addWinners = (winners, rewards=defaultRewards) => {
     {
       user_id: winners[0].id_str,
       username: winners[0].screen_name,
-      balance: defaultRewards.question,
+      reward: defaultRewards.question,
     },
     {
       user_id: winners[1].id_str,
       username: winners[1].screen_name,
-      balance: defaultRewards.writing,
+      reward: defaultRewards.writing,
     },
     {
       user_id: winners[2].id_str,
       username: winners[2].screen_name,
-      balance: defaultRewards.random,
+      reward: defaultRewards.random,
     },
   ]
 
