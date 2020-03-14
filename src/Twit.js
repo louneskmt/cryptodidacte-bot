@@ -20,7 +20,7 @@ const sendMessage = (user_id, message_create_object) => {
   }
 
   Twitter.post('direct_messages/events/new', message, function (err, data, response) {
-    // console.log(data)
+    console.log(data)
   });
 }
 
@@ -104,7 +104,6 @@ const sendAdminMenu = (user_id) => {
       ]
     }
   }
-
   sendMessage(user_id, message_create_object);
 }
 
