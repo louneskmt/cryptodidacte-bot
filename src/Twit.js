@@ -88,7 +88,7 @@ const sendAdminMenu = (user_id) => {
       options: [
         {
           label: "🏅 Add new #LNQuiz winners",
-          description: "",
+          description: "Set Twitter account as winners, and autorize them to claim their rewards",
           metadata: "add_winners"
         },
         {
