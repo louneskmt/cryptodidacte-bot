@@ -35,6 +35,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   var message_data = message_create_object.message_data;
 
   if(nextMessage === "WINNERS") {
+    console.log("Winner message")
     console.log(message_data.entities.user_mentions);
     nextMessage = "NORMAL";
   }
@@ -67,7 +68,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
     if(message_data.quick_reply_response.metadata === "add_winners") {
       Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
-      currentStatus = "WINNERS";
+      nextMessage = "WINNERS";
       return;
     }
   }
