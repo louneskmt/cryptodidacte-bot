@@ -49,24 +49,57 @@ const sendMessageWithImage = (user_id, text, filePath) => {
 
 const sendMenu = (user_id) => {
   var message_create_object = {
-    text: "What do you want to do ?",
+    text: "👋 Hey ! What do you want to do ?",
     quick_reply: {
       type: "options",
       options: [
         {
-          label: "Claim rewards",
+          label: "🎁 Claim rewards",
           description: "Claim #LNQuiz rewards if you won",
           metadata: "claim_rewards"
         },
         {
-          label: "Tip Cryptodidacte",
+          label: "💸 Tip Cryptodidacte",
           description: "Generate an LN invoice to tip Cryptodidacte",
           metadata: "generate_invoice"
         },
         {
-          label: "Receive sats",
+          label: "🏦 See CDT Balance",
+          description: "Display your CryptoDidacteTokens balance",
+          metadata: "display_cdt_balance"
+        },
+        {
+          label: "📥 Receive sats",
           description: "Test option for sats sending",
           metadata: "receive_sats"
+        }
+      ]
+    }
+  }
+
+  sendMessage(user_id, message_create_object);
+}
+
+const sendAdminMenu = (user_id) => {
+  var message_create_object = {
+    text: "👋 Hey, admin ! What do you want to do ? 🤔",
+    quick_reply: {
+      type: "options",
+      options: [
+        {
+          label: "🏅 Add new #LNQuiz winners",
+          description: "",
+          metadata: "add_winners"
+        },
+        {
+          label: "💸 Send CDT",
+          description: "Send CryptoDidacteTokens to an ETH address or Twitter account",
+          metadata: "send_cdt"
+        },
+        {
+          label: "Refill Lightning node",
+          description: "Generate an invoice of your choice to refill node",
+          metadata: "refill_node"
         }
       ]
     }
