@@ -9,6 +9,16 @@ eventEmitter.on('tweet', (tweet) => {
   Twitter.sendTextMessage(tweet.user_id, "We got your tweet!");
 });
 
+eventEmitter.on('logs', (body) => {
+  if(body.hasOwnProperty("direct_message_indicate_typing_events")) {
+    console.log("Typing...");
+  }
+  if(body.hasOwnProperty("direct_message_events")) {
+    console.log("New message :");
+    console.log(body.direct_message_events[0].message_create);
+  }
+});
+
 eventEmitter.on('dm', (user_id, message_create_object) => {
   var message = message_create_object.message_data.text;
   var message_data = message_create_object.message_data;
@@ -23,7 +33,6 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
     if(message_data.quick_reply_response.metadata === "generate_invoice") {
       Twitter.sendTextMessage(user_id, "You just choose to tip Cryptodidacte and generate an invoice.")
-      Twitter.sendTextInputMessage(user_id, "This is a test.");
     }
   }
 

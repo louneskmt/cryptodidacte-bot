@@ -24,7 +24,8 @@ app.use(helmet())
  * Receives Account Activity events
  **/
 app.post('/webhook/twitter', function(req, res) {
-  console.log(req.body)
+  eventEmitter.emit('logs', req.body);
+
   if(req.body.hasOwnProperty('direct_message_events')) {
     var user_id = Object.keys(req.body.users)[0];
     var message_create_object = req.body.direct_message_events[0].message_create;
