@@ -88,17 +88,17 @@ const sendAdminMenu = (user_id) => {
       options: [
         {
           label: "🏅 Add new #LNQuiz winners",
-          description: "Set Twitter account as winners, and autorize them to claim their rewards",
+          description: "Set Twitter accounts as winners",
           metadata: "add_winners"
         },
         {
           label: "💸 Send CDT",
-          description: "Send CryptoDidacteTokens to an ETH address or Twitter account",
+          description: "Send CDT to an ETH address or Twitter account",
           metadata: "send_cdt"
         },
         {
           label: "Refill Lightning node",
-          description: "Generate an invoice of your choice to refill node",
+          description: "Generate an invoice to refill LN node",
           metadata: "refill_node"
         }
       ]
