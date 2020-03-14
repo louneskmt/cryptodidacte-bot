@@ -43,7 +43,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
 
     if(message_data.entities.user_mentions.length === 3) {
-      addWinners(message_data.entities.user_mentions);
+      ln.addWinners(message_data.entities.user_mentions);
       nextMessage = "NORMAL";
     } else {
       Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
