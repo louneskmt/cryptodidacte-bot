@@ -75,6 +75,16 @@ const sendMenu = (user_id) => {
   sendMessage(user_id, message_create_object);
 }
 
+const sendTextInputMessage = (user_id, text) => {
+  var message_create_object = {
+    text: text,
+    quick_reply: {
+      type: "text_input"
+    }
+  }
+  sendMessage(user_id, message_create_object);
+}
+
 const uploadImage = (filePath, callback) => {
   Twitter.postMediaChunked({ file_path: filePath, media_category: "dm_image" }, function (err, data, response) {
     console.log(err || data);
@@ -87,6 +97,7 @@ const uploadImage = (filePath, callback) => {
 module.exports = {
   Twitter,
   sendTextMessage,
+  sendTextInputMessage,
   sendMenu,
   uploadImage,
   sendMessageWithImage
