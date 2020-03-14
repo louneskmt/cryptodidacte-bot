@@ -21,4 +21,12 @@ const twitterConfig = {
   admin: ["986994912565620736", "955781788743454721"] // @lounes_kmt, @Cryptodidacte
 };
 
-module.exports = twitterConfig;
+const databaseConfig = {
+  user: "cryptodidacte",
+  password: process.env.DB_PASSWORD
+}
+
+module.exports = {
+  twitterConfig,
+  databaseConfig
+}

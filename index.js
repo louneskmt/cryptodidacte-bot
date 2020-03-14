@@ -3,7 +3,7 @@ const eventEmitter = require('./src/events.js');
 const fs = require('fs');
 
 // Require Twitter related modules
-const twitterConfig = require('./config.js');
+const { twitterConfig } = require('./config.js');
 const security = require('./src/security.js');
 const Twitter = require('./src/Twit');
 
