@@ -12,7 +12,7 @@ var lightning = require('./lightning.rest.js');
 var QRCode = require('./qrcode.js');
 
 // LNQuiz function
-var lnquiz = require('.lnquiz.js');
+var lnquiz = require('./lnquiz.js');
 
 var currentStatus = "NORMAL";
 
