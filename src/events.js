@@ -43,12 +43,14 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   }
 
   if(message.toLowerCase() === "start") {
+    console.log(twitterConfig.admin)
+    console.log(twitterConfig.admin.includes(user_id))
     if(twitterConfig.admin.includes(user_id)) Twitter.sendAdminMenu(user_id)
     else Twitter.sendMenu(user_id)
   }
 
   if(message.toLowerCase() === "start no admin") {
-    Twitter.sendMenu(user_id)
+    Twitter.sendMenu(user_id);
   }
 
   if(message.startsWith('ln')) {
