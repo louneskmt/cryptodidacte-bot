@@ -20,7 +20,7 @@ const defaultWinners = {
 const addWinners = (winners, rewards=defaultRewards) => {
   var winners = defaultWinners;
 
-  db.findDocuments("rewards", { user_id: })
+  // db.findDocuments("rewards", { user_id: })
 
   // var newEntries = [
   //   {
