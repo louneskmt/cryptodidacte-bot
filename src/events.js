@@ -43,7 +43,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
 
     if(message_data.entities.user_mentions.length === 3) {
-      ln.addWinners(message_data.entities.user_mentions);
+      lnquiz.addWinners(message_data.entities.user_mentions);
       nextMessage = "NORMAL";
     } else {
       Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
@@ -57,7 +57,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
     if(message_data.quick_reply_response.metadata === "claim_rewards") {
       Twitter.sendTextMessage(user_id, "You just choose to claim rewards.")
-      ln.claimRewards(user_id);
+      lnquiz.claimRewards(user_id);
     }
     if(message_data.quick_reply_response.metadata === "generate_invoice") {
       Twitter.sendTextMessage(user_id, "You just choose to tip Cryptodidacte and generate an invoice.")
