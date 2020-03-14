@@ -22,7 +22,7 @@ const twitterConfig = {
 };
 
 const databaseConfig = {
-  user: "cryptodidacte",
+  user: "bot",
   password: process.env.DB_PASSWORD
 }
 
