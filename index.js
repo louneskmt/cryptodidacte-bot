@@ -38,7 +38,7 @@ app.post('/webhook/twitter', function(req, res) {
     }
     eventEmitter.emit('tweet', tweet);
   }
-  res.sendStatus(200);
+  res.status(200);
 })
 
 /**
@@ -49,9 +49,9 @@ app.get('/webhook/twitter', function(req, res) {
   console.log("Verification CRC...\n", crc_token);
   if (crc_token) {
     var hash = security.get_challenge_response(crc_token, twitterConfig.consumer_secret);
-    res.sendStatus(200).send({ response_token: 'sha256=' + hash });
+    res.status(200).send({ response_token: 'sha256=' + hash });
   } else {
-    res.sendStatus(400).send('Error: crc_token missing from request.');
+    res.status(400).send('Error: crc_token missing from request.');
   }
 });
 
