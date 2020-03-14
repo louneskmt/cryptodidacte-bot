@@ -22,23 +22,25 @@ const addWinners = (winners, rewards=defaultRewards) => {
 
   // db.findDocuments("rewards", { user_id: })
 
-  // var newEntries = [
-  //   {
-  //     user_id: winners.question.id,
-  //     username: winners.question.username,
-  //     balance: ,
-  //   },
-  //   {
-  //     user_id: ,
-  //     username: winners.question,
-  //     balance: ,
-  //   },
-  //   {
-  //     user_id: "1234",
-  //     username: winners.question,
-  //     balance: ,
-  //   }
-  // ]
+  var newEntries = [
+    {
+      user_id: winners[0].id_str,
+      username: winners[0].screen_name,
+      balance: defaultRewards.question,
+    },
+    {
+      user_id: winners[1].id_str,
+      username: winners[1].screen_name,
+      balance: defaultRewards.writing,
+    },
+    {
+      user_id: winners[2].id_str,
+      username: winners[2].screen_name,
+      balance: defaultRewards.random,
+    },
+  ]
+
+  db.insertDocuments("rewards", newEntries, () => {});
 }
 
 

@@ -36,9 +36,18 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
 
   if(nextMessage === "WINNERS") {
     console.log("Winner message")
-    console.log(message_data.entities);
-    console.log(message_data.entities);
-    nextMessage = "NORMAL";
+    console.log();
+    if(message.toLowerCase() === "cancel") {
+      nextMessage = "NORMAL";
+      return;
+    }
+
+    if(message_data.entities.user_mentions.length === 3) {
+      addWinners(message_data.entities.user_mentions);
+      nextMessage = "NORMAL";
+    } else {
+      Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
+    }
   }
 
   if(message_data.hasOwnProperty("quick_reply_response")) {
