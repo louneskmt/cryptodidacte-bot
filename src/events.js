@@ -14,7 +14,7 @@ var QRCode = require('./qrcode.js');
 // LNQuiz function
 var lnquiz = require('./lnquiz.js');
 
-var currentStatus = "NORMAL";
+var nextMessage = "NORMAL";
 
 eventEmitter.on('tweet', (tweet) => {
   Twitter.sendTextMessage(tweet.user_id, "We got your tweet!");
@@ -34,9 +34,9 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   var message = message_create_object.message_data.text;
   var message_data = message_create_object.message_data;
 
-  if(currentStatus === "WINNERS") {
+  if(nextMessage === "WINNERS") {
     console.log(message_data.entities.user_mentions);
-    currentStatus = "NORMAL";
+    nextMessage = "NORMAL";
   }
 
   if(message_data.hasOwnProperty("quick_reply_response")) {
@@ -49,15 +49,30 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
     if(message_data.quick_reply_response.metadata === "generate_invoice") {
       Twitter.sendTextMessage(user_id, "You just choose to tip Cryptodidacte and generate an invoice.")
+      console.log("Generating invoice");
+      Twitter.sendTextMessage(user_id, "Generating invoice...");
+      lightning.generateInvoice(200, "Test", (invoice) => {
+        Twitter.sendTextMessage(user_id, "✅ Done!");
+        QRCode.generateQRCode(invoice, (QRCodePath) => {
+          console.log("QRCodePath :", QRCodePath);
+          if(QRCodePath !== "None") {
+            Twitter.sendMessageWithImage(user_id, invoice, QRCodePath);
+          } else {
+            Twitter.sendTextMessage(user_id, invoice);
+          }
+        });
+      }, (err) => {
+        Twitter.sendTextMessage(user_id, "❌ Error generating invoice... Please try later.");
+      });
     }
     if(message_data.quick_reply_response.metadata === "add_winners") {
       Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
       currentStatus = "WINNERS";
+      return;
     }
   }
 
   if(message.toLowerCase() === "start") {
-    console.log(twitterConfig.admin)
     if(twitterConfig.admin.includes(user_id)) {
       console.log("Sending admin menu...")
       Twitter.sendAdminMenu(user_id)
@@ -70,34 +85,16 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     Twitter.sendMenu(user_id);
   }
 
-  if(message.startsWith('ln')) {
-    console.log("Paying invoice : ", message)
-    Twitter.sendTextMessage(user_id, "Paying invoice...");
-    lightning.payInvoice(message, () => {
-      Twitter.sendTextMessage(user_id, "✅ Paid!");
-    }, (err) => {
-      Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try later.");
-      Twitter.sendTextMessage(user_id, "Logs : " + err.payment_error);
-    });
-  }
-
-  if(message.startsWith('Generate invoice')) {
-    console.log("Generating invoice");
-    Twitter.sendTextMessage(user_id, "Generating invoice...");
-    lightning.generateInvoice(200, "Test", (invoice) => {
-      Twitter.sendTextMessage(user_id, "✅ Done!");
-      QRCode.generateQRCode(invoice, (QRCodePath) => {
-        console.log("QRCodePath :", QRCodePath);
-        if(QRCodePath !== "None") {
-          Twitter.sendMessageWithImage(user_id, invoice, QRCodePath);
-        } else {
-          Twitter.sendTextMessage(user_id, invoice);
-        }
-      });
-    }, (err) => {
-      Twitter.sendTextMessage(user_id, "❌ Error generating invoice... Please try later.");
-    });
-  }
+  // if(message.startsWith('ln')) {
+  //   console.log("Paying invoice : ", message)
+  //   Twitter.sendTextMessage(user_id, "Paying invoice...");
+  //   lightning.payInvoice(message, () => {
+  //     Twitter.sendTextMessage(user_id, "✅ Paid!");
+  //   }, (err) => {
+  //     Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try later.");
+  //     Twitter.sendTextMessage(user_id, "Logs : " + err.payment_error);
+  //   });
+  // }
 });
 
 module.exports = eventEmitter;
