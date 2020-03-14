@@ -18,7 +18,7 @@ const twitterConfig = {
   access_token: process.env.ACCESS_TOKEN,
   access_token_secret: process.env.ACCESS_TOKEN_SECRET,
   webhook_id: '1238264407626592257',
-  admin: ["986994912565620736", "955781788743454721"]
+  admin: ["986994912565620736", "955781788743454721"] // @lounes_kmt, @Cryptodidacte
 };
 
 module.exports = twitterConfig;
