@@ -36,7 +36,8 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
 
   if(nextMessage === "WINNERS") {
     console.log("Winner message")
-    console.log(message_data.entities.user_mentions);
+    console.log(message_data.entities);
+    console.log(message_data.entities);
     nextMessage = "NORMAL";
   }
 
