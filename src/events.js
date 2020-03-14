@@ -11,6 +11,11 @@ var lightning = require('./lightning.rest.js');
 // QRCode generator module
 var QRCode = require('./qrcode.js');
 
+// LNQuiz function
+var lnquiz = require('.lnquiz.js');
+
+var currentStatus = "NORMAL";
+
 eventEmitter.on('tweet', (tweet) => {
   Twitter.sendTextMessage(tweet.user_id, "We got your tweet!");
 });
@@ -29,6 +34,11 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   var message = message_create_object.message_data.text;
   var message_data = message_create_object.message_data;
 
+  if(currentStatus === "WINNERS") {
+    console.log(message_data.entities.user_mentions);
+    currentStatus = "NORMAL";
+  }
+
   if(message_data.hasOwnProperty("quick_reply_response")) {
     console.log(message_data)
     if(message_data.quick_reply_response.metadata === "receive_sats") {
@@ -39,6 +49,10 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
     if(message_data.quick_reply_response.metadata === "generate_invoice") {
       Twitter.sendTextMessage(user_id, "You just choose to tip Cryptodidacte and generate an invoice.")
+    }
+    if(message_data.quick_reply_response.metadata === "add_winners") {
+      Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
+      currentStatus = "WINNERS";
     }
   }
 
