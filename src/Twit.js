@@ -4,8 +4,6 @@ const Twitter = new Twit(twitterConfig);
 
 const request = require('request');
 
-// @lounes_kmt -> 986994912565620736
-
 const sendMessage = (user_id, message_create_object) => {
   var message = {
     event: {

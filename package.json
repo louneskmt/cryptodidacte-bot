@@ -12,6 +12,7 @@
     "express-https-redirect": "^1.0.0",
     "grpc": "^1.24.2",
     "helmet": "^3.21.3",
+    "mongodb": "^3.5.5",
     "qrcode": "^1.4.4",
     "socks5-https-client": "^1.2.1",
     "twit": "https://github.com/lounes-kmt/twit"
