@@ -120,6 +120,7 @@ const uploadImage = (filePath, callback) => {
 module.exports = {
   Twitter,
   sendTextMessage,
+  sendAdminMenu,
   sendMenu,
   uploadImage,
   sendMessageWithImage
