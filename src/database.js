@@ -1,8 +1,14 @@
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/mydb";
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
 
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  console.log("Database created!");
-  db.close();
+const { databaseConfig } = require('../config')
+
+const url = `mongodb://${databaseConfig.user}:${databaseConfig.password}@localhost:27017/cryptodidacte`;
+const client = new MongoClient(url);
+
+client.connect(function(err) {
+  assert.equal(null, err);
+  console.log("Connected successfully to server");
+  const db = client.db("cryptodidacte");
+  client.close();
 });

@@ -3,7 +3,7 @@ var eventEmitter = new events.EventEmitter();
 
 // Twitter modules
 var Twitter = require('./Twit');
-const twitterConfig = require('../config.js');
+const { twitterConfig } = require('../config.js');
 
 // Lightning REST
 var lightning = require('./lightning.rest.js');
