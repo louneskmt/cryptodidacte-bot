@@ -23,6 +23,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
     if(message_data.quick_reply_response.metadata === "generate_invoice") {
       Twitter.sendTextMessage(user_id, "You just choose to tip Cryptodidacte and generate an invoice.")
+      Twitter.sendTextInputMessage(user_id, "This is a test.");
     }
   }
 
