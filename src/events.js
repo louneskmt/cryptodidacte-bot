@@ -40,7 +40,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   }
 
   if(message_data.hasOwnProperty("quick_reply_response")) {
-    console.log(message_data)
+    console.log("Quick Reply")
     if(message_data.quick_reply_response.metadata === "receive_sats") {
       Twitter.sendTextMessage(user_id, "You just choose to receive sats.")
     }
