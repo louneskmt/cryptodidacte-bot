@@ -1,4 +1,5 @@
 const lightning = require('./lightning.rest');
+const db = require('./database');
 
 const claimRewards = () => {
 
@@ -10,24 +11,38 @@ const defaultRewards = {
   random: 15000,
 }
 
-const addWinners = (winners, rewards=defaultRewards) => {
-  var winners = {"winner1": 15000, "winner2": 30000, "winner3": 8000};
+const defaultWinners = {
+  question: "",
+  writing: "",
+  random: "",
+}
 
-  var lnquiz = {
-    id: 103,
-    id_str: "103",
-    date: "2020-04-17",
-    winners: {
-      question: winners.question,
-      writing: winners.writing,
-      random: winners.random,
-    },
-    rewards: rewards
-  }
+const addWinners = (winners, rewards=defaultRewards) => {
+  var winners = defaultWinners;
+
+  db.findDocuments("rewards", { user_id: })
+
+  // var newEntries = [
+  //   {
+  //     user_id: winners.question.id,
+  //     username: winners.question.username,
+  //     balance: ,
+  //   },
+  //   {
+  //     user_id: ,
+  //     username: winners.question,
+  //     balance: ,
+  //   },
+  //   {
+  //     user_id: "1234",
+  //     username: winners.question,
+  //     balance: ,
+  //   }
+  // ]
 }
 
 
 module.exports = {
   claimRewards,
-  addWinner,
+  addWinners,
 }
