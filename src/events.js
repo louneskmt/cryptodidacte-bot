@@ -43,6 +43,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   }
 
   if(message.toLowerCase() === "start") {
+    console.log(twitterConfig.admin)
     if(twitterConfig.admin.includes(user_id)) {
       console.log("Sending admin menu...")
       Twitter.sendAdminMenu(user_id)
