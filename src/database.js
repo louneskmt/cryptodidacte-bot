@@ -22,9 +22,8 @@ const disconnect = () => {
 const insertDocuments = (collection, newEntries, callback) => {
   connect((db) => {
     // Get collection
-    const collection = db.collection(collection);
     // Insert some documents
-    collection.insertMany(newEntries, function(err, result) {
+    db.getCollection(collection).insertMany(newEntries, function(err, result) {
       assert.equal(err, null);
       console.log("Inserted" + result.result.n + "documents into the collection");
       callback(result);
@@ -36,9 +35,8 @@ const insertDocuments = (collection, newEntries, callback) => {
 const insertOneDocument = (collection, newEntry, callback) => {
   connect((db) => {
     // Get the collection
-    const collection = db.collection(collection);
     // Insert some documents
-    collection.insertOne(newEntry, function(err, result) {
+    db.getCollection(collection).insertOne(newEntry, function(err, result) {
       assert.equal(err, null);
       console.log("Inserted 1 document into the collection");
       callback(result);
@@ -63,9 +61,8 @@ const findDocuments = (collection, query, callback) => {
 const removeDocument = (collection, query, callback) => {
   connect((db) => {
     // Get the documents collection
-    const collection = db.collection(collection);
     // Delete document
-    collection.deleteOne({ a : 3 }, function(err, result) {
+    db.getCollection(collection).deleteOne({ a : 3 }, function(err, result) {
       assert.equal(err, null);
       assert.equal(1, result.result.n);
       console.log("Document removed");
@@ -78,9 +75,8 @@ const removeDocument = (collection, query, callback) => {
 const updateDocument = (collection, query, modification, callback) => {
   connect((db) => {
     // Get the documents collection
-    const collection = db.collection(collection);
     // Update document where a is 2, set b equal to 1
-    collection.updateOne(query
+    db.getCollection(collection).updateOne(query
       , { $set: modification }, function(err, result) {
       assert.equal(err, null);
       assert.equal(1, result.result.n);
