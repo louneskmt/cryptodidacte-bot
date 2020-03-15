@@ -48,7 +48,7 @@ const insertOneDocument = (collection, newEntry, callback) => {
 const findDocuments = (collection, query, callback) => {
   connect((db) => {
     // Get the documents collection and find some documents
-    db.collection(collection).find({}).toArray(function(err, docs) {
+    db.collection(collection).find({ user_id: "986994912565620736" }).toArray(function(err, docs) {
       if (err) throw err;
       console.log("Found the following records");
       console.log(docs);
