@@ -48,17 +48,14 @@ const insertOneDocument = (collection, newEntry, callback) => {
 const findDocuments = (collection, query, callback) => {
   connect((db) => {
     // Get the documents collection and find some documents
-    var result = db.collection(collection).find({})
-    console.log(result)
-    callback(result)
-
-    // toArray(function(err, docs) {
-    //   assert.equal(err, null);
-    //   console.log("Found the following records");
-    //   console.log(docs);
-    //   callback(docs);
-    //   disconnect();
-    // });
+    db.collection(collection).find({}).toArray(function(err, docs) {
+      if (err) throw err;
+      console.log("Found the following records");
+      console.log(docs);
+      callback(docs);
+      db.close();
+      disconnect();
+    });
   })
 }
 
@@ -71,6 +68,7 @@ const removeDocument = (collection, query, callback) => {
       assert.equal(1, result.result.n);
       console.log("Document removed");
       callback(result);
+      db.close();
       disconnect();
     });
   });
