@@ -23,7 +23,7 @@ const insertDocuments = (collection, newEntries, callback) => {
   connect((db) => {
     // Get collection
     // Insert some documents
-    db.getCollection(collection).insertMany(newEntries, function(err, result) {
+    db.collection(collection).insertMany(newEntries, function(err, result) {
       assert.equal(err, null);
       console.log("Inserted" + result.result.n + "documents into the collection");
       callback(result);
@@ -48,7 +48,7 @@ const insertOneDocument = (collection, newEntry, callback) => {
 const findDocuments = (collection, query, callback) => {
   connect((db) => {
     // Get the documents collection and find some documents
-    db.getCollection(collection).find(query).toArray(function(err, docs) {
+    db.collection(collection).find(query).toArray(function(err, docs) {
       assert.equal(err, null);
       console.log("Found the following records");
       console.log(docs);
