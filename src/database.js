@@ -10,7 +10,8 @@ const connect = (callback) => {
   client.connect(function(err) {
     assert.equal(null, err);
     console.log("Connected successfully to server");
-    const db = client.db("cryptodidacte");
+    var db = client.db("cryptodidacte");
+    console.log("Go callback DB")
     callback(db);
   });
 }
