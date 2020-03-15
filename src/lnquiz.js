@@ -3,7 +3,7 @@ const database = require('./database.js');
 const Twitter = require('./Twit.js')
 
 const claimRewards = (user_id) => {
-  database.findDocuments("rewards", { user_id: user_id }, (result) => {
+  database.findDocuments("rewards", { user_id: user_id.toString() }, (result) => {
     var totalToPay = 0;
 
     if(result.length === 0) {
