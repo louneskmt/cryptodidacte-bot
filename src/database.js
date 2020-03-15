@@ -48,13 +48,17 @@ const insertOneDocument = (collection, newEntry, callback) => {
 const findDocuments = (collection, query, callback) => {
   connect((db) => {
     // Get the documents collection and find some documents
-    db.collection(collection).find({}).toArray(function(err, docs) {
-      assert.equal(err, null);
-      console.log("Found the following records");
-      console.log(docs);
-      callback(docs);
-      disconnect();
-    });
+    var result = db.collection(collection).find({})
+    console.log(result)
+    callback(result)
+
+    // toArray(function(err, docs) {
+    //   assert.equal(err, null);
+    //   console.log("Found the following records");
+    //   console.log(docs);
+    //   callback(docs);
+    //   disconnect();
+    // });
   })
 }
 
