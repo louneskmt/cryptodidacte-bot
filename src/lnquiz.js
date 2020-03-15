@@ -1,9 +1,9 @@
 const lightning = require('./lightning.rest');
-const db = require('./database');
+const database = require('./database.js');
 const Twitter = require('./Twit.js')
 
 const claimRewards = (user_id) => {
-  db.findDocuments("rewards", { user_id: user_id }, (result) => {
+  database.findDocuments("rewards", { user_id: user_id }, (result) => {
     var totalToPay = 0;
 
     if(result.length === 0) {
@@ -52,7 +52,7 @@ const addWinners = (winners, rewards=defaultRewards) => {
     },
   ]
 
-  db.insertDocuments("rewards", newEntries, () => {});
+  database.insertDocuments("rewards", newEntries, () => {});
 }
 
 
