@@ -13,7 +13,8 @@ const connect = (callback) => {
     var db = client.db("cryptodidacte");
     console.log("Go callback DB")
     callback(db);
-  });
+  })
+  .then(() => client.close())
 }
 
 const disconnect = () => {
@@ -49,13 +50,14 @@ const insertOneDocument = (collection, newEntry, callback) => {
 const findDocuments = (collection, query, callback) => {
   connect((db) => {
     // Get the documents collection and find some documents
+    console.log(query)
     const col = db.collection(collection);
     col.find(query).toArray(function(err, docs) {
       if (err) throw err;
       console.log("Found the following records");
       console.log(docs);
       callback(docs);
-      client.close();
+      next();
     });
   })
 }
