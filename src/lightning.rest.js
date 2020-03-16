@@ -80,10 +80,8 @@ const generateInvoice = (value, memo, successCallback, errorCallback) => {
 }
 
 const getInvoiceData = (payment_request) => {
-  var r_hash = Buffer.from(payment_request).toString('base64');
-  console.log(r_hash);
   var options = {
-    url: `https://kfmprmnblmf262qcj7vf7lh7lqzrybruj5vvzx7rkpt3kafejwtvydad.onion:10080/v1/invoice/${r_hash}`,
+    url: `https://kfmprmnblmf262qcj7vf7lh7lqzrybruj5vvzx7rkpt3kafejwtvydad.onion:10080/v1/payreq/${payment_request}`,
     strictSSL: false,
   	agentClass: Agent,
     agentOptions: {
