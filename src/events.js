@@ -78,7 +78,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
     if(message_data.quick_reply_response.metadata === "add_winners") {
       Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
-      user.updateStatus(user_id, "add_winners");
+      user.setStatus(user_id, "add_winners");
       return;
     }
   }
