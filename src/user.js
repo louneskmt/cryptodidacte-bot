@@ -21,11 +21,14 @@ const addStatus = (user_id, status) => {
 }
 
 const setStatus = (user_id, newStatus) => {
-  console.log("Deleting status")
-  deleteStatus(user_id, () => {
-    console.log("Adding status")
-    addStatus(user_id, newStatus);
-  });
+  console.log("Updating status")
+  getStatus(user_id, (status) => {
+    if(status) {
+      database.updateDocument("status", { user_id: user_id.toString() }, { status: newStatus }, () => console.log("Updated"))
+    } else {
+      addStatus(user_id, newStatus)
+    }
+  })
 }
 
 const deleteStatus = (user_id, callback) => {
