@@ -104,6 +104,14 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     Twitter.sendMenu(user_id);
   }
 
+  if(message.startsWith('ln')) {
+    console.log("Checking invoice : ", message);
+    lightning.getInvoiceData(message, (result) => {
+      console.log("Amount : ", result.value);
+    })
+  }
+
+
   // if(message.startsWith('ln')) {
   //   console.log("Paying invoice : ", message)
   //   Twitter.sendTextMessage(user_id, "Paying invoice...");

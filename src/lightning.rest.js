@@ -109,5 +109,6 @@ const getInvoiceData = (payment_request) => {
 
 module.exports = {
   payInvoice,
-  generateInvoice
+  generateInvoice,
+  getInvoiceData
 }
