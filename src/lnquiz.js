@@ -1,6 +1,9 @@
+const fs = require('fs')
+
 const lightning = require('./lightning.rest');
 const database = require('./database.js');
-const Twitter = require('./Twit.js')
+const Twitter = require('./Twit.js');
+var rewards = require('../data/rewards.json');
 
 const claimRewards = (user_id) => {
   database.findDocuments("rewards", { user_id: user_id.toString() }, (result) => {
@@ -17,19 +20,9 @@ const claimRewards = (user_id) => {
   })
 }
 
-const defaultRewards = {
-  question: 150,
-  writing: 300,
-  random: 150,
-}
 
-const defaultWinners = {
-  question: "",
-  writing: "",
-  random: "",
-}
 
-const addWinners = (winners, rewards=defaultRewards) => {
+const addWinners = (winners, rewardsSpecific=rewards) => {
   var newEntries = [
     {
       user_id: winners[0].id_str,
@@ -51,6 +44,14 @@ const addWinners = (winners, rewards=defaultRewards) => {
   database.insertDocuments("rewards", newEntries, () => {});
 }
 
+const updateRewards = (newRewards) => {
+  var fileName = __dirname + 'data/rewards.json'
+  fs.writeFile(fileName, JSON.stringify(newRewards), function writeJSON(err) {
+    if (err) return console.log(err);
+    console.log(JSON.stringify(newRewards));
+    console.log('writing to ' + fileName);
+  }); 
+}
 
 module.exports = {
   claimRewards,
