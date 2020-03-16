@@ -9,7 +9,7 @@ var lightning = require('./lightning.rest.js');
 var QRCode = require('./qrcode.js');
 // LNQuiz function
 var lnquiz = require('./lnquiz.js');
-// Status and database functions 
+// Status and database functions
 var user = require('./user.js');
 var database = require('./database.js');
 
@@ -42,11 +42,12 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
       if(message_data.entities.user_mentions.length === 3) {
         lnquiz.addWinners(message_data.entities.user_mentions);
         user.deleteStatus(user_id);
+        Twitter.sendTextMessage(user_id, "✅ You successfully added three winners! ");
       } else {
         Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
       }
     } else if (status === 'generating_invoice') {
-
+      user.deleteStatus(user_id);
     } else if (status.startsWith('claim_rewards_') && message.startsWith('ln')) {
       var amount = status.split('_')[2];
       var invoice = message;
@@ -60,10 +61,12 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
           }, (err) => {
             Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try later.");
             Twitter.sendTextMessage(user_id, "Logs : " + err.payment_error);
+            user.deleteStatus(user_id);
           });
         } else {
           Twitter.sendTextMessage(user_id, "❌ Error, your invoice is for " + result.num_satoshis.toString() + " sats, \
 and you can only claim " + amount.toString() + " sats.\n\nPlease send another invoice, or send 'Cancel'.");
+
         }
       })
     }
@@ -75,7 +78,6 @@ and you can only claim " + amount.toString() + " sats.\n\nPlease send another in
       Twitter.sendTextMessage(user_id, "You just chose to receive sats.")
     }
     if(message_data.quick_reply_response.metadata === "claim_rewards") {
-      Twitter.sendTextMessage(user_id, "You just chose to claim rewards.")
       lnquiz.claimRewards(user_id);
     }
     if(message_data.quick_reply_response.metadata === "generate_invoice") {
