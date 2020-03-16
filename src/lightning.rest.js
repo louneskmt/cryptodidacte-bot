@@ -98,6 +98,7 @@ const getInvoiceData = (payment_request) => {
   };
 
   request.get(options, function(error, response, body) {
+    console.log("Check response")
     console.log(error || body);
     if(body && typeof successCallback === "function") {
       successCallback(body);
