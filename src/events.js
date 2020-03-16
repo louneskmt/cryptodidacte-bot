@@ -41,6 +41,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
       console.log("Waiting for winners")
       if(message_data.entities.user_mentions.length === 3) {
         lnquiz.addWinners(message_data.entities.user_mentions);
+        user.deleteStatus(user_id);
         Twitter.sendTextMessage(user_id, "✅ You successfully added three winners! ");
       } else {
         Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");

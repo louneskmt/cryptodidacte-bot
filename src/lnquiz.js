@@ -54,5 +54,5 @@ const updateRewards = (newRewards) => {
 
 module.exports = {
   claimRewards,
-  addWinners,
+  addWinners
 }
