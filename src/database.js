@@ -88,6 +88,8 @@ const updateDocument = (collection, query, modification, callback) => {
 }
 
 module.exports = {
+  connect,
+  disconnect,
   insertDocuments,
   insertOneDocument,
   findDocuments,
