@@ -17,7 +17,7 @@ const addStatus = (user_id, status) => {
   database.insertDocuments("status", newEntry, () => {});
 }
 
-const updateStatus = (user_id, status) => {
+const setStatus = (user_id, status) => {
   if(getStatus(user_id)) {
     updateDocument("status", { user_id: user_id.toString() }, { status: status }, () => {});
   } else {
@@ -33,6 +33,6 @@ const deleteStatus = (user_id) => {
 
 module.exports = {
   getStatus,
-  updateStatus,
-  setStatus
+  setStatus,
+  deleteStatus
 }
