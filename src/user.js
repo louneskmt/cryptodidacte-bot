@@ -3,7 +3,7 @@ const database = require('./database.js');
 const getStatus = (user_id, callback) => {
   database.findDocuments("status", { user_id: user_id.toString() }, (docs) => {
     if(docs.length === 0) {
-      return undefined;
+      callback(undefined);
     }
     console.log("Found one status", docs[0].status)
     if(typeof callback === "function") {
@@ -24,7 +24,7 @@ const setStatus = (user_id, newStatus) => {
   console.log("Updating status")
   getStatus(user_id, (status) => {
     if(status) {
-      database.updateDocument("status", { user_id: user_id.toString() }, { status: newStatus }, () => console.log("Updated"))
+      database.updateDocument("status", { user_id: user_id.toString() }, { status: newStatus })
     } else {
       addStatus(user_id, newStatus)
     }
