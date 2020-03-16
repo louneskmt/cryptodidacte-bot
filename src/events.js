@@ -31,43 +31,57 @@ eventEmitter.on('logs', (body) => {
 });
 
 eventEmitter.on('dm', (user_id, message_create_object) => {
-  var message = message_create_object.message_data.text;
+  var message = message_create_object.message_data.text.toLowerCase();
   var message_data = message_create_object.message_data;
 
-  user.getStatus(user_id, (status) => {
-    switch(status) {
-      case 'add_winners':
-        console.log("Waiting for winners")
-        if(message.toLowerCase() === "cancel") {
-          user.deleteStatus(user_id);
-          return;
-        }
-        if(message_data.entities.user_mentions.length === 3) {
-          lnquiz.addWinners(message_data.entities.user_mentions);
-          user.deleteStatus(user_id);
-        } else {
-          Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
-        }
-        break;
+  if(message === "cancel") {
+    user.deleteStatus(user_id);
+    return;
+  }
 
-      case 'generating_invoice':
-        return;
-      default:
-        break;
+  user.getStatus(user_id, (status) => {
+    if(status === 'add_winners') {
+      console.log("Waiting for winners")
+      if(message_data.entities.user_mentions.length === 3) {
+        lnquiz.addWinners(message_data.entities.user_mentions);
+        user.deleteStatus(user_id);
+      } else {
+        Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
+      }
+    } else if (status === 'generating_invoice') {
+
+    } else if (status.startsWith('claim_rewards_') && message.startsWith('ln')) {
+      var amount = status.split('_')[2];
+      var invoice = message;
+      lightning.getInvoiceData(invoice, (result) => {
+        if(result.num_satoshis === amount) {
+          lightning.payInvoice(invoice, () => {
+            Twitter.sendTextMessage(user_id, "✅ Paid!");
+            user.deleteStatus(user_id);
+          }, (err) => {
+            Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try later.");
+            Twitter.sendTextMessage(user_id, "Logs : " + err.payment_error);
+          });
+        } else {
+          Twitter.sendTextMessage(user_id, "❌ Error, your invoice is for " + result.num_satoshis.toString() + " sats, \
+              and you can only claim " + amount.toString() + " sats.\n\n\
+              Please send another invoice, or send 'Cancel'.");
+        }
+      })
     }
   });
 
   if(message_data.hasOwnProperty("quick_reply_response")) {
     console.log("Quick Reply")
     if(message_data.quick_reply_response.metadata === "receive_sats") {
-      Twitter.sendTextMessage(user_id, "You just choose to receive sats.")
+      Twitter.sendTextMessage(user_id, "You just chose to receive sats.")
     }
     if(message_data.quick_reply_response.metadata === "claim_rewards") {
-      Twitter.sendTextMessage(user_id, "You just choose to claim rewards.")
+      Twitter.sendTextMessage(user_id, "You just chose to claim rewards.")
       lnquiz.claimRewards(user_id);
     }
     if(message_data.quick_reply_response.metadata === "generate_invoice") {
-      Twitter.sendTextMessage(user_id, "You just choose to tip Cryptodidacte and generate an invoice.")
+      Twitter.sendTextMessage(user_id, "You just chose to tip Cryptodidacte and generate an invoice.")
       console.log("Generating invoice");
       Twitter.sendTextMessage(user_id, "Generating invoice...");
       user.setStatus(user_id, "generating_invoice")
@@ -93,7 +107,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
   }
 
-  if(message.toLowerCase() === "start") {
+  if(message === "start") {
     if(twitterConfig.admin.includes(user_id)) {
       console.log("Sending admin menu...")
       Twitter.sendAdminMenu(user_id)
@@ -102,16 +116,16 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
   }
 
-  if(message.toLowerCase() === "start no admin") {
+  if(message === "start no admin") {
     Twitter.sendMenu(user_id);
   }
 
-  if(message.startsWith('ln')) {
-    console.log("Checking invoice : ", message);
-    lightning.getInvoiceData(message, (result) => {
-      console.log("Amount : ", result.value);
-    })
-  }
+  // if(message.startsWith('ln')) {
+  //   console.log("Checking invoice : ", message);
+  //   lightning.getInvoiceData(message, (result) => {
+  //     console.log("Amount : ", result.value);
+  //   })
+  // }
 
 
   // if(message.startsWith('ln')) {
