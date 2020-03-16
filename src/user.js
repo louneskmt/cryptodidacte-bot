@@ -6,7 +6,9 @@ const getStatus = (user_id, callback) => {
       return undefined;
     }
     console.log("Found one status", docs[0].status)
-    callback(docs[0].status);
+    if(typeof callback === "function") {
+      callback(docs[0].status);
+    }
   })
 }
 
