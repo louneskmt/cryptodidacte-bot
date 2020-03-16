@@ -47,17 +47,15 @@ const insertOneDocument = (collection, newEntry, callback) => {
 }
 
 const findDocuments = (collection, query, callback) => {
-  connect((db) => {
     // Get the documents collection and find some documents
+    console.log(query)
     const col = db.collection(collection);
     col.find(query).toArray(function(err, docs) {
       if (err) throw err;
       console.log("Found the following records");
       console.log(docs);
       callback(docs);
-      client.close();
     });
-  })
 }
 
 const removeDocument = (collection, query, callback) => {
@@ -90,6 +88,8 @@ const updateDocument = (collection, query, modification, callback) => {
 }
 
 module.exports = {
+  connect,
+  disconnect,
   insertDocuments,
   insertOneDocument,
   findDocuments,
