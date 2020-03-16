@@ -14,7 +14,7 @@ var QRCode = require('./qrcode.js');
 // LNQuiz function
 var lnquiz = require('./lnquiz.js');
 
-var nextMessage = "NORMAL";
+var user = require('./user.js');
 
 eventEmitter.on('tweet', (tweet) => {
   Twitter.sendTextMessage(tweet.user_id, "We got your tweet!");
@@ -34,17 +34,16 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   var message = message_create_object.message_data.text;
   var message_data = message_create_object.message_data;
 
-  if(nextMessage === "WINNERS") {
-    console.log("Winner message")
-    console.log();
+  if(user.getStatus(user_id) === "add_winners") {
+    console.log("Waiting for winners")
     if(message.toLowerCase() === "cancel") {
-      nextMessage = "NORMAL";
+      user.deleteStatus(user_id);
       return;
     }
 
     if(message_data.entities.user_mentions.length === 3) {
       lnquiz.addWinners(message_data.entities.user_mentions);
-      nextMessage = "NORMAL";
+      user.deleteStatus(user_id);
     } else {
       Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
     }
@@ -79,7 +78,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
     if(message_data.quick_reply_response.metadata === "add_winners") {
       Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
-      nextMessage = "WINNERS";
+      user.updateStatus(user_id, "add_winners");
       return;
     }
   }
