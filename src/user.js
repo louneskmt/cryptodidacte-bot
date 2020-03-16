@@ -20,11 +20,13 @@ const addStatus = (user_id, status) => {
   database.insertOneDocument("status", newEntry, () => {});
 }
 
-const setStatus = (user_id, status) => {
+const setStatus = (user_id, newStatus) => {
   getStatus(user_id, (status) => {
     if(status) {
-      updateDocument("status", { user_id: user_id.toString() }, { status: status }, () => {});
+      console.log("Updating status");
+      updateDocument("status", { user_id: user_id.toString() }, { status: newStatus }, () => {});
     } else {
+      console.log("Adding status");
       addStatus(user_id, status);
     }
   });
