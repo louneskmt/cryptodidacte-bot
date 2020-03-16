@@ -83,7 +83,7 @@ const getInvoiceData = (payment_request) => {
   var r_hash_str = Buffer.from(payment_request).toString('base64');
 
   var options = {
-    url: `https://kfmprmnblmf262qcj7vf7lh7lqzrybruj5vvzx7rkpt3kafejwtvydad.onion:10080/v1/invoice/${r_hash_str}`,
+    url: `https://kfmprmnblmf262qcj7vf7lh7lqzrybruj5vvzx7rkpt3kafejwtvydad.onion:10080/v1/invoice?r_hash=${r_hash_str}`,
     strictSSL: false,
   	agentClass: Agent,
     agentOptions: {
