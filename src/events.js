@@ -58,14 +58,14 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
           lightning.payInvoice(invoice, () => {
             Twitter.sendTextMessage(user_id, "✅ Paid!");
             user.deleteStatus(user_id);
+            database.removeDocuments("rewards", { user_id: user_id.toString() })
           }, (err) => {
             Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try later.");
             Twitter.sendTextMessage(user_id, "Logs : " + err.payment_error);
           });
         } else {
           Twitter.sendTextMessage(user_id, "❌ Error, your invoice is for " + result.num_satoshis.toString() + " sats, \
-              and you can only claim " + amount.toString() + " sats.\n\n\
-              Please send another invoice, or send 'Cancel'.");
+and you can only claim " + amount.toString() + " sats.\n\nPlease send another invoice, or send 'Cancel'.");
         }
       })
     }
@@ -107,16 +107,12 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
   }
 
-  if(message === "start") {
-    if(twitterConfig.admin.includes(user_id)) {
-      console.log("Sending admin menu...")
-      Twitter.sendAdminMenu(user_id)
-    } else {
-      Twitter.sendMenu(user_id)
-    }
+  if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
+    console.log("Sending admin menu...")
+    Twitter.sendAdminMenu(user_id)
   }
 
-  if(message === "start no admin") {
+  if(message === "start") {
     Twitter.sendMenu(user_id);
   }
 
