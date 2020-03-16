@@ -49,6 +49,8 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
           Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
         }
         break;
+
+      case 'generating_invoice'
       default:
         break;
     }
@@ -67,6 +69,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
       Twitter.sendTextMessage(user_id, "You just choose to tip Cryptodidacte and generate an invoice.")
       console.log("Generating invoice");
       Twitter.sendTextMessage(user_id, "Generating invoice...");
+      user.setStatus(user_id, "generating_invoice")
       lightning.generateInvoice(200, "Test", (invoice) => {
         Twitter.sendTextMessage(user_id, "✅ Done!");
         QRCode.generateQRCode(invoice, (QRCodePath) => {
