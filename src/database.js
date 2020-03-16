@@ -19,27 +19,26 @@ const disconnect = (client) => {
 }
 
 const insertDocuments = (collection, newEntries, callback) => {
-  connect((db) => {
+  connect((client, db) => {
     // Get collection
     // Insert some documents
     db.collection(collection).insertMany(newEntries, function(err, result) {
       assert.equal(err, null);
       console.log("Inserted" + result.result.n + "documents into the collection");
       callback(result);
-      client.close();
+      disconnect(client);
     });
   })
 }
 
 const insertOneDocument = (collection, newEntry, callback) => {
-  connect((db) => {
-    // Get the collection
-    // Insert some documents
+  connect((client, db) => {
+    // Get the documents collection and find some documents
     db.collection(collection).insertOne(newEntry, function(err, result) {
       assert.equal(err, null);
       console.log("Inserted 1 document into the collection");
       callback(result);
-      client.close();
+      disconnect(client);
     });
   });
 }
@@ -47,8 +46,7 @@ const insertOneDocument = (collection, newEntry, callback) => {
 const findDocuments = (collection, query, callback) => {
   connect((client, db) => {
     // Get the documents collection and find some documents
-    var col = db.collection(collection);
-    col.find(query).toArray(function(err, docs) {
+    db.collection(collection).find(query).toArray(function(err, docs) {
       if (err) throw err;
       console.log("Found the following records");
       console.log(docs);
@@ -59,7 +57,7 @@ const findDocuments = (collection, query, callback) => {
 }
 
 const removeDocument = (collection, query, callback) => {
-  connect((db) => {
+  connect((client, db) => {
     // Get the documents collection
     // Delete document
     db.collection(collection).deleteOne(query, function(err, result) {
@@ -67,7 +65,7 @@ const removeDocument = (collection, query, callback) => {
       assert.equal(1, result.result.n);
       console.log("Document removed");
       callback(result);
-      client.close();
+      disconnect(client);
     });
   });
 }
@@ -82,7 +80,7 @@ const updateDocument = (collection, query, modification, callback) => {
       assert.equal(1, result.result.n);
       console.log("Document updated");
       callback(result);
-      client.close();
+      disconnect(client);
     });
   });
 }
