@@ -34,20 +34,25 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   var message = message_create_object.message_data.text;
   var message_data = message_create_object.message_data;
 
-  if(user.getStatus(user_id) === "add_winners") {
-    console.log("Waiting for winners")
-    if(message.toLowerCase() === "cancel") {
-      user.deleteStatus(user_id);
-      return;
+  user.getStatus(user_id, (status) => {
+    switch(status) {
+      case 'add_winners':
+        console.log("Waiting for winners")
+        if(message.toLowerCase() === "cancel") {
+          user.deleteStatus(user_id);
+          return;
+        }
+        if(message_data.entities.user_mentions.length === 3) {
+          lnquiz.addWinners(message_data.entities.user_mentions);
+          user.deleteStatus(user_id);
+        } else {
+          Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
+        }
+        break;
+      default:
+        break;
     }
-
-    if(message_data.entities.user_mentions.length === 3) {
-      lnquiz.addWinners(message_data.entities.user_mentions);
-      user.deleteStatus(user_id);
-    } else {
-      Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
-    }
-  }
+  });
 
   if(message_data.hasOwnProperty("quick_reply_response")) {
     console.log("Quick Reply")
