@@ -55,6 +55,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
       var invoice = message;
       lightning.getInvoiceData(invoice, (result) => {
         if(result.num_satoshis === amount) {
+          Twitter.sendTextMessage(user_id, "Paying invoice...");
           lightning.payInvoice(invoice, () => {
             Twitter.sendTextMessage(user_id, "✅ Paid!");
             user.deleteStatus(user_id);
