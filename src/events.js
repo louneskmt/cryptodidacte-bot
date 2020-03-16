@@ -50,7 +50,8 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
         }
         break;
 
-      case 'generating_invoice'
+      case 'generating_invoice':
+        return;
       default:
         break;
     }
@@ -72,6 +73,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
       user.setStatus(user_id, "generating_invoice")
       lightning.generateInvoice(200, "Test", (invoice) => {
         Twitter.sendTextMessage(user_id, "✅ Done!");
+        user.deleteStatus(user_id);
         QRCode.generateQRCode(invoice, (QRCodePath) => {
           console.log("QRCodePath :", QRCodePath);
           if(QRCodePath !== "None") {
