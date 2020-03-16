@@ -1,12 +1,12 @@
 const database = require('./database.js');
 
-const getStatus = (user_id) => {
+const getStatus = (user_id, callback) => {
   database.findDocuments("status", { user_id: user_id.toString() }, (docs) => {
     if(docs.length === 0) {
       return undefined;
     }
-    console.log("Found one status")
-    return docs[0].status;
+    console.log("Found one status", docs[0].status)
+    callback(docs[0].status);
   })
 }
 
