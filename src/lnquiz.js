@@ -1,5 +1,5 @@
 const fs = require('fs')
-
+const user = require('./user.js')
 const lightning = require('./lightning.rest');
 const database = require('./database.js');
 const Twitter = require('./Twit.js');
@@ -7,20 +7,19 @@ var rewards = require('../data/rewards.json');
 
 const claimRewards = (user_id) => {
   database.findDocuments("rewards", { user_id: user_id.toString() }, (result) => {
-    var totalToPay = 0;
-
     if(result.length === 0) {
       Twitter.sendTextMessage(user_id, "You have nothing to claim.");
       return;
     }
+
+    var totalToPay = 0;
     result.forEach((elmt) => {
       totalToPay += elmt.reward;
     })
     Twitter.sendTextMessage(user_id, "Please, send an invoice for " + totalToPay + " sats.");
-  })
+    user.setStatus(user_id, "claim_rewards_" + totalToPay.toString() + "_sats");
+  });
 }
-
-
 
 const addWinners = (winners) => {
   var newEntries = [
