@@ -29,9 +29,11 @@ const setStatus = (user_id, status) => {
 }
 
 const deleteStatus = (user_id) => {
-  if(getStatus(user_id)) {
-    database.removeDocument("status", { user_id: user_id.toString() }, () => {});
-  }
+  getStatus(user_id, (status) => {
+    if(status) {
+      database.removeDocument("status", { user_id: user_id.toString() }, () => {});
+    }
+  })
 }
 
 module.exports = {
