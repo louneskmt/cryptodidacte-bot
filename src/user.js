@@ -4,6 +4,7 @@ const getStatus = (user_id, callback) => {
   database.findDocuments("status", { user_id: user_id.toString() }, (docs) => {
     if(docs.length === 0) {
       callback(undefined);
+      return;
     }
     console.log("Found one status", docs[0].status)
     if(typeof callback === "function") {
