@@ -37,8 +37,8 @@ const insertOneDocument = (collection, newEntry, callback) => {
     db.collection(collection).insertOne(newEntry, function(err, result) {
       assert.equal(err, null);
       console.log("Inserted 1 document into the collection");
-      callback(result);
       disconnect(client);
+      callback(result);
     });
   });
 }
@@ -50,8 +50,8 @@ const findDocuments = (collection, query, callback) => {
       if (err) throw err;
       console.log("Found the following records");
       console.log(docs);
-      callback(docs);
       disconnect(client);
+      callback(docs);
     });
   });
 }
@@ -64,8 +64,8 @@ const removeOneDocument = (collection, query, callback) => {
       assert.equal(err, null);
       assert.equal(1, result.result.n);
       console.log("Document removed");
-      callback(result);
       disconnect(client);
+      callback(result);
     });
   });
 }
@@ -76,9 +76,9 @@ const removeDocuments = (collection, query, callback) => {
     // Delete document
     db.collection(collection).deleteMany(query, function(err, result) {
       assert.equal(err, null);
-      console.log(result.result.n.toString() + " documents removed");
-      callback(result);
+      console.log(result.deletedCount.toString() + " documents removed");
       disconnect(client);
+      callback(result);
     });
   });
 }
@@ -92,8 +92,8 @@ const updateDocument = (collection, query, modification, callback) => {
       assert.equal(err, null);
       assert.equal(1, result.result.n);
       console.log("Document updated");
-      callback(result);
       disconnect(client);
+      callback(result);
     });
   });
 }

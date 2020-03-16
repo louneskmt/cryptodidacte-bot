@@ -21,7 +21,9 @@ const addStatus = (user_id, status) => {
 }
 
 const setStatus = (user_id, newStatus) => {
+  console.log("Deleting status")
   deleteStatus(user_id, () => {
+    console.log("Adding status")
     addStatus(user_id, newStatus);
   });
 }
