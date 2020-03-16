@@ -56,7 +56,7 @@ const findDocuments = (collection, query, callback) => {
   });
 }
 
-const removeDocument = (collection, query, callback) => {
+const removeOneDocument = (collection, query, callback) => {
   connect((client, db) => {
     // Get the documents collection
     // Delete document
@@ -64,6 +64,19 @@ const removeDocument = (collection, query, callback) => {
       assert.equal(err, null);
       assert.equal(1, result.result.n);
       console.log("Document removed");
+      callback(result);
+      disconnect(client);
+    });
+  });
+}
+
+const removeDocuments = (collection, query, callback) => {
+  connect((client, db) => {
+    // Get the documents collection
+    // Delete document
+    db.collection(collection).deleteMany(query, function(err, result) {
+      assert.equal(err, null);
+      console.log(result.result.n.toString() + " documents removed");
       callback(result);
       disconnect(client);
     });
@@ -91,6 +104,7 @@ module.exports = {
   insertDocuments,
   insertOneDocument,
   findDocuments,
-  removeDocument,
+  removeDocuments,
+  removeOneDocument,
   updateDocument
 }
