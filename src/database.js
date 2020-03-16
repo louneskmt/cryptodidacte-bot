@@ -4,19 +4,17 @@ const assert = require('assert');
 const { databaseConfig } = require('../config')
 
 const url = `mongodb://${databaseConfig.user}:${databaseConfig.password}@localhost:27017/cryptodidacte`;
-const client = new MongoClient(url);
 
 const connect = (callback) => {
-  client.connect(function(err) {
+  MongoClient.connect(url, function(err, client) {
     assert.equal(null, err);
     console.log("Connected successfully to server");
     var db = client.db("cryptodidacte");
-    console.log("Go callback DB")
-    callback(db);
+    callback(client, db);
   });
 }
 
-const disconnect = () => {
+const disconnect = (client) => {
   client.close();
 }
 
@@ -47,15 +45,17 @@ const insertOneDocument = (collection, newEntry, callback) => {
 }
 
 const findDocuments = (collection, query, callback) => {
+  connect((client, db) => {
     // Get the documents collection and find some documents
-    console.log(query)
-    const col = db.collection(collection);
+    var col = db.collection(collection);
     col.find(query).toArray(function(err, docs) {
       if (err) throw err;
       console.log("Found the following records");
       console.log(docs);
       callback(docs);
+      disconnect(client);
     });
+  });
 }
 
 const removeDocument = (collection, query, callback) => {
