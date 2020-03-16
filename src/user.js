@@ -14,7 +14,7 @@ const addStatus = (user_id, status) => {
     user_id: user_id.toString(),
     status: status
   }
-  database.insertDocuments("status", newEntry, () => {});
+  database.insertOneDocument("status", newEntry, () => {});
 }
 
 const setStatus = (user_id, status) => {
