@@ -22,22 +22,22 @@ const claimRewards = (user_id) => {
 
 
 
-const addWinners = (winners, rewardsSpecific=rewards) => {
+const addWinners = (winners) => {
   var newEntries = [
     {
       user_id: winners[0].id_str,
       username: winners[0].screen_name,
-      reward: defaultRewards.question,
+      reward: rewards.question,
     },
     {
       user_id: winners[1].id_str,
       username: winners[1].screen_name,
-      reward: defaultRewards.writing,
+      reward: rewards.writing,
     },
     {
       user_id: winners[2].id_str,
       username: winners[2].screen_name,
-      reward: defaultRewards.random,
+      reward: rewards.random,
     },
   ]
 
@@ -50,7 +50,7 @@ const updateRewards = (newRewards) => {
     if (err) return console.log(err);
     console.log(JSON.stringify(newRewards));
     console.log('writing to ' + fileName);
-  }); 
+  });
 }
 
 module.exports = {
