@@ -27,7 +27,7 @@ const setStatus = (user_id, newStatus) => {
       updateDocument("status", { user_id: user_id.toString() }, { status: newStatus }, () => {});
     } else {
       console.log("Adding status");
-      addStatus(user_id, status);
+      addStatus(user_id, newStatus);
     }
   });
 }
