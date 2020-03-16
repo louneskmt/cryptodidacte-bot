@@ -21,6 +21,7 @@ const addStatus = (user_id, status) => {
 }
 
 const setStatus = (user_id, newStatus) => {
+  console.log("setStatus");
   getStatus(user_id, (status) => {
     if(status) {
       console.log("Updating status");
