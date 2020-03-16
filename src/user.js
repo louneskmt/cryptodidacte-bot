@@ -31,7 +31,7 @@ const setStatus = (user_id, status) => {
 const deleteStatus = (user_id) => {
   getStatus(user_id, (status) => {
     if(status) {
-      database.removeDocument("status", { user_id: user_id.toString() }, () => {});
+      database.removeDocuments("status", { user_id: user_id.toString() }, () => {});
     }
   })
 }
