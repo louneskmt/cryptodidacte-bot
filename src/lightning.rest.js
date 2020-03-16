@@ -79,7 +79,7 @@ const generateInvoice = (value, memo, successCallback, errorCallback) => {
   });
 }
 
-const getInvoiceData = (payment_request) => {
+const getInvoiceData = (payment_request, successCallback, errorCallback) => {
   var options = {
     url: `https://kfmprmnblmf262qcj7vf7lh7lqzrybruj5vvzx7rkpt3kafejwtvydad.onion:10080/v1/payreq/${payment_request}`,
     strictSSL: false,
@@ -96,7 +96,6 @@ const getInvoiceData = (payment_request) => {
   };
 
   request.get(options, function(error, response, body) {
-    console.log("Check response")
     console.log(error || body);
     if(body && typeof successCallback === "function") {
       successCallback(body);
