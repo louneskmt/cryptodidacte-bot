@@ -37,6 +37,10 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   }
 
   user.getStatus(user_id, (status) => {
+    if(status === undefined) {
+      return;
+    }
+
     if(status === 'add_winners') {
       console.log("Waiting for winners")
       if(message_data.entities.user_mentions.length === 3) {
