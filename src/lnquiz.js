@@ -3,7 +3,7 @@ const database = require('./database.js');
 const Twitter = require('./Twit.js')
 
 const claimRewards = (user_id) => {
-  database.connect((db) => database.findDocuments("rewards", { user_id: user_id.toString() }, (result) => {
+  database.findDocuments("rewards", { user_id: user_id.toString() }, (result) => {
     var totalToPay = 0;
 
     if(result.length === 0) {
@@ -14,9 +14,7 @@ const claimRewards = (user_id) => {
       totalToPay += elmt.reward;
     })
     Twitter.sendTextMessage(user_id, "Please, send an invoice for " + totalToPay + " sats.");
-  }))
-  .then(() => database.disconnect())
-
+  })
 }
 
 const defaultRewards = {
