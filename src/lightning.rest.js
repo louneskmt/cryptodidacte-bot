@@ -79,6 +79,34 @@ const generateInvoice = (value, memo, successCallback, errorCallback) => {
   });
 }
 
+const getInvoiceData = (payment_request) => {
+  var r_hash_str = payment_request.toString('hex');
+
+  var options = {
+    url: `https://kfmprmnblmf262qcj7vf7lh7lqzrybruj5vvzx7rkpt3kafejwtvydad.onion:10080/v1/invoice/${r_hash_str}`,
+    strictSSL: false,
+  	agentClass: Agent,
+    agentOptions: {
+  		socksHost: '127.0.0.1', // Defaults to 'localhost'.
+  		socksPort: 9050, // Defaults to 1080.
+  	},
+    rejectUnauthorized: false,
+    json: true,
+    headers: {
+      'Grpc-Metadata-macaroon': macaroon,
+    }
+  };
+
+  request.get(options, function(error, response, body) {
+    console.log(error || body);
+    if(body && typeof successCallback === "function") {
+      successCallback(body);
+    } else if (error && typeof errorCallback === "function") {
+      errorCallback(error);
+    }
+  });
+}
+
 module.exports = {
   payInvoice,
   generateInvoice
