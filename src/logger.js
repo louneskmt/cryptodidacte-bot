@@ -7,7 +7,7 @@ function __(message, lvl = 0){
 
 
     var date = new Date();
-    var date = date.getDate()+"/"+(date.getMonth()+1)+" "+date.getHours()+":"+date.getSeconds()+":"+date.getMilliseconds()
+    var date = date.getDate()+"/"+(date.getMonth()+1)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
 
     var levels = {
         0: "VERBOSE",
