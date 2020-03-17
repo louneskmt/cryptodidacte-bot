@@ -42,6 +42,7 @@ const addWinners = (winners) => {
 
   database.insertDocuments("rewards", newEntries, () => {});
 }
+const {__} = require("./src/logger.js");
 
 const updateRewards = (newRewards, callback) => {
   var fileName = __dirname + '/../data/rewards.json'
