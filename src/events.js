@@ -38,6 +38,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
 
   user.getStatus(user_id, (status) => {
     if(status === undefined) {
+      console.log("No status")
       return;
     }
 
