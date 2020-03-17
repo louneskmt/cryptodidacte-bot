@@ -37,5 +37,5 @@ main.write(`\n\n\n------------------------ ${date} ------------------------`)
 __`Logger has started`
 
 module.exports = {
-    __
+    __, __json
 }

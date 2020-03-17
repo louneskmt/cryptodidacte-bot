@@ -1,4 +1,4 @@
-const {__} = require("./logger.js");
+const {__, __json} = require("./logger.js");
 
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
