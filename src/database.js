@@ -8,7 +8,7 @@ const url = `mongodb://${databaseConfig.user}:${databaseConfig.password}@localho
 const connect = (callback) => {
   MongoClient.connect(url, function(err, client) {
     assert.equal(null, err);
-    console.log("Connected successfully to server");
+    __("Connected successfully to server",1);
     var db = client.db("cryptodidacte");
     callback(client, db);
   });
@@ -24,7 +24,7 @@ const insertDocuments = (collection, newEntries, callback) => {
     // Insert some documents
     db.collection(collection).insertMany(newEntries, function(err, result) {
       assert.equal(err, null);
-      console.log("Inserted" + result.result.n + "documents into the collection");
+      __("database.js@insertDocuments : Inserted many (" + result.result.n + ") documents into the collection");
       callback(result);
       disconnect(client);
     });
@@ -36,7 +36,7 @@ const insertOneDocument = (collection, newEntry, callback) => {
     // Get the documents collection and find some documents
     db.collection(collection).insertOne(newEntry, function(err, result) {
       assert.equal(err, null);
-      console.log("Inserted 1 document into the collection");
+      __("database.js@insertOneDocument : 1 document inserted into "+collection);
       disconnect(client);
       callback(result);
     });
@@ -48,8 +48,7 @@ const findDocuments = (collection, query, callback) => {
     // Get the documents collection and find some documents
     db.collection(collection).find(query).toArray(function(err, docs) {
       if (err) throw err;
-      console.log("Found the following records");
-      console.log(docs);
+      __("database.js@findDocuments : Found the following records : \n"+ JSON.stringify(docs));
       disconnect(client);
       if(typeof callback === "function") callback(docs);
     });
@@ -63,7 +62,7 @@ const removeOneDocument = (collection, query, callback) => {
     db.collection(collection).deleteOne(query, function(err, result) {
       assert.equal(err, null);
       assert.equal(1, result.result.n);
-      console.log("Document removed");
+      __("1 document removed");
       disconnect(client);
       if(typeof callback === "function") callback(result);
     });
@@ -76,7 +75,7 @@ const removeDocuments = (collection, query, callback) => {
     // Delete document
     db.collection(collection).deleteMany(query, function(err, result) {
       assert.equal(err, null);
-      console.log(result.deletedCount.toString() + " documents removed");
+      __("database.js@removeDocuments : " + result.deletedCount.toString() + " documents removed from collection "+collection);
       disconnect(client);
       if(typeof callback === "function") callback(result);
     });
@@ -91,7 +90,7 @@ const updateDocument = (collection, query, modification, callback) => {
       , { $set: modification }, function(err, result) {
       assert.equal(err, null);
       assert.equal(1, result.result.n);
-      console.log("Document updated");
+      __("database.js@updateDocument : 1 document updated in collection "+collection);
       disconnect(client);
       if(typeof callback === "function") callback(result);
     });
