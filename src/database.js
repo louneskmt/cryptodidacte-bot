@@ -25,7 +25,7 @@ const insertDocuments = (collection, newEntries, callback) => {
     // Insert some documents
     db.collection(collection).insertMany(newEntries, function(err, result) {
       assert.equal(err, null);
-      __("database.js@insertDocuments : Inserted many (" + result.result.n + ") documents into the collection");
+      __(__filename+"@insertDocuments : Inserted many (" + result.result.n + ") documents into the collection");
       callback(result);
       disconnect(client);
     });
@@ -37,7 +37,7 @@ const insertOneDocument = (collection, newEntry, callback) => {
     // Get the documents collection and find some documents
     db.collection(collection).insertOne(newEntry, function(err, result) {
       assert.equal(err, null);
-      __("database.js@insertOneDocument : 1 document inserted into "+collection);
+      __(__filename+"@insertOneDocument : 1 document inserted into "+collection);
       disconnect(client);
       callback(result);
     });
@@ -49,7 +49,7 @@ const findDocuments = (collection, query, callback) => {
     // Get the documents collection and find some documents
     db.collection(collection).find(query).toArray(function(err, docs) {
       if (err) throw err;
-      __("database.js@findDocuments : Found the following records : \n"+ JSON.stringify(docs));
+      __(__filename+"@findDocuments : Found the following records : \n"+ JSON.stringify(docs));
       disconnect(client);
       if(typeof callback === "function") callback(docs);
     });
@@ -75,8 +75,8 @@ const removeDocuments = (collection, query, callback) => {
     // Get the documents collection
     // Delete document
     db.collection(collection).deleteMany(query, function(err, result) {
-      assert.equal(err, null);
-      __("database.js@removeDocuments : " + result.deletedCount.toString() + " documents removed from collection "+collection);
+      assert.equal(err, null); 
+      __(__filename+"@removeDocuments : " + result.deletedCount.toString() + " documents removed from collection "+collection);
       disconnect(client);
       if(typeof callback === "function") callback(result);
     });
