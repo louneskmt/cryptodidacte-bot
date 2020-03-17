@@ -32,7 +32,7 @@ function __json(message, lvl){
 }
 
 var date = new Date();
-var date = date.getDate()+"/"+(date.getMonth()+1)+" "+date.getHours()+":"+date.getSeconds()+":"+date.getMilliseconds()
+var date = date.getDate()+"/"+(date.getMonth()+1)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
 
 main.write(`\n\n\n------------------------ ${date} ------------------------`)
 
