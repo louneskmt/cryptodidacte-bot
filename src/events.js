@@ -53,29 +53,35 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
 
     if (status === 'generating_invoice') {
       user.deleteStatus(user_id);
+      Twitter.sendTextMessage(user_id, "Nothing yet here.");
     }
 
-    if (status.startsWith('claim_rewards_') && message.startsWith('ln')) {
-      var amount = status.split('_')[2];
-      var invoice = message;
-      lightning.getInvoiceData(invoice, (result) => {
-        if(result.num_satoshis === amount) {
-          Twitter.sendTextMessage(user_id, "Paying invoice...");
-          lightning.payInvoice(invoice, () => {
-            Twitter.sendTextMessage(user_id, "✅ Paid!");
-            user.deleteStatus(user_id);
-            database.removeDocuments("rewards", { user_id: user_id.toString() })
-          }, (err) => {
-            Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try later.");
-            Twitter.sendTextMessage(user_id, "Logs : " + err.payment_error);
-            user.deleteStatus(user_id);
-          });
-        } else {
-          Twitter.sendTextMessage(user_id, "❌ Error, your invoice is for " + result.num_satoshis.toString() + " sats, \
-and you can only claim " + amount.toString() + " sats.\n\nPlease send another invoice, or send 'Cancel'.");
-
-        }
-      })
+    if (status.startsWith('claim_rewards_')) {
+      if(message.startsWith('ln')) {
+        var amount = status.split('_')[2];
+        var invoice = message;
+        lightning.getInvoiceData(invoice, (result) => {
+          if(result.num_satoshis === amount) {
+            Twitter.sendTextMessage(user_id, "Paying invoice...");
+            lightning.payInvoice(invoice, () => {
+              Twitter.sendTextMessage(user_id, "✅ Paid!");
+              user.deleteStatus(user_id);
+              database.removeDocuments("rewards", { user_id: user_id.toString() })
+            }, (err) => {
+              Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try later.");
+              Twitter.sendTextMessage(user_id, "Logs : " + err.payment_error);
+              user.deleteStatus(user_id);
+            });
+          } else {
+            Twitter.sendTextMessage(user_id, "❌ Error, your invoice is for " + result.num_satoshis.toString() + " sats, \
+  and you can only claim " + amount.toString() + " sats.\n\nPlease send another invoice, or send 'Cancel'.");
+          }
+        }, (err) => {
+          Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
+        })
+      } else {
+        Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
+      }
     }
 
     if(status === "update_rewards") {
