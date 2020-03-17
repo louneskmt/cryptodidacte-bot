@@ -60,17 +60,17 @@ const sendMenu = (user_id) => {
           label: "💸 Tip Cryptodidacte",
           description: "Generate an LN invoice to tip Cryptodidacte",
           metadata: "generate_invoice"
-        },
-        {
-          label: "🏦 See CDT Balance",
-          description: "Display your CryptoDidacteTokens balance",
-          metadata: "display_cdt_balance"
-        },
-        {
-          label: "📥 Receive sats",
-          description: "Test option for sats sending",
-          metadata: "receive_sats"
         }
+        // {
+        //   label: "🏦 See CDT Balance",
+        //   description: "Display your CryptoDidacteTokens balance",
+        //   metadata: "display_cdt_balance"
+        // },
+        // {
+        //   label: "📥 Receive sats",
+        //   description: "Test option for sats sending",
+        //   metadata: "receive_sats"
+        // }
       ]
     }
   }
@@ -88,6 +88,11 @@ const sendAdminMenu = (user_id) => {
           label: "🏅 Add new #LNQuiz winners",
           description: "Set Twitter accounts as winners",
           metadata: "add_winners"
+        },
+        {
+          label: "🔄 Update #LNQuiz Rewards",
+          description: "Set new rewards amounts",
+          metadata: "update_rewards"
         },
         {
           label: "💸 Send CDT",
