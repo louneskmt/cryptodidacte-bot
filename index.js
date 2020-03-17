@@ -1,3 +1,5 @@
+const __ = require("./src/logger.js");
+
 // Require Events handler and fs to read files
 const eventEmitter = require('./src/events.js');
 const fs = require('fs');
@@ -6,7 +8,6 @@ const fs = require('fs');
 const { twitterConfig } = require('./config.js');
 const security = require('./src/security.js');
 const Twitter = require('./src/Twit');
-const __ = require("./src/logger.js");
 
 // Require Express (HTTPS server)
 const express = require("express");
