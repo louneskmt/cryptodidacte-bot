@@ -71,16 +71,20 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
               Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try later.");
               Twitter.sendTextMessage(user_id, "Logs : " + err.payment_error);
               user.deleteStatus(user_id);
+              return;
             });
           } else {
             Twitter.sendTextMessage(user_id, "❌ Error, your invoice is for " + result.num_satoshis.toString() + " sats, \
   and you can only claim " + amount.toString() + " sats.\n\nPlease send another invoice, or send 'Cancel'.");
+            return;
           }
         }, (err) => {
           Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
+          return;
         })
       } else {
         Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
+        return;
       }
     }
 
