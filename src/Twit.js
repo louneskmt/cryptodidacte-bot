@@ -1,3 +1,5 @@
+const {__} = require("./src/logger.js");
+
 const Twit = require('twit');
 const { twitterConfig } = require('../config.js');
 const Twitter = new Twit(twitterConfig);

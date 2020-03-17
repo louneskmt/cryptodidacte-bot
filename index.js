@@ -1,4 +1,4 @@
-const __ = require("./src/logger.js");
+const {__} = require("./src/logger.js");
 
 // Require Events handler and fs to read files
 const eventEmitter = require('./src/events.js');

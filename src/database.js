@@ -1,3 +1,5 @@
+const {__} = require("./src/logger.js");
+
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
