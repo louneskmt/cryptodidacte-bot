@@ -82,13 +82,16 @@ and you can only claim " + amount.toString() + " sats.\n\nPlease send another in
       if(/^(\d+ \d+ \d+)$/.test(message)) {
         var amounts = message.split(' ');
         var newRewards = {
-          question: amounts[0],
-          writing: amounts[1],
-          random: amounts[2]
+          question: Number(amounts[0], 10),
+          writing: Number(amounts[1], 10),
+          random: Number(amounts[2], 10)
         }
         console.log("newRewards :\n", newRewards);
         lnquiz.updateRewards(newRewards, (err) => {
-          if(err) return Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
+          if(err) {
+            console.log("Error : ", err);
+            return Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
+          }
           Twitter.sendTextMessage(user_id, "✅ Updated!");
           user.deleteStatus(user_id);
         });
