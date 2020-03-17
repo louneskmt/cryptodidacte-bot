@@ -1,3 +1,5 @@
+const {__} = require("./logger.js");
+
 const fs = require('fs')
 const user = require('./user.js')
 const lightning = require('./lightning.rest');

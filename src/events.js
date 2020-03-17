@@ -22,8 +22,8 @@ eventEmitter.on('logs', (body) => {
     __`Typing`
   }
   if(body.hasOwnProperty("direct_message_events")) {
-    __`New message :`
-    __(body.direct_message_events[0].message_create);
+    __`New message : `
+    __json(body.direct_message_events[0].message_create);
   }
 });
 
