@@ -49,9 +49,13 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
       } else {
         Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
       }
-    } else if (status === 'generating_invoice') {
+    }
+
+    if (status === 'generating_invoice') {
       user.deleteStatus(user_id);
-    } else if (status.startsWith('claim_rewards_') && message.startsWith('ln')) {
+    }
+
+    if (status.startsWith('claim_rewards_') && message.startsWith('ln')) {
       var amount = status.split('_')[2];
       var invoice = message;
       lightning.getInvoiceData(invoice, (result) => {
@@ -72,6 +76,24 @@ and you can only claim " + amount.toString() + " sats.\n\nPlease send another in
 
         }
       })
+    }
+
+    if(status === "update_rewards") {
+      if(/^(\d+ \d+ \d+)$/.test(message)) {
+        var amounts = message.split(' ');
+        var newRewards = {
+          question: amounts[0],
+          writing: amounts[1],
+          random: amounts[2]
+        }
+        console.log("newRewards :\n", newRewards);
+        lnquiz.updateRewards(newRewards, (err) => {
+          if(err) return Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
+          Twitter.sendTextMessage(user_id, "✅ Updated!");
+        });
+      } else {
+        Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
+      }
     }
   });
 
@@ -106,6 +128,11 @@ and you can only claim " + amount.toString() + " sats.\n\nPlease send another in
     if(message_data.quick_reply_response.metadata === "add_winners") {
       Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
       user.setStatus(user_id, "add_winners");
+      return;
+    }
+    if(message_data.quick_reply_response.metadata === "update_rewards") {
+      Twitter.sendTextMessage(user_id, "Please, send the new rewards ammounts in the following order : question-writing-random, separated with a space and in sats (e.g. \"150 300 150\").");
+      user.setStatus(user_id, "update_rewards");
       return;
     }
   }
