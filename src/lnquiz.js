@@ -44,13 +44,12 @@ const addWinners = (winners) => {
 }
 
 const updateRewards = (newRewards, callback) => {
-  var fileName = __dirname + 'data/rewards.json'
+  var fileName = __dirname + '/../data/rewards.json'
   fs.writeFile(fileName, JSON.stringify(newRewards), function writeJSON(err) {
-    if (err && typeof callback === "function") return callback(err);
-    if (err) return console.log("Error : ", err);
     console.log(JSON.stringify(newRewards));
     console.log('writing to ' + fileName);
     rewards = newRewards;
+    if(typeof callback === "function") return callback(err);
   });
 }
 
