@@ -24,6 +24,11 @@ function __(message, lvl = 0){
 
     main.write(text);
 }
+
+function __json(message, lvl){
+    __(JSON.stringify(message),lvl);
+}
+
 var date = new Date();
 var date = date.getDate()+"/"+(date.getMonth()+1)+" "+date.getHours()+":"+date.getSeconds()+":"+date.getMilliseconds()
 
