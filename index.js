@@ -40,7 +40,7 @@ app.post('/webhook/twitter', function(req, res) {
     }
     eventEmitter.emit('tweet', tweet);
   }
-  res.status(200);
+  res.status(200).end();
 })
 
 /**
