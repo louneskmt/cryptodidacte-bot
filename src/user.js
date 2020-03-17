@@ -1,4 +1,4 @@
-const {__} = require("./src/logger.js");
+const {__} = require("./logger.js");
 
 const database = require('./database.js');
 

@@ -1,4 +1,4 @@
-const {__} = require("./src/logger.js");
+const {__} = require("./logger.js");
 
 const Twit = require('twit');
 const { twitterConfig } = require('../config.js');
