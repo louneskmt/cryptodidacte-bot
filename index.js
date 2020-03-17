@@ -6,7 +6,7 @@ const fs = require('fs');
 const { twitterConfig } = require('./config.js');
 const security = require('./src/security.js');
 const Twitter = require('./src/Twit');
-const __ = require(".src/logger.js");
+const __ = require("./src/logger.js");
 
 // Require Express (HTTPS server)
 const express = require("express");
