@@ -49,7 +49,7 @@ const updateRewards = (newRewards, callback) => {
     console.log(JSON.stringify(newRewards));
     console.log('writing to ' + fileName);
     rewards = newRewards;
-    if(typeof callback === "function") return callback(err);
+    callback(err);
   });
 }
 
