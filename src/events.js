@@ -1,15 +1,13 @@
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
+
 // Twitter modules
 var Twitter = require('./Twit');
 const { twitterConfig } = require('../config.js');
-// Lightning REST
+
 var lightning = require('./lightning.rest.js');
-// QRCode generator module
 var QRCode = require('./qrcode.js');
-// LNQuiz function
 var lnquiz = require('./lnquiz.js');
-// Status and database functions
 var user = require('./user.js');
 var database = require('./database.js');
 

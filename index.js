@@ -6,6 +6,7 @@ const fs = require('fs');
 const { twitterConfig } = require('./config.js');
 const security = require('./src/security.js');
 const Twitter = require('./src/Twit');
+const __ = require(".src/logger.js");
 
 // Require Express (HTTPS server)
 const express = require("express");
@@ -48,7 +49,7 @@ app.post('/webhook/twitter', function(req, res) {
  */
 app.get('/webhook/twitter', function(req, res) {
   var crc_token = req.query.crc_token;
-  console.log("Verification CRC...\n", crc_token);
+  __("Verification CRC...\n"+crc_token, 2);
   if (crc_token) {
     var hash = security.get_challenge_response(crc_token, twitterConfig.consumer_secret);
     res.status(200).send({ response_token: 'sha256=' + hash });
