@@ -90,6 +90,7 @@ and you can only claim " + amount.toString() + " sats.\n\nPlease send another in
         lnquiz.updateRewards(newRewards, (err) => {
           if(err) return Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
           Twitter.sendTextMessage(user_id, "✅ Updated!");
+          user.deleteStatus(user_id);
         });
       } else {
         Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
