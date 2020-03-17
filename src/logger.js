@@ -1,3 +1,5 @@
+const beautify = require("json-beautify");
+
 if(typeof fs != "object"){
     var fs = require("fs");
 }
@@ -26,7 +28,7 @@ function __(message, lvl = 0){
 }
 
 function __json(message, lvl){
-    __(JSON.stringify(message),lvl);
+    __(beautify(message, null, 2, 100),lvl);
 }
 
 var date = new Date();
