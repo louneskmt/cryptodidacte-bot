@@ -1,4 +1,5 @@
 const __ = require("./logger.js");
+console.log(__)
 
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
