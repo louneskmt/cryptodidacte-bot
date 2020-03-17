@@ -2,6 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
 const { databaseConfig } = require('../config')
+const __ = require("./logger.js");
 
 const url = `mongodb://${databaseConfig.user}:${databaseConfig.password}@localhost:27017/cryptodidacte`;
 
