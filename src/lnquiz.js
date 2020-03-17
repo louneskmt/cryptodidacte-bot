@@ -46,13 +46,15 @@ const addWinners = (winners) => {
 const updateRewards = (newRewards) => {
   var fileName = __dirname + 'data/rewards.json'
   fs.writeFile(fileName, JSON.stringify(newRewards), function writeJSON(err) {
-    if (err) return console.log(err);
+    if (err) return callback(err);
     console.log(JSON.stringify(newRewards));
     console.log('writing to ' + fileName);
+    rewards = newRewards;
   });
 }
 
 module.exports = {
   claimRewards,
-  addWinners
+  addWinners,
+  updateRewards
 }
