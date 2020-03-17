@@ -1,5 +1,3 @@
-const {__} = require("./logger.js");
-
 const database = require('./database.js');
 
 const getStatus = (user_id, callback) => {
