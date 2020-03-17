@@ -17,11 +17,11 @@ eventEmitter.on('tweet', (tweet) => {
 
 eventEmitter.on('logs', (body) => {
   if(body.hasOwnProperty("direct_message_indicate_typing_events")) {
-    console.log("Typing...");
+    __`Typing`
   }
   if(body.hasOwnProperty("direct_message_events")) {
-    console.log("New message :");
-    console.log(body.direct_message_events[0].message_create);
+    __`New message :`
+    __(body.direct_message_events[0].message_create);
   }
 });
 
