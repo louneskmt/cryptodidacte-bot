@@ -51,7 +51,7 @@ const findDocuments = (collection, query, callback) => {
       console.log("Found the following records");
       console.log(docs);
       disconnect(client);
-      callback(docs);
+      if(typeof callback === "function") callback(docs);
     });
   });
 }
@@ -65,7 +65,7 @@ const removeOneDocument = (collection, query, callback) => {
       assert.equal(1, result.result.n);
       console.log("Document removed");
       disconnect(client);
-      callback(result);
+      if(typeof callback === "function") callback(result);
     });
   });
 }
@@ -78,7 +78,7 @@ const removeDocuments = (collection, query, callback) => {
       assert.equal(err, null);
       console.log(result.deletedCount.toString() + " documents removed");
       disconnect(client);
-      callback(result);
+      if(typeof callback === "function") callback(result);
     });
   });
 }
@@ -93,7 +93,7 @@ const updateDocument = (collection, query, modification, callback) => {
       assert.equal(1, result.result.n);
       console.log("Document updated");
       disconnect(client);
-      callback(result);
+      if(typeof callback === "function") callback(result);
     });
   });
 }
