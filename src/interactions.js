@@ -10,6 +10,8 @@ var database = require('./database.js');
 
 
 function start(params){
+    if(params.status) end(params);
+    
     let {user_id} = params;
   
     Twitter.sendMenu(user_id);
@@ -176,8 +178,6 @@ function start(params){
   // INTERACTIONS
   
   function end(params, description){
-    if(params.status) end(params);
-
     let {user_id} = params;
   
     user.deleteStatus(user_id);
