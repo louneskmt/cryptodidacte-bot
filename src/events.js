@@ -74,6 +74,13 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
       return interactions.start(params);
     }
     
+    if(message_data.hasOwnProperty("quick_reply_response")) {
+      let metadata = message_data.quick_reply_response.metadata;
+  
+      if(fn_exact.hasOwnProperty(metadata)){
+        return fn_exact[metadata](params);
+      }
+    }
 
     if(fn_exact.hasOwnProperty(status)){
       fn_exact[status](params);
@@ -85,13 +92,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
 
   });
 
-  if(message_data.hasOwnProperty("quick_reply_response")) {
-    let metadata = message_data.quick_reply_response.metadata;
-
-    if(fn_exact.hasOwnProperty(metadata)){
-      fn_exact[metadata](params);
-    }
-  }
+  
 
 
 
