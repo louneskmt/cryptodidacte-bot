@@ -54,6 +54,7 @@ function generatingInvoice(params){
 }
 
 function addWinners(params){
+  let {user_id} = params;
   Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
   return user.setStatus(user_id, "add_winners");
 }
