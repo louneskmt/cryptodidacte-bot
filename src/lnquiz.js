@@ -15,7 +15,7 @@ const countRewards = (user_id, callback) => {
     result.forEach((elmt) => {
       totalToPay += elmt.reward;
     })
-    __("Here : "+amount,2)
+    __("Here : "+totalToPay,2)
     if(typeof callback === "function") callback(totalToPay);
   });
 }
