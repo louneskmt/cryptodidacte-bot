@@ -88,7 +88,7 @@ const updateDocument = (collection, query, modification, callback) => {
   connect((client, db) => {
     // Get the documents collection
     // Update document where a is 2, set b equal to 1
-    __(db.collection, 2)
+
     db.collection(collection).updateOne(query
       , { $set: modification }, function(err, result) {
       assert.equal(err, null);

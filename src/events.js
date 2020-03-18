@@ -56,7 +56,7 @@ function generatingInvoice(params){
 function addWinners(params){
   let {user_id} = params;
   Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
-  return user.setStatus(user_id, "add_winners");
+  return user.setStatus(user_id, "adding_winners");
 }
 
 function generateInvoice(params){
@@ -219,7 +219,8 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
 
 
   const fn_exact = {
-    "add_winners": tryAddWinners,
+    "adding_winners": tryAddWinners,
+    "add_winners": addWinners,
     "generating_invoice": generatingInvoice,
     "update_rewards": updateRewards,
     "updating_rewards": updatingRewards,
@@ -228,7 +229,6 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     "receive_sats": receiveSats,
     "claim_rewards": countRewards,
     "generate_invoice": generateInvoice,
-    "add_winners": addWinners
   }
 
   const fn_startsWith = {
