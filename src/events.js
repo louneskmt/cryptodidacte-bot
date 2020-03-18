@@ -1,165 +1,108 @@
+const {__} = require("./logger.js");
+
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
+
 // Twitter modules
 var Twitter = require('./Twit');
 const { twitterConfig } = require('../config.js');
-// Lightning REST
-var lightning = require('./lightning.rest.js');
-// QRCode generator module
-var QRCode = require('./qrcode.js');
-// LNQuiz function
-var lnquiz = require('./lnquiz.js');
-// Status and database functions
+var interactions = require("./interactions");
 var user = require('./user.js');
-var database = require('./database.js');
+
 
 eventEmitter.on('tweet', (tweet) => {
   Twitter.sendTextMessage(tweet.user_id, "We got your tweet!");
 });
 
 eventEmitter.on('logs', (body) => {
-  if(body.hasOwnProperty("direct_message_indicate_typing_events")) {
-    console.log("Typing...");
-  }
   if(body.hasOwnProperty("direct_message_events")) {
-    console.log("New message :");
-    console.log(body.direct_message_events[0].message_create);
+    var message_create = body.direct_message_events[0].message_create;
+    var recipient = message_create.target.recipient_id;
+    var sender = message_create.sender_id;
+    var content = message_create.message_data.text;
+
+    __("Sender : "+sender)
+    if(sender === Twitter.botId){
+      sender = "BOT"
+    }else{
+      recipient = "BOT"
+    }
+
+    __(`Message from ${sender} to ${recipient} : ${content}`);
   }
 });
+
 
 eventEmitter.on('dm', (user_id, message_create_object) => {
   var message = message_create_object.message_data.text.toLowerCase();
   var message_data = message_create_object.message_data;
 
-  if(message === "cancel") {
-    user.deleteStatus(user_id);
-    return;
+  const fn_exact = {
+    "adding_winners": interactions.tryAddWinners,
+    "add_winners": interactions.addWinners,
+    "generating_invoice": interactions.generatingInvoice,
+    "update_rewards": interactions.updateRewards,
+    "updating_rewards": interactions.updatingRewards,
+    "cancel": interactions.end,
+    "start": interactions.start,
+    "receive_sats": interactions.receiveSats,
+    "claim_rewards": interactions.countRewards,
+    "generate_invoice": interactions.generateInvoice,
   }
 
+  const fn_startsWith = {
+    "claim_rewards_": interactions.claimRewards
+  }
+
+  const params = {
+    user_id, message, message_data
+  };
+
+  if(message === "cancel") return interactions.end(params);
+
   user.getStatus(user_id, (status) => {
+<<<<<<< HEAD
     if(status === undefined) {
       console.log("No status")
       return;
     }
+=======
+    params.status = status;
+>>>>>>> 5dbd82d2408a3cfccf0620e5304f7d7ecc1045f6
 
-    if(status === 'add_winners') {
-      console.log("Waiting for winners")
-      if(message_data.entities.user_mentions.length === 3) {
-        lnquiz.addWinners(message_data.entities.user_mentions);
-        Twitter.sendTextMessage(user_id, "✅ You successfully added three winners! ");
-      } else {
-        Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
-      }
-    }
-
-    if (status === 'generating_invoice') {
+    if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
       user.deleteStatus(user_id);
-      Twitter.sendTextMessage(user_id, "Nothing yet here.");
+      __("Sending admin menu...")
+      return Twitter.sendAdminMenu(user_id)
     }
-
-    if (status.startsWith('claim_rewards_')) {
-      if(message.startsWith('ln')) {
-        var amount = status.split('_')[2];
-        var invoice = message;
-        lightning.getInvoiceData(invoice, (result) => {
-          if(result.num_satoshis === amount) {
-            Twitter.sendTextMessage(user_id, "Paying invoice...");
-            lightning.payInvoice(invoice, () => {
-              Twitter.sendTextMessage(user_id, "✅ Paid!");
-              user.deleteStatus(user_id);
-              database.removeDocuments("rewards", { user_id: user_id.toString() })
-            }, (err) => {
-              Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try later.");
-              Twitter.sendTextMessage(user_id, "Logs : " + err.payment_error);
-              user.deleteStatus(user_id);
-              return;
-            });
-          } else {
-            Twitter.sendTextMessage(user_id, "❌ Error, your invoice is for " + result.num_satoshis.toString() + " sats, \
-  and you can only claim " + amount.toString() + " sats.\n\nPlease send another invoice, or send 'Cancel'.");
-            return;
-          }
-        }, (err) => {
-          Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
-          return;
-        })
-      } else {
-        Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
-        return;
+  
+    if(message === "start"){
+      user.deleteStatus(user_id);
+      return interactions.start(params);
+    }
+    
+    if(message_data.hasOwnProperty("quick_reply_response")) {
+      let metadata = message_data.quick_reply_response.metadata;
+  
+      if(fn_exact.hasOwnProperty(metadata)){
+        return fn_exact[metadata](params);
       }
     }
 
-    if(status === "update_rewards") {
-      if(/^(\d+ \d+ \d+)$/.test(message)) {
-        var amounts = message.split(' ');
-        var newRewards = {
-          question: Number(amounts[0], 10),
-          writing: Number(amounts[1], 10),
-          random: Number(amounts[2], 10)
-        }
-        console.log("newRewards :\n", newRewards);
-        lnquiz.updateRewards(newRewards, (err) => {
-          if(err) {
-            console.log("Error : ", err);
-            return Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
-          }
-          Twitter.sendTextMessage(user_id, "✅ Updated!");
-          user.deleteStatus(user_id);
-        });
-      } else {
-        Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
+    if(fn_exact.hasOwnProperty(status)){
+      fn_exact[status](params);
+    } else {
+      for (const key in fn_startsWith) {
+        if(status.startsWith(key))  fn_startsWith[key](params)
       }
     }
+
   });
 
-  if(message_data.hasOwnProperty("quick_reply_response")) {
-    console.log("Quick Reply")
-    if(message_data.quick_reply_response.metadata === "receive_sats") {
-      Twitter.sendTextMessage(user_id, "You just chose to receive sats.")
-    }
-    if(message_data.quick_reply_response.metadata === "claim_rewards") {
-      lnquiz.claimRewards(user_id);
-    }
-    if(message_data.quick_reply_response.metadata === "generate_invoice") {
-      Twitter.sendTextMessage(user_id, "You just chose to tip Cryptodidacte and generate an invoice.")
-      console.log("Generating invoice");
-      Twitter.sendTextMessage(user_id, "Generating invoice...");
-      user.setStatus(user_id, "generating_invoice")
-      lightning.generateInvoice(200, "Test", (invoice) => {
-        Twitter.sendTextMessage(user_id, "✅ Done!");
-        user.deleteStatus(user_id);
-        QRCode.generateQRCode(invoice, (QRCodePath) => {
-          console.log("QRCodePath :", QRCodePath);
-          if(QRCodePath !== "None") {
-            Twitter.sendMessageWithImage(user_id, invoice, QRCodePath);
-          } else {
-            Twitter.sendTextMessage(user_id, invoice);
-          }
-        });
-      }, (err) => {
-        Twitter.sendTextMessage(user_id, "❌ Error generating invoice... Please try later.");
-      });
-    }
-    if(message_data.quick_reply_response.metadata === "add_winners") {
-      Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
-      user.setStatus(user_id, "add_winners");
-      return;
-    }
-    if(message_data.quick_reply_response.metadata === "update_rewards") {
-      Twitter.sendTextMessage(user_id, "Please, send the new rewards ammounts in the following order : question-writing-random, separated with a space and in sats (e.g. \"150 300 150\").");
-      user.setStatus(user_id, "update_rewards");
-      return;
-    }
-  }
+  
 
-  if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
-    console.log("Sending admin menu...")
-    Twitter.sendAdminMenu(user_id)
-  }
 
-  if(message === "start") {
-    Twitter.sendMenu(user_id);
-  }
+
 
   // if(message.startsWith('ln')) {
   //   console.log("Checking invoice : ", message);

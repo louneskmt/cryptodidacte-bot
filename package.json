@@ -7,6 +7,8 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "beautify": "0.0.8",
+    "colors": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-https-redirect": "^1.0.0",
@@ -15,7 +17,7 @@
     "mongodb": "^3.5.5",
     "qrcode": "^1.4.4",
     "socks5-https-client": "^1.2.1",
-    "twit": "https://github.com/lounes-kmt/twit"
+    "twit": "git+https://github.com/lounes-kmt/twit.git"
   },
   "scripts": {
     "start": "node index.js"
