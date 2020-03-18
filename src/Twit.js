@@ -19,10 +19,9 @@ const sendMessage = (user_id, message_create_object) => {
     }
   }
 
-  /** ALREADY TREATED IN events.js **/
-  // Twitter.post('direct_messages/events/new', message, function (err, data, response) {
-  //   console.log(data)
-  // });
+  Twitter.post('direct_messages/events/new', message, function (err, data, response) {
+     if(err) __(err,9)
+  });
 }
 
 const sendTextMessage = (user_id, text) => {
