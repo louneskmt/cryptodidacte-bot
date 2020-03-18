@@ -15,7 +15,7 @@ const bodyParser = require('body-parser');
 const https = require('https');
 const helmet = require('helmet');
 
-global.database = require('./database.js')("cryptodidacte");
+global.database = require('./src/atabase.js')("cryptodidacte");
 database.connect();
 
 // HTTPS Server config
