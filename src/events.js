@@ -27,66 +27,120 @@ eventEmitter.on('logs', (body) => {
   }
 });
 
+function tryAddWinners(params){
+  __`Expecting winners`
+
+  if(message_data.entities.user_mentions.length === 3) {
+    lnquiz.addWinners(message_data.entities.user_mentions);
+    Twitter.sendTextMessage(user_id, "✅ You successfully added three winners! ");
+  } else {
+    Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
+  }
+}
+
+function generatingInvoice(params){
+  let {user_id} = params;
+
+  Twitter.sendTextMessage(user_id, "Nothing yet here.");
+  end(user_id)
+}
+
+
+function claimRewards(params){
+  if(message.startsWith('ln')) {
+    var amount = status.split('_')[2];
+    var invoice = message;
+
+    lightning.getInvoiceData(invoice, 
+      
+      (result) => {
+      if(result.num_satoshis === amount) {
+        Twitter.sendTextMessage(user_id, "Paying invoice...");
+        __`events.js@claimRewars : An invoice is paying paid`
+
+        lightning.payInvoice(invoice, () => {
+          database.removeDocuments("rewards", { user_id: user_id.toString() })
+          __(`events.js@claimRewars : Reward paid, document removed !`, 2)
+
+          //*** TODO : Should I send message "end of action" ?***//
+          end(params, "✅ Paid!");
+        }, (err) => {
+          // Cannot pay invoice
+          Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try again later.");
+          __("Could not pay invoice, got following error : ", 9)
+          __json(err.payment_error, 9);
+          end(params, "Error log : " + err.payment_error);
+        });
+
+      } else {
+        /// Amounts not corresponding
+        return retry(params, "Your invoice is for " + result.num_satoshis.toString() + " sats, \
+and you can only claim " + amount.toString() + " sats");
+      }
+    }, 
+    
+    /// ERROR AT GETTING INVOICE DATA
+    (err) => {
+      //** CANCELLATION (?) **/
+      __("events.js@claimRewards:lightning.getInvoiceData : Couldn't get invoice data, got following error : ", 9);
+      __json(err, 9); 
+      return end(params, "Could not get invoice data")
+    });
+
+  } else {
+    return retry(params);
+  }
+}
+
+// INTERACTIONS
+function end(params, description){
+  let {user_id} = params;
+
+  user_id.deleteStatus(user_id);
+  
+  if(description) Twitter.sendTextMessage(user_id, description)
+
+  Twitter.sendTextMessage(user_id, "End of action")
+  __`End of action for ${user_id}`
+}
+
+
+function retry(params, description){
+  let {user_id} = params;
+
+  if(description) Twitter.sendTextMessage(user_id, description)
+
+  Twitter.sendTextMessage(user_id, "❌ Please try again, or send 'Cancel'.");
+}
+
 eventEmitter.on('dm', (user_id, message_create_object) => {
   var message = message_create_object.message_data.text.toLowerCase();
   var message_data = message_create_object.message_data;
 
-  if(message === "cancel") {
-    user.deleteStatus(user_id);
-    return;
-  }
+  if(message === "cancel") return user.deleteStatus(user_id);
 
   user.getStatus(user_id, (status) => {
     if(status === undefined) {
       return;
     }
 
-    if(status === 'add_winners') {
-      console.log("Waiting for winners")
-      if(message_data.entities.user_mentions.length === 3) {
-        lnquiz.addWinners(message_data.entities.user_mentions);
-        Twitter.sendTextMessage(user_id, "✅ You successfully added three winners! ");
-      } else {
-        Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
-      }
+    const fn_exact = {
+      "add_winners": tryAddWinners,
+      "generating_invoice": generatingInvoice 
     }
 
-    if (status === 'generating_invoice') {
-      user.deleteStatus(user_id);
-      Twitter.sendTextMessage(user_id, "Nothing yet here.");
+    const fn_startsWith = {
+      "claim_rewards_": claimRewards
     }
 
-    if (status.startsWith('claim_rewards_')) {
-      if(message.startsWith('ln')) {
-        var amount = status.split('_')[2];
-        var invoice = message;
-        lightning.getInvoiceData(invoice, (result) => {
-          if(result.num_satoshis === amount) {
-            Twitter.sendTextMessage(user_id, "Paying invoice...");
-            lightning.payInvoice(invoice, () => {
-              Twitter.sendTextMessage(user_id, "✅ Paid!");
-              user.deleteStatus(user_id);
-              database.removeDocuments("rewards", { user_id: user_id.toString() })
-            }, (err) => {
-              Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try later.");
-              Twitter.sendTextMessage(user_id, "Logs : " + err.payment_error);
-              user.deleteStatus(user_id);
-              return;
-            });
-          } else {
-            Twitter.sendTextMessage(user_id, "❌ Error, your invoice is for " + result.num_satoshis.toString() + " sats, \
-  and you can only claim " + amount.toString() + " sats.\n\nPlease send another invoice, or send 'Cancel'.");
-            return;
-          }
-        }, (err) => {
-          Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
-          return;
-        })
-      } else {
-        Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
-        return;
-      }
+    if(fn_exact.hasOwnProperty(status)){
+      fn_exact[status]({
+        user_id, status
+      })
     }
+
+
+    // TODO :  To be continued
 
     if(status === "update_rewards") {
       if(/^(\d+ \d+ \d+)$/.test(message)) {
