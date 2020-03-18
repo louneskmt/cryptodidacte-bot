@@ -9,8 +9,8 @@ function __(message, lvl = 0){
 
     if(typeof message === "object" && message != null){
         console.trace();
-        __(message, 2)
-        message = beautify(message, null, 2, 100);
+        console.log(message, message.length)
+        // message = beautify(message, null, 2, 100);
     }
 
     var date = new Date();
