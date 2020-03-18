@@ -242,7 +242,9 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     Twitter.sendAdminMenu(user_id)
   }
 
-  if(message === "start") start(params);
+  if(message === "start") fn_exact.start(params);
+
+  if(message === "cancel") fn_exact.cancel(params);
 
 
   // if(message.startsWith('ln')) {
