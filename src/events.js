@@ -82,6 +82,8 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
       }
     }
 
+    if(status === undefined) return;
+    
     if(fn_exact.hasOwnProperty(status)){
       fn_exact[status](params);
     } else {
