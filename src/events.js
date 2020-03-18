@@ -93,7 +93,7 @@ function generateInvoice(params){
 }
 
 function claimRewards(params){
-  let {message, user_id} = params;
+  let {message, user_id, status} = params;
 
   if(message.startsWith('ln')) {
     var amount = status.split('_')[2];
