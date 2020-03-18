@@ -27,12 +27,6 @@ function __(message, lvl = 0){
 
     main.write(text);
 }
-
-//** DEPRECATED (already) **//
-function __json(message, lvl){
-    __(beautify(message, null, 2, 100),lvl);
-}
-
 var date = new Date();
 var date = date.getDate()+"/"+(date.getMonth()+1)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
 
@@ -41,5 +35,5 @@ main.write(`\n\n\n------------------------ ${date} ------------------------`)
 __`Logger has started`
 
 module.exports = {
-    __, __json
+    __
 }
