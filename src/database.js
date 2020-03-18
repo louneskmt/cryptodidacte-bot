@@ -7,12 +7,11 @@ const { databaseConfig } = require('../config')
 
 const url = `mongodb://${databaseConfig.user}:${databaseConfig.password}@localhost:27017/cryptodidacte`;
 
-const connect = async () => {
+const connect = (callback) => {
   MongoClient.connect(url, function(err, client) {
     assert.equal(null, err);
     __("Connected successfully to server",1);
     let db = client.db("cryptodidacte");
-
     callback(client, db);
   });
 }
