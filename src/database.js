@@ -50,7 +50,7 @@ const findDocuments = (collection, query, callback) => {
     // Get the documents collection and find some documents
     db.collection(collection).find(query).toArray(function(err, docs) {
       if (err) throw err;
-      __("database.js@findDocuments : Found the following records : \n"+ JSON.stringify(docs));
+      __("database.js@findDocuments : Found the following documents : \n"+ JSON.stringify(docs));
       disconnect(client);
       if(typeof callback === "function") callback(docs);
     });

@@ -19,9 +19,10 @@ const sendMessage = (user_id, message_create_object) => {
     }
   }
 
-  Twitter.post('direct_messages/events/new', message, function (err, data, response) {
-    console.log(data)
-  });
+  /** ALREADY TREATED IN events.js **/
+  // Twitter.post('direct_messages/events/new', message, function (err, data, response) {
+  //   console.log(data)
+  // });
 }
 
 const sendTextMessage = (user_id, text) => {
@@ -114,7 +115,12 @@ const sendAdminMenu = (user_id) => {
 
 const uploadImage = (filePath, callback) => {
   Twitter.postMediaChunked({ file_path: filePath, media_category: "dm_image" }, function (err, data, response) {
-    console.log(err || data);
+    if(err) __(err, 9)
+    else{
+      __(`Uploaded image : `)
+      __(data)
+    }
+
     if(data && typeof callback === "function") {
       callback(data.media_id_string, data.image.image_type)
     }
@@ -127,5 +133,6 @@ module.exports = {
   sendAdminMenu,
   sendMenu,
   uploadImage,
-  sendMessageWithImage
+  sendMessageWithImage,
+  botId: 1235621426125774850
 };
