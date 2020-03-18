@@ -6,7 +6,9 @@ var eventEmitter = new events.EventEmitter();
 // Twitter modules
 var Twitter = require('./Twit');
 const { twitterConfig } = require('../config.js');
-var interactions = require("./interactions")
+var interactions = require("./interactions");
+var user = require('./user.js');
+
 
 eventEmitter.on('tweet', (tweet) => {
   Twitter.sendTextMessage(tweet.user_id, "We got your tweet!");
@@ -49,7 +51,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     user_id, message, message_data
   };
 
-  if(message === "cancel") return end(params);
+  if(message === "cancel") return interactions.end(params);
 
   if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
     __("Sending admin menu...")
