@@ -8,8 +8,6 @@ var main = fs.createWriteStream("./logs/main.log", {flags: "a"});
 function __(message, lvl = 0){
 
     if(typeof message === "object" && message != null){
-        console.trace();
-        console.log(message, message.length)
         message = beautify(message, null, 2, 100);
     }
 
