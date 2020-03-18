@@ -187,7 +187,7 @@ function start(params){
     setTimeout(function(){
       Twitter.sendTextMessage(user_id, "End of action 🙃")
     },1000);
-    __`End of action for ${user_id}`
+    __(`End of action for ${user_id}`)
   }
   
   
