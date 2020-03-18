@@ -165,7 +165,6 @@ function start(params){
   
   function countRewards(params){
     lnquiz.countRewards(params.user_id, (amount) => {
-        __(amount,2)
       if(amount) {
         Twitter.sendTextMessage(params.user_id, "Please, send an invoice for " + amount + " sats.");
         return user.setStatus(params.user_id, "claim_rewards_" + amount + "_sats");
