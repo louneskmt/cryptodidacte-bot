@@ -12,6 +12,7 @@ function __(message, lvl = 0){
         try{
             message = beautify(message, null, 2, 100);
         }catch(err){
+            console.error(message);
             __(err, 9);
         }
     }
