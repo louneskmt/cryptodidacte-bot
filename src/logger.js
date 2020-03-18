@@ -36,8 +36,6 @@ function __(message, lvl = 0){
     var level = levels[lvl]
 
     var color = color_list[lvl];
-    console.log(lvl)
-
 
     var text = colors[color](`\n[${date}] | [${level}] |: ${message}`)
 
