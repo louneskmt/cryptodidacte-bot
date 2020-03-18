@@ -212,7 +212,9 @@ function retry(params, description){
 
   if(description) Twitter.sendTextMessage(user_id, description)
 
-  Twitter.sendTextMessage(user_id, "❌ Please try again, or send 'Cancel'.");
+  setTimeout(function(){
+    Twitter.sendTextMessage(user_id, "❌ Please try again, or send 'Cancel'.");
+  }, 1000)
 }
 
 eventEmitter.on('dm', (user_id, message_create_object) => {
