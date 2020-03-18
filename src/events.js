@@ -40,7 +40,7 @@ function tryAddWinners(params){
     lnquiz.addWinners(message_data.entities.user_mentions);
     end(params, "✅ You successfully added three winners! ");
   } else {
-    retry(params, "You didn't enter three winners, please try again or send 'Cancel'.");
+    retry(params, "You didn't enter three winners.");
   }
 }
 
