@@ -4,20 +4,17 @@ const lightning = require('./lightning.rest');
 const database = require('./database.js');
 const Twitter = require('./Twit.js');
 var rewards = require('../data/rewards.json');
+const {__} = require("./logger.js");
 
-const claimRewards = (user_id) => {
+const countRewards = (user_id, callback) => {
+
   database.findDocuments("rewards", { user_id: user_id.toString() }, (result) => {
-    if(result.length === 0) {
-      Twitter.sendTextMessage(user_id, "You have nothing to claim.");
-      return;
-    }
-
     var totalToPay = 0;
     result.forEach((elmt) => {
       totalToPay += elmt.reward;
     })
-    Twitter.sendTextMessage(user_id, "Please, send an invoice for " + totalToPay + " sats.");
-    user.setStatus(user_id, "claim_rewards_" + totalToPay.toString() + "_sats");
+
+    if(typeof callback === "function") callback(totalToPay);
   });
 }
 
@@ -45,16 +42,18 @@ const addWinners = (winners) => {
 
 const updateRewards = (newRewards, callback) => {
   var fileName = __dirname + '/../data/rewards.json'
-  fs.writeFile(fileName, JSON.stringify(newRewards), function writeJSON(err) {
-    console.log(JSON.stringify(newRewards));
-    console.log('writing to ' + fileName);
-    rewards = newRewards;
+
+  fs.writeFile(fileName, JSON.stringify(newRewards), (err) => {
+
+    __(JSON.stringify(newRewards));
+    __('lnquiz.js@updateRewards : Rewards updated at ' + fileName, 1);
+
     callback(err);
   });
 }
 
 module.exports = {
-  claimRewards,
+  countRewards,
   addWinners,
   updateRewards
 }
