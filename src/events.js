@@ -63,7 +63,7 @@ function generateInvoice(params){
   let {user_id} = params;
 
   Twitter.sendTextMessage(user_id, "Thank you for choosing to tip Cryptodidacte")
-  __("events.js@generateInvoice : Generating an invoice (tip) "); 
+  __("events.js@generateInvoice : Generating an invoice (tip) ");
 
   Twitter.sendTextMessage(user_id, "Generating invoice...");
   user.setStatus(user_id, "generating_invoice")
@@ -80,7 +80,7 @@ function generateInvoice(params){
         Twitter.sendTextMessage(user_id, invoice);
       }
     });
-    
+
     end(params);
 
   }, (err) => {
@@ -88,7 +88,7 @@ function generateInvoice(params){
     __(err, 9);
 
     end(params, "❌ Error generating invoice... Please try later.");
-  
+
   });
 }
 
@@ -99,8 +99,8 @@ function claimRewards(params){
     var amount = status.split('_')[2];
     var invoice = message;
 
-    lightning.getInvoiceData(invoice, 
-      
+    lightning.getInvoiceData(invoice,
+
       (result) => {
       if(result.num_satoshis === amount) {
         Twitter.sendTextMessage(user_id, "Paying invoice...");
@@ -123,15 +123,15 @@ function claimRewards(params){
       } else {
         /// Amounts not corresponding
         return retry(params, "Your invoice is for " + result.num_satoshis.toString() + " sats, \
-and you can only claim " + amount.toString() + " sats");
+and you can only claim " + amount.toString() + " sats.");
       }
-    }, 
-    
+    },
+
     /// ERROR AT GETTING INVOICE DATA
     (err) => {
       //** CANCELLATION (?) **/
       __("events.js@claimRewards:lightning.getInvoiceData : Couldn't get invoice data, got following error : ", 9);
-      __(err, 9); 
+      __(err, 9);
       return end(params, "Could not get invoice data")
     });
 
@@ -179,10 +179,16 @@ function receiveSats(params){
   end(params, "You have chosen to receive sats")
 }
 
-function claimRewards(params){
+function countRewards(params){
   // TODO : Claim rewards here not in lnquiz.js
-
-  lnquiz.claimRewards(params.user_id);
+  lnquiz.countRewards(params.user_id, (amount) => {
+    if(amount) {
+      Twitter.sendTextMessage(user_id, "Please, send an invoice for " + amount + " sats.");
+      return user.setStatus(user_id, "claim_rewards_" + amount + "_sats");
+    } else {
+      return end(params, "You have nothing to claim.");
+    }
+  });
 }
 
 // INTERACTIONS
@@ -191,7 +197,7 @@ function end(params, description){
   let {user_id} = params;
 
   user.deleteStatus(user_id);
-  
+
   if(description) Twitter.sendTextMessage(user_id, description)
 
   Twitter.sendTextMessage(user_id, "End of action 🙃")
@@ -220,7 +226,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     "cancel": end,
     "start": start,
     "receive_sats": receiveSats,
-    "claim_rewards": claimRewards,
+    "claim_rewards": countRewards,
     "generate_invoice": generateInvoice,
     "add_winners": addWinners
   }
@@ -246,30 +252,26 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     if(status === undefined) return;
 
     params.status = status;
-    
+
     if(fn_exact.hasOwnProperty(status)){
       fn_exact[status](params);
-    }else{
+    } else {
       for (const key in fn_startsWith) {
         if(status.startsWith(key))  fn_startsWith[key](params)
       }
     }
-      
+
   });
 
-  if(message_data.hasOwnProperty("quick_reply_response")) { 
+  if(message_data.hasOwnProperty("quick_reply_response")) {
     let metadata = message_data.quick_reply_response.metadata;
 
     if(fn_exact.hasOwnProperty(metadata)){
       fn_exact[metadata](params);
-    }else{
-      for (const key in fn_startsWith) {
-        if(metadata.startsWith(key))  fn_startsWith[key](params)
-      }
     }
   }
 
- 
+
 
 
   // if(message.startsWith('ln')) {

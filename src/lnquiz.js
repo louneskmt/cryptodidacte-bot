@@ -6,22 +6,18 @@ const Twitter = require('./Twit.js');
 var rewards = require('../data/rewards.json');
 const {__} = require("./logger.js");
 
-const claimRewards = (user_id) => {
+const countRewards = (user_id, callback) => {
 
   // TODO : Return only value of reward
 
   database.findDocuments("rewards", { user_id: user_id.toString() }, (result) => {
-    if(result.length === 0) {
-      Twitter.sendTextMessage(user_id, "You have nothing to claim.");
-      return;
-    }
+    if(result.length === 0) return;
 
     var totalToPay = 0;
     result.forEach((elmt) => {
       totalToPay += elmt.reward;
     })
-    Twitter.sendTextMessage(user_id, "Please, send an invoice for " + totalToPay + " sats.");
-    user.setStatus(user_id, "claim_rewards_" + totalToPay.toString() + "_sats");
+    if(typeof callback === "function") callback(totalToPay.toString());
   });
 }
 
@@ -60,7 +56,7 @@ const updateRewards = (newRewards, callback) => {
 }
 
 module.exports = {
-  claimRewards,
+  countRewards,
   addWinners,
   updateRewards
 }
