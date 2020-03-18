@@ -98,7 +98,7 @@ function start(params){
   
             //*** TODO : Should I send message "end of action" ?***//
             end(params, "✅ Paid!");
-          }, (err) => {
+          }, err => {
             // Cannot pay invoice
             Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try again later.");
             __("Could not pay invoice, got following error : ", 9)
