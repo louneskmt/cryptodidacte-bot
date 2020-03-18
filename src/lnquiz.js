@@ -1,14 +1,14 @@
 const fs = require('fs')
 const user = require('./user.js')
 const lightning = require('./lightning.rest');
-const database = require('./database.js');
 const Twitter = require('./Twit.js');
 var rewards = require('../data/rewards.json');
 const {__} = require("./logger.js");
 
 const countRewards = (user_id, callback) => {
 
-  database.findDocuments("rewards", { user_id: user_id.toString() }, (result) => {
+  database.find("rewards", { user_id: user_id.toString() }).then((result) => {
+    
     var totalToPay = 0;
     result.forEach((elmt) => {
       totalToPay += elmt.reward;
@@ -16,9 +16,10 @@ const countRewards = (user_id, callback) => {
 
     if(typeof callback === "function") callback(totalToPay);
   });
+
 }
 
-const addWinners = (winners) => {
+const addWinners = async (winners) => {
   var newEntries = [
     {
       user_id: winners[0].id_str,
@@ -37,7 +38,9 @@ const addWinners = (winners) => {
     },
   ]
 
-  database.insertDocuments("rewards", newEntries, () => {});
+  return new Promise(function(resolve, reject){
+    database.insert("rewards", newEntries).then(res => resolve(0)).catch(err => resolve(1));
+  })
 }
 
 const updateRewards = (newRewards, callback) => {
