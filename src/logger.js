@@ -7,8 +7,11 @@ var main = fs.createWriteStream("./logs/main.log", {flags: "a"});
 
 function __(message, lvl = 0){
 
+
     if(typeof message === "object" && message != null){
-        message = beautify(message, null, 2, 100);
+        if(message.isArray() && message.length > 1){
+            message = beautify(message, null, 2, 100);
+        }
     }
 
     var date = new Date();
