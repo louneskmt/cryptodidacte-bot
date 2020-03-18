@@ -1,4 +1,4 @@
-const {__} = require("./src/logger.js");
+const {__} = require("./logger.js");
 
 const getStatus = (user_id, callback) => {
   database.find("status", { user_id: user_id.toString() }).then((docs) => {
