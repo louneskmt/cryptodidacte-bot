@@ -19,8 +19,18 @@ eventEmitter.on('logs', (body) => {
     __`Typing`
   }
   if(body.hasOwnProperty("direct_message_events")) {
-    __`New message : `
-    __(body.direct_message_events[0].message_create);
+    var message_create = body.direct_message_events[0].message_create;
+    var recipient = message_create.target.recipient_id;
+    var sender = message_create.sender_id;
+    var content = message_create.message_data.text;
+
+    if(sender === Twitter.botId){
+      sender = "BOT"
+    }else{
+      recipient = "BOT"
+    }
+
+    __`Message from ${sender} to ${recipient} : ${content}`
   }
 });
 

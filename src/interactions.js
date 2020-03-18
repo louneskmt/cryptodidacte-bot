@@ -1,3 +1,4 @@
+const {__} = require("./logger.js");
 var Twitter = require('./Twit');
 
 
@@ -54,7 +55,7 @@ function start(params){
       Twitter.sendTextMessage(user_id, "✅ Done!");
   
       QRCode.generateQRCode(invoice, (QRCodePath) => {
-        console.log("QRCodePath :", QRCodePath);
+        __("QRCodePath :", QRCodePath);
         if(QRCodePath !== "None") {
           Twitter.sendMessageWithImage(user_id, invoice, QRCodePath);
         } else {
