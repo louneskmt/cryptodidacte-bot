@@ -200,7 +200,9 @@ function end(params, description){
 
   if(description) Twitter.sendTextMessage(user_id, description)
 
-  Twitter.sendTextMessage(user_id, "End of action 🙃")
+  setTimeout(function(){
+    Twitter.sendTextMessage(user_id, "End of action 🙃")
+  },1000);
   __`End of action for ${user_id}`
 }
 
