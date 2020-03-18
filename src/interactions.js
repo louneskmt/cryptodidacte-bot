@@ -10,9 +10,6 @@ var database = require('./database.js');
 
 
 function start(params){
-    __(params,2)
-    if(params.status) end(params);
-
     let {user_id} = params;
   
     Twitter.sendMenu(user_id);
