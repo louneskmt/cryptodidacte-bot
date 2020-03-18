@@ -196,7 +196,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     let metadata = message_data.quick_reply_response.metadata;
 
     if(fn_exact.hasOwnProperty(metadata)){
-      fn_exact[status](params);
+      fn_exact[metatdata](params);
     }else{
       for (const key in fn_startsWith) {
         if(metadata.startsWith(key))  fn_startsWith[key](params)
