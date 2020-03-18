@@ -14,7 +14,7 @@ const connect = async () => {
       __("Connected successfully to server",1);
       let db = client.db("cryptodidacte");
   
-      resolve(client, db);
+      resolve({client, db});
     });
   })
 }
