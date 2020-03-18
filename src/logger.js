@@ -28,6 +28,7 @@ function __(message, lvl = 0){
     main.write(text);
 }
 
+//** DEPRECATED (already) **//
 function __json(message, lvl){
     __(beautify(message, null, 2, 100),lvl);
 }
