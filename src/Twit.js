@@ -133,5 +133,5 @@ module.exports = {
   sendMenu,
   uploadImage,
   sendMessageWithImage,
-  botId: 1235621426125774850
+  botId: "1235621426125774850"
 };
