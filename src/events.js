@@ -69,7 +69,11 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
       return Twitter.sendAdminMenu(user_id)
     }
   
-    if(message === "start") return interactions.start(params);
+    if(message === "start"){
+      user.deleteStatus(user_id);
+      return interactions.start(params);
+    }
+    
 
     if(fn_exact.hasOwnProperty(status)){
       fn_exact[status](params);
