@@ -39,8 +39,6 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   var message = message_create_object.message_data.text.toLowerCase();
   var message_data = message_create_object.message_data;
 
-  __("Received message");
-
   const fn_exact = {
     "adding_winners": interactions.tryAddWinners,
     "add_winners": interactions.addWinners,
