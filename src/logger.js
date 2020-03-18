@@ -30,7 +30,7 @@ function __(message, lvl = 0){
 
     var color_list = {
       0: "grey",
-      1: "black",
+      1: "bgWhite",
       2: "blue",
       9: "red"
     }
