@@ -138,7 +138,7 @@ function receiveSats(params){
 function end(params, description){
   let {user_id} = params;
 
-  user_id.deleteStatus(user_id);
+  user.deleteStatus(user_id);
   
   if(description) Twitter.sendTextMessage(user_id, description)
 
