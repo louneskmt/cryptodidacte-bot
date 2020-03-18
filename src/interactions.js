@@ -55,7 +55,7 @@ function start(params){
       Twitter.sendTextMessage(user_id, "✅ Done!");
   
       QRCode.generateQRCode(invoice, (QRCodePath) => {
-        __("QRCodePath :", QRCodePath);
+        __("QRCodePath :"+ QRCodePath);
         if(QRCodePath !== "None") {
           Twitter.sendMessageWithImage(user_id, invoice, QRCodePath);
         } else {
