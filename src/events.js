@@ -61,9 +61,15 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   if(message === "cancel") return interactions.end(params);
 
   user.getStatus(user_id, (status) => {
-    if(status === undefined) return;
-
     params.status = status;
+
+    if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
+      user.deleteStatus(user_id);
+      __("Sending admin menu...")
+      return Twitter.sendAdminMenu(user_id)
+    }
+  
+    if(message === "start") return interactions.start(params);
 
     if(fn_exact.hasOwnProperty(status)){
       fn_exact[status](params);
@@ -83,13 +89,6 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
   }
 
-  if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
-    user.deleteStatus(user_id);
-    __("Sending admin menu...")
-    return Twitter.sendAdminMenu(user_id)
-  }
-
-  if(message === "start") return interactions.start(params);
 
 
 
