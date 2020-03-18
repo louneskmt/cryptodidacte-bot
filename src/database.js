@@ -7,13 +7,16 @@ const { databaseConfig } = require('../config')
 
 const url = `mongodb://${databaseConfig.user}:${databaseConfig.password}@localhost:27017/cryptodidacte`;
 
-const connect = (callback) => {
-  MongoClient.connect(url, function(err, client) {
-    assert.equal(null, err);
-    __("Connected successfully to server",1);
-    let db = client.db("cryptodidacte");
-    callback(client, db);
-  });
+const connect = async () => {
+  return new Promise((resolve, reject)=>{
+    MongoClient.connect(url, function(err, client) {
+      assert.equal(null, err);
+      __("Connected successfully to server",1);
+      let db = client.db("cryptodidacte");
+  
+      resolve(client, db);
+    });
+  })
 }
 
 const disconnect = (client) => {
@@ -21,7 +24,7 @@ const disconnect = (client) => {
 }
 
 const insertDocuments = (collection, newEntries, callback) => {
-  connect((client, db) => {
+  connect().then( (client, db) => {
     // Get collection
     // Insert some documents
     db.collection(collection).insertMany(newEntries, function(err, result) {
@@ -34,7 +37,7 @@ const insertDocuments = (collection, newEntries, callback) => {
 }
 
 const insertOneDocument = (collection, newEntry, callback) => {
-  connect((client, db) => {
+  connect().then( (client, db) => {
     // Get the documents collection and find some documents
     db.collection(collection).insertOne(newEntry, function(err, result) {
       assert.equal(err, null);
@@ -46,7 +49,7 @@ const insertOneDocument = (collection, newEntry, callback) => {
 }
 
 const findDocuments = (collection, query, callback) => {
-  connect((client, db) => {
+  connect().then( (client, db) => {
     // Get the documents collection and find some documents
     db.collection(collection).find(query).toArray(function(err, docs) {
       if (err) throw err;
@@ -59,7 +62,7 @@ const findDocuments = (collection, query, callback) => {
 }
 
 const removeOneDocument = (collection, query, callback) => {
-  connect((client, db) => {
+  connect().then( (client, db) => {
     // Get the documents collection
     // Delete document
     db.collection(collection).deleteOne(query, function(err, result) {
@@ -73,7 +76,7 @@ const removeOneDocument = (collection, query, callback) => {
 }
 
 const removeDocuments = (collection, query, callback) => {
-  connect((client, db) => {
+  connect().then( (client, db) => {
     // Get the documents collection
     // Delete document
     db.collection(collection).deleteMany(query, function(err, result) {
@@ -86,7 +89,7 @@ const removeDocuments = (collection, query, callback) => {
 }
 
 const updateDocument = (collection, query, modification, callback) => {
-  connect((client, db) => {
+  connect().then( (client, db) => {
     // Get the documents collection
     // Update document where a is 2, set b equal to 1
 
