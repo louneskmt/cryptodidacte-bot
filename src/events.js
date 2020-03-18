@@ -27,8 +27,14 @@ eventEmitter.on('logs', (body) => {
   }
 });
 
+function start(params){
+  let {user_id} = params;
+
+  Twitter.sendMenu(user_id);
+}
+
 function tryAddWinners(params){
-  __`Expecting winners`
+  let {user_id, message_data} = params;
 
   if(message_data.entities.user_mentions.length === 3) {
     lnquiz.addWinners(message_data.entities.user_mentions);
@@ -126,7 +132,8 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
 
     const fn_exact = {
       "add_winners": tryAddWinners,
-      "generating_invoice": generatingInvoice 
+      "generating_invoice": generatingInvoice,
+      "start": start
     }
 
     const fn_startsWith = {
@@ -135,7 +142,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
 
     if(fn_exact.hasOwnProperty(status)){
       fn_exact[status]({
-        user_id, status
+        user_id, status, message, message_data
       })
     }
 
@@ -206,12 +213,11 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   }
 
   if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
-    console.log("Sending admin menu...")
+    __("Sending admin menu...")
     Twitter.sendAdminMenu(user_id)
   }
 
   if(message === "start") {
-    Twitter.sendMenu(user_id);
   }
 
   // if(message.startsWith('ln')) {
