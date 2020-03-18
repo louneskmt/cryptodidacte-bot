@@ -94,7 +94,7 @@ function start(params){
   
           lightning.payInvoice(invoice, () => {
             database.remove("rewards", { user_id: user_id.toString() }, true)
-            __(`events.js@claimRewars : Reward paid, document removed !`, 2)
+            __(`events.js@claimRewars : Reward paid, documents removed !`, 2)
   
             //*** TODO : Should I send message "end of action" ?***//
             end(params, "✅ Paid!");
