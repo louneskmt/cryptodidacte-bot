@@ -162,7 +162,6 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   const fn_exact = {
     "add_winners": tryAddWinners,
     "generating_invoice": generatingInvoice,
-    "start": start,
     "update_rewards": updateRewards,
     "cancel": end,
     "receive_sats": receiveSats
@@ -236,6 +235,8 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     __("Sending admin menu...")
     Twitter.sendAdminMenu(user_id)
   }
+
+  if(message === "start") start();
 
 
   // if(message.startsWith('ln')) {
