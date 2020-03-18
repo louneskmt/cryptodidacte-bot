@@ -7,7 +7,7 @@ var main = fs.createWriteStream("./logs/main.log", {flags: "a"});
 
 function __(message, lvl = 0){
 
-    if(typeof message === "object"){
+    if(typeof message === "object" && message != null){
         __("Message : ")
         __(message, 2)
         message = beautify(message, null, 2, 100);
