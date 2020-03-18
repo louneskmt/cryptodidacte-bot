@@ -53,6 +53,8 @@ function generatingInvoice(params){
 
 
 function claimRewards(params){
+  let {message, user_id} = params;
+
   if(message.startsWith('ln')) {
     var amount = status.split('_')[2];
     var invoice = message;
@@ -62,7 +64,7 @@ function claimRewards(params){
       (result) => {
       if(result.num_satoshis === amount) {
         Twitter.sendTextMessage(user_id, "Paying invoice...");
-        __`events.js@claimRewars : An invoice is paying paid`
+        __`events.js@claimRewars : An invoice is being paid`
 
         lightning.payInvoice(invoice, () => {
           database.removeDocuments("rewards", { user_id: user_id.toString() })
