@@ -15,15 +15,13 @@ eventEmitter.on('tweet', (tweet) => {
 });
 
 eventEmitter.on('logs', (body) => {
-  if(body.hasOwnProperty("direct_message_indicate_typing_events")) {
-    __`Typing`
-  }
   if(body.hasOwnProperty("direct_message_events")) {
     var message_create = body.direct_message_events[0].message_create;
     var recipient = message_create.target.recipient_id;
     var sender = message_create.sender_id;
     var content = message_create.message_data.text;
 
+    __("Sender : "+sender)
     if(sender === Twitter.botId){
       sender = "BOT"
     }else{
@@ -62,13 +60,6 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
 
   if(message === "cancel") return interactions.end(params);
 
-  if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
-    __("Sending admin menu...")
-    return Twitter.sendAdminMenu(user_id)
-  }
-
-  if(message === "start") return fn_exact.start(params);
-
   user.getStatus(user_id, (status) => {
     if(status === undefined) return;
 
@@ -92,6 +83,13 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
   }
 
+  if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
+    user.deleteStatus(user_id);
+    __("Sending admin menu...")
+    return Twitter.sendAdminMenu(user_id)
+  }
+
+  if(message === "start") return interactions.start(params);
 
 
 
