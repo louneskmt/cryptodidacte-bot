@@ -24,7 +24,7 @@ class Database {
               if (err) {
                   __("Could not connect, got following : ", 9);
                   __(err, 9);
-                  return reject(err)
+                  throw err;
               }
               __("Connected successfully to server", 1);
               self.db = client.db(self.name);
@@ -64,7 +64,7 @@ class Database {
               if (err) {
                   __("Could not insert document, got : ", 9)
                   __(err, 9);
-                  return reject(err)
+                  throw err
               }
               __(`Inserted ${res.insertedCount} documents into ${collection}`);
               resolve(res);
@@ -87,7 +87,7 @@ class Database {
               if (err) {
                   __("Could not remove document, got : ", 9)
                   __(err, 9);
-                  return reject(err)
+                  throw err
               }
 
               __(`Removed ${res.deletedCount} documents from ${collection}`)
@@ -113,7 +113,7 @@ class Database {
                   if (err) {
                       __("Could not remove document, got : ", 9)
                       __(err, 9);
-                      return reject(err)
+                      throw err
                   }
 
                   __(`Updated ${res.modifiedCount} documents from ${collection}`)
@@ -122,6 +122,25 @@ class Database {
           /*
            */
       })
+  }
+
+  async find(collection, query) {
+    var self = this;
+    await this.connectIfNot();
+
+    var coll = this.db.collection(collection);
+
+    return new Promise(function (resolve, reject) {
+      coll.find(query).toArray(function (err, docs) {
+        if (err) {
+          __("Couldn't get documents, got following error : ", 9);
+          __(err, 9);
+        }
+        __("database.js@findDocuments : Found the following documents : \n" + JSON.stringify(docs));
+        resolve(docs);
+      })
+
+    })
   }
 
 

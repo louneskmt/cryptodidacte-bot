@@ -15,6 +15,9 @@ const bodyParser = require('body-parser');
 const https = require('https');
 const helmet = require('helmet');
 
+global.database = require('./database.js')("cryptodidacte");
+database.connect();
+
 // HTTPS Server config
 var app = express();
 app.set('port', 8443)
