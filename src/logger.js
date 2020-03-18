@@ -37,7 +37,11 @@ function __(message, lvl = 0){
 
     var color = color_list[lvl];
 
-    var text = colors[color](`\n[${date}] | [${level}] |: ${message}`)
+    try{
+      var text = colors[color](`\n[${date}] | [${level}] |: ${message}`)
+    }catch(err){
+      console.log("Couldn't find color n°", lvl)
+    }
 
 
     console.log(text);
