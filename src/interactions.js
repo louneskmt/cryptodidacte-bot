@@ -11,7 +11,7 @@ var database = require('./database.js');
 
 function start(params){
     if(params.status) end(params);
-    
+
     let {user_id} = params;
   
     Twitter.sendMenu(user_id);
@@ -86,7 +86,7 @@ function start(params){
       lightning.getInvoiceData(invoice,
   
         (result) => {
-        if(result.num_satoshis === amount) {
+        if(result.num_satoshis === amount){
           Twitter.sendTextMessage(user_id, "Paying invoice...");
           __`events.js@claimRewars : An invoice is being paid`
   
