@@ -61,7 +61,14 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   if(message === "cancel") return interactions.end(params);
 
   user.getStatus(user_id, (status) => {
+<<<<<<< HEAD
+    if(status === undefined) {
+      console.log("No status")
+      return;
+    }
+=======
     params.status = status;
+>>>>>>> 5dbd82d2408a3cfccf0620e5304f7d7ecc1045f6
 
     if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
       user.deleteStatus(user_id);
