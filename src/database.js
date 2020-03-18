@@ -11,7 +11,7 @@ const connect = (callback) => {
   MongoClient.connect(url, function(err, client) {
     assert.equal(null, err);
     __("Connected successfully to server",1);
-    var db = client.db("cryptodidacte");
+    let db = client.db("cryptodidacte");
     callback(client, db);
   });
 }
@@ -88,6 +88,7 @@ const updateDocument = (collection, query, modification, callback) => {
   connect((db) => {
     // Get the documents collection
     // Update document where a is 2, set b equal to 1
+    __(db, 2)
     db.collection(collection).updateOne(query
       , { $set: modification }, function(err, result) {
       assert.equal(err, null);
