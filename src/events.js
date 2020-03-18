@@ -38,9 +38,9 @@ function tryAddWinners(params){
 
   if(message_data.entities.user_mentions.length === 3) {
     lnquiz.addWinners(message_data.entities.user_mentions);
-    Twitter.sendTextMessage(user_id, "✅ You successfully added three winners! ");
+    end(params, "✅ You successfully added three winners! ");
   } else {
-    Twitter.sendTextMessage(user_id, "You didn't enter three winners, please try again or send 'Cancel'.");
+    retry(params, "You didn't enter three winners, please try again or send 'Cancel'.");
   }
 }
 
@@ -98,7 +98,41 @@ and you can only claim " + amount.toString() + " sats");
   }
 }
 
+function updateRewards(params){
+  let {message} = params;
+
+  if(/^(\d+ \d+ \d+)$/.test(message)) {
+    var amounts = message.split(' ');
+    var newRewards = {
+      question: Number(amounts[0], 10),
+      writing: Number(amounts[1], 10),
+      random: Number(amounts[2], 10)
+    }
+    __("Trying to update rewards : ");
+    __json(newRewards);
+
+    lnquiz.updateRewards(newRewards, (err) => {
+      if(err) {
+        __("events.js@updateRewards : Got error ", 9);
+        __json(err, 9);
+
+        return retry(params);
+      }
+
+      end(params, "✅ Updated!");
+    });
+  } else {
+    // Not matching pattern
+    retry(params);
+  }
+}
+
+function receiveSats(params){
+
+}
+
 // INTERACTIONS
+
 function end(params, description){
   let {user_id} = params;
 
@@ -125,57 +159,43 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
 
   if(message === "cancel") return user.deleteStatus(user_id);
 
+  const fn_exact = {
+    "add_winners": tryAddWinners,
+    "generating_invoice": generatingInvoice,
+    "start": start,
+    "update_rewards": updateRewards,
+    "cancel": end,
+    "receive_sats": receiveSats
+  }
+
+  const fn_startsWith = {
+    "claim_rewards_": claimRewards
+  }
+
   user.getStatus(user_id, (status) => {
-    if(status === undefined) {
-      return;
-    }
-
-    const fn_exact = {
-      "add_winners": tryAddWinners,
-      "generating_invoice": generatingInvoice,
-      "start": start
-    }
-
-    const fn_startsWith = {
-      "claim_rewards_": claimRewards
-    }
-
+    if(status === undefined) return;
+    const params = {
+      user_id, status, message, message_data
+    };
     if(fn_exact.hasOwnProperty(status)){
-      fn_exact[status]({
-        user_id, status, message, message_data
-      })
-    }
-
-
-    // TODO :  To be continued
-
-    if(status === "update_rewards") {
-      if(/^(\d+ \d+ \d+)$/.test(message)) {
-        var amounts = message.split(' ');
-        var newRewards = {
-          question: Number(amounts[0], 10),
-          writing: Number(amounts[1], 10),
-          random: Number(amounts[2], 10)
-        }
-        console.log("newRewards :\n", newRewards);
-        lnquiz.updateRewards(newRewards, (err) => {
-          if(err) {
-            console.log("Error : ", err);
-            return Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
-          }
-          Twitter.sendTextMessage(user_id, "✅ Updated!");
-          user.deleteStatus(user_id);
-        });
-      } else {
-        Twitter.sendTextMessage(user_id, "❌ Error, please try again, or send 'Cancel'.");
+      fn_exact[status](params);
+    }else{
+      for (const key in fn_startsWith) {
+        if(status.startsWith(key))  fn_startsWith[key](params)
       }
     }
+      
   });
 
-  if(message_data.hasOwnProperty("quick_reply_response")) {
-    console.log("Quick Reply")
-    if(message_data.quick_reply_response.metadata === "receive_sats") {
-      Twitter.sendTextMessage(user_id, "You just chose to receive sats.")
+  if(message_data.hasOwnProperty("quick_reply_response")) { 
+    let metadata = message_data.quick_reply_response.metadata;
+
+    if(fn_exact.hasOwnProperty(metadata)){
+      fn_exact[status](params);
+    }else{
+      for (const key in fn_startsWith) {
+        if(metadata.startsWith(key))  fn_startsWith[key](params)
+      }
     }
     if(message_data.quick_reply_response.metadata === "claim_rewards") {
       lnquiz.claimRewards(user_id);
@@ -217,8 +237,6 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     Twitter.sendAdminMenu(user_id)
   }
 
-  if(message === "start") {
-  }
 
   // if(message.startsWith('ln')) {
   //   console.log("Checking invoice : ", message);

@@ -46,10 +46,12 @@ const {__} = require("./logger.js");
 
 const updateRewards = (newRewards, callback) => {
   var fileName = __dirname + '/../data/rewards.json'
-  fs.writeFile(fileName, JSON.stringify(newRewards), function writeJSON(err) {
-    console.log(JSON.stringify(newRewards));
-    console.log('writing to ' + fileName);
-    rewards = newRewards;
+
+  fs.writeFile(fileName, JSON.stringify(newRewards), (err) => {
+
+    __(JSON.stringify(newRewards));
+    __('lnquiz.js@updateRewards : Rewards updated at ' + fileName, 1);
+
     callback(err);
   });
 }
