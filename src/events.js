@@ -171,11 +171,15 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     "claim_rewards_": claimRewards
   }
 
+  const params = {
+    user_id, message, message_data
+  };
+
   user.getStatus(user_id, (status) => {
     if(status === undefined) return;
-    const params = {
-      user_id, status, message, message_data
-    };
+
+    params.status = status;
+    
     if(fn_exact.hasOwnProperty(status)){
       fn_exact[status](params);
     }else{
@@ -236,7 +240,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     Twitter.sendAdminMenu(user_id)
   }
 
-  if(message === "start") start();
+  if(message === "start") start(params);
 
 
   // if(message.startsWith('ln')) {
