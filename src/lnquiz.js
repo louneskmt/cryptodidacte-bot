@@ -9,13 +9,11 @@ const {__} = require("./logger.js");
 const countRewards = (user_id, callback) => {
 
   database.findDocuments("rewards", { user_id: user_id.toString() }, (result) => {
-    if(result.length === 0) return;
-
     var totalToPay = 0;
     result.forEach((elmt) => {
       totalToPay += elmt.reward;
     })
-    __("Here : "+totalToPay,2)
+
     if(typeof callback === "function") callback(totalToPay);
   });
 }
