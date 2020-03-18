@@ -1,41 +1,44 @@
-const database = require('./database.js');
+const {__} = require("./logger.js");
 
 const getStatus = (user_id, callback) => {
-  database.findDocuments("status", { user_id: user_id.toString() }, (docs) => {
+  database.find("status", { user_id: user_id.toString() }).then((docs) => {
     if(docs.length === 0) {
       callback(undefined);
       return;
     }
-    console.log("Found one status", docs[0].status)
+    
+    __(`Found status for ${user_id} : `+docs[0].status);
+
     if(typeof callback === "function") {
       callback(docs[0].status);
     }
   })
 }
 
-const addStatus = (user_id, status) => {
+const addStatus = async (user_id, status) => {
   var newEntry = {
     user_id: user_id.toString(),
     status: status
   }
-  database.insertOneDocument("status", newEntry, () => {});
+  await database.insert("status", newEntry);
 }
 
-const setStatus = (user_id, newStatus) => {
-  console.log("Updating status")
-  getStatus(user_id, (status) => {
+const setStatus = async (user_id, newStatus) => {
+  __(`Updating status of ${user_id}`);
+
+  getStatus(user_id, async (status) => {
     if(status) {
-      database.updateDocument("status", { user_id: user_id.toString() }, { status: newStatus })
+      await database.updateDocument("status", { user_id: user_id.toString() }, { status: newStatus })
     } else {
-      addStatus(user_id, newStatus)
+      await addStatus(user_id, newStatus);
     }
   })
 }
 
-const deleteStatus = (user_id, callback) => {
-  getStatus(user_id, (status) => {
+const deleteStatus = async (user_id, callback) => {
+  getStatus(user_id, async (status) => {
     if(status) {
-      database.removeDocuments("status", { user_id: user_id.toString() }, () => {});
+      await database.remove("status", { user_id: user_id.toString() });
     }
   })
 }

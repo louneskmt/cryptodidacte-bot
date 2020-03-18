@@ -6,7 +6,6 @@ var lightning = require('./lightning.rest.js');
 var QRCode = require('./qrcode.js');
 var lnquiz = require('./lnquiz.js');
 var user = require('./user.js');
-var database = require('./database.js');
 
 
 function start(params){
@@ -15,12 +14,17 @@ function start(params){
     Twitter.sendMenu(user_id);
 }
   
-  function tryAddWinners(params){
+  async function tryAddWinners(params){
     let {user_id, message_data} = params;
   
     if(message_data.entities.user_mentions.length === 3) {
-      lnquiz.addWinners(message_data.entities.user_mentions);
-      end(params, "✅ You successfully added three winners! ");
+      var errCode = await lnquiz.addWinners(message_data.entities.user_mentions);
+
+      if(errCode===0){
+        end(params, "✅ You successfully added three winners! ");
+      }else{
+        end(params, "Sorry, something went wrong");
+      }
     } else {
       retry(params, "You didn't enter three winners.");
     }
@@ -89,12 +93,12 @@ function start(params){
           __`events.js@claimRewars : An invoice is being paid`
   
           lightning.payInvoice(invoice, () => {
-            database.removeDocuments("rewards", { user_id: user_id.toString() })
+            database.remove("rewards", { user_id: user_id.toString() })
             __(`events.js@claimRewars : Reward paid, document removed !`, 2)
   
             //*** TODO : Should I send message "end of action" ?***//
             end(params, "✅ Paid!");
-          }, (err) => {
+          }, err => {
             // Cannot pay invoice
             Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try again later.");
             __("Could not pay invoice, got following error : ", 9)
