@@ -4,8 +4,12 @@ const lightning = require('./lightning.rest');
 const database = require('./database.js');
 const Twitter = require('./Twit.js');
 var rewards = require('../data/rewards.json');
+const {__} = require("./logger.js");
 
 const claimRewards = (user_id) => {
+
+  // TODO : Return only value of reward
+
   database.findDocuments("rewards", { user_id: user_id.toString() }, (result) => {
     if(result.length === 0) {
       Twitter.sendTextMessage(user_id, "You have nothing to claim.");
@@ -42,7 +46,6 @@ const addWinners = (winners) => {
 
   database.insertDocuments("rewards", newEntries, () => {});
 }
-const {__} = require("./logger.js");
 
 const updateRewards = (newRewards, callback) => {
   var fileName = __dirname + '/../data/rewards.json'
