@@ -183,8 +183,8 @@ function countRewards(params){
   // TODO : Claim rewards here not in lnquiz.js
   lnquiz.countRewards(params.user_id, (amount) => {
     if(amount) {
-      Twitter.sendTextMessage(user_id, "Please, send an invoice for " + amount + " sats.");
-      return user.setStatus(user_id, "claim_rewards_" + amount + "_sats");
+      Twitter.sendTextMessage(params.user_id, "Please, send an invoice for " + amount + " sats.");
+      return user.setStatus(params.user_id, "claim_rewards_" + amount + "_sats");
     } else {
       return end(params, "You have nothing to claim.");
     }
