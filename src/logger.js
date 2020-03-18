@@ -8,7 +8,7 @@ var main = fs.createWriteStream("./logs/main.log", {flags: "a"});
 function __(message, lvl = 0){
 
 
-    if(message.toString() === "[object Object]"){
+    if(typeof message != undefined message.toString() === "[object Object]"){
         try{
             message = beautify(message, null, 2, 100);
         }catch(err){
