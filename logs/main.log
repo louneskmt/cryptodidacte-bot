@@ -3,3 +3,45 @@
 
 ------------------------ 17/3 23:17:68 ------------------------
 [17/3 23:17:71] | [VERBOSE] |: Logger has started
+
+
+------------------------ 18/3 17:55:17 ------------------------[90m[39m
+[90m[18/3 17:55:17] | [VERBOSE] |: Logger has started[39m[90m[39m
+[90m[18/3 17:55:52] | [VERBOSE] |: Sender : 1175249514745212928[39m[90m[39m
+[90m[18/3 17:55:52] | [VERBOSE] |: Message from 1175249514745212928 to BOT : 🎁 Claim rewards[39m[30m[39m
+[30m[18/3 17:55:52] | [DEBUG] |: Connected successfully to server[39m[90m[39m
+[90m[18/3 17:55:52] | [VERBOSE] |: database.js@findDocuments : Found the following documents : [39m
+[90m[][39m[30m[39m
+[30m[18/3 17:55:52] | [DEBUG] |: Connected successfully to server[39m[90m[39m
+[90m[18/3 17:55:52] | [VERBOSE] |: database.js@findDocuments : Found the following documents : [39m
+[90m[{"_id":"5e72483f17a32e2b8e1e1ec8","user_id":"1175249514745212928","username":"cillianklota","reward":150},{"_id":"5e72483f17a32e2b8e1e1ec9","user_id":"1175249514745212928","username":"cillianklota","reward":300},{"_id":"5e72483f17a32e2b8e1e1eca","user_id":"1175249514745212928","username":"cillianklota","reward":150}][39m[30m[39m
+[30m[18/3 17:55:52] | [DEBUG] |: Connected successfully to server[39m[90m[39m
+[90m[18/3 17:55:52] | [VERBOSE] |: database.js@findDocuments : Found the following documents : [39m
+[90m[][39m[30m[39m
+[30m[18/3 17:55:52] | [DEBUG] |: Connected successfully to server[39m[90m[39m
+[90m[18/3 17:55:52] | [VERBOSE] |: database.js@insertOneDocument : 1 document inserted into status[39m[90m[39m
+[90m[18/3 17:55:52] | [VERBOSE] |: Sender : 1235621426125774850[39m[90m[39m
+[90m[18/3 17:55:52] | [VERBOSE] |: Message from 1235621426125774850 to BOT : Please, send an invoice for 600 sats.[39m[90m[39m
+[90m[18/3 17:55:56] | [VERBOSE] |: Sender : 1175249514745212928[39m[90m[39m
+[90m[18/3 17:55:56] | [VERBOSE] |: Message from 1175249514745212928 to BOT : Start[39m[30m[39m
+[30m[18/3 17:55:56] | [DEBUG] |: Connected successfully to server[39m[90m[39m
+[90m[18/3 17:55:56] | [VERBOSE] |: database.js@findDocuments : Found the following documents : [39m
+[90m[{"_id":"5e725298bee2d72e0f7b1422","user_id":"1175249514745212928","status":"claim_rewards_600_sats"}][39m[30m[39m
+[30m[18/3 17:55:56] | [DEBUG] |: Connected successfully to server[39m[90m[39m
+[90m[18/3 17:55:56] | [VERBOSE] |: database.js@findDocuments : Found the following documents : [39m
+[90m[{"_id":"5e725298bee2d72e0f7b1422","user_id":"1175249514745212928","status":"claim_rewards_600_sats"}][39m[30m[39m
+[30m[18/3 17:55:56] | [DEBUG] |: Connected successfully to server[39m[90m[39m
+[90m[18/3 17:55:56] | [VERBOSE] |: database.js@removeDocuments : 1 documents removed from collection status[39m[90m[39m
+[90m[18/3 17:55:56] | [VERBOSE] |: Sender : 1235621426125774850[39m[90m[39m
+[90m[18/3 17:55:56] | [VERBOSE] |: Message from 1235621426125774850 to BOT : 👋 Hey ! What do you want to do ?[39m
+
+
+------------------------ 18/3 20:36:7 ------------------------[90m[39m
+[90m[18/3 20:36:7] | [VERBOSE] |: Logger has started[39m[90m[39m
+[90m[18/3 20:36:46] | [VERBOSE] |: Sender : 1175249514745212928[39m[90m[39m
+[90m[18/3 20:36:46] | [VERBOSE] |: Message from 1175249514745212928 to BOT : Start[39m[30m[39m
+[30m[18/3 20:36:46] | [DEBUG] |: Connected successfully to server[39m
+
+
+------------------------ 18/3 20:40:14 ------------------------[90m[39m
+[90m[18/3 20:40:14] | [VERBOSE] |: Logger has started[39m
