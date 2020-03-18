@@ -159,7 +159,6 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   var message = message_create_object.message_data.text.toLowerCase();
   var message_data = message_create_object.message_data;
 
-  if(message === "cancel") return user.deleteStatus(user_id);
 
   const fn_exact = {
     "add_winners": tryAddWinners,
@@ -176,6 +175,15 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   const params = {
     user_id, message, message_data
   };
+
+  if(message === "cancel") return end(params);
+
+  if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
+    __("Sending admin menu...")
+    return Twitter.sendAdminMenu(user_id)
+  }
+
+  if(message === "start") return fn_exact.start(params);
 
   user.getStatus(user_id, (status) => {
     if(status === undefined) return;
@@ -237,14 +245,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
   }
 
-  if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
-    __("Sending admin menu...")
-    Twitter.sendAdminMenu(user_id)
-  }
-
-  if(message === "start") fn_exact.start(params);
-
-  if(message === "cancel") fn_exact.cancel(params);
+ 
 
 
   // if(message.startsWith('ln')) {
