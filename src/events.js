@@ -30,7 +30,7 @@ eventEmitter.on('logs', (body) => {
       recipient = "BOT"
     }
 
-    __`Message from ${sender} to ${recipient} : ${content}`
+    __(`Message from ${sender} to ${recipient} : ${content}`);
   }
 });
 
