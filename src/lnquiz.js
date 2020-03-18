@@ -8,8 +8,6 @@ const {__} = require("./logger.js");
 
 const countRewards = (user_id, callback) => {
 
-  // TODO : Return only value of reward
-
   database.findDocuments("rewards", { user_id: user_id.toString() }, (result) => {
     if(result.length === 0) return;
 
@@ -17,6 +15,7 @@ const countRewards = (user_id, callback) => {
     result.forEach((elmt) => {
       totalToPay += elmt.reward;
     })
+    __("Here : "+amount,2)
     if(typeof callback === "function") callback(totalToPay);
   });
 }
