@@ -1,4 +1,5 @@
 const beautify = require("json-beautify");
+const colors = require("colors");
 
 if(typeof fs != "object"){
     var fs = require("fs");
@@ -21,14 +22,22 @@ function __(message, lvl = 0){
     var date = date.getDate()+"/"+(date.getMonth()+1)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
 
     var levels = {
-        0: "VERBOSE",
-        1: "DEBUG",
-        2: "IMPORTANT",
-        9: "ERROR"
+      0: "VERBOSE",
+      1: "DEBUG",
+      2: "IMPORTANT",
+      9: "ERROR"
     }
+
+    var color_list = {
+      0: "grey",
+      1: "black",
+      2: "blue",
+      9: "red"
+    }
+
     var level = levels[lvl]
 
-    var text = `\n[${date}] | [${level}] |: ${message}`
+    var text = colors[color_list](`\n[${date}] | [${level}] |: ${message}`)
 
 
     console.log(text);
