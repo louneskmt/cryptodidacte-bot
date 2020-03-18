@@ -1,4 +1,4 @@
-const {__, __json} = require("./logger.js");
+const {__} = require("./logger.js");
 
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
@@ -23,7 +23,7 @@ eventEmitter.on('logs', (body) => {
   }
   if(body.hasOwnProperty("direct_message_events")) {
     __`New message : `
-    __json(body.direct_message_events[0].message_create);
+    __(body.direct_message_events[0].message_create);
   }
 });
 
@@ -45,12 +45,51 @@ function tryAddWinners(params){
 }
 
 function generatingInvoice(params){
+  /** ??????? **/
+
   let {user_id} = params;
 
-  Twitter.sendTextMessage(user_id, "Nothing yet here.");
+  Twitter.sendTextMessage(user_id, "Nothing here yet.");
   end(user_id)
 }
 
+function addWinners(params){
+  Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
+  return user.setStatus(user_id, "add_winners");
+}
+
+function generateInvoice(params){
+  let {user_id} = params;
+
+  Twitter.sendTextMessage(user_id, "Thank you for choosing to tip Cryptodidacte")
+  __("events.js@generateInvoice : Generating an invoice (tip) "); 
+
+  Twitter.sendTextMessage(user_id, "Generating invoice...");
+  user.setStatus(user_id, "generating_invoice")
+
+  lightning.generateInvoice(200, "Test", (invoice) => {
+
+    Twitter.sendTextMessage(user_id, "✅ Done!");
+
+    QRCode.generateQRCode(invoice, (QRCodePath) => {
+      console.log("QRCodePath :", QRCodePath);
+      if(QRCodePath !== "None") {
+        Twitter.sendMessageWithImage(user_id, invoice, QRCodePath);
+      } else {
+        Twitter.sendTextMessage(user_id, invoice);
+      }
+    });
+    
+    end(params);
+
+  }, (err) => {
+    __("events.js@generateInvoice : Could not generate invoice, got following", 9);
+    __(err, 9);
+
+    end(params, "❌ Error generating invoice... Please try later.");
+  
+  });
+}
 
 function claimRewards(params){
   let {message, user_id} = params;
@@ -76,7 +115,7 @@ function claimRewards(params){
           // Cannot pay invoice
           Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try again later.");
           __("Could not pay invoice, got following error : ", 9)
-          __json(err.payment_error, 9);
+          __(err.payment_error, 9);
           end(params, "Error log : " + err.payment_error);
         });
 
@@ -91,7 +130,7 @@ and you can only claim " + amount.toString() + " sats");
     (err) => {
       //** CANCELLATION (?) **/
       __("events.js@claimRewards:lightning.getInvoiceData : Couldn't get invoice data, got following error : ", 9);
-      __json(err, 9); 
+      __(err, 9); 
       return end(params, "Could not get invoice data")
     });
 
@@ -101,6 +140,12 @@ and you can only claim " + amount.toString() + " sats");
 }
 
 function updateRewards(params){
+  let {user_id} = params;
+  Twitter.sendTextMessage(user_id, "Please, send the new rewards ammounts in the following order : question-writing-random, separated with a space and in sats (e.g. \"150 300 150\").");
+  return user.setStatus(user_id, "updating_rewards");
+}
+
+function updatingRewards(params){
   let {message} = params;
 
   if(/^(\d+ \d+ \d+)$/.test(message)) {
@@ -111,12 +156,12 @@ function updateRewards(params){
       random: Number(amounts[2], 10)
     }
     __("Trying to update rewards : ");
-    __json(newRewards);
+    __(newRewards);
 
     lnquiz.updateRewards(newRewards, (err) => {
       if(err) {
         __("events.js@updateRewards : Got error ", 9);
-        __json(err, 9);
+        __(err, 9);
 
         return retry(params);
       }
@@ -130,7 +175,13 @@ function updateRewards(params){
 }
 
 function receiveSats(params){
+  end(params, "You have chosen to receive sats")
+}
 
+function claimRewards(params){
+  // TODO : Claim rewards here not in lnquiz.js
+
+  lnquiz.claimRewards(params.user_id);
 }
 
 // INTERACTIONS
@@ -142,7 +193,7 @@ function end(params, description){
   
   if(description) Twitter.sendTextMessage(user_id, description)
 
-  Twitter.sendTextMessage(user_id, "End of action")
+  Twitter.sendTextMessage(user_id, "End of action 🙃")
   __`End of action for ${user_id}`
 }
 
@@ -164,8 +215,13 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     "add_winners": tryAddWinners,
     "generating_invoice": generatingInvoice,
     "update_rewards": updateRewards,
+    "updating_rewards": updatingRewards,
     "cancel": end,
-    "receive_sats": receiveSats
+    "start": start,
+    "receive_sats": receiveSats,
+    "claim_rewards": claimRewards,
+    "generate_invoice": generateInvoice,
+    "add_winners": addWinners
   }
 
   const fn_startsWith = {
@@ -209,39 +265,6 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
       for (const key in fn_startsWith) {
         if(metadata.startsWith(key))  fn_startsWith[key](params)
       }
-    }
-    if(message_data.quick_reply_response.metadata === "claim_rewards") {
-      lnquiz.claimRewards(user_id);
-    }
-    if(message_data.quick_reply_response.metadata === "generate_invoice") {
-      Twitter.sendTextMessage(user_id, "You just chose to tip Cryptodidacte and generate an invoice.")
-      console.log("Generating invoice");
-      Twitter.sendTextMessage(user_id, "Generating invoice...");
-      user.setStatus(user_id, "generating_invoice")
-      lightning.generateInvoice(200, "Test", (invoice) => {
-        Twitter.sendTextMessage(user_id, "✅ Done!");
-        user.deleteStatus(user_id);
-        QRCode.generateQRCode(invoice, (QRCodePath) => {
-          console.log("QRCodePath :", QRCodePath);
-          if(QRCodePath !== "None") {
-            Twitter.sendMessageWithImage(user_id, invoice, QRCodePath);
-          } else {
-            Twitter.sendTextMessage(user_id, invoice);
-          }
-        });
-      }, (err) => {
-        Twitter.sendTextMessage(user_id, "❌ Error generating invoice... Please try later.");
-      });
-    }
-    if(message_data.quick_reply_response.metadata === "add_winners") {
-      Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
-      user.setStatus(user_id, "add_winners");
-      return;
-    }
-    if(message_data.quick_reply_response.metadata === "update_rewards") {
-      Twitter.sendTextMessage(user_id, "Please, send the new rewards ammounts in the following order : question-writing-random, separated with a space and in sats (e.g. \"150 300 150\").");
-      user.setStatus(user_id, "update_rewards");
-      return;
     }
   }
 
