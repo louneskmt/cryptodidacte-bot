@@ -1,3 +1,5 @@
+const {__} = require("./logger.js");
+
 const Twit = require('twit');
 const { twitterConfig } = require('../config.js');
 const Twitter = new Twit(twitterConfig);
@@ -18,7 +20,7 @@ const sendMessage = (user_id, message_create_object) => {
   }
 
   Twitter.post('direct_messages/events/new', message, function (err, data, response) {
-    console.log(data)
+     if(err) __(err,9)
   });
 }
 
@@ -112,7 +114,12 @@ const sendAdminMenu = (user_id) => {
 
 const uploadImage = (filePath, callback) => {
   Twitter.postMediaChunked({ file_path: filePath, media_category: "dm_image" }, function (err, data, response) {
-    console.log(err || data);
+    if(err) __(err, 9)
+    else{
+      __(`Uploaded image : `)
+      __(data)
+    }
+
     if(data && typeof callback === "function") {
       callback(data.media_id_string, data.image.image_type)
     }
@@ -125,5 +132,6 @@ module.exports = {
   sendAdminMenu,
   sendMenu,
   uploadImage,
-  sendMessageWithImage
+  sendMessageWithImage,
+  botId: 1235621426125774850
 };

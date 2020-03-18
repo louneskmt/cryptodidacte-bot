@@ -1,3 +1,5 @@
+const {__,  __json} = require("./src/logger.js");
+
 // Require Events handler and fs to read files
 const eventEmitter = require('./src/events.js');
 const fs = require('fs');
@@ -28,9 +30,11 @@ app.post('/webhook/twitter', function(req, res) {
   if(req.body.hasOwnProperty('direct_message_events')) {
     var user_id = Object.keys(req.body.users)[0];
     var message_create_object = req.body.direct_message_events[0].message_create;
+    
     if(user_id !== twitterConfig.user_id_bot) {
       eventEmitter.emit('dm', user_id, message_create_object);
     }
+
   }
   if(req.body.hasOwnProperty('tweet_create_events')) {
     var tweet = {
@@ -48,7 +52,7 @@ app.post('/webhook/twitter', function(req, res) {
  */
 app.get('/webhook/twitter', function(req, res) {
   var crc_token = req.query.crc_token;
-  console.log("Verification CRC...\n", crc_token);
+  __("Verification CRC...\n"+crc_token, 2);
   if (crc_token) {
     var hash = security.get_challenge_response(crc_token, twitterConfig.consumer_secret);
     res.status(200).send({ response_token: 'sha256=' + hash });
