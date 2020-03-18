@@ -79,9 +79,9 @@ function generateInvoice(params){
       } else {
         Twitter.sendTextMessage(user_id, invoice);
       }
-    });
 
-    end(params);
+      end(params);
+    });
 
   }, (err) => {
     __("events.js@generateInvoice : Could not generate invoice, got following", 9);
