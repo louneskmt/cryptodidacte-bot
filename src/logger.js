@@ -9,7 +9,7 @@ function __(message, lvl = 0){
 
 
     if(typeof message === "object" && message != null){
-        if(Array.isArray(message) && message.length > 1){
+        if(Array.isArray(message) && message.length > 1 || !Array.isArray(message) ){
             message = beautify(message, null, 2, 100);
         }
     }
