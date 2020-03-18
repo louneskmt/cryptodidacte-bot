@@ -21,15 +21,13 @@ eventEmitter.on('logs', (body) => {
     var sender = message_create.sender_id;
     var content = message_create.message_data.text;
 
-    __("Sender : "+sender)
-    __(Twitter.botId)
-    if(sender === Twitter.botId){
+    if(sender == Twitter.botId){
       sender = "BOT"
     }else{
       recipient = "BOT"
     }
 
-    __(`Message from ${sender}: ${content}`);
+    __(`Message from ${sender} to ${recipient} : ${content}`);
   }
 });
 
@@ -84,7 +82,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
 
     if(status === undefined) return;
-
+    
     if(fn_exact.hasOwnProperty(status)){
       fn_exact[status](params);
     } else {
