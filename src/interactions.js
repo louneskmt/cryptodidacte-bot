@@ -93,7 +93,7 @@ function start(params){
           __`events.js@claimRewars : An invoice is being paid`
   
           lightning.payInvoice(invoice, () => {
-            database.remove("rewards", { user_id: user_id.toString() })
+            database.remove("rewards", { user_id: user_id.toString() }, true)
             __(`events.js@claimRewars : Reward paid, document removed !`, 2)
   
             //*** TODO : Should I send message "end of action" ?***//
