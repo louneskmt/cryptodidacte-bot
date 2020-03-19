@@ -94,7 +94,7 @@ function start(params){
   
           lightning.payInvoice(invoice, () => {
             database.remove("rewards", { user_id: user_id.toString() }, true)
-            __(`events.js@claimRewars : Reward paid, document removed !`, 2)
+            __(`events.js@claimRewars : Reward paid, document(s) removed !`, 2)
   
             //*** TODO : Should I send message "end of action" ?***//
             end(params, "✅ Paid!");
@@ -108,8 +108,7 @@ function start(params){
   
         } else {
           /// Amounts not corresponding
-          return retry(params, "Your invoice is for " + result.num_satoshis.toString() + " sats, \
-  and you can only claim " + amount.toString() + " sats.");
+          return retry(params, `Your invoice is for ${result.num_satoshis.toString()} sats. Please generate an invoice for ${amount.toString()} sats.`);
         }
       },
   
