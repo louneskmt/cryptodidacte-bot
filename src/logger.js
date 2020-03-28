@@ -38,15 +38,15 @@ function __(message, lvl = 0){
     var color = color_list[lvl];
 
     try{
-      var text = colors[color](`\n[${date}] | [${level}] |: ${message}`)
+      var textRaw = `\n[${date}] | [${level}] |: ${message}`
+      var textColor = colors[color](textRaw)
     }catch(err){
       console.log("Couldn't find color n°", lvl)
     }
 
+    console.log(textColor);
 
-    console.log(text);
-
-    main.write(text);
+    main.write(textRaw);
 }
 var date = new Date();
 var date = date.getDate()+"/"+(date.getMonth()+1)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
