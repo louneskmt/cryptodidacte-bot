@@ -22,9 +22,8 @@ eventEmitter.on('tweet', (tweet) => {
       interactions.addWinners(params);
     }
   } else {
-    Twitter.sendTextMessage(tweet.user.id_str, "I got your tweet, but I have no information about how to process it, sorry.");
+    Twitter.sendTextMessage(user_id, "I got your tweet, but I have no information about how to process it, sorry.");
   }
-  
 });
 
 eventEmitter.on('logs', (body) => {
