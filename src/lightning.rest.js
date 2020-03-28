@@ -15,7 +15,7 @@ const payInvoice = (invoice, successCallback, errorCallback) => {
     strictSSL: false,
   	agentClass: Agent,
     agentOptions: {
-  		socksHost: '127.0.0.1', // Defaults to 'localhost'.
+  		socksHost: 'localhost', // Defaults to 'localhost'.
   		socksPort: 9050, // Defaults to 1080.
   	},
     rejectUnauthorized: false,
@@ -58,7 +58,7 @@ const generateInvoice = (value, memo, successCallback, errorCallback) => {
     strictSSL: false,
   	agentClass: Agent,
     agentOptions: {
-  		socksHost: '127.0.0.1', // Defaults to 'localhost'.
+  		socksHost: 'localhost', // Defaults to 'localhost'.
   		socksPort: 9050, // Defaults to 1080.
   	},
     rejectUnauthorized: false,
@@ -85,7 +85,7 @@ const getInvoiceData = (payment_request, successCallback, errorCallback) => {
     strictSSL: false,
   	agentClass: Agent,
     agentOptions: {
-  		socksHost: '127.0.0.1', // Defaults to 'localhost'.
+  		socksHost: 'localhost', // Defaults to 'localhost'.
   		socksPort: 9050, // Defaults to 1080.
   	},
     rejectUnauthorized: false,
