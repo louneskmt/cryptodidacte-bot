@@ -1,9 +1,9 @@
 {
-  "name": "CryptodidacteBot",
+  "name": "cryptodidactebot",
   "version": "1.0.0",
-  "description": "A twitter bot to manage CryptodidacteCoin tips and more",
+  "description": "A twitter bot to manage CryptodidacteCoin tips, #LNQuiz rewards and more",
   "main": "index.js",
-  "author": "Lounès Ksouri",
+  "author": "Lounès Ksouri and Killian Clotagatide",
   "license": "MIT",
   "private": true,
   "dependencies": {
