@@ -11,7 +11,22 @@ var user = require('./user.js');
 
 
 eventEmitter.on('tweet', (tweet) => {
-  Twitter.sendTextMessage(tweet.user_id, "We got your tweet!");
+  var user_id = tweet.user.id.toString();
+  if(twitterConfig.admin.includes(user_id)) {
+    if(tweet.text.includes("Félicitations aux gagnants")) {
+      var winners = tweet.entities.user_mentions.slice(1,4);
+      var errCode = await lnquiz.addWinners(winners);
+  
+      if(errCode===0){
+        Twitter.sendTextMessage(user_id, "✅ You successfully added this three winners : \n🏁 @" + winners[0] + "\n✍️ @" + winners[2] + "\n🎲 @" + winners[2])
+      } else {
+        Twitter.sendTextMessage(user_id, "Sorry, something went wrong");
+      }
+    }
+  } else {
+    Twitter.sendTextMessage(tweet.user.id_str, "I got your tweet, but I have no information about how to process it, sorry.");
+  }
+  
 });
 
 eventEmitter.on('logs', (body) => {
