@@ -12,6 +12,7 @@ var user = require('./user.js');
 
 eventEmitter.on('tweet', (tweet) => {
   var user_id = tweet.user.id.toString();
+  __(`Mentionned in tweet ${tweet.id_str} by ${user_id}`)
   if(twitterConfig.admin.includes(user_id)) {
     if(tweet.text.includes("Félicitations aux gagnants")) {
       var params = {
