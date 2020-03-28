@@ -10,7 +10,7 @@ var user = require('./user.js');
 
 function start(params){
     let {user_id} = params;
-  
+
     Twitter.sendMenu(user_id);
 }
   
@@ -18,15 +18,23 @@ function start(params){
     let {user_id, message_data} = params;
   
     if(message_data.entities.user_mentions.length === 3) {
-      var errCode = await lnquiz.addWinners(message_data.entities.user_mentions);
+      params.winners = message_data.entities.user_mentions;
 
-      if(errCode===0){
-        end(params, "✅ You successfully added three winners! ");
-      }else{
-        end(params, "Sorry, something went wrong");
-      }
+      addWinners(params);
     } else {
       retry(params, "You didn't enter three winners.");
+    }
+  }
+
+  async function addWinners(params){
+    let {user_id, winners} = params;
+
+    var errCode = await lnquiz.addWinners(winners);
+
+    if(errCode===0){
+      end(params, "✅ You successfully added this three winners : \n🏁 @" + winners[0] + "\n✍️ @" + winners[2] + "\n🎲 @" + winners[2], false);
+    }else{
+      end(params, "Sorry, something went wrong", false);
     }
   }
   
@@ -39,7 +47,7 @@ function start(params){
     end(user_id)
   }
   
-  function addWinners(params){
+  function waitForWinners(params){
     let {user_id} = params;
     Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
     return user.setStatus(user_id, "adding_winners");
@@ -177,12 +185,12 @@ function start(params){
   
   // INTERACTIONS
   
-  function end(params, description){
+  function end(params, description, resetStatus=true){
     let {user_id} = params;
   
-    user.deleteStatus(user_id);
+    if(resetStatus) user.deleteStatus(user_id);
   
-    if(description) Twitter.sendTextMessage(user_id, description)
+    if(description) Twitter.sendTextMessage(user_id, description);
   
     setTimeout(function(){
       Twitter.sendTextMessage(user_id, "End of action 🙃")
@@ -207,6 +215,7 @@ function start(params){
     end,
     tryAddWinners,
     addWinners,
+    waitForWinners,
     countRewards,
     claimRewards,
     receiveSats,
