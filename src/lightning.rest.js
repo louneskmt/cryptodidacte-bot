@@ -29,7 +29,8 @@ const payInvoice = (invoice, successCallback, errorCallback) => {
   request.post(options, function(error, response, body) {
     console.log(error || body);
     if(body && typeof successCallback === "function") {
-      successCallback();
+      if(body.payment_error != '') errorCallback(body.payment_error);
+      successCallback(body.payment_request);
     } else if (error && typeof errorCallback === "function") {
       errorCallback(error);
     }
