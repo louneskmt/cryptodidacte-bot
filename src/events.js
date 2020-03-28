@@ -14,14 +14,11 @@ eventEmitter.on('tweet', (tweet) => {
   var user_id = tweet.user.id.toString();
   if(twitterConfig.admin.includes(user_id)) {
     if(tweet.text.includes("Félicitations aux gagnants")) {
-      var winners = tweet.entities.user_mentions.slice(0,3);
-      var errCode = await lnquiz.addWinners(winners);
-  
-      if(errCode===0){
-        Twitter.sendTextMessage(user_id, "✅ You successfully added this three winners : \n🏁 @" + winners[0] + "\n✍️ @" + winners[2] + "\n🎲 @" + winners[2])
-      } else {
-        Twitter.sendTextMessage(user_id, "Sorry, something went wrong");
+      var params = {
+        user_id: user_id,
+        winners: tweet.entities.user_mentions.slice(0,3)
       }
+      interactions.addWinners(params);
     }
   } else {
     Twitter.sendTextMessage(tweet.user.id_str, "I got your tweet, but I have no information about how to process it, sorry.");
@@ -53,7 +50,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
 
   const fn_exact = {
     "adding_winners": interactions.tryAddWinners,
-    "add_winners": interactions.addWinners,
+    "add_winners": interactions.waitForWinners,
     "generating_invoice": interactions.generatingInvoice,
     "update_rewards": interactions.updateRewards,
     "updating_rewards": interactions.updatingRewards,
