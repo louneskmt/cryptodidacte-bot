@@ -14,7 +14,7 @@ eventEmitter.on('tweet', (tweet) => {
   var user_id = tweet.user.id.toString();
   if(twitterConfig.admin.includes(user_id)) {
     if(tweet.text.includes("Félicitations aux gagnants")) {
-      var winners = tweet.entities.user_mentions.slice(1,4);
+      var winners = tweet.entities.user_mentions.slice(0,3);
       var errCode = await lnquiz.addWinners(winners);
   
       if(errCode===0){
