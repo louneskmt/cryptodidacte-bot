@@ -47,15 +47,12 @@ class Database {
       await this.connectIfNot();
 
       var coll = this.db.collection(collection);
-      var fn = null
-      var text = null;
+      var fn = null;
 
       if (Array.isArray(newEntry)) {
           fn = coll.insertMany;
-          text = `Inserted many (${newEntry.length}) documents into collection '${collection}'`
       } else {
           fn = coll.insertOne;
-          text = `Inserted one document into collection '${collection}'`
       }
 
 
@@ -66,7 +63,7 @@ class Database {
                   __(err, 9);
                   throw err
               }
-              __(`Inserted ${res.insertedCount} documents into ${collection}`);
+              __(`Inserted ${res.insertedCount} document(s) into ${collection}`);
               resolve(res);
           });
       })
@@ -77,8 +74,7 @@ class Database {
       await this.connectIfNot();
 
       var coll = this.db.collection(collection);
-      var fn = null
-      var text = null;
+      var fn = null;
 
       fn = many ? coll.deleteMany : coll.deleteOne;
 
@@ -101,8 +97,7 @@ class Database {
       await this.connectIfNot();
 
       var coll = this.db.collection(collection);
-      var fn = null
-      var text = null;
+      var fn = null;
 
       fn = many ? coll.updateMany : coll.updateOne;
 

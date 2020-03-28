@@ -92,30 +92,6 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     }
 
   });
-
-  
-
-
-
-
-  // if(message.startsWith('ln')) {
-  //   console.log("Checking invoice : ", message);
-  //   lightning.getInvoiceData(message, (result) => {
-  //     console.log("Amount : ", result.value);
-  //   })
-  // }
-
-
-  // if(message.startsWith('ln')) {
-  //   console.log("Paying invoice : ", message)
-  //   Twitter.sendTextMessage(user_id, "Paying invoice...");
-  //   lightning.payInvoice(message, () => {
-  //     Twitter.sendTextMessage(user_id, "✅ Paid!");
-  //   }, (err) => {
-  //     Twitter.sendTextMessage(user_id, "❌ Error paying invoice... Please try later.");
-  //     Twitter.sendTextMessage(user_id, "Logs : " + err.payment_error);
-  //   });
-  // }
 });
 
 module.exports = eventEmitter;
