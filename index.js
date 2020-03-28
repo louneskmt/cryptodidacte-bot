@@ -41,12 +41,7 @@ app.post('/webhook/twitter', function(req, res) {
 
   }
   if(req.body.hasOwnProperty('tweet_create_events')) {
-    var tweet = {
-      id: req.body.tweet_create_events[0].id_str,
-      user_id: req.body.tweet_create_events[0].user.id_str,
-      text: req.body.tweet_create_events[0].text
-    }
-    eventEmitter.emit('tweet', tweet);
+    eventEmitter.emit('tweet', req.body.tweet_create_events[0]);
   }
   res.status(200).end();
 })
