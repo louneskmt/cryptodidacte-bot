@@ -34,6 +34,7 @@ app.post('/webhook/twitter', function(req, res) {
   if(req.body.hasOwnProperty('direct_message_events')) {
     var user_id = Object.keys(req.body.users)[0];
     var message_create_object = req.body.direct_message_events[0].message_create;
+    __("Some message received")
     
     if(user_id !== twitterConfig.user_id_bot) {
       eventEmitter.emit('dm', user_id, message_create_object);
