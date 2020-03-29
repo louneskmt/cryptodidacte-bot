@@ -92,6 +92,11 @@ const sendAdminMenu = (user_id) => {
           metadata: "add_winners"
         },
         {
+          label: "ℹ️ Get #LNQuiz Rewards info",
+          description: "See the current rewards amounts",
+          metadata: "get_rewards_info"
+        },
+        {
           label: "🔄 Update #LNQuiz Rewards",
           description: "Set new rewards amounts",
           metadata: "update_rewards"
