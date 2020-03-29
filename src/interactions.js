@@ -160,7 +160,8 @@ function start(params){
           return retry(params);
         }
   
-        end(params, "✅ Updated!");
+        end(params, "✅ Updated!", endMessage=false);
+        sendRewardsInfo(params);
       });
     } else {
       // Not matching pattern
@@ -190,16 +191,19 @@ function start(params){
   
   // INTERACTIONS
   
-  function end(params, description, resetStatus=true){
+  function end(params, description, resetStatus=true, endMessage=true){
     let {user_id} = params;
   
     if(resetStatus) user.deleteStatus(user_id);
   
     if(description) Twitter.sendTextMessage(user_id, description);
   
-    setTimeout(function(){
-      Twitter.sendTextMessage(user_id, "End of action 🙃")
-    },1000);
+    if(endMessage) {
+      setTimeout(function(){
+        Twitter.sendTextMessage(user_id, "End of action 🙃")
+      },1000);
+    }
+
     __(`End of action for ${user_id}`)
   }
   
