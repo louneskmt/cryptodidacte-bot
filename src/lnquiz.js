@@ -54,8 +54,6 @@ const updateRewards = (newRewards, callback) => {
     rewards.question = newRewards.question
     rewards.writing = newRewards.writing
     rewards.random = newRewards.random
-
-    __(`lnquiz.js@updateRewards : new rewards object ` + rewards, 1)
     
     callback(err);
   });
