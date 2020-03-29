@@ -167,6 +167,11 @@ function start(params){
       retry(params);
     }
   }
+
+  function sendRewardsInfo(params){
+    let {user_id} = params;
+    Twitter.sendTextMessage(user_id, "Current #LNQuiz Rewards :\n\n🏁 " + lnquiz.rewards.question + " sats\n✍️ " + lnquiz.rewards.writing + " sats \n🎲 " + lnquiz.rewards.random + " sats")
+  }
   
   function receiveSats(params){
     end(params, "You have chosen to receive sats")
@@ -222,5 +227,6 @@ function start(params){
     generateInvoice,
     generatingInvoice,
     updateRewards,
-    updatingRewards
+    updatingRewards,
+    sendRewardsInfo
   }

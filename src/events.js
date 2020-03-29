@@ -59,6 +59,7 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
     "receive_sats": interactions.receiveSats,
     "claim_rewards": interactions.countRewards,
     "generate_invoice": interactions.generateInvoice,
+    "get_rewards_info": interactions.sendRewardsInfo
   }
 
   const fn_startsWith = {

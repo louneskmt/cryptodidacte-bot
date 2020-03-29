@@ -50,7 +50,8 @@ const updateRewards = (newRewards, callback) => {
 
     __(JSON.stringify(newRewards));
     __('lnquiz.js@updateRewards : Rewards updated at ' + fileName, 1);
-
+    rewards = newRewards;
+    
     callback(err);
   });
 }
@@ -58,5 +59,6 @@ const updateRewards = (newRewards, callback) => {
 module.exports = {
   countRewards,
   addWinners,
-  updateRewards
+  updateRewards,
+  rewards
 }
