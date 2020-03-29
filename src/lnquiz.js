@@ -50,7 +50,8 @@ const updateRewards = (newRewards, callback) => {
 
     __(JSON.stringify(newRewards));
     __('lnquiz.js@updateRewards : Rewards updated at ' + fileName, 1);
-    rewards = JSON.parse(newRewards);
+    
+    rewards = require('../data/rewards.json');
     
     callback(err);
   });
