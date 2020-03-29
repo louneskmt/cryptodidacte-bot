@@ -32,7 +32,7 @@ function start(params){
     var errCode = await lnquiz.addWinners(winners);
 
     if(errCode===0){
-      end(params, "✅ You successfully added this three winners : \n🏁 @" + winners[0] + "\n✍️ @" + winners[2] + "\n🎲 @" + winners[2], false);
+      end(params, "✅ You successfully added this three winners : \n\n🏁 @" + winners[0].screen_name + "\n✍️ @" + winners[1].screen_name + "\n🎲 @" + winners[2].screen_name, false);
     }else{
       end(params, "Sorry, something went wrong", false);
     }
