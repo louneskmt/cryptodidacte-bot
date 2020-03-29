@@ -51,7 +51,11 @@ const updateRewards = (newRewards, callback) => {
     __(JSON.stringify(newRewards));
     __('lnquiz.js@updateRewards : Rewards updated at ' + fileName, 1);
     
-    rewards = require('../data/rewards.json');
+    rewards.question = newRewards.question
+    rewards.writing = newRewards.writing
+    rewards.random = newRewards.random
+
+    __(`lnquiz.js@updateRewards : new rewards object ` + rewards, 1)
     
     callback(err);
   });
