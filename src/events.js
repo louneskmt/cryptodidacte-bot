@@ -12,7 +12,6 @@ var user = require('./user.js');
 
 eventEmitter.on('tweet', (tweet) => {
   var user_id = tweet.user.id_str;
-  __(`Mentionned in tweet ${tweet.id_str} by ${user_id}`)
   if(twitterConfig.admin.includes(user_id)) {
     if(tweet.text.includes("Félicitations aux gagnants")) {
       var params = {
@@ -40,6 +39,14 @@ eventEmitter.on('logs', (body) => {
     }
 
     __(`Message from ${sender} to ${recipient} : ${content}`);
+  }
+  if(body.hasOwnProperty('tweet_create_events')) {
+    var tweet = body.tweet_create_events[0]
+    var user_id = tweet.user.id_str;
+    var tweet_id = tweet.id_str;
+    var content = tweet.text;
+
+    __(`Mentionned in tweet ${tweet_id} by ${user_id} : ${content}`);
   }
 }); 
 
