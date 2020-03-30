@@ -67,6 +67,13 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+/**
+ * Returns logs
+ */
+app.get('/logs', function(req, res){
+  res.sendFile(__dirname + '/logs/main.log');
+});
+
 // Starts server
 https.createServer({
   key: fs.readFileSync('./certs/privkey.pem'),
