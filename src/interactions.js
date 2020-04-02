@@ -88,6 +88,8 @@ function start(params){
   
   function claimRewards(params){
     let {message, user_id, status} = params;
+
+    __(`eventTest for Remi Forte : ${message}`)
   
     if(message.startsWith('ln')) {
       var amount = status.split('_')[2];
@@ -193,8 +195,6 @@ function start(params){
   
   function end(params, description, {resetStatus=true, endMessage=true} = {}){
     let {user_id} = params;
-
-    __(`TEST_FLO : Valeur resetStatus ${resetStatus}`)
   
     if(resetStatus) user.deleteStatus(user_id);
   
