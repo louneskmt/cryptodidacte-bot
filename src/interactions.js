@@ -189,7 +189,7 @@ function start(params){
     });
   }
   
-  // INTERACTIONS
+  // INTERACTIONS test Flo
   
   function end(params, description, resetStatus=true, endMessage=true){
     let {user_id} = params;
