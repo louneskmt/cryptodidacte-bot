@@ -32,7 +32,7 @@ function start(params){
     var errCode = await lnquiz.addWinners(winners);
 
     if(errCode===0){
-      end(params, "✅ You successfully added this three winners : \n\n🏁 @" + winners[0].screen_name + "\n✍️ @" + winners[1].screen_name + "\n🎲 @" + winners[2].screen_name, endMessage=false);
+      end(params, "✅ You successfully added this three winners : \n\n🏁 @" + winners[0].screen_name + "\n✍️ @" + winners[1].screen_name + "\n🎲 @" + winners[2].screen_name, {endMessage: false});
     }else{
       end(params, "Sorry, something went wrong", false);
     }
@@ -160,7 +160,7 @@ function start(params){
           return retry(params);
         }
   
-        end(params, "✅ Updated!", endMessage=false);
+        end(params, "✅ Updated!", {endMessage: false});
         sendRewardsInfo(params);
       });
     } else {
@@ -191,7 +191,7 @@ function start(params){
   
   // INTERACTIONS test Flo
   
-  function end(params, description, resetStatus=true, endMessage=true){
+  function end(params, description, {resetStatus=true, endMessage=true} = {}){
     let {user_id} = params;
   
     if(resetStatus) user.deleteStatus(user_id);
