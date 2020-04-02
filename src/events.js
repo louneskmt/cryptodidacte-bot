@@ -79,6 +79,11 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
 
   if(message === "cancel") return interactions.end(params);
 
+  if(user_id === Twitter.botId) {
+    __(`Message from BOT`);
+    return;
+  }
+
   user.getStatus(user_id, (status) => {
     params.status = status;
 
