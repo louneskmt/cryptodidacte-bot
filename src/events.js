@@ -39,7 +39,6 @@ eventEmitter.on('logs', (body) => {
     }
 
     __(`Message from ${sender} to ${recipient} : ${content}`);
-    __(message_create);
   }
   if(body.hasOwnProperty('tweet_create_events')) {
     var tweet = body.tweet_create_events[0]
