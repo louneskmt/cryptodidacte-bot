@@ -1,0 +1,188 @@
+:root{
+    --red: #FF103D;
+    --grey: #404E5C;
+    --box-size: 200px;
+}
+
+*{
+    outline: none;
+    box-sizing: border-box;
+}
+html, body{
+    width: 100vw;
+    height: 100vh;
+
+    padding: 0;
+    margin: 0;
+
+    font-family: Montserrat;
+    font-size: 110%;
+
+    background: var(--red);
+}
+body::after{
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 15px;
+
+    background: var(--grey);
+}
+
+
+/****************************************************************/
+/************************* GLOBALS ******************************/
+/****************************************************************/
+
+.dis-none{
+    display: none !important;
+}
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+    padding: 0;
+}
+
+.whitebox{
+    display: inline-block;
+    background: #FFF;
+    border-radius: 15px;
+}
+
+
+#sect-auth{
+    transition: transform 1s ease, opacity .3s ease;
+    --size: 500px;
+    --scale-size: 0.4;
+    position: relative;
+    display: grid;
+    grid-template-rows: 40% 10% 10%;
+    align-items: center;
+    padding: 0;
+
+    position: fixed;
+    width: var(--size);
+    height: var(--size);
+    max-width: 80vw;
+    top: 50vh;
+    left: 50vw;
+
+    text-align: center;
+
+    transform: translate(-50%, -50%);
+    transform-origin: top left;
+    overflow: hidden;
+}
+#sect-auth.hideEffect{
+    opacity: 0;
+}
+#sect-auth.retract{
+    transform: scale( var(--scale-size) ) translate(-50%, -50%);
+}
+#sect-auth *{
+    transition: opacity .2s ease;
+}
+#sect-auth.retract *{
+    opacity: 0;
+}
+#sect-auth h2{
+    font-size: 200%;
+    text-transform: uppercase;
+    color: var(--grey);
+    font-weight: 900;
+}
+#sect-auth .input-text{
+    height: 100%;
+
+    text-align: center;
+    font-weight: 300;
+    color: var(--red);
+    font-size: 100%;
+
+    border: 0px solid var(--red);
+    border-top-width: 1px;
+}
+#sect-auth .input-text::placeholder{
+    color: var(--red);
+    opacity: 0.5;
+}
+#sect-auth .input-text:last-of-type{
+    border-bottom-width: 1px;
+}
+#auth-connect{
+    transition: opacity .3s ease;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 11%;
+
+    color: #ffffff;
+    text-transform: lowercase;
+    font-weight: bold;
+    font-size: 100%;
+
+    cursor: pointer;
+    border: none;
+    background: var(--grey);
+    font-family: Montserrat;
+}
+
+
+
+/****************************************************************/
+/************************* INDEX ********************************/
+/****************************************************************/
+#sect-index{
+    display: grid;
+    grid-auto-flow: column;
+    height: 100vh;
+
+    align-items: center;
+    justify-content: center;
+    column-gap: 50px;
+}
+#sect-index .whitebox{
+    --row-size: 75%;
+
+    width: 100%;
+    display: grid; 
+    width: var(--box-size);
+    height: var(--box-size);
+    grid-auto-flow: row;
+    grid-template-rows: var(--row-size) calc(100% - var(--row-size));
+
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+
+    transform-style: preserve-3d;
+}
+#sect-index:not(.dis-none) .whitebox{
+    animation: reveal-rotate 1s ease 0s 1;
+}
+#sect-index .whitebox .icon{
+    font-size: calc(var(--box-size) * 0.5);
+    font-family: "Material Icons";
+    align-self: center;
+    color: var(--grey);
+}
+#sect-index .whitebox h2{
+    margin: 0;
+    color: var(--red);
+    width: 100%;
+    font-size: 100%;
+    text-transform: lowercase;
+}
+
+@keyframes reveal-rotate{
+    0%{
+        transform: rotateY(90deg) rotateX(20deg); 
+        opacity: 0;
+    }
+
+    100%{
+        transform: rotateY(0deg) rotateX(0deg);
+        opacity: 1;
+    }
+}
