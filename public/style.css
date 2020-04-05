@@ -19,6 +19,7 @@ html, body{
     font-size: 110%;
 
     background: var(--red);
+    overflow: hidden;
 }
 body::after{
     content: "";
@@ -48,6 +49,21 @@ h1,h2,h3,h4,h5,h6{
     display: inline-block;
     background: #FFF;
     border-radius: 15px;
+}
+.--icon{
+    font-family: "Material Icons";
+}
+.--last-td-red > * td:last-child{
+    color: var(--red);
+}
+.--last-td-bold > * td:last-child{
+    font-weight: bold;
+}
+.--last-tabEl-center tr td:last-child,  .--last-tabEl-center tr th:last-child{
+    text-align: center !important;
+}
+.--ov-auto{
+    overflow: auto;
 }
 
 
@@ -185,4 +201,130 @@ h1,h2,h3,h4,h5,h6{
         transform: rotateY(0deg) rotateX(0deg);
         opacity: 1;
     }
+}
+
+
+/****************************************************************/
+/************************** DATA ********************************/
+/****************************************************************/
+#sect-data{
+    display: grid;
+    height: 100vh;
+    padding-top: 40px;
+    grid-auto-flow: row;
+    row-gap: 20px;
+    grid-template-rows: 5% 80% 10%;
+}
+.sect-data-header{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto 1fr 3%;
+    padding: 0 100px;
+}
+.sect-data-header h1{
+    display: inline-block;
+    padding-bottom: 5px;
+    
+    text-transform: uppercase;
+    color: #FFF;
+    font-weight: bold;
+
+    border-bottom: 3px solid #FFF;
+}
+#inp--data-filter{
+    padding: 0 10px;
+
+    text-align: right;
+    color: #ffffff;
+    font-weight: 200;
+    font-size: 1.5em;
+
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid #00000055;
+}
+.sect-data-header-icon{
+    height: 100%;
+    font-size: 1.7em;
+    font-family: "Material Icons";
+    color: #00000055;
+    border-bottom: 3px solid #00000055;
+}
+#sect-data > .table-container{
+    margin: 20px 100px;
+    width: auto;
+    border-radius: 10px;
+}
+#data-table{
+    background: white;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+#data-table tr th:first-child::after{
+    content: "radio_button_unchecked" !important;
+    display: inline-block;
+    font-family: "Material Icons";
+}
+#data-table tr th:first-child.selected::after{
+    content: "radio_button_checked" !important;
+    display: inline-block;
+    font-family: "Material Icons";
+}
+#data-table tr{
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid var(--red)
+}
+#data-table tr *{
+    text-align: left;
+}
+#dat-table tr{
+    position: relative;
+}
+
+#data-table th{
+    position: relative;
+}
+#data-table th::before{
+    --height: 75%;
+    content: "";
+    display: inline-block;
+    position: absolute;
+    
+    top: calc((100% - var(--height)) / 2);
+    left: -10px;
+    height: var(--height);
+    width: 1px;
+    background: var(--red);
+    border-radius: 1px;
+}
+#data-table th:nth-child(1)::before, #data-table th:nth-child(2)::before{
+    display: none;
+}
+
+#data-table tr *:first-child{
+    color: var(--red);
+    width: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+#data-table tr td:first-child::before{
+    transition: opacity .3s ease;
+    content: "check_circle";
+    font-family: "Material Icons";
+    vertical-align: inherit;
+    opacity: 0;
+}
+#data-table tr:hover td:first-child::before{
+    opacity: .3;
+}
+#data-table tr.selected td:first-child::before{
+    opacity: 1;
+}
+.sect-data-footer{
+    width: 100%;
+    background: var(--grey);
 }
