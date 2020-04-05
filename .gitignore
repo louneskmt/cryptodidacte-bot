@@ -115,4 +115,7 @@ bfg.jar
 response.json
 .vscode
 
+logs/
+*.log
+
 assets/temp/*
