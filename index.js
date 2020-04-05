@@ -72,6 +72,10 @@ app.get('/admin', function(req, res){
   res.sendFile(__dirname + '/public/index.html');
 });
 
+/**
+ * Serve static files from directory public
+ */
+app.use(express.static('public'))
 
 /**
  * Returns logs
