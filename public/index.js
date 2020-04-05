@@ -1,8 +1,10 @@
 $(function(){
     $("#auth-connect").click(() => connect() );
 
-    $("#data-table tr td:first-child").click(selectElementRow)
-    $("#data-table tr th:first-child").click(selectAllTabEl)
+    $("#data-table tr td:first-child").click(selectElementRow);
+    $(".data-thead tr th:first-child").click(selectAllTabEl);
+
+    updateTableRows();
 });
 
 let connect = async function(){
@@ -33,17 +35,26 @@ let selectElementRow = function (ev){
 
 let selectAllTabEl = function (ev){
     $(this).toggleClass("selected");
+
     if( $(this).hasClass("selected") ){
-        $(this).parents("table").children("tbody").children("tr").each(async function(ix, el){
+        $("#data-table").children("tbody").children("tr").each(async function(ix, el){
             await sleep(ix*0.05);
             $(el).addClass("selected")
         });    
     }else{
-        $(this).parents("table").children("tbody").children("tr").each(async function(ix, el){
+        $("#data-table").children("tbody").children("tr").each(async function(ix, el){
             await sleep(ix*0.05);
             $(el).removeClass("selected")
         });       
     }
 }
 
-let
+let updateTableRows = ()=>{
+    $("#data-table tr:first-child td").each( (ix, el) => {
+        if(ix==0) return true;
+        let width = $(el).width();
+        console.log(width);
+        
+        $(`.data-thead tr th:nth-child(${ix+1})`).css({width})
+    })
+}

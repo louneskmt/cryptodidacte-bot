@@ -65,6 +65,9 @@ h1,h2,h3,h4,h5,h6{
 .--ov-auto{
     overflow: auto;
 }
+.--ov-h{
+    overflow: hidden;
+}
 
 
 #sect-auth{
@@ -251,8 +254,9 @@ h1,h2,h3,h4,h5,h6{
     border-bottom: 3px solid #00000055;
 }
 #sect-data > .table-container{
+    position: static;
     margin: 20px 100px;
-    width: auto;
+    width: calc(100vw - 200px);
     border-radius: 10px;
 }
 #data-table{
@@ -263,32 +267,44 @@ h1,h2,h3,h4,h5,h6{
     border-collapse: collapse;
     overflow: hidden;
 }
-#data-table tr th:first-child::after{
+.data-thead{
+    position: relative;
+    width: calc(100vw - 200px);
+    height: 50px;
+    background: white;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+.data-thead table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.data-thead tr{
+    position: relative;
+}
+.data-thead tr th:first-child::after{
     content: "radio_button_unchecked" !important;
     display: inline-block;
     font-family: "Material Icons";
 }
-#data-table tr th:first-child.selected::after{
+.data-thead tr th:first-child.selected::after{
     content: "radio_button_checked" !important;
     display: inline-block;
     font-family: "Material Icons";
 }
-#data-table tr{
+#data-table tr, .data-thead tr{
     height: 50px;
     border: none;
     border-bottom: 1px solid var(--red)
 }
-#data-table tr *{
+#data-table tr *, .data-thead tr *{
     text-align: left;
 }
-#dat-table tr{
-    position: relative;
-}
 
-#data-table th{
+.data-thead th{
     position: relative;
 }
-#data-table th::before{
+.data-thead th::before{
     --height: 75%;
     content: "";
     display: inline-block;
@@ -301,15 +317,18 @@ h1,h2,h3,h4,h5,h6{
     background: var(--red);
     border-radius: 1px;
 }
-#data-table th:nth-child(1)::before, #data-table th:nth-child(2)::before{
+.data-thead th:nth-child(1)::before, .data-thead th:nth-child(2)::before{
     display: none;
 }
 
-#data-table tr *:first-child{
+#data-table tr *:first-child, .data-thead tr *:first-child{
     color: var(--red);
     width: 50px;
     text-align: center;
     cursor: pointer;
+}
+#data-table tr td{
+    width: auto;
 }
 #data-table tr td:first-child::before{
     transition: opacity .3s ease;
