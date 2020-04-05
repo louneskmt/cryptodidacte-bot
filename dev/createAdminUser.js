@@ -19,5 +19,6 @@ let prompt = async text => {
 
     console.log("\n TRYING TO CONNECT \n");
     
-    let db = new Db(`mongodb://${username}:${password}@localhost:27017/adminAuthTable`);
+    let db = new Db("users",`mongodb://${username}:${password}@localhost:27017/adminAuthTable`);
+    console.log(db.connect());
 })();
