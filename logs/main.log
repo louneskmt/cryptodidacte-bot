@@ -2220,3 +2220,1536 @@ NDQ3YjA2NDYtNmMwMC00ZjliLWI3YTEtNjliOTgzNTQ0ZmVi
 [29/3 21:0:35] | [VERBOSE] |: Message from BOT to 2354598829 : End of action 🙃
 [29/3 21:0:35] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
 []
+[29/3 21:7:58] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start
+[29/3 21:7:58] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[29/3 21:7:58] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[29/3 21:7:58] | [VERBOSE] |: Message from BOT to 986994912565620736 : 👋 Hey ! What do you want to do ?
+[29/3 21:8:1] | [VERBOSE] |: Message from 986994912565620736 to BOT : 🎁 Claim rewards
+[29/3 21:8:1] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[29/3 21:8:1] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e7f5e45dbf6a366590e3d65","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f5e45dbf6a366590e3d66","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f5e45dbf6a366590e3d67","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe379","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe37a","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f732c181e1779124fe37b","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3591","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3592","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f740b6be86d7998fd3593","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b5","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b6","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f758a62ad327a2ca580b7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be9","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d85","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d87","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e80688d49d17c2a92d11f3f","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e80688d49d17c2a92d11f40","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e80688d49d17c2a92d11f41","user_id":"986994912565620736","username":"lounes_kmt","reward":200}]
+[29/3 21:8:1] | [VERBOSE] |: Updating status of 986994912565620736
+[29/3 21:8:1] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[29/3 21:8:1] | [VERBOSE] |: Inserted 1 document(s) into status
+[29/3 21:8:3] | [VERBOSE] |: Message from BOT to 986994912565620736 : Please, send an invoice for 3700 sats.
+[29/3 21:8:13] | [VERBOSE] |: Message from 986994912565620736 to BOT : Cancel
+[29/3 21:8:13] | [VERBOSE] |: End of action for 986994912565620736
+[29/3 21:8:13] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e80f21149d17c2a92d11f43","user_id":"986994912565620736","status":"claim_rewards_3700_sats"}]
+[29/3 21:8:13] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_3700_sats
+[29/3 21:8:13] | [VERBOSE] |: Removed 1 documents from status
+[29/3 21:8:15] | [VERBOSE] |: Message from BOT to 986994912565620736 : End of action 🙃
+[29/3 22:15:34] | [VERBOSE] |: Message from 2354598829 to BOT : Start
+[29/3 22:15:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[29/3 22:15:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[29/3 22:15:34] | [VERBOSE] |: Message from BOT to 2354598829 : 👋 Hey ! What do you want to do ?
+[29/3 22:15:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+
+
+------------------------ 30/3 7:33:4 ------------------------
+[30/3 7:33:4] | [VERBOSE] |: Logger has started
+[30/3 7:33:5] | [DEBUG] |: Connected successfully to server
+[30/3 7:37:32] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start admin
+[30/3 7:37:32] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[30/3 7:37:32] | [VERBOSE] |: Sending admin menu...
+[30/3 7:37:32] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[30/3 7:37:33] | [VERBOSE] |: Message from BOT to 986994912565620736 : 👋 Hey, admin ! What do you want to do ? 🤔
+[30/3 9:52:29] | [VERBOSE] |: Message from 955781788743454721 to BOT : start
+[30/3 9:52:29] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[30/3 9:52:29] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[30/3 9:52:29] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey ! What do you want to do ?
+[30/3 9:52:34] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🎁 Claim rewards
+[30/3 9:52:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[30/3 9:52:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e710e09b049c25ba484fa5f","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e710e09b049c25ba484fa60","user_id":"955781788743454721","username":"cryptodidacte","reward":300},{"_id":"5e710e09b049c25ba484fa61","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be8","user_id":"955781788743454721","username":"Cryptodidacte","reward":300},{"_id":"5e7fa24a9cb4e77daca98d86","user_id":"955781788743454721","username":"Cryptodidacte","reward":300}]
+[30/3 9:52:34] | [VERBOSE] |: Updating status of 955781788743454721
+[30/3 9:52:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[30/3 9:52:34] | [VERBOSE] |: Inserted 1 document(s) into status
+[30/3 9:52:37] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send an invoice for 1200 sats.
+[30/3 9:52:53] | [VERBOSE] |: Message from 955781788743454721 to BOT : Cancel
+[30/3 9:52:53] | [VERBOSE] |: End of action for 955781788743454721
+[30/3 9:52:53] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e81a5428513bd75b5c10c9d","user_id":"955781788743454721","status":"claim_rewards_1200_sats"}]
+[30/3 9:52:53] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1200_sats
+[30/3 9:52:53] | [VERBOSE] |: Removed 1 documents from status
+[30/3 9:53:14] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start
+[30/3 9:53:14] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[30/3 9:53:14] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[30/3 9:53:17] | [VERBOSE] |: Message from BOT to 986994912565620736 : 👋 Hey ! What do you want to do ?
+[30/3 9:53:23] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start
+[30/3 9:53:23] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[30/3 9:53:23] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[30/3 9:53:26] | [VERBOSE] |: Message from 986994912565620736 to BOT : 🎁 Claim rewards
+[30/3 9:53:26] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[30/3 9:53:26] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e7f5e45dbf6a366590e3d65","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f5e45dbf6a366590e3d66","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f5e45dbf6a366590e3d67","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe379","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe37a","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f732c181e1779124fe37b","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3591","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3592","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f740b6be86d7998fd3593","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b5","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b6","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f758a62ad327a2ca580b7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be9","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d85","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d87","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e80688d49d17c2a92d11f3f","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e80688d49d17c2a92d11f40","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e80688d49d17c2a92d11f41","user_id":"986994912565620736","username":"lounes_kmt","reward":200}]
+[30/3 9:53:26] | [VERBOSE] |: Updating status of 986994912565620736
+[30/3 9:53:26] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[30/3 9:53:26] | [VERBOSE] |: Inserted 1 document(s) into status
+[30/3 9:53:27] | [VERBOSE] |: Message from BOT to 986994912565620736 : Please, send an invoice for 3700 sats.
+[30/3 18:43:7] | [IMPORTANT] |: Verification CRC...
+ZDcxZDE3ZmEtZmM0NC00OTE5LTlmNzAtNWE0MmRlYTcxY2Qw
+[31/3 19:13:7] | [IMPORTANT] |: Verification CRC...
+MWY3YzIyM2ItOTZjMy00YjQwLTljZTUtYzBjMjhmOWJlOGQz
+[1/4 11:18:6] | [VERBOSE] |: Message from BOT to 1175249514745212928 : 👋 Hey, admin ! What do you want to do ? 🤔
+[1/4 11:18:9] | [VERBOSE] |: Message from BOT to 1175249514745212928 : 👋 Hey, admin ! What do you want to do ? 🤔
+[1/4 11:18:11] | [VERBOSE] |: Message from BOT to 1175249514745212928 : 👋 Hey, admin ! What do you want to do ? 🤔
+[1/4 11:18:13] | [VERBOSE] |: Message from BOT to 1175249514745212928 : 👋 Hey, admin ! What do you want to do ? 🤔
+[1/4 11:18:14] | [VERBOSE] |: Message from BOT to 1175249514745212928 : 👋 Hey, admin ! What do you want to do ? 🤔
+[1/4 11:18:15] | [VERBOSE] |: Message from BOT to 1175249514745212928 : 👋 Hey, admin ! What do you want to do ? 🤔
+[1/4 11:18:15] | [VERBOSE] |: Message from BOT to 1175249514745212928 : 👋 Hey, admin ! What do you want to do ? 🤔
+[1/4 11:18:16] | [VERBOSE] |: Message from BOT to 1175249514745212928 : 👋 Hey, admin ! What do you want to do ? 🤔
+[1/4 11:18:16] | [VERBOSE] |: Message from BOT to 1175249514745212928 : 👋 Hey, admin ! What do you want to do ? 🤔
+[1/4 11:19:37] | [VERBOSE] |: Message from BOT to 1175249514745212928 : 👋 Hey, admin ! What do you want to do ? 🤔
+[1/4 11:41:38] | [VERBOSE] |: Message from BOT to 1175249514745212928 : 👋 Hey, admin ! What do you want to do ? 🤔
+[1/4 11:58:38] | [VERBOSE] |: Message from BOT to 1175249514745212928 : 👋 Hey, admin ! What do you want to do ? 🤔
+[1/4 19:43:9] | [IMPORTANT] |: Verification CRC...
+NzliNDljNTAtN2E4YS00NTEyLTk3ZTMtZTEyOWJhY2EwOWY1
+
+
+------------------------ 2/4 12:39:21 ------------------------
+[2/4 12:39:21] | [VERBOSE] |: Logger has started
+[2/4 12:39:23] | [DEBUG] |: Connected successfully to server
+[2/4 12:39:46] | [VERBOSE] |: Message from 955781788743454721 to BOT : start
+[2/4 12:39:46] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:39:46] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:40:0] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🎁 Claim rewards
+[2/4 12:40:0] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:40:0] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e710e09b049c25ba484fa5f","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e710e09b049c25ba484fa60","user_id":"955781788743454721","username":"cryptodidacte","reward":300},{"_id":"5e710e09b049c25ba484fa61","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be8","user_id":"955781788743454721","username":"Cryptodidacte","reward":300},{"_id":"5e7fa24a9cb4e77daca98d86","user_id":"955781788743454721","username":"Cryptodidacte","reward":300}]
+[2/4 12:40:0] | [VERBOSE] |: Updating status of 955781788743454721
+[2/4 12:40:0] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:40:0] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 12:40:1] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send an invoice for 1200 sats.
+[2/4 12:40:58] | [VERBOSE] |: Message from 955781788743454721 to BOT : Cancel
+[2/4 12:40:58] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 12:40:58] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c100d346bd7d0475b9f1","user_id":"955781788743454721","status":"claim_rewards_1200_sats"}]
+[2/4 12:40:58] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1200_sats
+[2/4 12:40:58] | [VERBOSE] |: Removed 1 documents from status
+[2/4 12:41:0] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+[2/4 12:41:38] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start
+[2/4 12:41:38] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e81a5768513bd75b5c10c9e","user_id":"986994912565620736","status":"claim_rewards_3700_sats"}]
+[2/4 12:41:38] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_3700_sats
+[2/4 12:41:38] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e81a5768513bd75b5c10c9e","user_id":"986994912565620736","status":"claim_rewards_3700_sats"}]
+[2/4 12:41:38] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_3700_sats
+[2/4 12:41:38] | [VERBOSE] |: Removed 1 documents from status
+[2/4 12:41:41] | [VERBOSE] |: Message from BOT to 986994912565620736 : 👋 Hey ! What do you want to do ?
+[2/4 12:41:47] | [VERBOSE] |: Message from 986994912565620736 to BOT : 🎁 Claim rewards
+[2/4 12:41:47] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:41:47] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e7f5e45dbf6a366590e3d65","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f5e45dbf6a366590e3d66","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f5e45dbf6a366590e3d67","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe379","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe37a","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f732c181e1779124fe37b","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3591","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3592","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f740b6be86d7998fd3593","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b5","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b6","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f758a62ad327a2ca580b7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be9","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d85","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d87","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e80688d49d17c2a92d11f3f","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e80688d49d17c2a92d11f40","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e80688d49d17c2a92d11f41","user_id":"986994912565620736","username":"lounes_kmt","reward":200}]
+[2/4 12:41:47] | [VERBOSE] |: Updating status of 986994912565620736
+[2/4 12:41:47] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:41:47] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 12:41:48] | [VERBOSE] |: Message from BOT to 986994912565620736 : Please, send an invoice for 3700 sats.
+[2/4 12:42:34] | [VERBOSE] |: Message from 986994912565620736 to BOT : blablabla
+[2/4 12:42:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c16bd346bd7d0475b9f2","user_id":"986994912565620736","status":"claim_rewards_3700_sats"}]
+[2/4 12:42:34] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_3700_sats
+[2/4 12:42:38] | [VERBOSE] |: Message from BOT to 986994912565620736 : ❌ Please try again, or send 'Cancel'.
+[2/4 12:42:54] | [VERBOSE] |: Message from 986994912565620736 to BOT : To ze moon les sats
+[2/4 12:42:54] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c16bd346bd7d0475b9f2","user_id":"986994912565620736","status":"claim_rewards_3700_sats"}]
+[2/4 12:42:54] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_3700_sats
+[2/4 12:42:56] | [VERBOSE] |: Message from BOT to 986994912565620736 : ❌ Please try again, or send 'Cancel'.
+[2/4 12:43:2] | [VERBOSE] |: Message from 986994912565620736 to BOT : Cancel
+[2/4 12:43:2] | [VERBOSE] |: End of action for 986994912565620736
+[2/4 12:43:2] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c16bd346bd7d0475b9f2","user_id":"986994912565620736","status":"claim_rewards_3700_sats"}]
+[2/4 12:43:2] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_3700_sats
+[2/4 12:43:2] | [VERBOSE] |: Removed 1 documents from status
+[2/4 12:43:3] | [VERBOSE] |: Message from BOT to 986994912565620736 : End of action 🙃
+[2/4 12:43:8] | [VERBOSE] |: Message from 986994912565620736 to BOT : Cimer
+[2/4 12:43:8] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:43:57] | [VERBOSE] |: Message from 986994912565620736 to BOT : start admin
+[2/4 12:43:58] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:43:58] | [VERBOSE] |: Sending admin menu...
+[2/4 12:43:58] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:44:0] | [VERBOSE] |: Message from BOT to 986994912565620736 : 👋 Hey, admin ! What do you want to do ? 🤔
+[2/4 12:44:8] | [VERBOSE] |: Message from 986994912565620736 to BOT : ℹ️ Get #LNQuiz Rewards info
+[2/4 12:44:8] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:44:9] | [VERBOSE] |: Message from BOT to 986994912565620736 : Current #LNQuiz Rewards :
+
+🏁 200 sats
+✍️ 300 sats 
+🎲 200 sats
+[2/4 12:44:19] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start admin
+[2/4 12:44:19] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:44:19] | [VERBOSE] |: Sending admin menu...
+[2/4 12:44:19] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:44:21] | [VERBOSE] |: Message from BOT to 986994912565620736 : 👋 Hey, admin ! What do you want to do ? 🤔
+[2/4 12:44:35] | [VERBOSE] |: Message from 986994912565620736 to BOT : 🏅 Add new #LNQuiz winners
+[2/4 12:44:35] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:44:35] | [VERBOSE] |: Updating status of 986994912565620736
+[2/4 12:44:35] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:44:35] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 12:44:38] | [VERBOSE] |: Message from BOT to 986994912565620736 : Please, send the new winners in the following order : question-writing-random.
+[2/4 12:45:1] | [VERBOSE] |: Message from 986994912565620736 to BOT : @Cryptodidacte @lounes_kmt @ForteRemi
+[2/4 12:45:1] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c213d346bd7d0475b9f3","user_id":"986994912565620736","status":"adding_winners"}]
+[2/4 12:45:1] | [VERBOSE] |: Found status for 986994912565620736 : adding_winners
+[2/4 12:45:1] | [VERBOSE] |: Inserted 3 document(s) into rewards
+[2/4 12:45:1] | [VERBOSE] |: End of action for 986994912565620736
+[2/4 12:45:2] | [VERBOSE] |: Message from BOT to 986994912565620736 : End of action 🙃
+[2/4 12:45:29] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start
+[2/4 12:45:29] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c213d346bd7d0475b9f3","user_id":"986994912565620736","status":"adding_winners"}]
+[2/4 12:45:29] | [VERBOSE] |: Found status for 986994912565620736 : adding_winners
+[2/4 12:45:29] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c213d346bd7d0475b9f3","user_id":"986994912565620736","status":"adding_winners"}]
+[2/4 12:45:29] | [VERBOSE] |: Found status for 986994912565620736 : adding_winners
+[2/4 12:45:29] | [VERBOSE] |: Removed 1 documents from status
+[2/4 12:45:47] | [VERBOSE] |: Message from 986994912565620736 to BOT : 🎁 Claim rewards
+[2/4 12:45:47] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:45:47] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e7f5e45dbf6a366590e3d65","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f5e45dbf6a366590e3d66","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f5e45dbf6a366590e3d67","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe379","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe37a","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f732c181e1779124fe37b","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3591","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3592","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f740b6be86d7998fd3593","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b5","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b6","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f758a62ad327a2ca580b7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be9","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d85","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d87","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e80688d49d17c2a92d11f3f","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e80688d49d17c2a92d11f40","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e80688d49d17c2a92d11f41","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e85c22dd346bd7d0475b9f5","user_id":"986994912565620736","username":"lounes_kmt","reward":300}]
+[2/4 12:45:47] | [VERBOSE] |: Updating status of 986994912565620736
+[2/4 12:45:47] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:45:47] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 12:45:47] | [VERBOSE] |: Message from BOT to 986994912565620736 : Please, send an invoice for 4000 sats.
+
+
+------------------------ 2/4 12:47:35 ------------------------
+[2/4 12:47:35] | [VERBOSE] |: Logger has started
+[2/4 12:47:36] | [DEBUG] |: Connected successfully to server
+[2/4 12:47:46] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start admin
+[2/4 12:47:46] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c25bd346bd7d0475b9f7","user_id":"986994912565620736","status":"claim_rewards_4000_sats"}]
+[2/4 12:47:46] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_4000_sats
+[2/4 12:47:46] | [VERBOSE] |: Sending admin menu...
+[2/4 12:47:46] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c25bd346bd7d0475b9f7","user_id":"986994912565620736","status":"claim_rewards_4000_sats"}]
+[2/4 12:47:46] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_4000_sats
+[2/4 12:47:46] | [VERBOSE] |: Removed 1 documents from status
+[2/4 12:47:47] | [VERBOSE] |: Message from BOT to 986994912565620736 : 👋 Hey, admin ! What do you want to do ? 🤔
+[2/4 12:48:4] | [VERBOSE] |: Message from 986994912565620736 to BOT : 🏅 Add new #LNQuiz winners
+[2/4 12:48:4] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:48:4] | [VERBOSE] |: Updating status of 986994912565620736
+[2/4 12:48:4] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:48:4] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 12:48:20] | [VERBOSE] |: Message from 986994912565620736 to BOT : @lounes_kmt @lounes_kmt @lounes_kmt
+[2/4 12:48:20] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c2e41417407db8a2b46f","user_id":"986994912565620736","status":"adding_winners"}]
+[2/4 12:48:20] | [VERBOSE] |: Found status for 986994912565620736 : adding_winners
+[2/4 12:48:20] | [VERBOSE] |: Inserted 3 document(s) into rewards
+[2/4 12:48:20] | [VERBOSE] |: End of action for 986994912565620736
+[2/4 12:48:20] | [VERBOSE] |: Message from BOT to 986994912565620736 : ✅ You successfully added this three winners : 
+
+🏁 @lounes_kmt
+✍️ @lounes_kmt
+🎲 @lounes_kmt
+[2/4 12:48:23] | [VERBOSE] |: Message from BOT to 986994912565620736 : End of action 🙃
+[2/4 12:48:48] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start
+[2/4 12:48:48] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c2e41417407db8a2b46f","user_id":"986994912565620736","status":"adding_winners"}]
+[2/4 12:48:48] | [VERBOSE] |: Found status for 986994912565620736 : adding_winners
+[2/4 12:48:48] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c2e41417407db8a2b46f","user_id":"986994912565620736","status":"adding_winners"}]
+[2/4 12:48:48] | [VERBOSE] |: Found status for 986994912565620736 : adding_winners
+[2/4 12:48:48] | [VERBOSE] |: Removed 1 documents from status
+[2/4 12:50:17] | [VERBOSE] |: Message from 986994912565620736 to BOT : 💸 Tip Cryptodidacte
+[2/4 12:50:17] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:50:17] | [VERBOSE] |: events.js@generateInvoice : Generating an invoice (tip) 
+[2/4 12:50:17] | [VERBOSE] |: Updating status of 986994912565620736
+[2/4 12:50:17] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 12:50:17] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 12:50:18] | [VERBOSE] |: Message from BOT to 986994912565620736 : Thank you for choosing to tip Cryptodidacte
+[2/4 12:50:19] | [ERROR] |: events.js@generateInvoice : Could not generate invoice, got following
+[2/4 12:50:19] | [ERROR] |: Error: SOCKS connection failed. General SOCKS server failure.
+[2/4 12:50:19] | [VERBOSE] |: End of action for 986994912565620736
+[2/4 12:50:19] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85c3691417407db8a2b473","user_id":"986994912565620736","status":"generating_invoice"}]
+[2/4 12:50:19] | [VERBOSE] |: Found status for 986994912565620736 : generating_invoice
+[2/4 12:50:19] | [VERBOSE] |: Removed 1 documents from status
+[2/4 12:50:20] | [VERBOSE] |: Message from BOT to 986994912565620736 : Generating invoice...
+[2/4 12:50:20] | [VERBOSE] |: Message from BOT to 986994912565620736 : ❌ Error generating invoice... Please try later.
+[2/4 15:16:27] | [VERBOSE] |: Message from 955781788743454721 to BOT : start
+[2/4 15:16:27] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:16:27] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:16:27] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey ! What do you want to do ?
+[2/4 15:16:33] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🎁 Claim rewards
+[2/4 15:16:33] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:16:33] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e710e09b049c25ba484fa5f","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e710e09b049c25ba484fa60","user_id":"955781788743454721","username":"cryptodidacte","reward":300},{"_id":"5e710e09b049c25ba484fa61","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be8","user_id":"955781788743454721","username":"Cryptodidacte","reward":300},{"_id":"5e7fa24a9cb4e77daca98d86","user_id":"955781788743454721","username":"Cryptodidacte","reward":300},{"_id":"5e85c22dd346bd7d0475b9f4","user_id":"955781788743454721","username":"Cryptodidacte","reward":200}]
+[2/4 15:16:33] | [VERBOSE] |: Updating status of 955781788743454721
+[2/4 15:16:33] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:16:33] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 15:16:34] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send an invoice for 1400 sats.
+[2/4 15:17:35] | [VERBOSE] |: Message from 955781788743454721 to BOT : Cancel
+[2/4 15:17:35] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 15:17:35] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85e5b11417407db8a2b474","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 15:17:35] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 15:17:35] | [VERBOSE] |: Removed 1 documents from status
+[2/4 15:17:37] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+[2/4 15:22:59] | [VERBOSE] |: Message from 955781788743454721 to BOT : start admin
+[2/4 15:22:59] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:22:59] | [VERBOSE] |: Sending admin menu...
+[2/4 15:22:59] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:22:59] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey, admin ! What do you want to do ? 🤔
+[2/4 15:23:34] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start
+[2/4 15:23:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:23:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:23:36] | [VERBOSE] |: Message from BOT to 986994912565620736 : 👋 Hey ! What do you want to do ?
+[2/4 15:23:42] | [VERBOSE] |: Message from 986994912565620736 to BOT : 🎁 Claim rewards
+[2/4 15:23:42] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:23:42] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e7f5e45dbf6a366590e3d65","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f5e45dbf6a366590e3d66","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f5e45dbf6a366590e3d67","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe379","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe37a","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f732c181e1779124fe37b","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3591","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3592","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f740b6be86d7998fd3593","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b5","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b6","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f758a62ad327a2ca580b7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be9","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d85","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d87","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e80688d49d17c2a92d11f3f","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e80688d49d17c2a92d11f40","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e80688d49d17c2a92d11f41","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e85c22dd346bd7d0475b9f5","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e85c2f41417407db8a2b470","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e85c2f41417407db8a2b471","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e85c2f41417407db8a2b472","user_id":"986994912565620736","username":"lounes_kmt","reward":200}]
+[2/4 15:23:42] | [VERBOSE] |: Updating status of 986994912565620736
+[2/4 15:23:42] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:23:42] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 15:23:45] | [VERBOSE] |: Message from BOT to 986994912565620736 : Please, send an invoice for 4700 sats.
+[2/4 15:24:58] | [VERBOSE] |: Message from 955781788743454721 to BOT : Cancel
+[2/4 15:24:58] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 15:24:58] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:24:59] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+[2/4 15:25:32] | [VERBOSE] |: Message from 955781788743454721 to BOT : start adminb
+[2/4 15:25:32] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:25:35] | [VERBOSE] |: Message from 955781788743454721 to BOT : start admin
+[2/4 15:25:35] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:25:35] | [VERBOSE] |: Sending admin menu...
+[2/4 15:25:35] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:25:36] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey, admin ! What do you want to do ? 🤔
+[2/4 15:25:41] | [VERBOSE] |: Message from 955781788743454721 to BOT : ℹ️ Get #LNQuiz Rewards info
+[2/4 15:25:41] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:25:44] | [VERBOSE] |: Message from BOT to 955781788743454721 : Current #LNQuiz Rewards :
+
+🏁 200 sats
+✍️ 300 sats 
+🎲 200 sats
+[2/4 15:28:9] | [VERBOSE] |: Message from 955781788743454721 to BOT : Cancel
+[2/4 15:28:9] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 15:28:9] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:28:11] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+[2/4 15:28:17] | [VERBOSE] |: Message from 955781788743454721 to BOT : start admin
+[2/4 15:28:17] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:28:17] | [VERBOSE] |: Sending admin menu...
+[2/4 15:28:17] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:28:18] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey, admin ! What do you want to do ? 🤔
+[2/4 15:28:30] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🔄 Update #LNQuiz Rewards
+[2/4 15:28:30] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:28:30] | [VERBOSE] |: Updating status of 955781788743454721
+[2/4 15:28:30] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:28:30] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 15:28:31] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send the new rewards ammounts in the following order : question-writing-random, separated with a space and in sats (e.g. "150 300 150").
+[2/4 15:28:48] | [VERBOSE] |: Message from 955781788743454721 to BOT : 150 300 150
+[2/4 15:28:48] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85e87e1417407db8a2b476","user_id":"955781788743454721","status":"updating_rewards"}]
+[2/4 15:28:48] | [VERBOSE] |: Found status for 955781788743454721 : updating_rewards
+[2/4 15:28:48] | [VERBOSE] |: Trying to update rewards : 
+[2/4 15:28:48] | [VERBOSE] |: { "question": 150, "writing": 300, "random": 150 }
+[2/4 15:28:48] | [VERBOSE] |: {"question":150,"writing":300,"random":150}
+[2/4 15:28:48] | [DEBUG] |: lnquiz.js@updateRewards : Rewards updated at /home/louneskmt/cryptodidacte-bot/src/../data/rewards.json
+[2/4 15:28:48] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 15:28:48] | [VERBOSE] |: Message from BOT to 955781788743454721 : ✅ Updated!
+[2/4 15:28:49] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+[2/4 15:28:50] | [VERBOSE] |: Message from BOT to 955781788743454721 : Current #LNQuiz Rewards :
+
+🏁 150 sats
+✍️ 300 sats 
+🎲 150 sats
+[2/4 15:32:24] | [VERBOSE] |: Message from 955781788743454721 to BOT : updating_rewards
+[2/4 15:32:24] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85e87e1417407db8a2b476","user_id":"955781788743454721","status":"updating_rewards"}]
+[2/4 15:32:24] | [VERBOSE] |: Found status for 955781788743454721 : updating_rewards
+[2/4 15:32:25] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 15:32:57] | [VERBOSE] |: Message from 955781788743454721 to BOT : pourquoi ?
+[2/4 15:32:57] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85e87e1417407db8a2b476","user_id":"955781788743454721","status":"updating_rewards"}]
+[2/4 15:32:57] | [VERBOSE] |: Found status for 955781788743454721 : updating_rewards
+[2/4 15:33:0] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 15:33:36] | [VERBOSE] |: Message from 955781788743454721 to BOT : cancel
+[2/4 15:33:36] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 15:33:36] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85e87e1417407db8a2b476","user_id":"955781788743454721","status":"updating_rewards"}]
+[2/4 15:33:36] | [VERBOSE] |: Found status for 955781788743454721 : updating_rewards
+[2/4 15:33:36] | [VERBOSE] |: Removed 1 documents from status
+[2/4 15:33:38] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+[2/4 15:33:39] | [VERBOSE] |: Message from 955781788743454721 to BOT : Cancel
+[2/4 15:33:39] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 15:33:39] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:33:55] | [VERBOSE] |: Message from 955781788743454721 to BOT : cancel
+[2/4 15:33:55] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 15:33:55] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:33:56] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+[2/4 15:35:46] | [VERBOSE] |: Message from 955781788743454721 to BOT : Cancel
+[2/4 15:35:46] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 15:35:46] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:35:48] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+[2/4 15:35:49] | [VERBOSE] |: Message from 955781788743454721 to BOT : cancel
+[2/4 15:35:49] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 15:35:49] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:35:51] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+[2/4 15:41:11] | [VERBOSE] |: Message from 955781788743454721 to BOT : cancel
+[2/4 15:41:12] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 15:41:12] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 15:41:13] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+[2/4 16:47:1] | [VERBOSE] |: Message from 2354598829 to BOT : 🎁 Claim rewards
+[2/4 16:47:1] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:47:1] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:47:1] | [VERBOSE] |: End of action for 2354598829
+[2/4 16:47:1] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:47:2] | [VERBOSE] |: Message from BOT to 2354598829 : You have nothing to claim.
+[2/4 16:47:2] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:47:3] | [VERBOSE] |: Message from BOT to 2354598829 : End of action 🙃
+[2/4 16:47:3] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:47:8] | [VERBOSE] |: Message from 2354598829 to BOT : Start
+[2/4 16:47:8] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:47:8] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:47:9] | [VERBOSE] |: Message from BOT to 2354598829 : 👋 Hey ! What do you want to do ?
+[2/4 16:47:9] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:47:13] | [VERBOSE] |: Message from 2354598829 to BOT : 🎁 Claim rewards
+[2/4 16:47:13] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:47:13] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:47:13] | [VERBOSE] |: End of action for 2354598829
+[2/4 16:47:13] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:47:14] | [VERBOSE] |: Message from BOT to 2354598829 : You have nothing to claim.
+[2/4 16:47:14] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:47:17] | [VERBOSE] |: Message from BOT to 2354598829 : End of action 🙃
+[2/4 16:47:17] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:48:9] | [VERBOSE] |: Message from 2354598829 to BOT : Start
+[2/4 16:48:9] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:48:9] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:48:10] | [VERBOSE] |: Message from BOT to 2354598829 : 👋 Hey ! What do you want to do ?
+[2/4 16:48:10] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:48:31] | [VERBOSE] |: Message from 2354598829 to BOT : 💸 Tip Cryptodidacte
+[2/4 16:48:31] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:48:31] | [VERBOSE] |: events.js@generateInvoice : Generating an invoice (tip) 
+[2/4 16:48:31] | [VERBOSE] |: Updating status of 2354598829
+[2/4 16:48:31] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:48:31] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 16:48:32] | [VERBOSE] |: Message from BOT to 2354598829 : Thank you for choosing to tip Cryptodidacte
+[2/4 16:48:32] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85fb3f1417407db8a2b477","user_id":"2354598829","status":"generating_invoice"}]
+[2/4 16:48:32] | [VERBOSE] |: Found status for 2354598829 : generating_invoice
+[2/4 16:48:32] | [VERBOSE] |: End of action for undefined
+[2/4 16:48:33] | [ERROR] |: Error: event.message_create.target.recipient_id: field is required
+[2/4 16:48:34] | [VERBOSE] |: Message from BOT to 2354598829 : Generating invoice...
+[2/4 16:48:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85fb3f1417407db8a2b477","user_id":"2354598829","status":"generating_invoice"}]
+[2/4 16:48:34] | [VERBOSE] |: Found status for 2354598829 : generating_invoice
+[2/4 16:48:34] | [VERBOSE] |: End of action for undefined
+[2/4 16:48:34] | [VERBOSE] |: Message from BOT to 2354598829 : Nothing here yet.
+[2/4 16:48:34] | [VERBOSE] |: Message from BOT to 2354598829 : Nothing here yet.
+[2/4 16:48:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85fb3f1417407db8a2b477","user_id":"2354598829","status":"generating_invoice"}]
+[2/4 16:48:34] | [VERBOSE] |: Found status for 2354598829 : generating_invoice
+[2/4 16:48:34] | [VERBOSE] |: End of action for undefined
+[2/4 16:48:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85fb3f1417407db8a2b477","user_id":"2354598829","status":"generating_invoice"}]
+[2/4 16:48:34] | [VERBOSE] |: Found status for 2354598829 : generating_invoice
+[2/4 16:48:34] | [VERBOSE] |: End of action for undefined
+[2/4 16:48:35] | [ERROR] |: Error: event.message_create.target.recipient_id: field is required
+[2/4 16:48:35] | [ERROR] |: Error: event.message_create.target.recipient_id: field is required
+[2/4 16:48:35] | [ERROR] |: Error: event.message_create.target.recipient_id: field is required
+[2/4 16:48:37] | [VERBOSE] |: Message from BOT to 2354598829 : Nothing here yet.
+[2/4 16:48:37] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85fb3f1417407db8a2b477","user_id":"2354598829","status":"generating_invoice"}]
+[2/4 16:48:37] | [VERBOSE] |: Found status for 2354598829 : generating_invoice
+[2/4 16:48:37] | [VERBOSE] |: End of action for undefined
+[2/4 16:48:37] | [VERBOSE] |: Message from BOT to 2354598829 : Nothing here yet.
+[2/4 16:48:37] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85fb3f1417407db8a2b477","user_id":"2354598829","status":"generating_invoice"}]
+[2/4 16:48:37] | [VERBOSE] |: Found status for 2354598829 : generating_invoice
+[2/4 16:48:37] | [VERBOSE] |: End of action for undefined
+[2/4 16:48:37] | [ERROR] |: events.js@generateInvoice : Could not generate invoice, got following
+[2/4 16:48:37] | [ERROR] |: Error: SOCKS connection failed. General SOCKS server failure.
+[2/4 16:48:37] | [VERBOSE] |: End of action for 2354598829
+[2/4 16:48:37] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85fb3f1417407db8a2b477","user_id":"2354598829","status":"generating_invoice"}]
+[2/4 16:48:37] | [VERBOSE] |: Found status for 2354598829 : generating_invoice
+[2/4 16:48:37] | [VERBOSE] |: Removed 1 documents from status
+[2/4 16:48:37] | [VERBOSE] |: Message from BOT to 2354598829 : Nothing here yet.
+[2/4 16:48:37] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:48:37] | [VERBOSE] |: Message from BOT to 2354598829 : Nothing here yet.
+[2/4 16:48:37] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 16:48:38] | [ERROR] |: Error: event.message_create.target.recipient_id: field is required
+[2/4 16:48:38] | [ERROR] |: Error: event.message_create.target.recipient_id: field is required
+[2/4 16:48:39] | [VERBOSE] |: Message from BOT to 2354598829 : End of action 🙃
+[2/4 16:48:39] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:37:22] | [VERBOSE] |: Message from 955781788743454721 to BOT : Start admin
+[2/4 17:37:22] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:37:22] | [VERBOSE] |: Sending admin menu...
+[2/4 17:37:22] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:37:24] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey, admin ! What do you want to do ? 🤔
+[2/4 17:37:26] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🏅 Add new #LNQuiz winners
+[2/4 17:37:26] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:37:26] | [VERBOSE] |: Updating status of 955781788743454721
+[2/4 17:37:26] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:37:26] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 17:37:28] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send the new winners in the following order : question-writing-random.
+[2/4 17:38:24] | [VERBOSE] |: Message from 955781788743454721 to BOT : forteremi forteremi forteremi
+[2/4 17:38:24] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8606b61417407db8a2b478","user_id":"955781788743454721","status":"adding_winners"}]
+[2/4 17:38:24] | [VERBOSE] |: Found status for 955781788743454721 : adding_winners
+[2/4 17:38:25] | [VERBOSE] |: Message from BOT to 955781788743454721 : You didn't enter three winners.
+[2/4 17:38:28] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 17:38:42] | [VERBOSE] |: Message from 955781788743454721 to BOT : forteremi-forteremi-forteremi
+[2/4 17:38:42] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8606b61417407db8a2b478","user_id":"955781788743454721","status":"adding_winners"}]
+[2/4 17:38:42] | [VERBOSE] |: Found status for 955781788743454721 : adding_winners
+[2/4 17:38:45] | [VERBOSE] |: Message from BOT to 955781788743454721 : You didn't enter three winners.
+[2/4 17:38:46] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 17:39:0] | [VERBOSE] |: Message from 955781788743454721 to BOT : @forteremi-@forteremi-@forteremi
+[2/4 17:39:0] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8606b61417407db8a2b478","user_id":"955781788743454721","status":"adding_winners"}]
+[2/4 17:39:0] | [VERBOSE] |: Found status for 955781788743454721 : adding_winners
+[2/4 17:39:0] | [VERBOSE] |: Inserted 3 document(s) into rewards
+[2/4 17:39:0] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 17:39:2] | [VERBOSE] |: Message from BOT to 955781788743454721 : ✅ You successfully added this three winners : 
+
+🏁 @forteremi
+✍️ @forteremi
+🎲 @forteremi
+
+
+------------------------ 2/4 17:41:1 ------------------------
+[2/4 17:41:1] | [VERBOSE] |: Logger has started
+[2/4 17:41:2] | [DEBUG] |: Connected successfully to server
+[2/4 17:41:13] | [VERBOSE] |: Message from 955781788743454721 to BOT : Cancel
+[2/4 17:41:13] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 17:41:13] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8606b61417407db8a2b478","user_id":"955781788743454721","status":"adding_winners"}]
+[2/4 17:41:13] | [VERBOSE] |: Found status for 955781788743454721 : adding_winners
+[2/4 17:41:13] | [VERBOSE] |: Removed 1 documents from status
+[2/4 17:41:16] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+[2/4 17:41:19] | [VERBOSE] |: Message from 986994912565620736 to BOT : Cancel
+[2/4 17:41:19] | [VERBOSE] |: End of action for 986994912565620736
+[2/4 17:41:19] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e85e75e1417407db8a2b475","user_id":"986994912565620736","status":"claim_rewards_4700_sats"}]
+[2/4 17:41:19] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_4700_sats
+[2/4 17:41:19] | [VERBOSE] |: Removed 1 documents from status
+[2/4 17:41:20] | [VERBOSE] |: Message from BOT to 986994912565620736 : End of action 🙃
+[2/4 17:41:42] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start admin
+[2/4 17:41:42] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:41:42] | [VERBOSE] |: Sending admin menu...
+[2/4 17:41:42] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:41:43] | [VERBOSE] |: Message from BOT to 986994912565620736 : 👋 Hey, admin ! What do you want to do ? 🤔
+[2/4 17:41:47] | [VERBOSE] |: Message from 986994912565620736 to BOT : ℹ️ Get #LNQuiz Rewards info
+[2/4 17:41:47] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:41:47] | [VERBOSE] |: Message from BOT to 986994912565620736 : Current #LNQuiz Rewards :
+
+🏁 150 sats
+✍️ 300 sats 
+🎲 150 sats
+[2/4 17:41:53] | [VERBOSE] |: Message from 2354598829 to BOT : Start
+[2/4 17:41:53] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:41:53] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:41:54] | [VERBOSE] |: Message from BOT to 2354598829 : 👋 Hey ! What do you want to do ?
+[2/4 17:41:54] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:41:57] | [VERBOSE] |: Message from 2354598829 to BOT : 🎁 Claim rewards
+[2/4 17:41:57] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:41:57] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8607141417407db8a2b479","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8607141417407db8a2b47a","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e8607141417407db8a2b47b","user_id":"2354598829","username":"forteremi","reward":150}]
+[2/4 17:41:57] | [VERBOSE] |: Updating status of 2354598829
+[2/4 17:41:57] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:41:57] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 17:41:57] | [VERBOSE] |: Message from BOT to 2354598829 : Please, send an invoice for 600 sats.
+[2/4 17:41:57] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8607c59a97c210da0efac3","user_id":"2354598829","status":"claim_rewards_600_sats"}]
+[2/4 17:41:57] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_600_sats
+[2/4 17:41:59] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 17:41:59] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8607c59a97c210da0efac3","user_id":"2354598829","status":"claim_rewards_600_sats"}]
+[2/4 17:41:59] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_600_sats
+[2/4 17:42:1] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 17:42:1] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8607c59a97c210da0efac3","user_id":"2354598829","status":"claim_rewards_600_sats"}]
+[2/4 17:42:1] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_600_sats
+[2/4 17:42:2] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 17:42:2] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8607c59a97c210da0efac3","user_id":"2354598829","status":"claim_rewards_600_sats"}]
+[2/4 17:42:2] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_600_sats
+[2/4 17:42:4] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 17:42:4] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8607c59a97c210da0efac3","user_id":"2354598829","status":"claim_rewards_600_sats"}]
+[2/4 17:42:4] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_600_sats
+[2/4 17:42:7] | [VERBOSE] |: Message from 2354598829 to BOT : cancel
+[2/4 17:42:7] | [VERBOSE] |: End of action for 2354598829
+[2/4 17:42:7] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8607c59a97c210da0efac3","user_id":"2354598829","status":"claim_rewards_600_sats"}]
+[2/4 17:42:7] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_600_sats
+[2/4 17:42:7] | [VERBOSE] |: Removed 1 documents from status
+[2/4 17:42:8] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 17:42:8] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:42:9] | [VERBOSE] |: Message from BOT to 2354598829 : End of action 🙃
+[2/4 17:42:9] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:43:25] | [VERBOSE] |: Message from 955781788743454721 to BOT : Start admin
+[2/4 17:43:25] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:43:25] | [VERBOSE] |: Sending admin menu...
+[2/4 17:43:25] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:43:26] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey, admin ! What do you want to do ? 🤔
+[2/4 17:43:29] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🏅 Add new #LNQuiz winners
+[2/4 17:43:29] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:43:29] | [VERBOSE] |: Updating status of 955781788743454721
+[2/4 17:43:29] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:43:29] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 17:43:30] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send the new winners in the following order : question-writing-random.
+[2/4 17:43:42] | [VERBOSE] |: Message from 955781788743454721 to BOT : @forteremi-@forteremi-@forteremi
+[2/4 17:43:42] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8608219a97c210da0efac4","user_id":"955781788743454721","status":"adding_winners"}]
+[2/4 17:43:42] | [VERBOSE] |: Found status for 955781788743454721 : adding_winners
+[2/4 17:43:42] | [VERBOSE] |: Inserted 3 document(s) into rewards
+[2/4 17:43:42] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 17:43:42] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8608219a97c210da0efac4","user_id":"955781788743454721","status":"adding_winners"}]
+[2/4 17:43:42] | [VERBOSE] |: Found status for 955781788743454721 : adding_winners
+[2/4 17:43:42] | [VERBOSE] |: Removed 1 documents from status
+[2/4 17:43:45] | [VERBOSE] |: Message from BOT to 955781788743454721 : ✅ You successfully added this three winners : 
+
+🏁 @forteremi
+✍️ @forteremi
+🎲 @forteremi
+
+
+------------------------ 2/4 17:49:18 ------------------------
+[2/4 17:49:18] | [VERBOSE] |: Logger has started
+[2/4 17:49:19] | [DEBUG] |: Connected successfully to server
+[2/4 17:49:43] | [VERBOSE] |: Message from 955781788743454721 to BOT : Start admin
+[2/4 17:49:43] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:49:43] | [VERBOSE] |: Sending admin menu...
+[2/4 17:49:43] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:49:43] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey, admin ! What do you want to do ? 🤔
+[2/4 17:49:53] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🏅 Add new #LNQuiz winners
+[2/4 17:49:53] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:49:53] | [VERBOSE] |: Updating status of 955781788743454721
+[2/4 17:49:53] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 17:49:53] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 17:49:53] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send the new winners in the following order : question-writing-random.
+[2/4 17:50:15] | [VERBOSE] |: Message from 955781788743454721 to BOT : @forteremi-@forteremi-@forteremi
+[2/4 17:50:15] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8609a1d934e211e5f33d33","user_id":"955781788743454721","status":"adding_winners"}]
+[2/4 17:50:15] | [VERBOSE] |: Found status for 955781788743454721 : adding_winners
+[2/4 17:50:15] | [VERBOSE] |: Inserted 3 document(s) into rewards
+[2/4 17:50:15] | [VERBOSE] |: TEST_FLO : Valeur resetStatus true
+[2/4 17:50:15] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 17:50:15] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8609a1d934e211e5f33d33","user_id":"955781788743454721","status":"adding_winners"}]
+[2/4 17:50:15] | [VERBOSE] |: Found status for 955781788743454721 : adding_winners
+[2/4 17:50:15] | [VERBOSE] |: Removed 1 documents from status
+[2/4 17:50:16] | [VERBOSE] |: Message from BOT to 955781788743454721 : ✅ You successfully added this three winners : 
+
+🏁 @forteremi
+✍️ @forteremi
+🎲 @forteremi
+[2/4 18:5:16] | [VERBOSE] |: Message from 955781788743454721 to BOT : start
+[2/4 18:5:16] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:5:16] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:5:19] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey ! What do you want to do ?
+[2/4 18:5:20] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🎁 Claim rewards
+[2/4 18:5:20] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:5:20] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e710e09b049c25ba484fa5f","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e710e09b049c25ba484fa60","user_id":"955781788743454721","username":"cryptodidacte","reward":300},{"_id":"5e710e09b049c25ba484fa61","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be8","user_id":"955781788743454721","username":"Cryptodidacte","reward":300},{"_id":"5e7fa24a9cb4e77daca98d86","user_id":"955781788743454721","username":"Cryptodidacte","reward":300},{"_id":"5e85c22dd346bd7d0475b9f4","user_id":"955781788743454721","username":"Cryptodidacte","reward":200}]
+[2/4 18:5:20] | [VERBOSE] |: Updating status of 955781788743454721
+[2/4 18:5:20] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:5:20] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 18:5:23] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send an invoice for 1400 sats.
+[2/4 18:7:12] | [VERBOSE] |: Message from 955781788743454721 to BOT : Cancel
+[2/4 18:7:12] | [VERBOSE] |: TEST_FLO : Valeur resetStatus true
+[2/4 18:7:12] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 18:7:12] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860d40d934e211e5f33d37","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:7:12] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:7:12] | [VERBOSE] |: Removed 1 documents from status
+[2/4 18:7:17] | [VERBOSE] |: Message from 955781788743454721 to BOT : start
+[2/4 18:7:17] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:7:17] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:7:18] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey ! What do you want to do ?
+[2/4 18:7:20] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🎁 Claim rewards
+[2/4 18:7:20] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:7:20] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e710e09b049c25ba484fa5f","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e710e09b049c25ba484fa60","user_id":"955781788743454721","username":"cryptodidacte","reward":300},{"_id":"5e710e09b049c25ba484fa61","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be8","user_id":"955781788743454721","username":"Cryptodidacte","reward":300},{"_id":"5e7fa24a9cb4e77daca98d86","user_id":"955781788743454721","username":"Cryptodidacte","reward":300},{"_id":"5e85c22dd346bd7d0475b9f4","user_id":"955781788743454721","username":"Cryptodidacte","reward":200}]
+[2/4 18:7:20] | [VERBOSE] |: Updating status of 955781788743454721
+[2/4 18:7:20] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:7:20] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 18:7:21] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send an invoice for 1400 sats.
+[2/4 18:8:12] | [VERBOSE] |: Message from 955781788743454721 to BOT : .
+[2/4 18:8:13] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:13] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:16] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:8:22] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:22] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:22] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:23] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:23] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:23] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:23] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:23] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:23] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:23] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:23] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:23] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:24] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:8:25] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:8:25] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:8:25] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:25] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:25] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:26] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:8:27] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:8:27] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:27] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:27] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:27] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:27] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:27] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:27] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:27] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:27] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:28] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:28] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:28] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:28] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:28] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:28] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:28] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:28] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:28] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:28] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:28] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:28] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:29] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:8:29] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:8:29] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:29] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:29] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:29] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:8:29] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:8:30] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:8:30] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:8:30] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:8:30] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:8:30] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:8:31] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+
+
+------------------------ 2/4 18:11:45 ------------------------
+[2/4 18:11:45] | [VERBOSE] |: Logger has started
+[2/4 18:11:46] | [DEBUG] |: Connected successfully to server
+[2/4 18:19:14] | [VERBOSE] |: Message from 955781788743454721 to BOT : start
+[2/4 18:19:14] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:19:14] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:19:14] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e860db8d934e211e5f33d38","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:19:14] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:19:14] | [VERBOSE] |: Removed 1 documents from status
+[2/4 18:19:14] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey ! What do you want to do ?
+[2/4 18:19:17] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🎁 Claim rewards
+[2/4 18:19:17] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:19:17] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e710e09b049c25ba484fa5f","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e710e09b049c25ba484fa60","user_id":"955781788743454721","username":"cryptodidacte","reward":300},{"_id":"5e710e09b049c25ba484fa61","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be8","user_id":"955781788743454721","username":"Cryptodidacte","reward":300},{"_id":"5e7fa24a9cb4e77daca98d86","user_id":"955781788743454721","username":"Cryptodidacte","reward":300},{"_id":"5e85c22dd346bd7d0475b9f4","user_id":"955781788743454721","username":"Cryptodidacte","reward":200}]
+[2/4 18:19:17] | [VERBOSE] |: Updating status of 955781788743454721
+[2/4 18:19:17] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:19:17] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 18:19:18] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send an invoice for 1400 sats.
+[2/4 18:19:22] | [VERBOSE] |: Message from 955781788743454721 to BOT : e
+[2/4 18:19:22] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861085af9a7313303bccba","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:19:22] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:19:22] | [VERBOSE] |: eventTest for Remi Forte : e
+[2/4 18:19:24] | [VERBOSE] |: Message from BOT to 955781788743454721 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:19:28] | [VERBOSE] |: Message from 955781788743454721 to BOT : ln
+[2/4 18:19:28] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861085af9a7313303bccba","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:19:28] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:19:28] | [VERBOSE] |: eventTest for Remi Forte : ln
+[2/4 18:19:30] | [ERROR] |: events.js@claimRewards:lightning.getInvoiceData : Couldn't get invoice data, got following error : 
+[2/4 18:19:30] | [ERROR] |: Error: SOCKS connection failed. General SOCKS server failure.
+[2/4 18:19:30] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 18:19:30] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861085af9a7313303bccba","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[2/4 18:19:30] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[2/4 18:19:30] | [VERBOSE] |: Removed 1 documents from status
+[2/4 18:19:31] | [VERBOSE] |: Message from BOT to 955781788743454721 : Could not get invoice data
+[2/4 18:19:32] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+[2/4 18:29:50] | [VERBOSE] |: Message from 955781788743454721 to BOT : Start admin
+[2/4 18:29:50] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:29:50] | [VERBOSE] |: Sending admin menu...
+[2/4 18:29:50] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:29:51] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey, admin ! What do you want to do ? 🤔
+[2/4 18:29:59] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🏅 Add new #LNQuiz winners
+[2/4 18:29:59] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:29:59] | [VERBOSE] |: Updating status of 955781788743454721
+[2/4 18:29:59] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:29:59] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 18:29:59] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send the new winners in the following order : question-writing-random.
+[2/4 18:30:11] | [VERBOSE] |: Message from 955781788743454721 to BOT : @danstonbloc-@danstonbloc-@danstonbloc
+[2/4 18:30:11] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861307af9a7313303bccbb","user_id":"955781788743454721","status":"adding_winners"}]
+[2/4 18:30:11] | [VERBOSE] |: Found status for 955781788743454721 : adding_winners
+[2/4 18:30:11] | [VERBOSE] |: Inserted 3 document(s) into rewards
+[2/4 18:30:11] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 18:30:11] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861307af9a7313303bccbb","user_id":"955781788743454721","status":"adding_winners"}]
+[2/4 18:30:11] | [VERBOSE] |: Found status for 955781788743454721 : adding_winners
+[2/4 18:30:11] | [VERBOSE] |: Removed 1 documents from status
+[2/4 18:30:11] | [VERBOSE] |: Message from BOT to 955781788743454721 : ✅ You successfully added this three winners : 
+
+🏁 @danstonbloc
+✍️ @danstonbloc
+🎲 @danstonbloc
+[2/4 18:30:59] | [VERBOSE] |: Message from 1189861943135363080 to BOT : Start
+[2/4 18:30:59] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:30:59] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:30:59] | [VERBOSE] |: Message from BOT to 1189861943135363080 : 👋 Hey ! What do you want to do ?
+[2/4 18:31:3] | [VERBOSE] |: Message from 1189861943135363080 to BOT : 🎁 Claim rewards
+[2/4 18:31:3] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:31:3] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861313af9a7313303bccbc","user_id":"1189861943135363080","username":"danstonbloc","reward":150},{"_id":"5e861313af9a7313303bccbd","user_id":"1189861943135363080","username":"danstonbloc","reward":300},{"_id":"5e861313af9a7313303bccbe","user_id":"1189861943135363080","username":"danstonbloc","reward":150}]
+[2/4 18:31:3] | [VERBOSE] |: Updating status of 1189861943135363080
+[2/4 18:31:3] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:31:3] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 18:31:3] | [VERBOSE] |: Message from BOT to 1189861943135363080 : Please, send an invoice for 600 sats.
+[2/4 18:31:13] | [VERBOSE] |: Message from 1189861943135363080 to BOT : Cancel
+[2/4 18:31:13] | [VERBOSE] |: End of action for 1189861943135363080
+[2/4 18:31:13] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861347af9a7313303bccbf","user_id":"1189861943135363080","status":"claim_rewards_600_sats"}]
+[2/4 18:31:13] | [VERBOSE] |: Found status for 1189861943135363080 : claim_rewards_600_sats
+[2/4 18:31:13] | [VERBOSE] |: Removed 1 documents from status
+[2/4 18:31:15] | [VERBOSE] |: Message from BOT to 1189861943135363080 : End of action 🙃
+[2/4 18:37:2] | [VERBOSE] |: Message from 2354598829 to BOT : Start
+[2/4 18:37:2] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:37:2] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:37:2] | [VERBOSE] |: Message from BOT to 2354598829 : 👋 Hey ! What do you want to do ?
+[2/4 18:37:3] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:37:6] | [VERBOSE] |: Message from 2354598829 to BOT : 🎁 Claim rewards
+[2/4 18:37:6] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:37:6] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8607141417407db8a2b479","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8607141417407db8a2b47a","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e8607141417407db8a2b47b","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e86082e9a97c210da0efac5","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e86082e9a97c210da0efac6","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e86082e9a97c210da0efac7","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8609b7d934e211e5f33d34","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8609b7d934e211e5f33d35","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e8609b7d934e211e5f33d36","user_id":"2354598829","username":"forteremi","reward":150}]
+[2/4 18:37:6] | [VERBOSE] |: Updating status of 2354598829
+[2/4 18:37:6] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:37:6] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 18:37:7] | [VERBOSE] |: Message from BOT to 2354598829 : Please, send an invoice for 1800 sats.
+[2/4 18:37:7] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8614b2af9a7313303bccc0","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:37:7] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:37:7] | [VERBOSE] |: eventTest for Remi Forte : please, send an invoice for 1800 sats.
+[2/4 18:37:8] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:37:8] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8614b2af9a7313303bccc0","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:37:8] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:37:8] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:37:10] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:37:10] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8614b2af9a7313303bccc0","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:37:10] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:37:10] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:37:11] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:37:11] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8614b2af9a7313303bccc0","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:37:11] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:37:11] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:37:13] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:37:13] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8614b2af9a7313303bccc0","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:37:13] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:37:13] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:37:14] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:37:14] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8614b2af9a7313303bccc0","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:37:14] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:37:14] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:37:15] | [VERBOSE] |: Message from 2354598829 to BOT : cancel
+[2/4 18:37:15] | [VERBOSE] |: End of action for 2354598829
+[2/4 18:37:15] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8614b2af9a7313303bccc0","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:37:15] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:37:15] | [VERBOSE] |: Removed 1 documents from status
+[2/4 18:37:16] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:37:16] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:37:16] | [VERBOSE] |: Message from BOT to 2354598829 : End of action 🙃
+[2/4 18:37:16] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:42:32] | [VERBOSE] |: Message from 955781788743454721 to BOT : Start admin
+[2/4 18:42:32] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:42:32] | [VERBOSE] |: Sending admin menu...
+[2/4 18:42:32] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:42:33] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey, admin ! What do you want to do ? 🤔
+[2/4 18:42:38] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🏅 Add new #LNQuiz winners
+[2/4 18:42:38] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:42:38] | [VERBOSE] |: Updating status of 955781788743454721
+[2/4 18:42:38] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:42:38] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 18:42:39] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send the new winners in the following order : question-writing-random.
+[2/4 18:42:45] | [VERBOSE] |: Message from 955781788743454721 to BOT : @LesOceans-@LesOceans-@LesOceans
+[2/4 18:42:45] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8615feaf9a7313303bccc1","user_id":"955781788743454721","status":"adding_winners"}]
+[2/4 18:42:45] | [VERBOSE] |: Found status for 955781788743454721 : adding_winners
+[2/4 18:42:45] | [VERBOSE] |: Inserted 3 document(s) into rewards
+[2/4 18:42:45] | [VERBOSE] |: End of action for 955781788743454721
+[2/4 18:42:45] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8615feaf9a7313303bccc1","user_id":"955781788743454721","status":"adding_winners"}]
+[2/4 18:42:45] | [VERBOSE] |: Found status for 955781788743454721 : adding_winners
+[2/4 18:42:45] | [VERBOSE] |: Removed 1 documents from status
+[2/4 18:42:46] | [VERBOSE] |: Message from BOT to 955781788743454721 : ✅ You successfully added this three winners : 
+
+🏁 @LesOceans
+✍️ @LesOceans
+🎲 @LesOceans
+[2/4 18:43:41] | [VERBOSE] |: Message from 957196137215217665 to BOT : Start
+[2/4 18:43:41] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:43:41] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:43:42] | [VERBOSE] |: Message from BOT to 957196137215217665 : 👋 Hey ! What do you want to do ?
+[2/4 18:43:44] | [VERBOSE] |: Message from 957196137215217665 to BOT : 🎁 Claim rewards
+[2/4 18:43:44] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:43:44] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861605af9a7313303bccc2","user_id":"957196137215217665","username":"LesOceans","reward":150},{"_id":"5e861605af9a7313303bccc3","user_id":"957196137215217665","username":"LesOceans","reward":300},{"_id":"5e861605af9a7313303bccc4","user_id":"957196137215217665","username":"LesOceans","reward":150}]
+[2/4 18:43:44] | [VERBOSE] |: Updating status of 957196137215217665
+[2/4 18:43:44] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:43:44] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 18:43:45] | [VERBOSE] |: Message from BOT to 957196137215217665 : Please, send an invoice for 600 sats.
+[2/4 18:44:4] | [VERBOSE] |: Message from 957196137215217665 to BOT : lnbc6u1p0gv9jdpp559za32cxwr0ec47rfku9p09dt633mz5g4xakwws4w8evk36eay9sdqqxqyz5vqcqzyssp5ckpyjh8ppudxtkx4hkwc9nr6p475pju7qzvnm22elszkxudsfsmsrzjqtny0ymxqsl0d8t4dq5rr9rszzzrktv54mu3xxagaayjs47ng7mxgz2z8gqq99gqqqqqqqqqqqqqqqgqpc9qy9qsq4dl6pzt7thj8s4prkkx0hkwmz2vxp32l8deetca9a7ea6ac2e45hedd9yzm0uql7ntq8pv9vtnzhht48u9slc4q85m0wrjrclwaw2mgph3a0nf
+[2/4 18:44:4] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861640af9a7313303bccc5","user_id":"957196137215217665","status":"claim_rewards_600_sats"}]
+[2/4 18:44:4] | [VERBOSE] |: Found status for 957196137215217665 : claim_rewards_600_sats
+[2/4 18:44:4] | [VERBOSE] |: eventTest for Remi Forte : lnbc6u1p0gv9jdpp559za32cxwr0ec47rfku9p09dt633mz5g4xakwws4w8evk36eay9sdqqxqyz5vqcqzyssp5ckpyjh8ppudxtkx4hkwc9nr6p475pju7qzvnm22elszkxudsfsmsrzjqtny0ymxqsl0d8t4dq5rr9rszzzrktv54mu3xxagaayjs47ng7mxgz2z8gqq99gqqqqqqqqqqqqqqqgqpc9qy9qsq4dl6pzt7thj8s4prkkx0hkwmz2vxp32l8deetca9a7ea6ac2e45hedd9yzm0uql7ntq8pv9vtnzhht48u9slc4q85m0wrjrclwaw2mgph3a0nf
+[2/4 18:44:6] | [ERROR] |: events.js@claimRewards:lightning.getInvoiceData : Couldn't get invoice data, got following error : 
+[2/4 18:44:6] | [ERROR] |: Error: SOCKS connection failed. General SOCKS server failure.
+[2/4 18:44:6] | [VERBOSE] |: End of action for 957196137215217665
+[2/4 18:44:6] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861640af9a7313303bccc5","user_id":"957196137215217665","status":"claim_rewards_600_sats"}]
+[2/4 18:44:6] | [VERBOSE] |: Found status for 957196137215217665 : claim_rewards_600_sats
+[2/4 18:44:6] | [VERBOSE] |: Removed 1 documents from status
+[2/4 18:44:7] | [VERBOSE] |: Message from BOT to 957196137215217665 : Could not get invoice data
+[2/4 18:44:8] | [VERBOSE] |: Message from BOT to 957196137215217665 : End of action 🙃
+
+
+------------------------ 2/4 18:45:0 ------------------------
+[2/4 18:45:0] | [VERBOSE] |: Logger has started
+[2/4 18:45:1] | [DEBUG] |: Connected successfully to server
+[2/4 18:46:47] | [VERBOSE] |: Message from 2354598829 to BOT : Start
+[2/4 18:46:47] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:46:47] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:46:47] | [VERBOSE] |: Message from BOT to 2354598829 : 👋 Hey ! What do you want to do ?
+[2/4 18:46:47] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:46:50] | [VERBOSE] |: Message from 2354598829 to BOT : 🎁 Claim rewards
+[2/4 18:46:50] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:46:50] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8607141417407db8a2b479","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8607141417407db8a2b47a","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e8607141417407db8a2b47b","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e86082e9a97c210da0efac5","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e86082e9a97c210da0efac6","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e86082e9a97c210da0efac7","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8609b7d934e211e5f33d34","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8609b7d934e211e5f33d35","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e8609b7d934e211e5f33d36","user_id":"2354598829","username":"forteremi","reward":150}]
+[2/4 18:46:50] | [VERBOSE] |: Updating status of 2354598829
+[2/4 18:46:50] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:46:50] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 18:46:50] | [VERBOSE] |: Message from BOT to 2354598829 : Please, send an invoice for 1800 sats.
+[2/4 18:46:50] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8616fa6f55cb1575e307d9","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:46:50] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:46:50] | [VERBOSE] |: eventTest for Remi Forte : please, send an invoice for 1800 sats.
+[2/4 18:46:52] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:46:52] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8616fa6f55cb1575e307d9","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:46:52] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:46:52] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:46:53] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:46:53] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8616fa6f55cb1575e307d9","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:46:53] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:46:53] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:46:55] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:46:55] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8616fa6f55cb1575e307d9","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:46:55] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:46:55] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:46:56] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:46:56] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8616fa6f55cb1575e307d9","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:46:56] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:46:56] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:46:57] | [VERBOSE] |: Message from 2354598829 to BOT : cancel
+[2/4 18:46:57] | [VERBOSE] |: End of action for 2354598829
+[2/4 18:46:57] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8616fa6f55cb1575e307d9","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:46:57] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:46:57] | [VERBOSE] |: Removed 1 documents from status
+[2/4 18:46:58] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:46:58] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:46:58] | [VERBOSE] |: Message from BOT to 2354598829 : End of action 🙃
+[2/4 18:46:58] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+
+
+------------------------ 2/4 18:56:22 ------------------------
+[2/4 18:56:22] | [VERBOSE] |: Logger has started
+[2/4 18:56:23] | [DEBUG] |: Connected successfully to server
+[2/4 18:56:40] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start
+[2/4 18:56:40] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:56:40] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:56:41] | [VERBOSE] |: Message from BOT to 986994912565620736 : 👋 Hey ! What do you want to do ?
+[2/4 18:56:49] | [VERBOSE] |: Message from 986994912565620736 to BOT : 🎁 Claim rewards
+[2/4 18:56:49] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:56:49] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e7f5e45dbf6a366590e3d65","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f5e45dbf6a366590e3d66","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f5e45dbf6a366590e3d67","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe379","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe37a","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f732c181e1779124fe37b","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3591","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3592","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f740b6be86d7998fd3593","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b5","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b6","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f758a62ad327a2ca580b7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be9","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d85","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d87","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e80688d49d17c2a92d11f3f","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e80688d49d17c2a92d11f40","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e80688d49d17c2a92d11f41","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e85c22dd346bd7d0475b9f5","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e85c2f41417407db8a2b470","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e85c2f41417407db8a2b471","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e85c2f41417407db8a2b472","user_id":"986994912565620736","username":"lounes_kmt","reward":200}]
+[2/4 18:56:49] | [VERBOSE] |: Updating status of 986994912565620736
+[2/4 18:56:49] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:56:49] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 18:56:50] | [VERBOSE] |: Message from BOT to 986994912565620736 : Please, send an invoice for 4700 sats.
+[2/4 18:57:4] | [VERBOSE] |: Message from 986994912565620736 to BOT : cancel
+[2/4 18:57:4] | [VERBOSE] |: End of action for 986994912565620736
+[2/4 18:57:4] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861951dc7b5816755b4cb4","user_id":"986994912565620736","status":"claim_rewards_4700_sats"}]
+[2/4 18:57:4] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_4700_sats
+[2/4 18:57:4] | [VERBOSE] |: Removed 1 documents from status
+[2/4 18:57:5] | [VERBOSE] |: Message from BOT to 986994912565620736 : End of action 🙃
+[2/4 18:57:37] | [VERBOSE] |: Message from 2354598829 to BOT : Start
+[2/4 18:57:37] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:57:37] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:57:37] | [VERBOSE] |: Message from BOT to 2354598829 : 👋 Hey ! What do you want to do ?
+[2/4 18:57:37] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:57:39] | [VERBOSE] |: Message from 2354598829 to BOT : 🎁 Claim rewards
+[2/4 18:57:39] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:57:39] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8607141417407db8a2b479","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8607141417407db8a2b47a","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e8607141417407db8a2b47b","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e86082e9a97c210da0efac5","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e86082e9a97c210da0efac6","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e86082e9a97c210da0efac7","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8609b7d934e211e5f33d34","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8609b7d934e211e5f33d35","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e8609b7d934e211e5f33d36","user_id":"2354598829","username":"forteremi","reward":150}]
+[2/4 18:57:39] | [VERBOSE] |: Updating status of 2354598829
+[2/4 18:57:39] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:57:39] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 18:57:40] | [VERBOSE] |: Message from BOT to 2354598829 : Please, send an invoice for 1800 sats.
+[2/4 18:57:40] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861983dc7b5816755b4cb5","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:57:40] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:57:40] | [VERBOSE] |: eventTest for Remi Forte : please, send an invoice for 1800 sats.
+[2/4 18:57:42] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:57:42] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861983dc7b5816755b4cb5","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:57:42] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:57:42] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:57:43] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:57:43] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861983dc7b5816755b4cb5","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:57:43] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:57:43] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:57:45] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:57:45] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861983dc7b5816755b4cb5","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:57:45] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:57:45] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:57:46] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:57:46] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861983dc7b5816755b4cb5","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:57:46] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:57:46] | [VERBOSE] |: eventTest for Remi Forte : ❌ please try again, or send 'cancel'.
+[2/4 18:57:46] | [VERBOSE] |: Message from 2354598829 to BOT : Cancel
+[2/4 18:57:46] | [VERBOSE] |: End of action for 2354598829
+[2/4 18:57:46] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861983dc7b5816755b4cb5","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 18:57:46] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 18:57:46] | [VERBOSE] |: Removed 1 documents from status
+[2/4 18:57:48] | [VERBOSE] |: Message from BOT to 2354598829 : End of action 🙃
+[2/4 18:57:48] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 18:57:48] | [VERBOSE] |: Message from BOT to 2354598829 : ❌ Please try again, or send 'Cancel'.
+[2/4 18:57:48] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+
+
+------------------------ 2/4 19:7:25 ------------------------
+[2/4 19:7:25] | [VERBOSE] |: Logger has started
+[2/4 19:7:26] | [DEBUG] |: Connected successfully to server
+[2/4 19:7:40] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start
+[2/4 19:7:40] | [VERBOSE] |: {
+  "target": { "recipient_id": "1235621426125774850" },
+  "sender_id": "986994912565620736",
+  "message_data": {
+    "text": "Start",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] }
+  }
+}
+[2/4 19:7:40] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 19:7:40] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 19:7:41] | [VERBOSE] |: Message from BOT to 986994912565620736 : 👋 Hey ! What do you want to do ?
+[2/4 19:7:41] | [VERBOSE] |: {
+  "target": { "recipient_id": "986994912565620736" },
+  "sender_id": "1235621426125774850",
+  "source_app_id": "17535735",
+  "message_data": {
+    "text": "👋 Hey ! What do you want to do ?",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] },
+    "quick_reply": {
+      "type": "options",
+      "options": [
+        {
+          "label": "🎁 Claim rewards",
+          "metadata": "claim_rewards",
+          "description": "Claim #LNQuiz rewards if you won"
+        },
+        {
+          "label": "💸 Tip Cryptodidacte",
+          "metadata": "generate_invoice",
+          "description": "Generate an LN invoice to tip Cryptodidacte"
+        }
+      ]
+    }
+  }
+}
+
+
+------------------------ 2/4 19:12:51 ------------------------
+[2/4 19:12:51] | [VERBOSE] |: Logger has started
+[2/4 19:12:52] | [DEBUG] |: Connected successfully to server
+[2/4 19:13:7] | [VERBOSE] |: Message from 986994912565620736 to BOT : 🎁 Claim rewards
+[2/4 19:13:7] | [VERBOSE] |: {
+  "target": { "recipient_id": "1235621426125774850" },
+  "sender_id": "986994912565620736",
+  "message_data": {
+    "text": "🎁 Claim rewards",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] },
+    "quick_reply_response": { "type": "options", "metadata": "claim_rewards" }
+  }
+}
+[2/4 19:13:8] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 19:13:8] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e7f5e45dbf6a366590e3d65","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f5e45dbf6a366590e3d66","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f5e45dbf6a366590e3d67","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe379","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe37a","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f732c181e1779124fe37b","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3591","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3592","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f740b6be86d7998fd3593","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b5","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b6","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f758a62ad327a2ca580b7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be9","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d85","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d87","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e80688d49d17c2a92d11f3f","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e80688d49d17c2a92d11f40","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e80688d49d17c2a92d11f41","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e85c22dd346bd7d0475b9f5","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e85c2f41417407db8a2b470","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e85c2f41417407db8a2b471","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e85c2f41417407db8a2b472","user_id":"986994912565620736","username":"lounes_kmt","reward":200}]
+[2/4 19:13:8] | [VERBOSE] |: Updating status of 986994912565620736
+[2/4 19:13:8] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 19:13:8] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 19:13:8] | [VERBOSE] |: Message from BOT to 986994912565620736 : Please, send an invoice for 4700 sats.
+[2/4 19:13:8] | [VERBOSE] |: {
+  "target": { "recipient_id": "986994912565620736" },
+  "sender_id": "1235621426125774850",
+  "source_app_id": "17535735",
+  "message_data": {
+    "text": "Please, send an invoice for 4700 sats.",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] }
+  }
+}
+[2/4 19:13:12] | [VERBOSE] |: Message from 986994912565620736 to BOT : Cancel
+[2/4 19:13:12] | [VERBOSE] |: {
+  "target": { "recipient_id": "1235621426125774850" },
+  "sender_id": "986994912565620736",
+  "message_data": {
+    "text": "Cancel",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] }
+  }
+}
+[2/4 19:13:12] | [VERBOSE] |: End of action for 986994912565620736
+[2/4 19:13:12] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861d240e9ca617f19a7fe6","user_id":"986994912565620736","status":"claim_rewards_4700_sats"}]
+[2/4 19:13:12] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_4700_sats
+[2/4 19:13:12] | [VERBOSE] |: Removed 1 documents from status
+[2/4 19:13:14] | [VERBOSE] |: Message from BOT to 986994912565620736 : End of action 🙃
+[2/4 19:13:14] | [VERBOSE] |: {
+  "target": { "recipient_id": "986994912565620736" },
+  "sender_id": "1235621426125774850",
+  "source_app_id": "17535735",
+  "message_data": {
+    "text": "End of action 🙃",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] }
+  }
+}
+[2/4 19:18:57] | [VERBOSE] |: Message from 2354598829 to BOT : Start
+[2/4 19:18:57] | [VERBOSE] |: {
+  "target": { "recipient_id": "1235621426125774850" },
+  "sender_id": "2354598829",
+  "message_data": {
+    "text": "Start",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] }
+  }
+}
+[2/4 19:18:57] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 19:18:57] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 19:18:57] | [VERBOSE] |: Message from BOT to 2354598829 : 👋 Hey ! What do you want to do ?
+[2/4 19:18:58] | [VERBOSE] |: {
+  "target": { "recipient_id": "2354598829" },
+  "sender_id": "1235621426125774850",
+  "source_app_id": "17535735",
+  "message_data": {
+    "text": "👋 Hey ! What do you want to do ?",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] },
+    "quick_reply": {
+      "type": "options",
+      "options": [
+        {
+          "label": "🎁 Claim rewards",
+          "metadata": "claim_rewards",
+          "description": "Claim #LNQuiz rewards if you won"
+        },
+        {
+          "label": "💸 Tip Cryptodidacte",
+          "metadata": "generate_invoice",
+          "description": "Generate an LN invoice to tip Cryptodidacte"
+        }
+      ]
+    }
+  }
+}
+[2/4 19:19:1] | [VERBOSE] |: Message from 2354598829 to BOT : 🎁 Claim rewards
+[2/4 19:19:1] | [VERBOSE] |: {
+  "target": { "recipient_id": "1235621426125774850" },
+  "sender_id": "2354598829",
+  "message_data": {
+    "text": "🎁 Claim rewards",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] },
+    "quick_reply_response": { "type": "options", "metadata": "claim_rewards" }
+  }
+}
+[2/4 19:19:1] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 19:19:1] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8607141417407db8a2b479","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8607141417407db8a2b47a","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e8607141417407db8a2b47b","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e86082e9a97c210da0efac5","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e86082e9a97c210da0efac6","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e86082e9a97c210da0efac7","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8609b7d934e211e5f33d34","user_id":"2354598829","username":"forteremi","reward":150},{"_id":"5e8609b7d934e211e5f33d35","user_id":"2354598829","username":"forteremi","reward":300},{"_id":"5e8609b7d934e211e5f33d36","user_id":"2354598829","username":"forteremi","reward":150}]
+[2/4 19:19:1] | [VERBOSE] |: Updating status of 2354598829
+[2/4 19:19:1] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[2/4 19:19:1] | [VERBOSE] |: Inserted 1 document(s) into status
+[2/4 19:19:2] | [VERBOSE] |: Message from BOT to 2354598829 : Please, send an invoice for 1800 sats.
+[2/4 19:19:2] | [VERBOSE] |: {
+  "target": { "recipient_id": "2354598829" },
+  "sender_id": "1235621426125774850",
+  "source_app_id": "17535735",
+  "message_data": {
+    "text": "Please, send an invoice for 1800 sats.",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] }
+  }
+}
+[2/4 19:19:28] | [VERBOSE] |: Message from 2354598829 to BOT : lnbc18u1p0gv85epp53h3lsw5reknvjyu0ycy6kqm4sdw2sq0xg5pny3jsgwxvfzr9p8dsdqqxqyz5vqcqzyssp5x0wz3p92n02sxphxck9n8j5wjv39l0trpv6ffgahth5n9k88esxqrzjqw7fxd78529m0pxkwapwhmwnp2fm4n0hun9pvsmw7ducqqpy9v39zzxzquqqyygqqyqqqqqqqqqqpjqqrc9qy9qsqmynayrxg739szqacyr80d9yekteqcpyqc6h0l7qpmyfs3899sr6337a6lmjyrzcmq74k70u52gzrncj3y7un4zf2mljh8rrw0a9cqnsp78kydx
+[2/4 19:19:28] | [VERBOSE] |: {
+  "target": { "recipient_id": "1235621426125774850" },
+  "sender_id": "2354598829",
+  "message_data": {
+    "text": "lnbc18u1p0gv85epp53h3lsw5reknvjyu0ycy6kqm4sdw2sq0xg5pny3jsgwxvfzr9p8dsdqqxqyz5vqcqzyssp5x0wz3p92n02sxphxck9n8j5wjv39l0trpv6ffgahth5n9k88esxqrzjqw7fxd78529m0pxkwapwhmwnp2fm4n0hun9pvsmw7ducqqpy9v39zzxzquqqyygqqyqqqqqqqqqqpjqqrc9qy9qsqmynayrxg739szqacyr80d9yekteqcpyqc6h0l7qpmyfs3899sr6337a6lmjyrzcmq74k70u52gzrncj3y7un4zf2mljh8rrw0a9cqnsp78kydx",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] }
+  }
+}
+[2/4 19:19:28] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861e850e9ca617f19a7fe7","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 19:19:28] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 19:19:28] | [VERBOSE] |: eventTest for Remi Forte : lnbc18u1p0gv85epp53h3lsw5reknvjyu0ycy6kqm4sdw2sq0xg5pny3jsgwxvfzr9p8dsdqqxqyz5vqcqzyssp5x0wz3p92n02sxphxck9n8j5wjv39l0trpv6ffgahth5n9k88esxqrzjqw7fxd78529m0pxkwapwhmwnp2fm4n0hun9pvsmw7ducqqpy9v39zzxzquqqyygqqyqqqqqqqqqqpjqqrc9qy9qsqmynayrxg739szqacyr80d9yekteqcpyqc6h0l7qpmyfs3899sr6337a6lmjyrzcmq74k70u52gzrncj3y7un4zf2mljh8rrw0a9cqnsp78kydx
+[2/4 19:19:34] | [ERROR] |: events.js@claimRewards:lightning.getInvoiceData : Couldn't get invoice data, got following error : 
+[2/4 19:19:34] | [ERROR] |: Error: SOCKS connection failed. General SOCKS server failure.
+[2/4 19:19:34] | [VERBOSE] |: End of action for 2354598829
+[2/4 19:19:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e861e850e9ca617f19a7fe7","user_id":"2354598829","status":"claim_rewards_1800_sats"}]
+[2/4 19:19:34] | [VERBOSE] |: Found status for 2354598829 : claim_rewards_1800_sats
+[2/4 19:19:34] | [VERBOSE] |: Removed 1 documents from status
+[2/4 19:19:35] | [VERBOSE] |: Message from BOT to 2354598829 : Could not get invoice data
+[2/4 19:19:35] | [VERBOSE] |: {
+  "target": { "recipient_id": "2354598829" },
+  "sender_id": "1235621426125774850",
+  "source_app_id": "17535735",
+  "message_data": {
+    "text": "Could not get invoice data",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] }
+  }
+}
+[2/4 19:19:36] | [VERBOSE] |: Message from BOT to 2354598829 : End of action 🙃
+[2/4 19:19:36] | [VERBOSE] |: {
+  "target": { "recipient_id": "2354598829" },
+  "sender_id": "1235621426125774850",
+  "source_app_id": "17535735",
+  "message_data": {
+    "text": "End of action 🙃",
+    "entities": { "hashtags": [], "symbols": [], "user_mentions": [], "urls": [] }
+  }
+}
+[2/4 20:1:27] | [IMPORTANT] |: Verification CRC...
+ZGJiMzc2OTAtNzMwNS00YWQ3LTlkNWMtZjAzOGUyZjJiMmU0
+[3/4 20:31:26] | [IMPORTANT] |: Verification CRC...
+ZmRjZGZlOTctN2JlOC00NTRkLTlmM2UtYjJhNjNjNWVmMjIz
+[4/4 21:1:23] | [IMPORTANT] |: Verification CRC...
+OWUyNzFjZjEtY2IzMS00NDZkLWEwZjQtMjAzNjc2NGZjZmI0
+
+
+------------------------ 5/4 7:29:42 ------------------------
+[5/4 7:29:42] | [VERBOSE] |: Logger has started
+[5/4 7:29:43] | [DEBUG] |: Connected successfully to server
+[5/4 7:33:55] | [VERBOSE] |: Message from 986994912565620736 to BOT : Stuart
+[5/4 7:33:55] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[5/4 7:33:57] | [VERBOSE] |: Message from 986994912565620736 to BOT : Start
+[5/4 7:33:57] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[5/4 7:33:57] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[5/4 7:33:58] | [VERBOSE] |: Message from BOT to 986994912565620736 : 👋 Hey ! What do you want to do ?
+[5/4 7:34:0] | [VERBOSE] |: Message from 986994912565620736 to BOT : 🎁 Claim rewards
+[5/4 7:34:0] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[5/4 7:34:0] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e7f5e45dbf6a366590e3d65","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f5e45dbf6a366590e3d66","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f5e45dbf6a366590e3d67","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe379","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f732c181e1779124fe37a","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f732c181e1779124fe37b","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3591","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f740b6be86d7998fd3592","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f740b6be86d7998fd3593","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b5","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f758a62ad327a2ca580b6","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e7f758a62ad327a2ca580b7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be7","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be9","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d85","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e7fa24a9cb4e77daca98d87","user_id":"986994912565620736","username":"lounes_kmt","reward":150},{"_id":"5e80688d49d17c2a92d11f3f","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e80688d49d17c2a92d11f40","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e80688d49d17c2a92d11f41","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e85c22dd346bd7d0475b9f5","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e85c2f41417407db8a2b470","user_id":"986994912565620736","username":"lounes_kmt","reward":200},{"_id":"5e85c2f41417407db8a2b471","user_id":"986994912565620736","username":"lounes_kmt","reward":300},{"_id":"5e85c2f41417407db8a2b472","user_id":"986994912565620736","username":"lounes_kmt","reward":200}]
+[5/4 7:34:0] | [VERBOSE] |: Updating status of 986994912565620736
+[5/4 7:34:0] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[5/4 7:34:0] | [VERBOSE] |: Inserted 1 document(s) into status
+[5/4 7:34:1] | [VERBOSE] |: Message from BOT to 986994912565620736 : Please, send an invoice for 4700 sats.
+[5/4 7:34:32] | [VERBOSE] |: Message from 986994912565620736 to BOT : lnbc47u1p0gjmw6pp5w3s4zrnv5kdwr5nvrjtr5vuwcg8vfxfekmjjv8sl0esysktcr8dsdqqcqzpgxqyz5vqsp5zwcx7n83lsez7g6tflkjsyzswv80jau2c7f6fr35ytmwr4z72utq9qy9qsqu8rvt949weg2ywl08xhmakvhlwkt7rdy4xmg2gfn6zyp0rjua3vxk7nxw3y5t7vpq9ggqv8dakl9sxzknvhaphhr3acec7g7ackhljcp85xxl9
+[5/4 7:34:32] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e896dc82d338a6557aa8af8","user_id":"986994912565620736","status":"claim_rewards_4700_sats"}]
+[5/4 7:34:32] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_4700_sats
+[5/4 7:34:37] | [VERBOSE] |: events.js@claimRewars : An invoice is being paid
+[5/4 7:34:38] | [VERBOSE] |: Message from BOT to 986994912565620736 : Paying invoice...
+[5/4 7:36:8] | [IMPORTANT] |: events.js@claimRewars : Reward paid, document(s) removed !
+[5/4 7:36:8] | [VERBOSE] |: End of action for 986994912565620736
+[5/4 7:36:8] | [VERBOSE] |: Removed 23 documents from rewards
+[5/4 7:36:8] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e896dc82d338a6557aa8af8","user_id":"986994912565620736","status":"claim_rewards_4700_sats"}]
+[5/4 7:36:8] | [VERBOSE] |: Found status for 986994912565620736 : claim_rewards_4700_sats
+[5/4 7:36:8] | [VERBOSE] |: Removed 1 documents from status
+[5/4 7:36:9] | [VERBOSE] |: Message from BOT to 986994912565620736 : ✅ Paid!
+[5/4 7:36:9] | [VERBOSE] |: Message from BOT to 986994912565620736 : End of action 🙃
+
+
+------------------------ 5/4 7:37:18 ------------------------
+[5/4 7:37:18] | [VERBOSE] |: Logger has started
+[5/4 7:37:19] | [DEBUG] |: Connected successfully to server
+
+
+------------------------ 5/4 7:39:41 ------------------------
+[5/4 7:39:41] | [VERBOSE] |: Logger has started
+[5/4 7:39:42] | [DEBUG] |: Connected successfully to server
+
+
+------------------------ 5/4 7:40:28 ------------------------
+[5/4 7:40:28] | [VERBOSE] |: Logger has started
+[5/4 7:40:29] | [DEBUG] |: Connected successfully to server
+
+
+------------------------ 5/4 9:33:52 ------------------------
+[5/4 9:33:52] | [VERBOSE] |: Logger has started
+[5/4 9:33:53] | [DEBUG] |: Connected successfully to server
+[5/4 12:16:56] | [VERBOSE] |: Message from 955781788743454721 to BOT : Start
+[5/4 12:16:56] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[5/4 12:16:56] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[5/4 12:16:56] | [VERBOSE] |: Message from BOT to 955781788743454721 : 👋 Hey ! What do you want to do ?
+[5/4 12:16:58] | [VERBOSE] |: Message from 955781788743454721 to BOT : 🎁 Claim rewards
+[5/4 12:16:58] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[5/4 12:16:58] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e710e09b049c25ba484fa5f","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e710e09b049c25ba484fa60","user_id":"955781788743454721","username":"cryptodidacte","reward":300},{"_id":"5e710e09b049c25ba484fa61","user_id":"955781788743454721","username":"cryptodidacte","reward":150},{"_id":"5e7f7be50ba84b7d4ecb6be8","user_id":"955781788743454721","username":"Cryptodidacte","reward":300},{"_id":"5e7fa24a9cb4e77daca98d86","user_id":"955781788743454721","username":"Cryptodidacte","reward":300},{"_id":"5e85c22dd346bd7d0475b9f4","user_id":"955781788743454721","username":"Cryptodidacte","reward":200}]
+[5/4 12:16:58] | [VERBOSE] |: Updating status of 955781788743454721
+[5/4 12:16:58] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[5/4 12:16:58] | [VERBOSE] |: Inserted 1 document(s) into status
+[5/4 12:16:59] | [VERBOSE] |: Message from BOT to 955781788743454721 : Please, send an invoice for 1400 sats.
+[5/4 12:17:22] | [VERBOSE] |: Message from 955781788743454721 to BOT : lnbc14u1p0gnvpfpp5hnzwcsenuf3tcz5r7cuvuegndq8hx0puu5htdv0tgry7almxul9qdqqcqzpgxqyz5vqsp53kvarj74p5au4ahyk73hxvh6h8wekkglwzjgmf6r8af306z76vxs9qy9qsqx2rqmkax3f3zfd7ec3va25lnwswm7hl3schg9xyc7acagnsfnr6kfg3pyvasg4p8s9gfwz6j02wsukqmd28yz4v7lt43zcutp5v0zegp4mm6c6
+[5/4 12:17:22] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e89b01a4932c16cf9c6129e","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[5/4 12:17:22] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[5/4 12:17:30] | [VERBOSE] |: events.js@claimRewars : An invoice is being paid
+[5/4 12:17:30] | [VERBOSE] |: Message from BOT to 955781788743454721 : Paying invoice...
+[5/4 12:18:23] | [IMPORTANT] |: events.js@claimRewars : Reward paid, document(s) removed !
+[5/4 12:18:23] | [VERBOSE] |: End of action for 955781788743454721
+[5/4 12:18:23] | [VERBOSE] |: Removed 6 documents from rewards
+[5/4 12:18:23] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e89b01a4932c16cf9c6129e","user_id":"955781788743454721","status":"claim_rewards_1400_sats"}]
+[5/4 12:18:23] | [VERBOSE] |: Found status for 955781788743454721 : claim_rewards_1400_sats
+[5/4 12:18:23] | [VERBOSE] |: Removed 1 documents from status
+[5/4 12:18:23] | [VERBOSE] |: Message from BOT to 955781788743454721 : ✅ Paid!
+[5/4 12:18:24] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+
+
+------------------------ 5/4 19:40:36 ------------------------
+[5/4 19:40:36] | [VERBOSE] |: Logger has started
+[5/4 19:40:37] | [DEBUG] |: Connected successfully to server
+
+
+------------------------ 5/4 19:41:34 ------------------------
+[5/4 19:41:34] | [VERBOSE] |: Logger has started
+
+
+------------------------ 5/4 19:44:8 ------------------------
+[5/4 19:44:8] | [VERBOSE] |: Logger has started
+[5/4 19:44:13] | [DEBUG] |: Connected successfully to server
+
+
+------------------------ 5/4 19:46:56 ------------------------
+[5/4 19:46:56] | [VERBOSE] |: Logger has started
+[5/4 19:46:59] | [ERROR] |: Could not connect, got following : 
+
+
+------------------------ 5/4 19:47:36 ------------------------
+[5/4 19:47:36] | [VERBOSE] |: Logger has started
+[5/4 19:48:25] | [DEBUG] |: Connected successfully to server
+[5/4 19:50:44] | [DEBUG] |: Connected successfully to server
+[5/4 19:52:27] | [ERROR] |: Could not connect, got following : 
+[5/4 19:52:27] | [ERROR] |: MongoNetworkError: failed to connect to server [localhost:27017] on first connect [MongoError: Authentication failed.
+    at Function._getError (/home/louneskmt/cryptodidacte-bot/node_modules/mongodb/lib/core/auth/scram.js:141:14)
+    at /home/louneskmt/cryptodidacte-bot/node_modules/mongodb/lib/core/auth/scram.js:191:31
+    at _callback (/home/louneskmt/cryptodidacte-bot/node_modules/mongodb/lib/core/connection/connect.js:349:5)
+    at Connection.messageHandler (/home/louneskmt/cryptodidacte-bot/node_modules/mongodb/lib/core/connection/connect.js:378:5)
+    at Connection.emit (events.js:311:20)
+    at Connection.EventEmitter.emit (domain.js:505:15)
+    at processMessage (/home/louneskmt/cryptodidacte-bot/node_modules/mongodb/lib/core/connection/connection.js:384:10)
+    at Socket.<anonymous> (/home/louneskmt/cryptodidacte-bot/node_modules/mongodb/lib/core/connection/connection.js:553:15)
+    at Socket.emit (events.js:311:20)
+    at Socket.EventEmitter.emit (domain.js:505:15) {
+  name: 'MongoError',
+  [Symbol(mongoErrorContextSymbol)]: {}
+}]
