@@ -5,7 +5,6 @@ $(function(){
     $("#data-table tr td:first-child").click(selectElementRow);
     $(".data-thead tr th:first-child").click(selectAllTabEl);
 
-    updateTableRows();
 });
 
 let connect = async function(){
@@ -35,6 +34,7 @@ let showDatabase = async (menu)=>{
     $("#sect-data").removeClass("dis-none")
     await sleep(.5);
     $("#sect-data").addClass("reveal")
+    updateTableRows();
 }
 
 let showIndex = async () => {
@@ -43,6 +43,9 @@ let showIndex = async () => {
     $("#sect-auth").addClass("dis-none");
     $("#sect-index").removeClass("dis-none");
     $("#sect-index .whitebox").addClass("reveal")
+
+    
+
 }
 
 let selectElementRow = function (ev){
@@ -74,4 +77,5 @@ let updateTableRows = ()=>{
         
         $(`.data-thead tr th:nth-child(${ix+1})`).css({width})
     })
+    
 }
