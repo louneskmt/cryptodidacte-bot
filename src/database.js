@@ -6,11 +6,11 @@ const assert = require('assert');
 const { databaseConfig } = require('../config')
 
 class Database {
-  constructor(name) {
+  constructor(name, url) {
       this.name = name;
       this.db = null;
       this.client = null;
-      this.url = `mongodb://${databaseConfig.user}:${databaseConfig.password}@localhost:27017/cryptodidacte`
+      this.url = url || `mongodb://${databaseConfig.user}:${databaseConfig.password}@localhost:27017/cryptodidacte`
 
       this.connected = false;
   }
