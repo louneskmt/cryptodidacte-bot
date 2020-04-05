@@ -3713,3 +3713,43 @@ OWUyNzFjZjEtY2IzMS00NDZkLWEwZjQtMjAzNjc2NGZjZmI0
 [5/4 12:18:23] | [VERBOSE] |: Removed 1 documents from status
 [5/4 12:18:23] | [VERBOSE] |: Message from BOT to 955781788743454721 : ✅ Paid!
 [5/4 12:18:24] | [VERBOSE] |: Message from BOT to 955781788743454721 : End of action 🙃
+
+
+------------------------ 5/4 19:40:36 ------------------------
+[5/4 19:40:36] | [VERBOSE] |: Logger has started
+[5/4 19:40:37] | [DEBUG] |: Connected successfully to server
+
+
+------------------------ 5/4 19:41:34 ------------------------
+[5/4 19:41:34] | [VERBOSE] |: Logger has started
+
+
+------------------------ 5/4 19:44:8 ------------------------
+[5/4 19:44:8] | [VERBOSE] |: Logger has started
+[5/4 19:44:13] | [DEBUG] |: Connected successfully to server
+
+
+------------------------ 5/4 19:46:56 ------------------------
+[5/4 19:46:56] | [VERBOSE] |: Logger has started
+[5/4 19:46:59] | [ERROR] |: Could not connect, got following : 
+
+
+------------------------ 5/4 19:47:36 ------------------------
+[5/4 19:47:36] | [VERBOSE] |: Logger has started
+[5/4 19:48:25] | [DEBUG] |: Connected successfully to server
+[5/4 19:50:44] | [DEBUG] |: Connected successfully to server
+[5/4 19:52:27] | [ERROR] |: Could not connect, got following : 
+[5/4 19:52:27] | [ERROR] |: MongoNetworkError: failed to connect to server [localhost:27017] on first connect [MongoError: Authentication failed.
+    at Function._getError (/home/louneskmt/cryptodidacte-bot/node_modules/mongodb/lib/core/auth/scram.js:141:14)
+    at /home/louneskmt/cryptodidacte-bot/node_modules/mongodb/lib/core/auth/scram.js:191:31
+    at _callback (/home/louneskmt/cryptodidacte-bot/node_modules/mongodb/lib/core/connection/connect.js:349:5)
+    at Connection.messageHandler (/home/louneskmt/cryptodidacte-bot/node_modules/mongodb/lib/core/connection/connect.js:378:5)
+    at Connection.emit (events.js:311:20)
+    at Connection.EventEmitter.emit (domain.js:505:15)
+    at processMessage (/home/louneskmt/cryptodidacte-bot/node_modules/mongodb/lib/core/connection/connection.js:384:10)
+    at Socket.<anonymous> (/home/louneskmt/cryptodidacte-bot/node_modules/mongodb/lib/core/connection/connection.js:553:15)
+    at Socket.emit (events.js:311:20)
+    at Socket.EventEmitter.emit (domain.js:505:15) {
+  name: 'MongoError',
+  [Symbol(mongoErrorContextSymbol)]: {}
+}]
