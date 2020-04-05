@@ -10,6 +10,7 @@
     "beautify": "0.0.8",
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",
+    "ethers": "^4.0.46",
     "express": "^4.17.1",
     "express-https-redirect": "^1.0.0",
     "grpc": "^1.24.2",
