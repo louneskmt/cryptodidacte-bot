@@ -1,5 +1,6 @@
 $(function(){
     $("#auth-connect").click(() => connect() );
+    $("#index-rewards").click(() => showDatabase("rewards") );
 
     $("#data-table tr td:first-child").click(selectElementRow);
     $(".data-thead tr th:first-child").click(selectAllTabEl);
@@ -21,11 +22,27 @@ let sleep = async secs => {
     })
 }
 
+let showDatabase = async (menu)=>{
+    $("#sect-index .whitebox").removeClass("reveal");
+    await sleep(.01);
+    $("#sect-index .whitebox").addClass("hideEffect");
+    await sleep(1);
+    $("#sect-index").addClass("dis-none")
+    
+    if(menu === "rewards"){
+        // Load rewards
+    }
+    $("#sect-data").removeClass("dis-none")
+    await sleep(.5);
+    $("#sect-data").addClass("reveal")
+}
+
 let showIndex = async () => {
     $("#sect-auth").addClass("hideEffect");
     await sleep(.3);
     $("#sect-auth").addClass("dis-none");
     $("#sect-index").removeClass("dis-none");
+    $("#sect-index .whitebox").addClass("reveal")
 }
 
 let selectElementRow = function (ev){
