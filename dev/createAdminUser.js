@@ -14,14 +14,15 @@ let prompt = async text => {
 }
 
 let hashPassword = ({username, password}) =>{
-    let salt = process.env.SALT+password+"*#*"+process.env.SALT
-    let shasum = crypto.createHash("sha1").update(salf).digest();
+    let salt = process.env.SALT+"*#*"+username+"--"+password+"*#*"+process.env.SALT
+    console.log(salt);
+    
+    let shasum = crypto.createHash("sha1").update(salt).digest("hex");
     return shasum;
 } 
 
 (async function(){
     console.log("************************* CONNECT TO DATABASE *************************")
-    /* 
     let username = await prompt("Enter your username: ");
     let password = await prompt("Enter your password: ");
 
@@ -34,14 +35,13 @@ let hashPassword = ({username, password}) =>{
         return process.exit(1);
         // END
     }
-*/
     console.log("You are connected to the authAdminTable");
-    console.log("\n\n************************* CREATING USER *************************\n\n&");
+    console.log("\n\n************************* CREATING USER *************************\n\n");
     let nUsername = await prompt("Enter username of new user:")
     let nPassword = await prompt("Enter password of new user:");
 
-
-    console.log(hashPassword(nPassword))
-    // db.insert("users",{username: nUsername, password: nPassword})
-
+    console.log("\n\n************************* INSERTING USER *************************\n\n");
+    console.log(hashPassword({username: nUsername, password: nPassword}))
+    await db.insert("users",{username: nUsername, password: nPassword})
+    console.log("**END**")
 })();
