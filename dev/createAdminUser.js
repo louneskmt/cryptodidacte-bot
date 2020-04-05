@@ -1,5 +1,4 @@
 const readline = require("readline");
-const promptPsswd = require("password-prompt");
 const Db = require("../src/database.js");
 
 const rl = readline.createInterface({
