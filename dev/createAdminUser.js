@@ -40,7 +40,7 @@ let hashPassword = ({username, password}) =>{
     let nPassword = await prompt("Enter password of new user:");
 
     console.log("\n\n************************* INSERTING USER *************************\n\n");
-    nPassword = hashPassword({nUsername, nPassword})
+    nPassword = hashPassword({username: nUsername, password: nPassword})
     console.log(nPassword)
     await db.insert("users",{username: nUsername, password: nPassword})
     console.log("**END**")
