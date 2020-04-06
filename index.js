@@ -73,7 +73,7 @@ app.get('/admin', function(req, res){
   res.sendFile(__dirname + '/public/index.html');
 });
 
-app.get("/login", async function(req, res){
+app.post("/login", async function(req, res){
   let username = req.body.username || "";
   let password = req.body.password || "";
   let session = new Session({username, password});
