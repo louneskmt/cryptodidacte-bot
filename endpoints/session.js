@@ -27,3 +27,5 @@ class Session{
         return insertedId;
     }
 }
+
+module.exports = Session;
