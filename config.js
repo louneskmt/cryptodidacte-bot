@@ -1,6 +1,7 @@
 // config.js
 
 const env = require('dotenv').config();
+const crypto = require("crypto");
 
 if (env.error) {
   throw env.error
@@ -19,6 +20,12 @@ const twitterConfig = {
 const databaseConfig = {
   user: "bot",
   password: process.env.DB_PASSWORD
+}
+
+const websiteDbConfig = {
+  user: "bot",
+  password: process.env.DB_PASSWORD,
+  hash: ({username, password}) => crypto.createHash("sha1").update(crypto.creatprocess.env.SALT+"*#*"+username+"--"+password+"*#*"+process.env.SALT).digest("hex")
 }
 
 const ethereumConfig = {
