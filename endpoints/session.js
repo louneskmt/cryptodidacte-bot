@@ -23,7 +23,7 @@ class Session{
         }
         // ELSE : 
 
-        let { insertedId } = await this.db.insert({username, timestamp: new Date().getTime(), openedFile: false});
+        let { insertedId } = await this.db.insert("tokens",{username, timestamp: new Date().getTime(), openedFile: false});
         this.id = insertedId;
         return insertedId;
     }
