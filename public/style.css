@@ -6,7 +6,8 @@
 
 @font-face{
     font-family: "Material Icons";
-    src: url(./fonts/MaterialIcons-Regular.ttf)
+    src: url(./fonts/MaterialIcons-Regular.ttf);
+    font-display: auto;
 }
 @font-face{
     font-family: Montserrat;
