@@ -1,7 +1,7 @@
 const {__,  __json} = require("./src/logger.js");
 
 // Require Events handler and fs to read files
-const eventEmitter = require('./endpoints/session.js');
+const Session = require('./endpoints/session.js');
 const eventEmitter = require('./src/events.js');
 const fs = require('fs');
 
