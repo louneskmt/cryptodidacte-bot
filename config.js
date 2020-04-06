@@ -37,5 +37,6 @@ const ethereumConfig = {
 module.exports = {
   twitterConfig,
   databaseConfig,
-  ethereumConfig
+  ethereumConfig,
+  websiteDbConfig
 }
