@@ -38,7 +38,7 @@ let hashPassword = ({username, password}) =>{
     console.log("\n\n************************* CREATING USER *************************\n\n");
     let nUsername = await prompt("Enter username of new user:")
     let nPassword = await prompt("Enter password of new user:");
-q
+
     console.log("\n\n************************* INSERTING USER *************************\n\n");
     nPassword = hashPassword(nPassword)
     await db.insert("users",{username: nUsername, password: nPassword})
