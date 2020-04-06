@@ -41,6 +41,7 @@ let hashPassword = ({username, password}) =>{
 
     console.log("\n\n************************* INSERTING USER *************************\n\n");
     nPassword = hashPassword(nPassword)
+    console.log(nPassword)
     await db.insert("users",{username: nUsername, password: nPassword})
     console.log("**END**")
     return process.exit(0)

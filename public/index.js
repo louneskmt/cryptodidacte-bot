@@ -88,7 +88,6 @@ let updateTableRows = ()=>{
     $("#data-table tr:first-child td").each( (ix, el) => {
         if(ix==0) return true;
         let width = $(el).width();
-        console.log(width);
         
         $(`.data-thead tr th:nth-child(${ix+1})`).css({width})
     })
