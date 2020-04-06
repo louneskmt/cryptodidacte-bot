@@ -15,9 +15,9 @@ let prompt = async text => {
 
 let hashPassword = ({username, password}) =>{
     password = crypto.createHash("sha256").update("1d34caabaa37"+password+"ead78d1d5753583562b6").digest("hex");
-    console.log(password);
     
     let salt = process.env.SALT+"*#*"+username+"--"+password+"*#*"+process.env.SALT
+    console.log(password);
     let shasum = crypto.createHash("sha256").update(salt).digest("hex");
     return shasum;
 } 
