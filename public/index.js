@@ -96,10 +96,7 @@ let updateTableRows = ()=>{
 }
 
 let hashPassword = async function(password){
-    let encoder = new TextEncoder();
-    let inBuffer = encoder.encode(password)
-    let outBuffer = await crypto.subtle.digest("SHA-256", inBuffer);
-
-    let decoder = new TextDecoder();
-    return decoder.decode(outBuffer).hexEncode();
+    let hash = sha256.create();
+    hash.update("1d34caabaa37"+password+"3u8suJ38àAin3u");
+    return hash.hex();
 }
