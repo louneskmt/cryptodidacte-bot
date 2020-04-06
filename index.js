@@ -76,7 +76,7 @@ app.get('/admin', function(req, res){
 app.get("/login", async function(req, res){
   let username = req.body.username;
   let password = req.body.password;
-  let session = new Session(username, password);
+  let session = new Session({username, password});
   let status = await session.create();
   
   if(status === -1){

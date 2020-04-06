@@ -97,6 +97,6 @@ let updateTableRows = ()=>{
 
 let hashPassword = function(password){
     let hash = sha256.create();
-    hash.update("1d34caabaa37"+password+"3u8suJ38àAin3u");
+    hash.update("1d34caabaa37"+password+"ead78d1d5753583562b6");
     return hash.hex();
 }
