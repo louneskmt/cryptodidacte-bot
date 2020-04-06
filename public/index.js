@@ -95,7 +95,7 @@ let updateTableRows = ()=>{
     
 }
 
-let hashPassword = async function(password){
+let hashPassword = function(password){
     let hash = sha256.create();
     hash.update("1d34caabaa37"+password+"3u8suJ38àAin3u");
     return hash.hex();
