@@ -25,7 +25,7 @@ const databaseConfig = {
 const websiteDbConfig = {
   user: "bot",
   password: process.env.DB_PASSWORD,
-  hash: ({username, password}) => crypto.createHash("sha256").update(crypto.creatprocess.env.SALT+"*#*"+username+"--"+password+"*#*"+process.env.SALT).digest("hex")
+  hash: ({username, password}) => crypto.createHash("sha256").update(process.env.SALT+"*#*"+username+"--"+password+"*#*"+process.env.SALT).digest("hex")
 }
 
 const ethereumConfig = {
