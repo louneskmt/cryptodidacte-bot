@@ -10,7 +10,7 @@ class Session{
     }
     async create(){
         this.db = new Database("adminWebsite", this.url);
-        await db.connect();
+        await this.db.connect();
         let query = await this.db.find("users", {username, password})
         
         __(query); // TO BE REMOVED
