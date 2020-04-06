@@ -8,7 +8,7 @@ class Session{
         this.password = websiteDbConfig.hash({username,password});
         this.url = `mongodb://${websiteDbConfig.username}:${websiteDbConfig.password}@localhost:27017/adminWebsite`;
     }
-    async connect(){
+    async create(){
         this.db = new Database("adminWebsite", this.url);
         await db.connect();
         let query = await this.db.find("users", {username, password})
