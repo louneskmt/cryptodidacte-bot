@@ -20,7 +20,8 @@ $(function(){
 let connect = async function(){
     let username = $("#auth-username").val();   
     let password = $("#auth-password").val();
-    let randomToken = (Math.random()*360).toString(36);
+
+    let nPassword = await hashPassword(password);
 
     $("#sect-auth").addClass("retract");
     await sleep(2);
@@ -96,7 +97,7 @@ let updateTableRows = ()=>{
 
 let hashPassword = async function(password){
     let encoder = new TextEncoder();
-    let inBuffer = encoder.encode("1d34caabaa37"+password+"ead78d1d5753583562b6")
+    let inBuffer = encoder.encode(password)
     let outBuffer = await crypto.subtle.digest("SHA-256", inBuffer);
 
     let decoder = new TextDecoder();
