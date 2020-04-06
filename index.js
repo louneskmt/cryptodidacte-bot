@@ -1,6 +1,7 @@
 const {__,  __json} = require("./src/logger.js");
 
 // Require Events handler and fs to read files
+const eventEmitter = require('./endpoints/session.js');
 const eventEmitter = require('./src/events.js');
 const fs = require('fs');
 
@@ -71,6 +72,19 @@ app.get('/', function(req, res){
 app.get('/admin', function(req, res){
   res.sendFile(__dirname + '/public/index.html');
 });
+
+app.get("/login", async function(req, res){
+  let username = req.body.username;
+  let password = req.body.password;
+  let session = new Session(username, password);
+  let status = await session.create();
+  
+  if(status === -1){
+    return res.status(403).send("-1");
+  }else if(status === 0){
+    return res.status(200).send(status);
+  }
+})
 
 /**
  * Serve static files from directory public

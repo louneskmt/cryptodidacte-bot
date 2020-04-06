@@ -1,3 +1,13 @@
+String.prototype.hexEncode = function(){
+    let hex, i;
+    let result = "";
+    for (i=0; i<this.length; i++) {
+        hex = this.charCodeAt(i).toString(16);
+        result += ("000"+hex).slice(-4);
+    }
+    return result
+}
+
 $(function(){
     $("#auth-connect").click(() => connect() );
     $("#index-rewards").click(() => showDatabase("rewards") );
@@ -8,6 +18,10 @@ $(function(){
 });
 
 let connect = async function(){
+    let username = $("#auth-username").val();   
+    let password = $("#auth-password").val();
+    let randomToken = (Math.random()*360).toString(36);
+
     $("#sect-auth").addClass("retract");
     await sleep(2);
     showIndex();
@@ -78,4 +92,13 @@ let updateTableRows = ()=>{
         $(`.data-thead tr th:nth-child(${ix+1})`).css({width})
     })
     
+}
+
+let hashPassword = async function(password){
+    let encoder = new TextEncoder();
+    let inBuffer = encoder.encoder("1d34caabaa37"+password+"ead78d1d5753583562b6")
+    let outBuffer = await crypto.subtle.digest("sha256", inBuffer);
+
+    let decoder = new TextDecoder();
+    return decoder.decode(outBuffer).hexEncode();
 }
