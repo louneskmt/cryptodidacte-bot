@@ -1,34 +1,35 @@
-// src/index.js
 const ethers = require('ethers');
-const CryptodidacteTokenABI = require(__dirname + '/contracts/CryptodidacteToken.json').abi;
-const { mnemonic, projectId, contractAddress } = require(__dirname + '/config.js').ethereumConfig;
+const { mnemonic, projectId } = require(__dirname + '/config.js').ethereumConfig;
 
-class Ethereum {
-    constructor() {
+class ERC20 {
+    constructor(contractAddress, contractABI) {
         this.provider = new ethers.providers.InfuraProvider('rinkeby', projectId);
-        this.wallet = ethers.Wallet.fromMnemonic(mnemonic, "m/44'/60'/0'/0/0").connect(provider);
-        this.contract = new ethers.Contract(contractAddress, CryptodidacteTokenABI, wallet);
+        this.wallet = ethers.Wallet.fromMnemonic(mnemonic, "m/44'/60'/0'/0/0").connect(this.provider);
+        this.contract = new ethers.Contract(contractAddress, contractABI, this.wallet);
     }
 
-    async sendCDT(to, amount) {
+    async method(method, ...args) {
         return new Promise((resolve, reject) => {
             try {
-                let tx = await this.contract.transfer(to, amount);
-                resolve(tx.hash, tx.wait());
+                this.contract[method](...args)
+                .then((tx) => {
+                    resolve(tx);
+                })
             } catch (err) {
                 reject(err)
             }  
         });
     }
 
-    async mintCDT(amount, to = this.address.wallet) {
-        return new Promise((resolve, reject) => {
-            try {
-                let tx = await this.contract.mint(to, amount);
-                resolve(tx.hash, tx.wait());
-            } catch (err) {
-                reject(err)
-            }  
-        });
+    async send(to, amount) {
+        return this.method('send', to, amount);
+    }
+
+    async mint(amount, to = this.wallet.address) {
+        return this.method('mint', to, amount);
     }
 }
+
+module.exports = {
+    ERC20
+};
