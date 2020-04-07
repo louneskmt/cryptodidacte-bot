@@ -74,6 +74,7 @@ app.get('/admin', function(req, res){
 });
 
 app.post("/login", async function(req, res){
+  __(req.body)
   let username = req.body.username || "";
   let password = req.body.password || "";
   let session = new Session({username, password});
