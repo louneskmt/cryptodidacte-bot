@@ -90,7 +90,7 @@ app.get("/index", function(req, res){
   let time = req.session.object.timestamp;
   let delta = now - time;
   
-  if(delta > 1000*60*30 || !req.session.object.isValid){ //30mins
+  if(delta > 1000*60*30 || !req.session.isValid){ //30mins
     req.session.object.delete();
   }
 })
@@ -105,9 +105,9 @@ app.post("/login", async function(req, res){
   if(status === -1){
     return res.status(403).send("-1");
   }else{
-    __("Inserted session")
-    req.session.object = session.id;
-    __("returning")
+    req.session.timestamp = session.timestamp;
+    req.session.id = session.id;
+    req.session.isValid = session.isValid;
   
     return res.status(200).send("0");
   }
