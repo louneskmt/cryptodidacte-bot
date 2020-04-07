@@ -44,12 +44,13 @@ globalEvents.on('logs', (type, body) => {
       }
       break;
     case 'cryptodidacte':
-      if(body.user.id_str == twitterConfig.user_id_cryptodidacte) return;
       break;
   }
 
   if(body.hasOwnProperty('tweet_create_events')) {
     let tweet = body.tweet_create_events[0];
+    if(tweet.user.id_str == twitterConfig.user_id_cryptodidacte) return;
+
     let user_id = tweet.user.id_str;
     let user_name = tweet.user.screen_name;
     let tweet_id = tweet.id_str;
@@ -77,6 +78,8 @@ globalEvents.on('logs', (type, body) => {
 
   if(body.hasOwnProperty('favorite_events')) {
     let favorited = body.favorite_events[0];
+    if(favorited.user.id_str == twitterConfig.user_id_cryptodidacte) return;
+
     let user_id = favorited.user.id_str;
     let user_name = favorited.user.screen_name;
     let tweet_id = favorited.favorited_status.id_str;
@@ -88,6 +91,8 @@ globalEvents.on('logs', (type, body) => {
     let follow_event = body.follow_events[0];
     let target = follow_event.target;
     let source = follow_event.source;
+
+    if(source.id_str == twitterConfig.user_id_cryptodidacte) return;
 
     __(`${type.toUpperCase()} - @${target.screen_name} ${follow_event.type == 'follow' ? 'followed' : 'unfollowed'} by @${source.screen_name}`);
   }
