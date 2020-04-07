@@ -10,6 +10,7 @@
          url('./fonts/MaterialIcons-Regular.ttf');
     font-display: block;
 }
+/*
 @font-face{
     font-family: 'Montserrat';
     font-weight: 100;
@@ -64,7 +65,7 @@
     font-weight: 900;
     src: url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_epG3g3D_vx3rCubqg.woff2) format('woff2'), 
          url(./fonts/Montserrat-Black.ttf);
-}
+} */
 
 *{
     outline: none;
