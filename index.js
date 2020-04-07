@@ -34,11 +34,11 @@ app.post('/webhook/twitter', function(req, res) {
   let for_user_id = req.body.for_user_id;
 
   switch (for_user_id) {
-    case twitter.user_id_bot:
+    case twitterConfig.user_id_bot:
       globalEvents.emit('bot', req.body);
       globalEvents.emit('logs', 'bot', req.body);
       break;
-    case twitter.user_id_cryptodidacte:
+    case twitterConfig.user_id_cryptodidacte:
       globalEvents.emit('cryptodidacte', req.body);
       globalEvents.emit('logs', 'cryptodidacte', req.body);
       break;
