@@ -46,7 +46,6 @@ globalEvents.on('cryptodidacte', (body) => {
           quoted_tweet_id: tweet.quoted_status.id_str,
           timestamp: tweet.timestamp_ms
         });
-        __(`${type.toUpperCase()} - ${tweet_type.toUpperCase()} - @${user_name} (${user_id}) quoted tweet ${tweet.quoted_status.id_str} by @${tweet.quoted_status.user.screen_name}`);
         break;
       case 'reply':
         fidelity.processEvent('reply', {
@@ -56,7 +55,6 @@ globalEvents.on('cryptodidacte', (body) => {
           in_reply_to_status_id: tweet.in_reply_to_status_id_str,
           timestamp: tweet.timestamp_ms
         });
-        __(`${type.toUpperCase()} - ${tweet_type.toUpperCase()} - @${user_name} (${user_id}) replied to tweet ${tweet.in_reply_to_status_id_str} by @${tweet.in_reply_to_screen_name} (${tweet.in_reply_to_user_id_str})`);
         break;
       case 'retweet':
         fidelity.processEvent('retweet', {
@@ -66,10 +64,8 @@ globalEvents.on('cryptodidacte', (body) => {
           retweeted_tweet_id: tweet.retweeted_status.id_str,
           timestamp: tweet.timestamp_ms
         });
-        __(`${type.toUpperCase()} - ${tweet_type.toUpperCase()} - Tweet ${tweet.retweeted_status.id_str} retweeted by @${user_name} (${user_id})`);
         break;
       default: 
-        __(`${type.toUpperCase()} - (Unknown type) - Tweet ${tweet_id} by @${user_name} (${user_id})`);
         break;
     }
   }
@@ -85,7 +81,6 @@ globalEvents.on('cryptodidacte', (body) => {
     fidelity.processEvent('favorite', {
       user_id: user_id,
       user_name: user_name,
-      tweet_id: tweet_id,
       favorited_tweet_id: favorite.favorited_status.id_str,
       timestamp: favorite.timestamp_ms
     });
