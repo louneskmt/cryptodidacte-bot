@@ -87,13 +87,11 @@ app.get('/connect', function(req, res){
 });
 app.get("/index", function(req, res){
   let now = new Date();
-  console.log(req.session);
-  let time = req.session.timestamp;
+  let time = req.session.object.timestamp;
   let delta = now - time;
   
-  if(delta > 1000*60*30 || !req.session.isValid){ //30mins
-    req.session.delete();
-    req.session = null;
+  if(delta > 1000*60*30 || !req.session.object.isValid){ //30mins
+    req.session.object.delete();
   }
 })
 
@@ -107,8 +105,7 @@ app.post("/login", async function(req, res){
   if(status === -1){
     return res.status(403).send("-1");
   }else{
-    req.session = session;
-    console.log(req.session);
+    req.session.object = session;
     
     return res.status(200).send(status);
   }
