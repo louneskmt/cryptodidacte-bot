@@ -33,14 +33,14 @@ let transition = async function(from, to){
     })
 }
 
-let loadViewOnClick = async (ev) => {
+let loadViewOnClick = async function(ev){
     let viewName = $(this).attr("open-view");
     await loadView(viewName);
 }
 
 let loadView = async function(viewName){
-    let url = `./views/${viewName}.html`;
-    let newJS = $("<script></script>",{id:"view-js", src:`./views/js/${viewName}.js`})
+    let url = `/views/${viewName}.html`;
+    let newJS = $("<script></script>",{id:"view-js", src:`/views/js/${viewName}.js`})
     $("#view-js").replaceWith(newJS);
     let request = $("#sect-view").load(url, async function(){
         // ANIM
