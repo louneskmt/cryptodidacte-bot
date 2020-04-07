@@ -44,6 +44,7 @@ globalEvents.on('logs', (type, body) => {
       }
       break;
     case 'cryptodidacte':
+      if(body.user.id_str == twitterConfig.user_id_cryptodidacte) return;
       break;
   }
 
@@ -53,9 +54,25 @@ globalEvents.on('logs', (type, body) => {
     let user_name = tweet.user.screen_name;
     let tweet_id = tweet.id_str;
 
-    __(`${type.toUpperCase()} - Mentionned in tweet ${tweet_id} by @${user_name} (${user_id})`);
+    let type;
+    if(tweet.is_quote_status) type = 'quote';
+    else if (tweet.in_reply_to_user_id) type = 'reply';
+    else if (tweet.hasOwnProperty('retweeted_Status')) type = 'retweet';
 
-    __(tweet);
+    switch (type) {
+      case 'quote':
+        __(`${type.toUpperCase()} - @${user_name} (${user_id}) quoted tweet ${tweet.quoted_status.id_str} by ${tweet.quoted_status.user.screen_name}`);
+        break;
+      case 'reply':
+        __(`${type.toUpperCase()} - @${user_name} (${user_id}) replied to tweet ${tweet.in_reply_to_status_id_str} by @${tweet.in_reply_to_screen_name} (${tweet.in_reply_to_user_id_str})`);
+        break;
+      case 'retweet':
+        __(`${type.toUpperCase()} - Tweet ${tweet.retweeted_status.id_str} retweeted by @${user_name} (${user_id})`);
+        break;
+      default: 
+        __(`${type.toUpperCase()} - (Unknown type) Tweet ${tweet_id} by @${user_name} (${user_id})`);
+        break;
+    }
   }
 
   if(body.hasOwnProperty('favorite_events')) {
