@@ -63,9 +63,10 @@ globalEvents.on('logs', (type, body) => {
     switch (type) {
       case 'quote':
         // __(tweet);
-        __(`${type.toUpperCase()} - @${user_name} (${user_id}) quoted tweet ${tweet.quoted_status.id_str} by ${tweet.quoted_status.user.screen_name}`);
+        __(`${type.toUpperCase()} - @${user_name} (${user_id}) quoted tweet ${tweet.quoted_status.id_str} by @${tweet.quoted_status.user.screen_name}`);
         break;
       case 'reply':
+        __(tweet);
         __(`${type.toUpperCase()} - @${user_name} (${user_id}) replied to tweet ${tweet.in_reply_to_status_id_str} by @${tweet.in_reply_to_screen_name} (${tweet.in_reply_to_user_id_str})`);
         break;
       case 'retweet':
