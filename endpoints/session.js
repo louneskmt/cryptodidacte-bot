@@ -26,7 +26,7 @@ class Session{
         // ELSE : 
 
         let res = await this.db.insert("tokens",{username, timestamp: new Date().getTime(), openedFile: false});
-        this.id = insertedId;
+        // this.id = insertedId;
         this.isValid = true;
         this.timestamp = new Date();
         console.log("insertedID:", res);
