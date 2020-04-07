@@ -27,7 +27,7 @@ app.set('port', 8443)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(helmet())
-aapp.use(expresSession({
+aapp.use(expressSession({
   secret: process.env.SALT,
   resave: false,
   saveUninitialized: true,
