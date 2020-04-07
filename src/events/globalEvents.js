@@ -60,7 +60,7 @@ globalEvents.on('logs', (type, body) => {
     else if (tweet.in_reply_to_user_id) tweet_type = 'reply';
     else if(tweet.is_quote_status) tweet_type = 'quote';
 
-    switch (type) {
+    switch (tweet_type) {
       case 'quote':
         // __(tweet);
         __(`${type.toUpperCase()} - ${tweet_type.toUpperCase()} - @${user_name} (${user_id}) quoted tweet ${tweet.quoted_status.id_str} by @${tweet.quoted_status.user.screen_name}`);
