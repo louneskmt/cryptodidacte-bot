@@ -92,7 +92,7 @@ app.get("/index", function(req, res){
   let delta = now - time;
   
   if(delta > 1000*60*30 || !req.session.isValid){ //30mins
-    session.delete();
+    req.session.delete();
     req.session = null;
   }
 })
