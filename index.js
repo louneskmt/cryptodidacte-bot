@@ -91,7 +91,7 @@ app.get("/index", function(req, res){
   let delta = now - time;
   
   if(delta > 1000*60*30 || !req.session.isValid){ //30mins
-    req.session.object.delete();
+    res.status(403).send("-1")
   }
 })
 
