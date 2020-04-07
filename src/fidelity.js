@@ -28,7 +28,7 @@ const processEvent = async (event, data) => {
             break;
     }
 
-    db.find("users", {user_id: data.user_id}).then((docs) => {
+    await db.find("users", {user_id: data.user_id}).then((docs) => {
         if(typeof docs != undefined || docs.length === 0) {
             db.insert("users", {
                 user_id: data.user_id,
