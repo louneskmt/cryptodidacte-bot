@@ -24,8 +24,14 @@ let connect = async function(){
     let nPassword = await hashPassword(password);
 
     $("#sect-auth").addClass("retract");
-    await sleep(2);
-    showIndex();
+    let request = $.post("/login", {
+        username, password: nPassword
+    }); 
+    request.then(function(res){
+        if(res === "-1") return $("#sect-auth").removeClass("retract");
+
+        showIndex();
+    })
 }
 
 let sleep = async secs => {
