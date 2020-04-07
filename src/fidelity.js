@@ -38,6 +38,8 @@ const processEvent = async (event, data) => {
             db.update("users", {user_id: data.user_id}, {balance: reward}, 'inc');
         }
     });
+
+    await db.disconnect();
 };
 
 module.exports = {
