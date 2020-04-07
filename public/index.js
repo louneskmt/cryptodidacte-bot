@@ -35,7 +35,7 @@ let transition = async function(from, to){
 
 let loadViewOnClick = async (ev) => {
     let viewName = $(this).attr("open-view");
-    await loadPage(viewName);
+    await loadView(viewName);
 }
 
 let loadView = async function(viewName){
