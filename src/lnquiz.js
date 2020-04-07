@@ -1,5 +1,4 @@
-const fs = require('fs')
-const user = require('./user.js')
+const fs = require('fs');
 const lightning = require('./lightning.rest');
 const Twitter = require('./Twit.js');
 var rewards = require('../data/rewards.json');

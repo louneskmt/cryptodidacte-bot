@@ -5,7 +5,7 @@ var Twitter = require('./Twit');
 var lightning = require('./lightning.rest.js');
 var QRCode = require('./qrcode.js');
 var lnquiz = require('./lnquiz.js');
-var user = require('./user.js');
+var userStatus = require('./userStatus.js');
 
 
 function start(params){
@@ -50,7 +50,7 @@ function start(params){
   function waitForWinners(params){
     let {user_id} = params;
     Twitter.sendTextMessage(user_id, "Please, send the new winners in the following order : question-writing-random.");
-    return user.setStatus(user_id, "adding_winners");
+    return userStatus.setStatus(user_id, "adding_winners");
   }
   
   function generateInvoice(params){
@@ -60,7 +60,7 @@ function start(params){
     __("events.js@generateInvoice : Generating an invoice (tip) ");
   
     Twitter.sendTextMessage(user_id, "Generating invoice...");
-    user.setStatus(user_id, "generating_invoice")
+    userStatus.setStatus(user_id, "generating_invoice")
   
     lightning.generateInvoice(200, "Test", (invoice) => {
   
@@ -136,7 +136,7 @@ function start(params){
   function updateRewards(params){
     let {user_id} = params;
     Twitter.sendTextMessage(user_id, "Please, send the new rewards ammounts in the following order : question-writing-random, separated with a space and in sats (e.g. \"150 300 150\").");
-    return user.setStatus(user_id, "updating_rewards");
+    return userStatus.setStatus(user_id, "updating_rewards");
   }
   
   function updatingRewards(params){
@@ -182,7 +182,7 @@ function start(params){
     lnquiz.countRewards(params.user_id, (amount) => {
       if(amount) {
         Twitter.sendTextMessage(params.user_id, "Please, send an invoice for " + amount + " sats.");
-        return user.setStatus(params.user_id, "claim_rewards_" + amount + "_sats");
+        return userStatus.setStatus(params.user_id, "claim_rewards_" + amount + "_sats");
       } else {
         return end(params, "You have nothing to claim.");
       }
@@ -194,7 +194,7 @@ function start(params){
   function end(params, description, {resetStatus=true, endMessage=true} = {}){
     let {user_id} = params;
   
-    if(resetStatus) user.deleteStatus(user_id);
+    if(resetStatus) userStatus.deleteStatus(user_id);
   
     if(description) Twitter.sendTextMessage(user_id, description);
   
