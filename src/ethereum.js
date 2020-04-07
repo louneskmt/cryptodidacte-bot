@@ -1,5 +1,5 @@
 const ethers = require('ethers');
-const { mnemonic, projectId } = require(__dirname + '/config.js').ethereumConfig;
+const { mnemonic, projectId } = require(__dirname + '/../config.js').ethereumConfig;
 
 class ERC20 {
     constructor(contractAddress, contractABI) {
