@@ -1,16 +1,15 @@
-const {__} = require("./logger.js");
+const {__} = require("../logger.js");
 
-var events = require('events');
-var eventEmitter = new events.EventEmitter();
+const events = require('events');
+var botEvents = new events.EventEmitter();
 
 // Twitter modules
-var Twitter = require('./Twit');
-const { twitterConfig } = require('../config.js');
-var interactions = require("./interactions");
-var user = require('./user.js');
+var Twitter = require('../Twit.js');
+const { twitterConfig } = require('../../config.js');
+var interactions = require('../interactions.js');
+var user = require('../user.js');
 
-
-eventEmitter.on('tweet', (tweet) => {
+botEvents.on('tweet', (tweet) => {
   var user_id = tweet.user.id_str;
   if(twitterConfig.admin.includes(user_id)) {
     if(tweet.text.includes("Félicitations aux gagnants")) {
@@ -25,33 +24,8 @@ eventEmitter.on('tweet', (tweet) => {
   }
 });
 
-eventEmitter.on('logs', (body) => {
-  if(body.hasOwnProperty("direct_message_events")) {
-    var message_create = body.direct_message_events[0].message_create;
-    var recipient = message_create.target.recipient_id;
-    var sender = message_create.sender_id;
-    var content = message_create.message_data.text;
 
-    if(sender == Twitter.botId){
-      sender = "BOT"
-    }else{
-      recipient = "BOT"
-    }
-
-    __(`Message from ${sender} to ${recipient} : ${content}`);
-  }
-  if(body.hasOwnProperty('tweet_create_events')) {
-    var tweet = body.tweet_create_events[0]
-    var user_id = tweet.user.id_str;
-    var tweet_id = tweet.id_str;
-    var content = tweet.text;
-
-    __(`Mentionned in tweet ${tweet_id} by ${user_id} : ${content}`);
-  }
-}); 
-
-
-eventEmitter.on('dm', (user_id, message_create_object) => {
+botEvents.on('dm', (user_id, message_create_object) => {
   var message = message_create_object.message_data.text.toLowerCase();
   var message_data = message_create_object.message_data;
 
@@ -114,4 +88,4 @@ eventEmitter.on('dm', (user_id, message_create_object) => {
   });
 });
 
-module.exports = eventEmitter;
+module.exports = botEvents;
