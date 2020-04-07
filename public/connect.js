@@ -26,7 +26,8 @@ let connect = async function(){
     request.then(function(res){
         if(res === "-1") return retryAuth();
 
-        window.location.href = "/index"
+        let href = $("#params-next").val() || "/index";
+        window.location.href = href
     });
     request.catch(function(res){
         retryAuth();
