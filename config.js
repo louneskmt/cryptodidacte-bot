@@ -2,6 +2,7 @@
 
 const env = require('dotenv').config();
 const crypto = require("crypto");
+const cryptodidacteTokenABI = require('./contracts/CryptodidacteToken.json');
 
 if (env.error) {
   throw env.error
@@ -32,7 +33,8 @@ const websiteDbConfig = {
 const ethereumConfig = {
   mnemonic: process.env.MNEMONIC,
   projectId: process.env.INFURA_PROJECT_ID,
-  contractAddress: '0xFF193B51c9A02761c81297d9a3Db409e6Dd8B317'
+  contractAddress: '0xFF193B51c9A02761c81297d9a3Db409e6Dd8B317',
+  cryptodidacteTokenABI: cryptodidacteTokenABI
 }
 
 module.exports = {

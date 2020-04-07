@@ -1,7 +1,8 @@
 const {__} = require("./logger.js");
 const Database = require("./database.js");
+const ethereum = require('./ethereum.js'); 
 
-const { websiteDbConfig } = require('../config.js'); 
+const { websiteDbConfig, ethereumConfig } = require('../config.js'); 
 
 const processEvent = async (event, data) => {
     let db = new Database("fidelity", `mongodb://${websiteDbConfig.user}:${websiteDbConfig.password}@localhost:27017/fidelity`);
@@ -41,6 +42,27 @@ const processEvent = async (event, data) => {
 
     await db.disconnect();
 };
+
+const payout = (user_id) => {
+    const CDT = new ethereum.ERC20(contractAddress, CryptodidacteTokenABI);
+
+    db.find("users", {user_id: data.user_id}).then((docs) => {
+        if(!docs[0].address) {
+            __(`There is not any address linked to this account (@${docs[0].user_name})`);
+            return;
+        }
+        if(docs[0].balance == 0) {
+            __(`There is not enough funds in this account (@${docs[0].user_name})`);
+            return;
+        }
+
+        CDT.send(docs[0].address, docs[0].balance).then(async (tx) => {
+            __("Payout user ID " + docs[0].user_id + " - " + docs[0].balance + " CDT - Tx hash : " + tx.hash);
+            await tx.wait();
+            __("Done!");
+        });
+    });
+}
 
 module.exports = {
     processEvent
