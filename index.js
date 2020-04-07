@@ -97,7 +97,7 @@ app.get("/index", function(req, res){
     req.session.isValid = false;
     res.redirect("/connect");
   }else{
-    ejs.renderFile(__dirname + "/public/index.ejs", function(err,str){
+    ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
       if(err) __(err,9);
       res.status(200).send(str);
     })
@@ -112,7 +112,7 @@ app.get("/view/:viewName", function(req, res){
     req.session.isValid = false;
     res.redirect("/connect");
   }else{
-    ejs.renderFile(__dirname + "/public/index.ejs", function(err,str){
+    ejs.renderFile(__dirname + "/public/index.ejs", {view: req.params.viewName}, function(err,str){
       res.status(200).send(str);
     })
   }
