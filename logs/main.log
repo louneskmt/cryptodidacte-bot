@@ -4791,3 +4791,87 @@ NDhhMjAyMzktN2FjNS00NzQ2LThmYjctMWFkNzk4NmNhYTkz
 ------------------------ 6/4 21:39:14 ------------------------
 [6/4 21:39:14] | [VERBOSE] |: Logger has started
 [6/4 21:39:15] | [DEBUG] |: Connected successfully to server
+
+
+------------------------ 7/4 8:1:55 ------------------------
+[7/4 8:1:55] | [VERBOSE] |: Logger has started
+[7/4 8:1:56] | [DEBUG] |: Connected successfully to server
+
+
+------------------------ 7/4 8:5:17 ------------------------
+[7/4 8:5:17] | [VERBOSE] |: Logger has started
+[7/4 8:5:18] | [DEBUG] |: Connected successfully to server
+
+
+------------------------ 7/4 8:7:24 ------------------------
+[7/4 8:7:24] | [VERBOSE] |: Logger has started
+[7/4 8:7:25] | [DEBUG] |: Connected successfully to server
+[7/4 8:51:53] | [DEBUG] |: Connected successfully to server
+[7/4 8:51:53] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[7/4 8:51:53] | [VERBOSE] |: 
+
+
+------------------------ 7/4 8:52:1 ------------------------
+[7/4 8:52:1] | [VERBOSE] |: Logger has started
+[7/4 8:52:2] | [DEBUG] |: Connected successfully to server
+[7/4 8:52:33] | [DEBUG] |: Connected successfully to server
+[7/4 8:52:33] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[7/4 8:52:33] | [VERBOSE] |: 
+
+
+------------------------ 7/4 8:56:21 ------------------------
+[7/4 8:56:21] | [VERBOSE] |: Logger has started
+[7/4 8:56:22] | [DEBUG] |: Connected successfully to server
+[7/4 8:56:27] | [DEBUG] |: Connected successfully to server
+[7/4 8:56:27] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[7/4 8:56:27] | [VERBOSE] |: 
+[7/4 8:57:34] | [DEBUG] |: Connected successfully to server
+[7/4 8:57:34] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[7/4 8:57:34] | [VERBOSE] |: 
+
+
+------------------------ 7/4 8:59:50 ------------------------
+[7/4 8:59:50] | [VERBOSE] |: Logger has started
+[7/4 8:59:51] | [DEBUG] |: Connected successfully to server
+[7/4 8:59:56] | [undefined] |: 
+[7/4 8:59:56] | [DEBUG] |: Connected successfully to server
+[7/4 8:59:56] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[7/4 8:59:56] | [VERBOSE] |: 
+
+
+------------------------ 7/4 9:3:0 ------------------------
+[7/4 9:3:0] | [VERBOSE] |: Logger has started
+[7/4 9:3:1] | [DEBUG] |: Connected successfully to server
+[7/4 9:3:10] | [VERBOSE] |: {}
+[7/4 9:3:10] | [undefined] |: 
+[7/4 9:3:10] | [DEBUG] |: Connected successfully to server
+[7/4 9:3:10] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[7/4 9:3:10] | [VERBOSE] |: 
+[7/4 9:8:7] | [VERBOSE] |: { "username": "lounes", "password": "test" }
+[7/4 9:8:7] | [undefined] |: lounes
+[7/4 9:8:7] | [DEBUG] |: Connected successfully to server
+[7/4 9:8:7] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[]
+[7/4 9:8:7] | [VERBOSE] |: 
+[7/4 9:11:2] | [VERBOSE] |: {
+  "username": "test4",
+  "password": "3f9b26dba0fc1e449445437903b56a87ae3826f93aa44e66e2d371625e2b8076"
+}
+[7/4 9:11:2] | [undefined] |: test4
+[7/4 9:11:2] | [DEBUG] |: Connected successfully to server
+[7/4 9:11:2] | [VERBOSE] |: database.js@findDocuments : Found the following documents : 
+[{"_id":"5e8b9e37b8a63a0c7f418ed9","username":"test4","password":"faf25ff49b20e716bb03bb6087cfac816af2444711c7cc7ece8114e91fb14e1c"}]
+[7/4 9:11:2] | [VERBOSE] |: [
+  {
+    "_id": "5e8b9e37b8a63a0c7f418ed9",
+    "username": "test4",
+    "password": "faf25ff49b20e716bb03bb6087cfac816af2444711c7cc7ece8114e91fb14e1c"
+  }
+]
+[7/4 9:11:2] | [VERBOSE] |: Inserted 1 document(s) into tokens
