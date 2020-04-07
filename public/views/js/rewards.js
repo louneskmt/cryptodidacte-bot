@@ -1,34 +1,7 @@
-$(function(){
-    showIndex();
-});
-
-
-let showDatabase = async (menu)=>{
-    $("#sect-index .whitebox").removeClass("reveal");
-    await sleep(.01);
-    $("#sect-index .whitebox").addClass("hideEffect");
-    await sleep(1);
-    $("#sect-index").addClass("dis-none")
-    
-    if(menu === "rewards"){
-        // Load rewards
-    }
-    $("#sect-data").removeClass("dis-none")
-    await sleep(.5);
-    $("#sect-data").addClass("reveal")
+onViewLoaded = function(){
     updateTableRows();
 }
 
-let showIndex = async () => {
-    $("#sect-auth").addClass("hideEffect");
-    await sleep(.3);
-    $("#sect-auth").addClass("dis-none");
-    $("#sect-index").removeClass("dis-none");
-    $("#sect-index .whitebox").addClass("reveal")
-
-    
-
-}
 
 let selectElementRow = function (ev){
     $(this).parents("tr").toggleClass("selected");    

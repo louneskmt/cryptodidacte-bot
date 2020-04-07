@@ -7,18 +7,13 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="" id="view-js"></script>
     <script src="sha256.js"></script>
     <script defer src="./index.js"></script>
 </head>
 <body>
-    <section id="sect-auth" class="whitebox">
-        <h2>Welcome</h2>
-        <input type="text" id="auth-username" name="username" class="input-text" placeholder="username">
-        <input type="password" id="auth-password" name="pasword" class="input-text" placeholder="password">
-        <button id="auth-connect">Connect</button>
-    </section>
     <section id="sect-index" class="dis-none">
-        <div class="whitebox unselectable" id="index-rewards">
+        <div class="whitebox unselectable" id="index-rewards" open-view="rewards">
             <div class="icon">card_giftcard</div>
             <h2>Rewards</h2>
         </div>
@@ -35,148 +30,8 @@
             <h2>Debug</h2>
         </div>
     </section>
-    <section id="sect-data" class="dis-none">
-        <header class="sect-data-header">
-            <h1>Rewards</h1>
-            <input type="text" id="inp--data-filter" value="claimed:no & reward>100">
-            <span class="sect-data-header-icon --icon">filter_list</span>
-        </header>
-        <div class="--ov-h table-container">
-            <div class="data-thead">
-                <table>
-                    <tr>
-                        <th id="data-table-checkall" class="--icon"></th>
-                        <th>Username</th>
-                        <th>Claimed</th>
-                        <th>Type</th>
-                        <th>Reward</th>
-                    </tr>
-                </table>
-            </div>
-            <div class="--ov-auto" style="height: 100%; border-radius: 10px">
-                <table id="data-table">
-                    <tbody class="--last-td-red --last-td-bold">
-                        <tr class="selected">
-                            <td class="data-table-check"></td>
-                            <td>cillianklota</td>
-                            <td>no</td>
-                            <td>LNQuiz</td>
-                            <td>300</td>
-                        </tr>
-                        <tr>
-                            <td class="data-table-check"></td>
-                            <td>lounes_kmt</td>
-                            <td>no</td>
-                            <td>multiple</td>
-                            <td>1500</td>
-                        </tr>
-                        <tr>
-                            <td class="data-table-check"></td>
-                            <td>Cryptodidacte</td>
-                            <td>yes</td>
-                            <td>multiple</td>
-                            <td>1500</td>
-                        </tr>
-                        <tr>
-                            <td class="data-table-check"></td>
-                            <td>RemiForte</td>
-                            <td>yes</td>
-                            <td>multiple</td>
-                            <td>1500</td>
-                        </tr>
-                        <tr class="selected">
-                            <td class="data-table-check"></td>
-                            <td>cillianklota</td>
-                            <td>no</td>
-                            <td>LNQuiz</td>
-                            <td>300</td>
-                        </tr>
-                        <tr>
-                            <td class="data-table-check"></td>
-                            <td>lounes_kmt</td>
-                            <td>no</td>
-                            <td>multiple</td>
-                            <td>1500</td>
-                        </tr>
-                        <tr>
-                            <td class="data-table-check"></td>
-                            <td>Cryptodidacte</td>
-                            <td>yes</td>
-                            <td>multiple</td>
-                            <td>1500</td>
-                        </tr>
-                        <tr>
-                            <td class="data-table-check"></td>
-                            <td>RemiForte</td>
-                            <td>yes</td>
-                            <td>multiple</td>
-                            <td>1500</td>
-                        </tr>
-                        <tr class="selected">
-                            <td class="data-table-check"></td>
-                            <td>cillianklota</td>
-                            <td>no</td>
-                            <td>LNQuiz</td>
-                            <td>300</td>
-                        </tr>
-                        <tr>
-                            <td class="data-table-check"></td>
-                            <td>lounes_kmt</td>
-                            <td>no</td>
-                            <td>multiple</td>
-                            <td>1500</td>
-                        </tr>
-                        <tr>
-                            <td class="data-table-check"></td>
-                            <td>Cryptodidacte</td>
-                            <td>yes</td>
-                            <td>multiple</td>
-                            <td>1500</td>
-                        </tr>
-                        <tr>
-                            <td class="data-table-check"></td>
-                            <td>RemiForte</td>
-                            <td>yes</td>
-                            <td>multiple</td>
-                            <td>1500</td>
-                        </tr>
-                        <tr class="selected">
-                            <td class="data-table-check"></td>
-                            <td>cillianklota</td>
-                            <td>no</td>
-                            <td>LNQuiz</td>
-                            <td>300</td>
-                        </tr>
-                        <tr>
-                            <td class="data-table-check"></td>
-                            <td>lounes_kmt</td>
-                            <td>no</td>
-                            <td>multiple</td>
-                            <td>1500</td>
-                        </tr>
-                        <tr>
-                            <td class="data-table-check"></td>
-                            <td>Cryptodidacte</td>
-                            <td>yes</td>
-                            <td>multiple</td>
-                            <td>1500</td>
-                        </tr>
-                        <tr>
-                            <td class="data-table-check"></td>
-                            <td>RemiForte</td>
-                            <td>yes</td>
-                            <td>multiple</td>
-                            <td>1500</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <footer class="sect-data-footer">
-            <div class="ta-left"></div>
-            <div class="ta-center"></div>
-            <div class="ta-right"></div>
-        </footer>
+    <section id="sect-view" class="dis-none">
+        
     </section>
 </body>
 </html>

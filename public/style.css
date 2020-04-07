@@ -23,7 +23,7 @@
     font-family: Montserrat;
     font-weight: 200;
     src: url(./fonts/Montserrat-ExtraLight.ttf)
-}*/
+}
 @font-face{
     font-family: 'Montserrat';
     font-weight: 300;
@@ -68,7 +68,7 @@
 } */
 
 *{
-    outline: none;
+    outline: none !important;
     box-sizing: border-box;
 }
 html, body{
@@ -257,6 +257,7 @@ h1,h2,h3,h4,h5,h6{
     animation: reveal-rotate 1s ease 0s 1 reverse !important;
 }
 #sect-index .whitebox .icon{
+    width: 100%;
     font-size: calc(var(--box-size) * 0.5);
     font-family: "Material Icons";
     align-self: center;
@@ -286,19 +287,19 @@ h1,h2,h3,h4,h5,h6{
 /****************************************************************/
 /************************** DATA ********************************/
 /****************************************************************/
-#sect-data{
+#sect-view{
     transition: opacity 1s ease;
     display: grid;
     height: 100vh;
     padding-top: 40px;
     grid-auto-flow: row;
     row-gap: 20px;
-    grid-template-rows: 5% 75% 15%;
+    grid-template-rows: 5% 1fr 75px;
 
     opacity: 0;
 
 }
-#sect-data.reveal{
+#sect-view.reveal{
     opacity: 1;
 }
 .sect-data-header{
@@ -336,7 +337,7 @@ h1,h2,h3,h4,h5,h6{
     color: #00000055;
     border-bottom: 3px solid #00000055;
 }
-#sect-data > .table-container{
+#sect-view > .table-container{
     position: static;
     margin: 20px 100px;
     width: calc(100vw - 200px);
