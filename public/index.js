@@ -40,6 +40,7 @@ let loadPage = async function(ev){
         onViewLoaded();
     });
 
+    history.pushState({view: viewName}, viewName, "/view/"+viewName);
     
 }
 
