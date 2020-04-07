@@ -6,6 +6,7 @@ class Session{
     constructor({username, password}){
         this.username = username;
         this.password = websiteDbConfig.hash({username,password});
+        this.isValid = false;
         
         this.url = `mongodb://${websiteDbConfig.user}:${websiteDbConfig.password}@localhost:27017/adminWebsite`;
     }
@@ -26,7 +27,13 @@ class Session{
 
         let { insertedId } = await this.db.insert("tokens",{username, timestamp: new Date().getTime(), openedFile: false});
         this.id = insertedId;
+        this.isValid = true;
+        this.timestamp = new Date();
         return insertedId;
+    }
+
+    async delete(){
+        return await this.db.remove({_id: this.id});
     }
 }
 

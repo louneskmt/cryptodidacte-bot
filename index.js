@@ -79,11 +79,16 @@ app.get('/', function(req, res){
 app.get('/connect', function(req, res){
   res.sendFile(__dirname + '/public/connect.html');
 });
-app.get("/secure.js", function(req, res){
-  if(!req.session) return res.status(403).send("-1");
-  let token = req.query.token;
-  let session = req.session;
- 
+app.get("/index", function(req, res){
+  let now = new Date();
+  let time = req.session.timestamp;
+  let delta = now - time;
+  console.log(req.session);
+  
+  if(delta > 1000*60*30 || !req.session.isValid){ //30mins
+    session.delete();
+    req.session = null;
+  }
 })
 
 app.post("/login", async function(req, res){
