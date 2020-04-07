@@ -54,6 +54,8 @@ globalEvents.on('logs', (type, body) => {
     let tweet_id = tweet.id_str;
 
     __(`${type.toUpperCase()} - Mentionned in tweet ${tweet_id} by @${user_name} (${user_id})`);
+
+    __(tweet);
   }
 
   if(body.hasOwnProperty('favorite_events')) {
@@ -72,6 +74,8 @@ globalEvents.on('logs', (type, body) => {
 
     __(`${type.toUpperCase()} - @${target.screen_name} ${follow_event.type == 'follow' ? 'followed' : 'unfollowed'} by @${source.screen_name}`);
   }
+
+
 })
 
 module.exports = globalEvents;
