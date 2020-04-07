@@ -60,7 +60,7 @@ globalEvents.on('logs', (type, body) => {
     let favorited = body.favorite_events[0];
     let user_id = favorited.user.id_str;
     let user_name = favorited.user.screen_name;
-    let tweet_id = favorited.id_str;
+    let tweet_id = favorited.favorited_status.id_str;
 
     __(`${type.toUpperCase()} - Tweet ${tweet_id} favorited by @${user_name} (${user_id})`);
   }
