@@ -62,7 +62,7 @@ globalEvents.on('logs', (type, body) => {
 
     switch (type) {
       case 'quote':
-        __(tweet);
+        // __(tweet);
         __(`${type.toUpperCase()} - @${user_name} (${user_id}) quoted tweet ${tweet.quoted_status.id_str} by ${tweet.quoted_status.user.screen_name}`);
         break;
       case 'reply':
