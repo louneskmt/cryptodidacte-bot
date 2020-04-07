@@ -56,9 +56,9 @@ globalEvents.on('logs', (type, body) => {
     let tweet_id = tweet.id_str;
 
     let type = '';
-    if(tweet.is_quote_status) type = 'quote';
+    if (tweet.hasOwnProperty('retweeted_status')) type = 'retweet';
     else if (tweet.in_reply_to_user_id) type = 'reply';
-    else if (tweet.hasOwnProperty('retweeted_status')) type = 'retweet';
+    else if(tweet.is_quote_status) type = 'quote';
 
     switch (type) {
       case 'quote':
