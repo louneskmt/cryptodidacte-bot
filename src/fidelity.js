@@ -29,17 +29,13 @@ const processEvent = async (event, data) => {
 
     db.find("users", {user_id: data.user_id}).then((docs) => {
         if(docs.length === 0) {
-            db.insert("users", {user_id: data.user_id}, {
+            db.insert("users", {
                 user_id: data.user_id,
                 user_name: data.user_name,
                 balance: reward
             });
         } else {
-            db.update("users", {
-                user_id: data.user_id,
-                user_name: data.user_name,
-                balance: reward
-            });
+            db.update("users", {user_id: data.user_id}, {balance: reward}, 'inc');
         }
     });
 };
