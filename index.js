@@ -82,7 +82,7 @@ app.post("/login", async function(req, res){
   
   if(status === -1){
     return res.status(403).send("-1");
-  }else if(status === 0){
+  }else{
     return res.status(200).send(status);
   }
 })
