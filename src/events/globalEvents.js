@@ -49,15 +49,37 @@ globalEvents.on('logs', (type, body) => {
 
   if(body.hasOwnProperty('tweet_create_events')) {
     let tweet = body.tweet_create_events[0];
+    if(tweet.user.id_str == twitterConfig.user_id_cryptodidacte) return;
+
     let user_id = tweet.user.id_str;
     let user_name = tweet.user.screen_name;
     let tweet_id = tweet.id_str;
 
-    __(`${type.toUpperCase()} - Mentionned in tweet ${tweet_id} by @${user_name} (${user_id})`);
+    let type;
+    if(tweet.is_quote_status) type = 'quote';
+    else if (tweet.in_reply_to_user_id) type = 'reply';
+    else if (tweet.hasOwnProperty('retweeted_Status')) type = 'retweet';
+
+    switch (type) {
+      case 'quote':
+        __(`${type.toUpperCase()} - @${user_name} (${user_id}) quoted tweet ${tweet.quoted_status.id_str} by ${tweet.quoted_status.user.screen_name}`);
+        break;
+      case 'reply':
+        __(`${type.toUpperCase()} - @${user_name} (${user_id}) replied to tweet ${tweet.in_reply_to_status_id_str} by @${tweet.in_reply_to_screen_name} (${tweet.in_reply_to_user_id_str})`);
+        break;
+      case 'retweet':
+        __(`${type.toUpperCase()} - Tweet ${tweet.retweeted_status.id_str} retweeted by @${user_name} (${user_id})`);
+        break;
+      default: 
+        __(`${type.toUpperCase()} - (Unknown type) Tweet ${tweet_id} by @${user_name} (${user_id})`);
+        break;
+    }
   }
 
   if(body.hasOwnProperty('favorite_events')) {
     let favorited = body.favorite_events[0];
+    if(favorited.user.id_str == twitterConfig.user_id_cryptodidacte) return;
+
     let user_id = favorited.user.id_str;
     let user_name = favorited.user.screen_name;
     let tweet_id = favorited.favorited_status.id_str;
@@ -70,8 +92,12 @@ globalEvents.on('logs', (type, body) => {
     let target = follow_event.target;
     let source = follow_event.source;
 
+    if(source.id_str == twitterConfig.user_id_cryptodidacte) return;
+
     __(`${type.toUpperCase()} - @${target.screen_name} ${follow_event.type == 'follow' ? 'followed' : 'unfollowed'} by @${source.screen_name}`);
   }
+
+
 })
 
 module.exports = globalEvents;
