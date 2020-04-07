@@ -107,7 +107,7 @@ app.post("/login", async function(req, res){
   }else{
     req.session.object = session;
     
-    return res.status(200).send(status);
+    return res.status(200).send("0");
   }
 })
 
