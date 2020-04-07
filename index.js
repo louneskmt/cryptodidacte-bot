@@ -64,6 +64,11 @@ app.get('/webhook/twitter', function(req, res) {
   }
 });
 
+app.get('/done', function(req, res) {
+  console.log(req.query);
+  console.log(req.body);
+});
+
 /**
  * Returns index HTML page
  */
@@ -71,13 +76,14 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/admin', function(req, res){
-  res.sendFile(__dirname + '/public/index.html');
+app.get('/connect', function(req, res){
+  res.sendFile(__dirname + '/public/connect.html');
 });
 app.get("/secure.js", function(req, res){
   if(!req.session) return res.status(403).send("-1");
   let token = req.query.token;
   let session = req.session;
+ 
 })
 
 app.post("/login", async function(req, res){

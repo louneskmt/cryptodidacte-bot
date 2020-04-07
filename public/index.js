@@ -1,43 +1,11 @@
-String.prototype.hexEncode = function(){
-    let hex, i;
-    let result = "";
-    for (i=0; i<this.length; i++) {
-        hex = this.charCodeAt(i).toString(16);
-        result += ("000"+hex).slice(-4);
-    }
-    return result
-}
-
 $(function(){
-    $("#auth-connect").click(() => connect() );
-    $("#index-rewards").click(() => showDatabase("rewards") );
+    showIndex();
 
-    $("#data-table tr td:first-child").click(selectElementRow);
-    $(".data-thead tr th:first-child").click(selectAllTabEl);
-
+    $(".whitebox[open-view]").click(loadPage);
 });
 
-let connect = async function(){
-    let username = $("#auth-username").val();   
-    let password = $("#auth-password").val();
-
-    let nPassword = await hashPassword(password);
-
-    $("#sect-auth").addClass("retract");
-    let request = $.post("/login", {
-        username, password: nPassword
-    }); 
-    request.then(function(res){
-        if(res === "-1") return retryAuth();
-
-        loadSecureJS(res);
-    });
-    request.catch(function(res){
-        retryAuth();
-    })
-}
-
-let sleep = async secs => {
+// GLOBAL
+sleep = async secs => {
     return new Promise((resolve, reject) => {
         setTimeout(()=>{
             resolve(secs);
@@ -45,18 +13,39 @@ let sleep = async secs => {
     })
 }
 
-let retryAuth = ()=>{
-    $("#sect-auth").removeClass("retract");
+let transition = async function(from, to){
+    return new Promise(async (resolve, reject)=>{
+        $(from).removeClass("reveal");
+        await sleep(.01);
+        $(from).addClass("hideEffect");
+        await sleep(1);
+        $(from).addClass("dis-none")
+        $(to).removeClass("dis-none")
+        await sleep(.1);
+        $(to).addClass("reveal");
+
+        resolve(to);
+    })
 }
 
-let loadSecureJS = (token)=>{
-    let script = $("<script></script>");
-    $(script).attr("src", "/secure.js?token="+token);
-    $("head").append(script)
+let loadPage = async function(ev){
+    let viewName = $(this).attr("open-view");
+    let url = `./views/${viewName}.html`;
+    let newJS = $("<script></script>",{id:"view-js", src:`./views/js/${viewName}.js`})
+    $("#view-js").replaceWith(newJS);
+    let request = $("#sect-view").load(url, async function(){
+        // ANIM
+        await transition("#sect-index .whitebox", "#sect-view");
+        $("#sect-index").addClass("dis-none");
+        onViewLoaded();
+    });
+
+    
 }
 
-let hashPassword = function(password){
-    let hash = sha256.create();
-    hash.update("1d34caabaa37"+password+"ead78d1d5753583562b6");
-    return hash.hex();
+let showIndex = async () => {
+    await sleep(.3);
+    $("#sect-index").removeClass("dis-none");
+    $("#sect-index .whitebox").addClass("reveal")
 }
+
