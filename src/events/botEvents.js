@@ -7,7 +7,7 @@ var botEvents = new events.EventEmitter();
 var Twitter = require('../Twit.js');
 const { twitterConfig } = require('../../config.js');
 var interactions = require('../interactions.js');
-var user = require('../user.js');
+var userStatus = require('../userStatus.js');
 
 botEvents.on('tweet', (tweet) => {
   var user_id = tweet.user.id_str;
@@ -53,17 +53,17 @@ botEvents.on('dm', (user_id, message_create_object) => {
 
   if(message === "cancel") return interactions.end(params);
 
-  user.getStatus(user_id, (status) => {
+  userStatus.getStatus(user_id, (status) => {
     params.status = status;
 
     if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
-      user.deleteStatus(user_id);
+      userStatus.deleteStatus(user_id);
       __("Sending admin menu...")
       return Twitter.sendAdminMenu(user_id)
     }
   
     if(message === "start"){
-      user.deleteStatus(user_id);
+      userStatus.deleteStatus(user_id);
       return interactions.start(params);
     }
     
