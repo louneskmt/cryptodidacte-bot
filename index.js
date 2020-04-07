@@ -87,7 +87,7 @@ app.get('/connect', function(req, res){
 });
 app.get("/index", function(req, res){
   let now = new Date();
-  let time = req.session.object.timestamp;
+  let time = req.session.timestamp;
   let delta = now - time;
   
   if(delta > 1000*60*30 || !req.session.isValid){ //30mins
