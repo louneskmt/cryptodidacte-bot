@@ -55,25 +55,25 @@ globalEvents.on('logs', (type, body) => {
     let user_name = tweet.user.screen_name;
     let tweet_id = tweet.id_str;
 
-    let type = '';
-    if (tweet.hasOwnProperty('retweeted_status')) type = 'retweet';
-    else if (tweet.in_reply_to_user_id) type = 'reply';
-    else if(tweet.is_quote_status) type = 'quote';
+    let tweet_type = '';
+    if (tweet.hasOwnProperty('retweeted_status')) tweet_type = 'retweet';
+    else if (tweet.in_reply_to_user_id) tweet_type = 'reply';
+    else if(tweet.is_quote_status) tweet_type = 'quote';
 
     switch (type) {
       case 'quote':
         // __(tweet);
-        __(`${type.toUpperCase()} - @${user_name} (${user_id}) quoted tweet ${tweet.quoted_status.id_str} by @${tweet.quoted_status.user.screen_name}`);
+        __(`${type.toUpperCase()} - ${tweet_type.toUpperCase()} - @${user_name} (${user_id}) quoted tweet ${tweet.quoted_status.id_str} by @${tweet.quoted_status.user.screen_name}`);
         break;
       case 'reply':
         __(tweet);
-        __(`${type.toUpperCase()} - @${user_name} (${user_id}) replied to tweet ${tweet.in_reply_to_status_id_str} by @${tweet.in_reply_to_screen_name} (${tweet.in_reply_to_user_id_str})`);
+        __(`${type.toUpperCase()} -${tweet_type.toUpperCase()} - @${user_name} (${user_id}) replied to tweet ${tweet.in_reply_to_status_id_str} by @${tweet.in_reply_to_screen_name} (${tweet.in_reply_to_user_id_str})`);
         break;
       case 'retweet':
-        __(`${type.toUpperCase()} - Tweet ${tweet.retweeted_status.id_str} retweeted by @${user_name} (${user_id})`);
+        __(`${type.toUpperCase()} - ${tweet_type.toUpperCase()} - Tweet ${tweet.retweeted_status.id_str} retweeted by @${user_name} (${user_id})`);
         break;
       default: 
-        __(`${type.toUpperCase()} - (Unknown type) Tweet ${tweet_id} by @${user_name} (${user_id})`);
+        __(`${type.toUpperCase()} - (Unknown type) - Tweet ${tweet_id} by @${user_name} (${user_id})`);
         break;
     }
   }
