@@ -10,10 +10,6 @@ String.prototype.hexEncode = function(){
 
 $(function(){
     $("#auth-connect").click(() => connect() );
-    $("#index-rewards").click(() => showDatabase("rewards") );
-
-    $("#data-table tr td:first-child").click(selectElementRow);
-    $(".data-thead tr th:first-child").click(selectAllTabEl);
 
 });
 
