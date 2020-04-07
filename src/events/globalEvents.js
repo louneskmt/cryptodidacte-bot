@@ -55,13 +55,14 @@ globalEvents.on('logs', (type, body) => {
     let user_name = tweet.user.screen_name;
     let tweet_id = tweet.id_str;
 
-    let type;
+    let type = '';
     if(tweet.is_quote_status) type = 'quote';
     else if (tweet.in_reply_to_user_id) type = 'reply';
-    else if (tweet.hasOwnProperty('retweeted_Status')) type = 'retweet';
+    else if (tweet.hasOwnProperty('retweeted_status')) type = 'retweet';
 
     switch (type) {
       case 'quote':
+        __(tweet);
         __(`${type.toUpperCase()} - @${user_name} (${user_id}) quoted tweet ${tweet.quoted_status.id_str} by ${tweet.quoted_status.user.screen_name}`);
         break;
       case 'reply':
