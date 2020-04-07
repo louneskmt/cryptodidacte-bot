@@ -31,7 +31,7 @@ app.use(expressSession({
   secret: process.env.SALT,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true, store: new MemoryStore(), expires: new Date(Date.now() + 5*60*1000)}
+  cookie: { secure: true, expires: new Date(Date.now() + 5*60*1000)}
 }))
 /**
  * Receives Account Activity events
