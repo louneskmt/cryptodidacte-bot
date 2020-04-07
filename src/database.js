@@ -92,7 +92,7 @@ class Database {
       })
   }
 
-  async update(collection, filter, edit, many = false) {
+  async update(collection, filter, edit, mode = 'set', many = false) {
       var self = this;
       await this.connectIfNot();
 
@@ -101,10 +101,20 @@ class Database {
 
       fn = many ? coll.updateMany : coll.updateOne;
 
+      let update = {};
+      switch (mode) {
+        case 'set':
+            update = { $set: edit };
+            break;
+        case 'inc':
+            update = { $inc: edit };
+            break;
+        default:
+            break;
+      }
+
       return new Promise(function (resolve, reject) {
-          fn.call(coll, filter, {
-                  $set: edit
-              }, (err, res) => {
+          fn.call(coll, filter, update, (err, res) => {
                   if (err) {
                       __("Could not remove document, got : ", 9)
                       __(err, 9);
