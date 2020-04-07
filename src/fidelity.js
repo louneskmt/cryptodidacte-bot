@@ -1,5 +1,5 @@
-const {__} = require("../logger.js");
-const Database = require("../src/database.js");
+const {__} = require("./logger.js");
+const Database = require("./database.js");
 
 const { websiteDbConfig } = require('../config.js'); 
 
