@@ -139,6 +139,14 @@ h1,h2,h3,h4,h5,h6{
     overflow: hidden;
 }
 
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 #sect-auth{
     transition: transform 1s ease, opacity .3s ease;
