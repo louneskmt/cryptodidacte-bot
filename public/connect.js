@@ -22,7 +22,7 @@ let connect = async function(){
     $("#sect-auth").addClass("retract");
     let request = $.post("/login", {
         username, password: nPassword
-    }); 
+    });
     request.then(function(res){
         if(res === "-1") return retryAuth();
 
