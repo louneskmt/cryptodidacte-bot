@@ -6,6 +6,8 @@ class Session{
     constructor({username, password}){
         this.username = username;
         this.password = websiteDbConfig.hash({username,password});
+        console.log(this.password);
+        
         this.url = `mongodb://${websiteDbConfig.user}:${websiteDbConfig.password}@localhost:27017/adminWebsite`;
     }
     async create(){
