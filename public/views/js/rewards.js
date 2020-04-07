@@ -1,7 +1,7 @@
 onViewLoaded = function(){
     updateTableRows();
-    $("#data-check-all").click(selectAllTabEl);
-    $(".data-table.check").click(selectElementRow)
+    $("#data-table-checkall").click(selectAllTabEl);
+    $(".data-table-check").click(selectElementRow)
 }
 
 
