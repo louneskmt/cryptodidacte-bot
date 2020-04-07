@@ -92,6 +92,8 @@ app.get("/index", function(req, res){
   
   if(delta > 1000*60*30 || !req.session.isValid){ //30mins
     res.status(403).send("-1")
+  }else{
+    res.status(200).sendFile(__dirname + "/public/index.html")
   }
 })
 
