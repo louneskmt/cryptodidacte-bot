@@ -16,6 +16,7 @@ const bodyParser = require('body-parser');
 const https = require('https');
 const helmet = require('helmet');
 const expressSession = require('express-session');
+const ejs = require("ejs");
 
 let Database = require('./src/database.js')
 global.database = new Database("cryptodidacte");
@@ -83,7 +84,9 @@ app.get('/', function(req, res){
 });
 
 app.get('/connect', function(req, res){
-  res.sendFile(__dirname + '/public/connect.html');
+  ejs.renderFile(__dirname + "/public/connect.ejs", function(err,str){
+    res.status(200).send(str);
+  })
 });
 app.get("/index", function(req, res){
   let now = new Date();
@@ -91,13 +94,28 @@ app.get("/index", function(req, res){
   let delta = now - time;
   
   if(delta > 1000*60*30 || !req.session.isValid){ //30mins
-    __("Session expired")
     req.session.isValid = false;
     res.redirect("/connect");
   }else{
-    res.status(200).sendFile(__dirname + "/public/index.html")
+    ejs.renderFile(__dirname + "/public/index.ejs", function(err,str){
+      res.status(200).send(str);
+    })
   }
 })
+app.get("/view/:viewName", function(req, res){
+  let now = new Date();
+  let time = req.session.timestamp;
+  let delta = now - time;
+  
+  if(delta > 1000*60*30 || !req.session.isValid){ //30mins
+    req.session.isValid = false;
+    res.redirect("/connect");
+  }else{
+    ejs.renderFile(__dirname + "/public/index.ejs", function(err,str){
+      res.status(200).send(str);
+    })
+  }
+});
 
 app.post("/login", async function(req, res){
   __(req.body)
