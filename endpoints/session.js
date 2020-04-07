@@ -5,7 +5,6 @@ const Database = require("../src/database.js");
 class Session{
     constructor({username, password}){
         this.username = username;
-        __(username, password);
         this.password = websiteDbConfig.hash({username,password});
         
         this.url = `mongodb://${websiteDbConfig.user}:${websiteDbConfig.password}@localhost:27017/adminWebsite`;
