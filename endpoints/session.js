@@ -29,6 +29,8 @@ class Session{
         this.id = insertedId;
         this.isValid = true;
         this.timestamp = new Date();
+        console.log(insertedId);
+        
         return insertedId;
     }
 
