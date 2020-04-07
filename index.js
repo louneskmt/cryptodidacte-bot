@@ -15,6 +15,7 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const https = require('https');
 const helmet = require('helmet');
+const expressSession = require('express-session');
 
 let Database = require('./src/database.js')
 global.database = new Database("cryptodidacte");
@@ -26,7 +27,12 @@ app.set('port', 8443)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(helmet())
-
+aapp.use(expresSession({
+  secret: process.env.SALT,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 /**
  * Receives Account Activity events
  **/
@@ -81,9 +87,9 @@ app.get('/connect', function(req, res){
 });
 app.get("/index", function(req, res){
   let now = new Date();
+  console.log(req.session);
   let time = req.session.timestamp;
   let delta = now - time;
-  console.log(req.session);
   
   if(delta > 1000*60*30 || !req.session.isValid){ //30mins
     session.delete();
@@ -102,6 +108,8 @@ app.post("/login", async function(req, res){
     return res.status(403).send("-1");
   }else{
     req.session = session;
+    console.log(req.session);
+    
     return res.status(200).send(status);
   }
 })
