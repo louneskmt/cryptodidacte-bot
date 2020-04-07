@@ -84,17 +84,6 @@ globalEvents.on('cryptodidacte', (body) => {
       favorited_tweet_id: favorite.favorited_status.id_str,
       timestamp: favorite.timestamp_ms
     });
-    __(`${type.toUpperCase()} - Tweet ${tweet_id} favorited by @${user_name} (${user_id})`);
-  }
-
-  if(body.hasOwnProperty('follow_events')) {
-    let follow_event = body.follow_events[0];
-    let target = follow_event.target;
-    let source = follow_event.source;
-
-    if(source.id_str == twitterConfig.user_id_cryptodidacte) return;
-
-    __(`${type.toUpperCase()} - @${target.screen_name} ${follow_event.type == 'follow' ? 'followed' : 'unfollowed'} by @${source.screen_name}`);
   }
 });
 
