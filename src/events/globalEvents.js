@@ -16,7 +16,7 @@ globalEvents.on('bot', (body) => {
         }
     }
 
-    if(req.body.hasOwnProperty('tweet_create_events')) {
+    if(body.hasOwnProperty('tweet_create_events')) {
       botEvents.emit('tweet', body.tweet_create_events[0]);
     }
 });
@@ -34,7 +34,7 @@ globalEvents.on('logs', (type, body) => {
         let sender = message_create.sender_id;
         let content = message_create.message_data.text;
     
-        if(sender == Twitter.botId){
+        if(sender == twitterConfig.user_id_bot){
           sender = "BOT"
         }else{
           recipient = "BOT"
