@@ -70,7 +70,7 @@ globalEvents.on('logs', (type, body) => {
     let target = follow_event.target;
     let source = follow_event.source;
 
-    __(`${type.toUpperCase()} - @${target.screen_name} followed by @${source.screen_name}`);
+    __(`${type.toUpperCase()} - @${target.screen_name} ${follow_event.type == 'follow' ? 'followed' : 'unfollowed'} by @${source.screen_name}`);
   }
 })
 
