@@ -1,7 +1,12 @@
 $(function(){
-    showIndex();
+    let defView = $("#params-view").val();
+    if(defView){
+        loadView(defView);
+    }else{
+        showIndex();
+    }
 
-    $(".whitebox[open-view]").click(loadPage);
+    $(".whitebox[open-view]").click(loadViewOnClick);
 });
 
 // GLOBAL
@@ -28,8 +33,12 @@ let transition = async function(from, to){
     })
 }
 
-let loadPage = async function(ev){
+let loadViewOnClick = async (ev) => {
     let viewName = $(this).attr("open-view");
+    await loadPage(viewName);
+}
+
+let loadView = async function(viewName){
     let url = `./views/${viewName}.html`;
     let newJS = $("<script></script>",{id:"view-js", src:`./views/js/${viewName}.js`})
     $("#view-js").replaceWith(newJS);
@@ -41,7 +50,6 @@ let loadPage = async function(ev){
     });
 
     history.pushState({view: viewName}, viewName, "/view/"+viewName);
-    
 }
 
 let showIndex = async () => {
