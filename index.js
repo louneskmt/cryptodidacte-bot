@@ -31,7 +31,7 @@ app.use(expressSession({
   secret: process.env.SALT,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { secure: true, store: new MemoryStore(), expires: new Date(Date.now() + 5*60*1000)}
 }))
 /**
  * Receives Account Activity events
@@ -90,8 +90,10 @@ app.get("/index", function(req, res){
   let time = req.session.timestamp;
   let delta = now - time;
   
-  if(delta > 1000*60*30 || !req.session.isValid){ //30mins
-    res.status(403).send("-1")
+  if(delta > 1000*60*1 || !req.session.isValid){ //30mins
+    __("Session expired")
+    req.session.isValid = false;
+    res.redirect("/connect");
   }else{
     res.status(200).sendFile(__dirname + "/public/index.html")
   }
