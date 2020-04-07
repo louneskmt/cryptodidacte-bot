@@ -6,7 +6,7 @@ const { websiteDbConfig, ethereumConfig } = require('../config.js');
 
 const processEvent = async (event, data) => {
     let db = new Database("fidelity", `mongodb://${websiteDbConfig.user}:${websiteDbConfig.password}@localhost:27017/fidelity`);
-
+    await db.connect();
     await db.insert("history", data);
 
     let reward;
