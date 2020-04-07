@@ -2,7 +2,7 @@ const {__,  __json} = require("./src/logger.js");
 
 // Require Events handler and fs to read files
 const Session = require('./endpoints/session.js');
-const eventEmitter = require('./src/events.js');
+const globalEvents = require('./src/events/globalEvents.js');
 const fs = require('fs');
 
 // Require Twitter related modules
@@ -31,20 +31,22 @@ app.use(helmet())
  * Receives Account Activity events
  **/
 app.post('/webhook/twitter', function(req, res) {
-  eventEmitter.emit('logs', req.body);
+  let for_user_id = req.body.for_user_id;
 
-  if(req.body.hasOwnProperty('direct_message_events')) {
-    var message_create_object = req.body.direct_message_events[0].message_create;
-    var user_id = message_create_object.sender_id;
-
-    if(user_id != twitterConfig.user_id_bot) {
-      eventEmitter.emit('dm', user_id, message_create_object);
-    }
-
+  switch (for_user_id) {
+    case twitter.user_id_bot:
+      globalEvents.emit('bot', req.body);
+      globalEvents.emit('logs', 'bot', req.body);
+      break;
+    case twitter.user_id_cryptodidacte:
+      globalEvents.emit('cryptodidacte', req.body);
+      globalEvents.emit('logs', 'cryptodidacte', req.body);
+      break;
+    default:
+      __('Unknow request target');
+      break;
   }
-  if(req.body.hasOwnProperty('tweet_create_events')) {
-    eventEmitter.emit('tweet', req.body.tweet_create_events[0]);
-  }
+  
   res.status(200).end();
 })
 
