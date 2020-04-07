@@ -84,7 +84,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/connect', function(req, res){
-  let continueTo = req.params.continueTo;
+  let continueTo = req.query.continueTo;
   ejs.renderFile(__dirname + "/public/connect.ejs", {continueTo}, function(err,str){
     if(err) __(err,9);
     res.status(200).send(str);
