@@ -105,8 +105,10 @@ app.post("/login", async function(req, res){
   if(status === -1){
     return res.status(403).send("-1");
   }else{
-    req.session.object = session;
-    
+    __("Inserted session")
+    req.session.object = session.id;
+    __("returning")
+  
     return res.status(200).send("0");
   }
 })
