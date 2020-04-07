@@ -75,19 +75,19 @@ globalEvents.on('cryptodidacte', (body) => {
   }
 
   if(body.hasOwnProperty('favorite_events')) {
-    let favorited = body.favorite_events[0];
-    if(favorited.user.id_str == twitterConfig.user_id_cryptodidacte) return;
+    let favorite = body.favorite_events[0];
+    if(favorite.user.id_str == twitterConfig.user_id_cryptodidacte) return;
 
-    let user_id = favorited.user.id_str;
-    let user_name = favorited.user.screen_name;
-    let tweet_id = favorited.favorited_status.id_str;
+    let user_id = favorite.user.id_str;
+    let user_name = favorite.user.screen_name;
+    let tweet_id = favorite.favorited_status.id_str;
 
     fidelity.processEvent('favorite', {
       user_id: user_id,
       user_name: user_name,
       tweet_id: tweet_id,
-      favorited_tweet_id: tweet.favorited_status.id_str,
-      timestamp: tweet.timestamp_ms
+      favorited_tweet_id: favorite.favorited_status.id_str,
+      timestamp: favorite.timestamp_ms
     });
     __(`${type.toUpperCase()} - Tweet ${tweet_id} favorited by @${user_name} (${user_id})`);
   }
