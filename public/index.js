@@ -28,9 +28,12 @@ let connect = async function(){
         username, password: nPassword
     }); 
     request.then(function(res){
-        if(res === "-1") return $("#sect-auth").removeClass("retract");
+        if(res === "-1") return retryAuth();
 
         showIndex();
+    });
+    request.catch(function(res){
+        retryAuth();
     })
 }
 
@@ -40,6 +43,10 @@ let sleep = async secs => {
             resolve(secs);
         }, secs*1000)
     })
+}
+
+let retryAuth = ()=>{
+    $("#sect-auth").removeClass("retract");
 }
 
 let showDatabase = async (menu)=>{
