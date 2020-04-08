@@ -39,6 +39,8 @@ let loadViewOnClick = async function(ev){
 }
 
 let loadView = async function(viewName){
+    let url = `/views/${viewName}.html`;
+
     let request = $("#sect-view").load(url, async function(res, status){
         // ANIM
         if(status==="error") return showIndex();
@@ -47,7 +49,6 @@ let loadView = async function(viewName){
         onViewLoaded();
     });
 
-    let url = `/views/${viewName}.html`;
     let newJS = $("<script></script>",{id:"view-js", src:`/views/js/${viewName}.js`})
     $("#view-js").replaceWith(newJS);
     $("body").addClass("loading");
