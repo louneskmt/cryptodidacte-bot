@@ -28,7 +28,6 @@ let transition = async function(from, to){
         $(to).removeClass("dis-none")
         await sleep(.1);
         $(to).addClass("reveal");
-        $(to).removeClass("hideEffect")
 
         resolve(to);
     })
@@ -70,7 +69,8 @@ let loadView = async function(viewName, params){
 }
 
 let showIndex = async () => {
-    await transition("#sect-view", "#sect-index");
-    transition("", "#sect-index .whitebox");
+    await sleep(.3);
+    $("#sect-index").removeClass("dis-none");
+   transition("#sect-view", "#sect-index .whitebox");
 }
 
