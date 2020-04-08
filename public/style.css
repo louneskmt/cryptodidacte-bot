@@ -159,6 +159,17 @@ h1,h2,h3,h4,h5,h6{
     overflow: hidden;
 }
 
+.--ta-left{
+    text-align: left;
+}
+.--ta-center{
+    text-align: center;
+}
+.--ta-right{
+    text-align: right;
+}
+
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -457,5 +468,11 @@ h1,h2,h3,h4,h5,h6{
 }
 .sect-data-footer{
     width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(3, 1fr);
+    
+    color: #ffffff;
+
     background: var(--grey);
 }

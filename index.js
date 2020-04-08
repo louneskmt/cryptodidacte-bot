@@ -136,8 +136,6 @@ app.post("/login", async function(req, res){
     req.session.timestamp = session.timestamp;
     req.session.token = session.id;
     req.session.isValid = true;
-
-    __(req.session,2);
   
     return res.status(200).send("0");
   }
@@ -195,7 +193,7 @@ let isSessionValid = (session)=>{
   let delta = now - time;
 
   //*** TEST ***//
-  if(delta > 1000*60*.1 || !session.isValid){ //30mins
+  if(delta > 1000*60*30 || !session.isValid){ //30mins
     session.isValid = false;
     return false
   }
