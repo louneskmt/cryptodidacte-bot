@@ -10,12 +10,21 @@ onViewLoaded = async function(obj){
     $("body").addClass("loading");
     $.post("/db/get", query, function(data){
         let keyOrder = obj.keyOrder || [];
-        if(keyOrder.length === 0){
+
+        let headTarget = $("#data-thead table tr");
+        $(headTarget).html(`
+            <th id="data-table-checkall" class="--icon"></th>
+        `);
+        if (keyOrder.length === 0) {
             for(const key in data[0]){
-                console.log(key);
+                if(key === "_id") continue;
                 
                 keyOrder.push(key);
             }
+        }
+
+        for (const key of keyOrder) {
+            $(headTarget).append(`<th>${key}</th>`)
         }
         
         for(const entry of data){
