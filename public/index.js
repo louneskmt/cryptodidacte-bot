@@ -3,7 +3,7 @@ $(function(){
     if(defView){
         loadView(defView);
     }else{
-        showIndex();
+        transition(null, "#sect-index .whitebox")
     }
 
     $(".whitebox[open-view]").click(loadViewOnClick);
@@ -20,11 +20,14 @@ sleep = async secs => {
 
 let transition = async function(from, to){
     return new Promise(async (resolve, reject)=>{
-        $(from).removeClass("reveal");
-        await sleep(.01);
-        $(from).addClass("hideEffect");
-        await sleep(1);
-        $(from).addClass("dis-none")
+        if(from){
+            $(from).removeClass("reveal");
+            await sleep(.01);
+            $(from).addClass("hideEffect");
+            await sleep(1);        
+            $(from).addClass("dis-none")
+        }
+
         $(to).removeClass("dis-none")
         await sleep(.1);
         $(to).addClass("reveal");
