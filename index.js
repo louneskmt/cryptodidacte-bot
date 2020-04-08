@@ -145,9 +145,9 @@ app.post("/db/get/", async function(req, res){
   }
 
   let collection = req.body.collection || null;
-  let filter = req.body.filter || null;
+  let filter = req.body.filter || {};
 
-  if(!collection || !filter) res.status(400).send("-1");
+  if(!collection) return res.status(400).send("-1");
 
   // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
   let queryResponse = await database.find(collection, filter);
