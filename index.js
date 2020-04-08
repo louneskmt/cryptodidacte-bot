@@ -199,7 +199,7 @@ let isSessionValid = (session)=>{
   let delta = now - time;
 
   //*** TEST ***//
-  if(delta > 1000*60*1 || !session.isValid){ //30mins
+  if(delta > 1000*60*0.5 || !session.isValid){ //30mins
     session.isValid = false;
     return false
   }
