@@ -517,6 +517,9 @@ h1,h2,h3,h4,h5,h6{
     font-size: 40px;
     color: #ffffff;
 }
+.sect-data-footer *{
+    align-items: center;
+}
 .footer-cont{
     display: inline-block;
     height: 60px;
