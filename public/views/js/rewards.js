@@ -26,7 +26,7 @@ onViewLoaded = async function(){
         }
 
         $("#data-table tr").each(async function(ix, el){
-            await sleep(ix*0.3)
+            await sleep(ix*0.2)
             $(el).addClass("reveal");
         })
 
