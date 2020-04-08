@@ -101,7 +101,7 @@ app.get("/index", function(req, res){
   if(delta > 1000*60*1 || !req.session.isValid){ //30mins
     req.session.isValid = false;
     req.session.destroy();
-    __("Session destroyed")
+    __(req.session.timestamp)
     res.redirect("/connect");
   }else{
     ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
