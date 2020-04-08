@@ -21,12 +21,12 @@ sleep = async secs => {
 let transition = async function(from, to){
     return new Promise(async (resolve, reject)=>{
         $(from).removeClass("reveal");
+        $(to).removeClass("hideEffect");
         await sleep(.01);
         $(from).addClass("hideEffect");
         await sleep(1);
         $(from).addClass("dis-none")
 
-        $(to).addClass("hideEffect");
         $(to).removeClass("dis-none")
         await sleep(.1);
         $(to).addClass("reveal");
