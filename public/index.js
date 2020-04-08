@@ -42,9 +42,9 @@ let loadView = async function(viewName){
     let url = `/views/${viewName}.html`;
     let newJS = $("<script></script>",{id:"view-js", src:`/views/js/${viewName}.js`})
     $("#view-js").replaceWith(newJS);
-    $("#sect-index").addClass("dis-none");
     $("body").addClass("loading");
     await transition("#sect-index .whitebox", "");
+    $("#sect-index").addClass("dis-none");
     
     let request = $("#sect-view").load(url, async function(res, status){
         // ANIM
