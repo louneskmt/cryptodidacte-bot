@@ -32,7 +32,7 @@ app.use(expressSession({
   secret: process.env.SALT,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true, expires: new Date(Date.now() + 30*60*1000)}
+  cookie: { secure: true, expires: new Date(Date.now() + 2*60*1000)}
 }))
 /**
  * Receives Account Activity events
@@ -190,7 +190,8 @@ let isSessionValid = (session)=>{
   let time = session.timestamp;
   let delta = now - time;
 
-  if(delta > 1000*60*30 || !session.isValid){ //30mins
+  //*** TEST ***//
+  if(delta > 1000*60*2 || !session.isValid){ //30mins
     session.isValid = false;
     return false
   }
