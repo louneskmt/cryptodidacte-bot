@@ -497,11 +497,6 @@ h1,h2,h3,h4,h5,h6{
     border-style: solid;
     cursor: pointer;
 }
-#data-table tr:hover{
-    border-width: 2px 0;
-    border-color: var(--red);
-    z-index: 10;
-}
 
 #data-table tr:hover td:first-child::before{
     opacity: .3;
