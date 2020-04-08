@@ -441,7 +441,7 @@ h1,h2,h3,h4,h5,h6{
 #data-table tr, .data-thead tr{
     height: 50px;
     border: none;
-    border-bottom: 1px solid var(--red)
+    border-bottom: 1px solid var(--red);
 }
 #data-table tr *, .data-thead tr *{
     text-align: left;
