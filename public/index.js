@@ -25,6 +25,8 @@ let transition = async function(from, to){
         $(from).addClass("hideEffect");
         await sleep(1);
         $(from).addClass("dis-none")
+
+        $(to).addClass("hideEffect");
         $(to).removeClass("dis-none")
         await sleep(.1);
         $(to).addClass("reveal");
