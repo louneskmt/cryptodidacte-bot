@@ -369,6 +369,9 @@ h1,h2,h3,h4,h5,h6{
 #sect-view.reveal{
     opacity: 1;
 }
+#sect-view.hideEffect{
+    opacity: 0;
+}
 .sect-data-header{
     display: grid;
     grid-auto-flow: column;
