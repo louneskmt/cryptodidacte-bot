@@ -43,11 +43,12 @@ let loadView = async function(viewName){
     let newJS = $("<script></script>",{id:"view-js", src:`/views/js/${viewName}.js`})
     $("#view-js").replaceWith(newJS);
     $("#sect-index").addClass("dis-none");
+    $("body").addClass("loading");
     await transition("#sect-index .whitebox", "");
     
-    $("body").addClass("loading");
-    let request = $("#sect-view").load(url, async function(){
+    let request = $("#sect-view").load(url, async function(res, status){
         // ANIM
+        if(status==="error") return showIndex();
         $("body").removeClass("loading");
         await transition("", "#sect-view");    
         onViewLoaded();
