@@ -400,8 +400,8 @@ h1,h2,h3,h4,h5,h6{
 }
 #sect-view > .table-container{
     position: static;
-    margin: 20px 100px;
-    width: calc(100vw - 200px);
+    margin: 20px auto;
+    width: calc(90vw);
     border-radius: 10px;
 }
 #data-table{
@@ -514,6 +514,12 @@ h1,h2,h3,h4,h5,h6{
 
     font-size: 40px;
     color: #ffffff;
+}
+.footer-cont{
+    display: inline-block;
+    height: 60px;
+    justify-self: center;
+    align-self: center;
 
     background: var(--grey);
 }
