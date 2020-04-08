@@ -368,7 +368,7 @@ h1,h2,h3,h4,h5,h6{
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: auto 1fr 3%;
-    padding: 0 100px;
+    padding: 0 5vw;
 }
 .sect-data-header h1{
     display: inline-block;
@@ -401,7 +401,7 @@ h1,h2,h3,h4,h5,h6{
 }
 #sect-view > .table-container{
     position: static;
-    padding: 20px;
+    padding: 20px 5vw;
     width: 100%;
     border-radius: 10px;
 }
