@@ -170,6 +170,21 @@ let isSessionValid = (session)=>{
 }
 
 
+app.post("/db/insert/", async function(req, res){
+  if( !isSessionValid(req.session) ){
+    return res.status(403).send("-1");
+  }
+  
+  let collection = req.body.collection || null;
+  let entry = req.body.entry || null;
+
+  if(!collection || !filter) res.status(400).send("-1");
+
+  // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
+  let queryResponse = await database.insert(collection, entry);
+  res.status(200).send(queryResponse);
+})
+
 app.post("/db/update/", async function(req, res){
   if( !isSessionValid(req.session) ){
     return res.status(403).send("-1");
