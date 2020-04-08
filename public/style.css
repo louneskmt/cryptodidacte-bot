@@ -405,7 +405,7 @@ h1,h2,h3,h4,h5,h6{
     border-radius: 10px;
 }
 #data-table{
-    background: white;
+    background: transparent;
     max-height: 100%;
     width: 100%;
     position: relative;
@@ -475,6 +475,7 @@ h1,h2,h3,h4,h5,h6{
 }
 #data-table tr td{
     width: auto;
+    background: white;
 }
 #data-table tr td:first-child::before{
     transition: opacity .3s ease;
