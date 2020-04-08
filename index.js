@@ -103,8 +103,8 @@ app.get("/index", function(req, res){
     if(req.session){
       __(req.session)
       req.session.isValid = false;
+      delete req.session.cookie;
       req.session.destroy();
-      if(req.session.cookie) delete req.session.cookie;
     }
     res.redirect("/connect");
   }else{
