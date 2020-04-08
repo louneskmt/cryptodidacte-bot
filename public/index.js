@@ -43,6 +43,7 @@ let loadViewOnClick = async function(ev){
 }
 
 let loadView = async function(viewName, params){
+    $("body").addClass("loading");
     let url = `/views/${viewName}.html`;
 
     let request = $("#sect-view").load(url, async function(res, status){
@@ -55,7 +56,6 @@ let loadView = async function(viewName, params){
 
     let newJS = $("<script></script>",{id:"view-js", src:`/views/js/${viewName}.js`})
     $("#view-js").replaceWith(newJS);
-    $("body").addClass("loading");
     await transition("#sect-index .whitebox", "");
     $("#sect-index").addClass("dis-none");
     
