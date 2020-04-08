@@ -503,7 +503,7 @@ h1,h2,h3,h4,h5,h6{
 }
 #data-table tr.hoveringSiblings{
     border-width: 1px 0;
-    border-color: #FF103D77;
+    border-color: #FF103D55;
 }
 
 #data-table tr:hover td:first-child::before{
