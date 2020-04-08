@@ -489,9 +489,6 @@ h1,h2,h3,h4,h5,h6{
 #data-table tr.selected td:first-child::before{
     opacity: 1;
 }
-#data-table tr{
-    opacity: 0; /* ANIM+REVEAL : SWIPE ENTER */
-}
 .sect-data-footer{
     width: 100%;
     display: grid;
