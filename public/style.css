@@ -441,7 +441,7 @@ h1,h2,h3,h4,h5,h6{
 #data-table tr, .data-thead tr{
     height: 50px;
     border: none;
-    border-bottom: 1px solid var(--red);
+    margin-bottom: 1px;
 }
 #data-table tr *, .data-thead tr *{
     text-align: left;
@@ -477,9 +477,6 @@ h1,h2,h3,h4,h5,h6{
     transition: border-color .3s ease;
     width: auto;
     background: white;
-}
-#data-table tr td:not(.revealBorder){
-    border-color: transparent;
 }
 #data-table tr td:first-child::before{
     transition: opacity .3s ease;
