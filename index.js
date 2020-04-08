@@ -94,19 +94,11 @@ app.get('/connect', function(req, res){
   })
 });
 app.get("/index", function(req, res){
-  let now = new Date();
-  let time = new Date(req.session.timestamp);
-  let delta = now.getTime() - time.getTime();
-  
-  __(delta);
-  if(delta > 1000*60*.1 || !req.session.isValid){ //30mins
-    if(req.session){
-      __(req.session)
-      req.session.isValid = false;
-      delete req.session.cookie;
-      req.session.destroy();
-    }
-    res.redirect("/connect");
+  if( !isSessionValid(req.session) ){ //30mins
+    req.session.destroy(function(err){
+      if(err) return __(err,9);
+      res.redirect(`/connect${viewName ? "?continueTo="+viewName : "" }`);
+    });
   }else{
     ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
       if(err) __(err,9);
@@ -121,8 +113,7 @@ app.get("/view/:viewName", function(req, res){
   let viewName = req.params.viewName || null;
 
   
-  if(delta > 1000*60*30 || !req.session.isValid){ //30mins
-    req.session.isValid = false;
+  if(isSessionValid(req.session) === false){ 
     req.session.destroy(function(err){
       if(err) return __(err,9);
       res.redirect(`/connect${viewName ? "?continueTo="+viewName : "" }`);
@@ -199,12 +190,12 @@ app.post("/db/update/", async function(req, res){
 let isSessionValid = (session)=>{
   if(typeof session === "undefined") return false;
   
-  let now = new Date();
-  let time = session.timestamp;
+  let now = (new Date()).getTime();
+  let time = session.timestamp.getTime();;
   let delta = now - time;
 
   //*** TEST ***//
-  if(delta > 1000*60*0.5 || !session.isValid){ //30mins
+  if(delta > 1000*60*.1 || !session.isValid){ //30mins
     session.isValid = false;
     return false
   }
