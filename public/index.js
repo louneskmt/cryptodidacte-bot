@@ -71,7 +71,6 @@ let loadView = async function(viewName, params){
 }
 
 let showIndex = async () => {
-    await sleep(.3);
     transition("#sect-view", "#sect-index .whitebox")
     $("#sect-index").removeClass("dis-none");
 }
