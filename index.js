@@ -153,28 +153,11 @@ app.post("/db/get/", async function(req, res){
   let queryResponse = await database.find(collection, filter);
   res.status(200).send(queryResponse);
 })
-
-let isSessionValid = (session)=>{
-  if(typeof session === "undefined") return false;
-  
-  let now = new Date();
-  let time = session.timestamp;
-  let delta = now - time;
-
-  if(delta > 1000*60*30 || !session.isValid){ //30mins
-    session.isValid = false;
-    return false
-  }
-
-  return true;
-}
-
-
 app.post("/db/insert/", async function(req, res){
   if( !isSessionValid(req.session) ){
     return res.status(403).send("-1");
   }
-  
+
   let collection = req.body.collection || null;
   let entry = req.body.entry || null;
 
