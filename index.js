@@ -121,7 +121,6 @@ app.get("/view/:viewName", function(req, res){
     })
   }
 });
-
 app.post("/login", async function(req, res){
   __(req.body)
   let username = req.body.username || "";
@@ -139,6 +138,44 @@ app.post("/login", async function(req, res){
     return res.status(200).send("0");
   }
 })
+
+app.post("/db/get/", async function(req, res){
+  if( isSessionValid(req.session) ){ //30mins
+    res.status
+  }else{
+    ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
+      if(err) __(err,9);
+      res.status(200).send(str);
+    })
+  }
+
+  let collection = req.body.collection || null;
+  let filter = req.body.filter || null;
+
+  if(!collection || !filter) res.status(400).send("-1");
+
+  // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
+  let queryResponse = await db.find(collection, filter);
+  res.status(200).send(queryResponse);
+})
+
+let isSessionValid = (session)=>{
+  if(typeof session === "undefined") return false;
+  
+  let now = new Date();
+  let time = session.timestamp;
+  let delta = now - time;
+
+  if(delta > 1000*60*30 || !session.isValid){ //30mins
+    session.isValid = false;
+    return false
+  }else{
+    ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
+      if(err) __(err,9);
+      res.status(200).send(str);
+    })
+  }
+}
 
 /**
  * Serve static files from directory public
