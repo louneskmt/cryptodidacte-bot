@@ -311,8 +311,13 @@ h1,h2,h3,h4,h5,h6{
 
     transform-style: preserve-3d;
 }
+#sect-index:not(.dis-none) .whitebox{
+    transform: rotateY(90deg) rotateX(20deg); 
+    opacity: 0;
+}
 #sect-index:not(.dis-none) .whitebox.reveal{
     animation: reveal-rotate 1s ease 0s 1;
+    animation-fill-mode: forwards;
 }
 #sect-index .whitebox.hideEffect{
     opacity: 0;
