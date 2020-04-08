@@ -12,7 +12,7 @@ onViewLoaded = async function(){
         
         for(const entry of data){
             let tr = $(`
-                <tr class=".--anim-swipeEnter">
+                <tr class="--anim-swipeEnter">
                     <td class="data-table-check"></td>
                     <td>${entry.username}</td>
                     <td>?</td>
