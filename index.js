@@ -141,12 +141,7 @@ app.post("/login", async function(req, res){
 
 app.post("/db/get/", async function(req, res){
   if( isSessionValid(req.session) && !req.body.isTest){ //30mins
-    res.status(403).send("-1");
-  }else{
-    ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
-      if(err) __(err,9);
-      res.status(200).send(str);
-    })
+    return res.status(403).send("-1");
   }
 
   let collection = req.body.collection || null;
