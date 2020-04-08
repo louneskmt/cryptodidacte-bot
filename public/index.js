@@ -3,7 +3,7 @@ $(function(){
     if(defView){
         loadView(defView);
     }else{
-        transition(null, "#sect-index .whitebox")
+        showIndex();
     }
 
     $(".whitebox[open-view]").click(loadViewOnClick);
@@ -71,9 +71,9 @@ let loadView = async function(viewName, params){
     history.pushState({view: viewName}, viewName, "/view/"+viewName+paramString);
 }
 
-let showIndex = async () => {
+let showIndex = async (first = false) => {
     $("#sect-index").removeClass("dis-none");
     await sleep(.1)
-   transition("#sect-view", "#sect-index .whitebox");
+    transition(first ? "" : "#sect-view", "#sect-index .whitebox");
 }
 
