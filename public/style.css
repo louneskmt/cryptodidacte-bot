@@ -194,7 +194,6 @@ h1,h2,h3,h4,h5,h6{
 }
 .--anim-swipeEnter{
     opacity: 0;
-    border-color: transparent;
 }
 .--anim-swipeEnter.reveal{
     opacity: 1;
@@ -475,8 +474,12 @@ h1,h2,h3,h4,h5,h6{
     cursor: pointer;
 }
 #data-table tr td{
+    transition: border-color .3s ease;
     width: auto;
     background: white;
+}
+#data-table tr td:not(.revealBorder){
+    border-color: transparent;
 }
 #data-table tr td:first-child::before{
     transition: opacity .3s ease;

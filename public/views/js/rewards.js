@@ -28,6 +28,8 @@ onViewLoaded = async function(){
         $("#data-table tr").each(async function(ix, el){
             await sleep(ix*0.3)
             $(el).addClass("reveal");
+            await sleep(ix*1.3)
+            $(el).addClass("revealBorder");
         })
 
         updateTableRows();
