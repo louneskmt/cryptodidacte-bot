@@ -188,10 +188,10 @@ app.post("/db/update/", async function(req, res){
 })
 
 let isSessionValid = (session)=>{
-  if(typeof session === "undefined") return false;
+  if(typeof session === "undefined" || !session.timestamp) return false;
   
   let now = (new Date()).getTime();
-  let time = session.timestamp.getTime();;
+  let time = session.timestamp.getTime();
   let delta = now - time;
 
   //*** TEST ***//
