@@ -191,7 +191,7 @@ let isSessionValid = (session)=>{
   if(typeof session === "undefined" || !session.timestamp) return false;
   
   let now = (new Date()).getTime();
-  let time = session.timestamp.getTime();
+  let time = (new Date(session.timestamp)).getTime();
   let delta = now - time;
 
   //*** TEST ***//
