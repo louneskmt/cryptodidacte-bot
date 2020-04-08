@@ -99,10 +99,11 @@ body::before{
     content: "";
     display: inline-block;
     position: fixed;
-    top: -5px;
+    top: 100vw;
     left: 0;
     height: 20px;
     width: 5vw;
+
     background: white;
     opacity: .3;
     z-index: 2;
@@ -110,7 +111,8 @@ body::before{
     opacity: 0;
 }
 body.loading::before{
-    opacity: 1;
+    left: -5px;
+    opacity: .5;
     animation: bodyLoader 1s ease 0s infinite;
 }
 @keyframes bodyLoader{
