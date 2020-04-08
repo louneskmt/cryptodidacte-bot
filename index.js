@@ -129,7 +129,6 @@ app.get("/view/:viewName", function(req, res){
   }
 });
 app.post("/login", async function(req, res){
-  __(req.body)
   let username = req.body.username || "";
   let password = req.body.password || "";
   let session = new Session({username, password});
@@ -139,7 +138,7 @@ app.post("/login", async function(req, res){
     return res.status(403).send("-1");
   }else{
     if(req.session){
-      __(session.isValid,2)
+      __(req.session,2)
       return res.status(500).send("-1");
     }
     req.session.timestamp = session.timestamp;
