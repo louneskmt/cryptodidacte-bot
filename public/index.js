@@ -64,7 +64,7 @@ let loadView = async function(viewName, params){
     
     let paramString = params ? "?" : "";
     for(const key in params){
-        paramString += key+"="+params[key];
+        paramString += key+"="+params[key]+"&";
     }
 
     history.pushState({view: viewName}, viewName, "/view/"+viewName+paramString);

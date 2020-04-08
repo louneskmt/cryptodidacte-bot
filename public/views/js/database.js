@@ -1,7 +1,9 @@
 viewDetails = {}
 onViewLoaded = async function(obj){
-    let {query, title} = obj;
+    let {colection, filter, title} = obj;
 
+    let query = {collection, filter};
+    
     let hideKeys = obj.hide || ["_id"];
     
     viewDetails.query = query;
