@@ -95,7 +95,7 @@ body::after{
     background: var(--grey);
 }
 body::before{
-    transition: opacity .3s ease;
+    transition: opacity .3s ease, left 1s ease;
     content: "";
     display: inline-block;
     position: fixed;
