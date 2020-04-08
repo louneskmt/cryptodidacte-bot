@@ -194,6 +194,7 @@ h1,h2,h3,h4,h5,h6{
 }
 .--anim-swipeEnter{
     opacity: 0;
+    border-color: transparent;
 }
 .--anim-swipeEnter.reveal{
     opacity: 1;
