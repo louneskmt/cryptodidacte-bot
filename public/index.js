@@ -57,12 +57,13 @@ let loadView = async function(viewName, params){
     await transition("#sect-index .whitebox", "");
     $("#sect-index").addClass("dis-none");
     
-    let paramString = params ? "?" : "";
+    let paramString = "?";
     for(const key in params){
         let value  = params[key];
         if(typeof value === "object") value = JSON.stringify(value);
         paramString += key+"="+value+"&";
-    }
+    }	
+    paramString.slice(0, -1);
 
     history.pushState({view: viewName}, viewName, "/view/"+viewName+paramString);
 }
