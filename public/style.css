@@ -492,11 +492,12 @@ h1,h2,h3,h4,h5,h6{
 }
 #data-table tr{
     transition: border-color .3s ease;
-    border-width: 1px 0 1px 0;
+    border-width: 0;
     border-color: transparent;
     border-style: solid;
 }
 #data-table tr:hover{
+    border-width: 1px 0;
     border-color: var(--red);
     z-index: 10;
 }
