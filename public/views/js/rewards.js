@@ -1,11 +1,11 @@
-onViewLoaded = function(){
+onViewLoaded = async function(){
     updateTableRows();
 
     let req = $.post("/db/get", {
         collection: "rewards", 
         filter: {}
     }, function(...args){
-        console.log(args);
+        return console.log(args);
         
         let json = JSON.parse(res);
         console.log(json);
