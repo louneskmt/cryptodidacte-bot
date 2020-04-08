@@ -477,6 +477,12 @@ h1,h2,h3,h4,h5,h6{
     transition: border-color .3s ease;
     width: auto;
     background: white;
+    border-width: 1px 0;
+    border-color: transparent;
+    border-style: solid;
+}
+#data-table tr td:hover{
+    border-color: var(--red);
 }
 #data-table tr td:first-child::before{
     transition: opacity .3s ease;
