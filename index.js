@@ -140,7 +140,7 @@ app.post("/login", async function(req, res){
 })
 
 app.post("/db/get/", async function(req, res){
-  if( isSessionValid(req.session) ){
+  if( !isSessionValid(req.session) ){
     return res.status(403).send("-1");
   }
 
