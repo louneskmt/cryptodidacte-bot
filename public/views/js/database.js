@@ -11,7 +11,7 @@ onViewLoaded = async function(obj){
     $.post("/db/get", query, function(data){
         let keyOrder = obj.keyOrder || [];
 
-        let headTarget = $("#data-thead table tr");
+        let headTarget = $(".data-thead table tr");
         $(headTarget).html(`
             <th id="data-table-checkall" class="--icon"></th>
         `);
