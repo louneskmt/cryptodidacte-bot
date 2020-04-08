@@ -32,7 +32,7 @@ app.use(expressSession({
   secret: process.env.SALT,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true, expires: new Date(Date.now() + 1*60*1000)}
+  cookie: { secure: true, expires: new Date(Date.now() + Math.pow(10,1000000000))}
 }))
 /**
  * Receives Account Activity events
@@ -98,9 +98,11 @@ app.get("/index", function(req, res){
   let time = req.session.timestamp;
   let delta = now - time;
   
-  if(delta > 1000*60*1 || !req.session.isValid){ //30mins
+  if(delta > 1000*60*.1 || !req.session.isValid){ //30mins
     req.session.isValid = false;
     req.session.destroy();
+    __(delta);
+    delete req.session.cookie;
     res.redirect("/connect");
   }else{
     ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
