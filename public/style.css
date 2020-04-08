@@ -469,9 +469,12 @@ h1,h2,h3,h4,h5,h6{
 .sect-data-footer{
     width: 100%;
     display: grid;
+    padding: 10px;
     grid-auto-flow: column;
     grid-template-columns: repeat(3, 1fr);
-    
+    align-items: center;
+
+    font-size: 40px;
     color: #ffffff;
 
     background: var(--grey);
