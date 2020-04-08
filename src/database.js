@@ -27,7 +27,7 @@ class Database {
                   __(err, 9);
                   throw err;
               }
-              if(debug) __("Connected successfully to server", 1);
+              if(this.debug) __("Connected successfully to server", 1);
               self.db = client.db(self.name);
               self.connected = true;
               resolve(self);
@@ -64,7 +64,7 @@ class Database {
                   __(err, 9);
                   throw err
               }
-              if(debug) __(`Inserted ${res.insertedCount} document(s) into ${collection}`);
+              if(this.debug) __(`Inserted ${res.insertedCount} document(s) into ${collection}`);
               resolve(res);
           });
       })
@@ -87,7 +87,7 @@ class Database {
                   throw err
               }
 
-              if(debug) __(`Removed ${res.deletedCount} documents from ${collection}`)
+              if(this.debug) __(`Removed ${res.deletedCount} documents from ${collection}`)
               resolve(res);
           });
       })
@@ -122,7 +122,7 @@ class Database {
                       throw err
                   }
 
-                  if(debug) __(`Updated ${res.modifiedCount} documents from ${collection}`)
+                  if(this.debug) __(`Updated ${res.modifiedCount} documents from ${collection}`)
                   resolve(res);
               })
           /*
@@ -142,7 +142,7 @@ class Database {
           __("Couldn't get documents, got following error : ", 9);
           __(err, 9);
         }
-        if(debug) __("database.js@findDocuments : Found the following documents : \n" + JSON.stringify(docs));
+        if(this.debug) __("database.js@findDocuments : Found the following documents : \n" + JSON.stringify(docs));
         resolve(docs);
       })
 
