@@ -3,7 +3,7 @@ $(function(){
     if(defView){
         loadView(defView);
     }else{
-        showIndex(true);
+        showIndex();
     }
 
     $(".whitebox[open-view]").click(loadViewOnClick);
@@ -20,14 +20,11 @@ sleep = async secs => {
 
 let transition = async function(from, to){
     return new Promise(async (resolve, reject)=>{
-        if(from){
-            $(from).removeClass("reveal");
-            await sleep(.01);
-            $(from).addClass("hideEffect");
-            await sleep(1);        
-            $(from).addClass("dis-none")
-        }
-
+        $(from).removeClass("reveal");
+        await sleep(.01);
+        $(from).addClass("hideEffect");
+        await sleep(1);
+        $(from).addClass("dis-none")
         $(to).removeClass("dis-none")
         await sleep(.1);
         $(to).addClass("reveal");
@@ -71,9 +68,8 @@ let loadView = async function(viewName, params){
     history.pushState({view: viewName}, viewName, "/view/"+viewName+paramString);
 }
 
-let showIndex = async (first = false) => {
+let showIndex = async () => {
     $("#sect-index").removeClass("dis-none");
-    await sleep(.01)
-    transition(first ? "" : "#sect-view", "#sect-index .whitebox");
+   transition("#sect-view", "#sect-index .whiteb");
 }
 
