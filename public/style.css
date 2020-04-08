@@ -484,7 +484,8 @@ h1,h2,h3,h4,h5,h6{
 #data-table tr td:hover{
     border-color: var(--red);
 }
-#data-table tr td:first-child::before{
+
+#data-table tr:first-child::before{
     transition: opacity .3s ease;
     content: "check_circle";
     font-family: "Material Icons";
