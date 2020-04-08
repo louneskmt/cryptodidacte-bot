@@ -509,7 +509,7 @@ h1,h2,h3,h4,h5,h6{
     width: 100%;
     display: grid;
     padding: 0 10px;
-    margin: -15px;
+    margin-top: -15px;
     grid-auto-flow: column;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
