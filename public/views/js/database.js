@@ -26,13 +26,12 @@ onViewLoaded = async function(obj){
             `)
 
             for(const key of keyOrder){
-                if(data.hasOwnProperty(key)){
+                if(entry.hasOwnProperty(key)){
                     $(tr).append(`<td>${entry[key]}</td>`)
                 }
             }
 
             $("#data-table tbody").append(tr);
-            $("body").removeClass("loading");
         }
 
         $("#data-table tr").each(async function(ix, el){
@@ -40,6 +39,7 @@ onViewLoaded = async function(obj){
             $(el).addClass("reveal");
         })
 
+        $("body").removeClass("loading");
         updateTableRows();
     })
 }
