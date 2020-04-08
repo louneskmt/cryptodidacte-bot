@@ -36,7 +36,12 @@ let transition = async function(from, to){
 let loadViewOnClick = async function(ev){
     let viewName = $(this).attr("open-view");
     let params = $(this).attr("view-args") || "null";
-    params = JSON.parse(params)
+    try{
+        params = JSON.parse(params)
+    }catch(err){
+        __("Can't parse view, got :", 9);
+        __(err, 9);
+    }
     await loadView(viewName, params);
 }
 
