@@ -3,7 +3,7 @@ $(function(){
     if(defView){
         loadView(defView);
     }else{
-        showIndex();
+        showIndex(true);
     }
 
     $(".whitebox[open-view]").click(loadViewOnClick);
