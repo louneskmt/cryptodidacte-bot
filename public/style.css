@@ -373,10 +373,11 @@ h1,h2,h3,h4,h5,h6{
 #data-table{
     background: white;
     height: 100%;
-    width: 100%;
+    max-width: 100%;
     position: relative;
     border-collapse: collapse;
     overflow: hidden;
+    border-radius: 10px;
 }
 .data-thead{
     position: relative;
