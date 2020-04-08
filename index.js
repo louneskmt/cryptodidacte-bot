@@ -97,7 +97,7 @@ app.get("/index", function(req, res){
   if( !isSessionValid(req.session) ){ //30mins
     req.session.destroy(function(err){
       if(err) return __(err,9);
-      res.redirect(`/connect${viewName ? "?continueTo="+viewName : "" }`);
+      res.redirect(`/connect`);
     });
   }else{
     ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
