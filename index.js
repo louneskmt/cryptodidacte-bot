@@ -118,8 +118,10 @@ app.get("/view/:viewName", function(req, res){
   
   if(delta > 1000*60*30 || !req.session.isValid){ //30mins
     req.session.isValid = false;
-    req.session.destroy();
-    res.redirect(`/connect${viewName ? "?continueTo="+viewName : "" }`);
+    req.session.destroy(function(err){
+      if(err) return __(err,9);
+      res.redirect(`/connect${viewName ? "?continueTo="+viewName : "" }`);
+    });
   }else{
     ejs.renderFile(__dirname + "/public/index.ejs", {view: viewName}, function(err,str){
       res.status(200).send(str);
