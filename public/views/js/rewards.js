@@ -20,7 +20,7 @@ onViewLoaded = async function(){
             `)
 
             $("#data-table tbody").append(tr);
-            $("body").addClass("loading");
+            $("body").removeClass("loading");
         }
 
         updateTableRows();
