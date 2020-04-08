@@ -497,7 +497,7 @@ h1,h2,h3,h4,h5,h6{
     cursor: pointer;
 }
 #data-table tr.hovering{
-    border-width: 1px 0;
+    border-width: 2px 0;
     border-color: var(--red);
     z-index: 10;
 }
