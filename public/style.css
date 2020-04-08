@@ -318,10 +318,6 @@ section{
 
     transform-style: preserve-3d;
 }
-#sect-index:not(.dis-none) .whitebox{
-    transform: rotateY(90deg) rotateX(20deg); 
-    opacity: 0;
-}
 #sect-index:not(.dis-none) .whitebox.reveal{
     animation: reveal-rotate 1s ease 0s 1;
     animation-fill-mode: forwards;
