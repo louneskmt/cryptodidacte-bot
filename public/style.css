@@ -491,7 +491,6 @@ h1,h2,h3,h4,h5,h6{
     opacity: 0;
 }
 #data-table tr{
-    transition: border .5s ease;
     border-width: 0;
     border-color: transparent;
     border-style: solid;
