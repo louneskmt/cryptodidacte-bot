@@ -401,8 +401,8 @@ h1,h2,h3,h4,h5,h6{
 }
 #sect-view > .table-container{
     position: static;
-    margin: 20px auto;
-    width: calc(90vw);
+    padding: 20px;
+    width: 100%;
     border-radius: 10px;
 }
 #data-table{
@@ -416,7 +416,6 @@ h1,h2,h3,h4,h5,h6{
 }
 .data-thead{
     position: relative;
-    width: calc(100vw - 200px);
     height: 50px;
     background: white;
     margin-bottom: 10px;
