@@ -12,7 +12,7 @@ onViewLoaded = async function(){
         
         for(const entry of data){
             let tr = $(`
-                <tr>
+                <tr class="">
                     <td class="data-table-check"></td>
                     <td>${entry.username}</td>
                     <td>?</td>
@@ -24,6 +24,11 @@ onViewLoaded = async function(){
             $("#data-table tbody").append(tr);
             $("body").removeClass("loading");
         }
+
+        $("#data-table tr").each(async function(ix, el){
+            await sleep(ix*0.3)
+            $(el).addClass("reveal");
+        })
 
         updateTableRows();
     })
