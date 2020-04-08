@@ -4,7 +4,7 @@ onViewLoaded = async function(obj){
 
     let query = {collection, filter};
 
-    let hideKeys = obj.hide || ["_id"];
+    let hideKeys = obj.hideKeys || ["_id"];
     
     viewDetails.query = query;
     $(".sect-data-header h1").text(title || "Database");
