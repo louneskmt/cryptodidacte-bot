@@ -169,6 +169,37 @@ let isSessionValid = (session)=>{
   return true;
 }
 
+
+app.post("/db/update/", async function(req, res){
+  if( !isSessionValid(req.session) ){
+    return res.status(403).send("-1");
+  }
+
+  let collection = req.body.collection || null;
+  let query = req.body.query || null;
+
+  if(!collection || !filter) res.status(400).send("-1");
+
+  // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
+  let queryResponse = await database.update(collection, query);
+  res.status(200).send(queryResponse);
+})
+
+let isSessionValid = (session)=>{
+  if(typeof session === "undefined") return false;
+  
+  let now = new Date();
+  let time = session.timestamp;
+  let delta = now - time;
+
+  if(delta > 1000*60*30 || !session.isValid){ //30mins
+    session.isValid = false;
+    return false
+  }
+
+  return true;
+}
+
 /**
  * Serve static files from directory public
  */
