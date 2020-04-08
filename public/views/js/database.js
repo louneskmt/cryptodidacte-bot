@@ -54,7 +54,9 @@ onViewLoaded = async function(obj){
 
         $("body").removeClass("loading");
         updateTableRows();
-    })
+    });
+
+    $("*[click-role=showIndex]").click(showIndex);
 }
 
 
