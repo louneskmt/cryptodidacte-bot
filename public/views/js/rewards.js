@@ -4,8 +4,7 @@ onViewLoaded = function(){
     let req = $.post("/db/get", {
         collection: "rewards", 
         filter: {}
-    })
-    .then(function(res){
+    }, function(...args){
         console.log(res);
         
         let json = JSON.parse(res);
@@ -26,9 +25,6 @@ onViewLoaded = function(){
         }
 
         updateTableRows();
-    })
-    .catch(function(err){
-        console.error("err", err);
     })
 }
 
