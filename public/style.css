@@ -501,10 +501,6 @@ h1,h2,h3,h4,h5,h6{
     border-color: var(--red);
     z-index: 10;
 }
-#data-table tr.hoveringSiblings{
-    border-width: 1px 0;
-    border-color: #FF103D55;
-}
 
 #data-table tr:hover td:first-child::before{
     opacity: .3;

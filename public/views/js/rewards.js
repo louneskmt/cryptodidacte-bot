@@ -58,21 +58,6 @@ let selectAllTabEl = function (ev){
 
 let updateTableRows = ()=>{
     $("#data-table-check").click(selectElementRow)
-    $("#data-table tr").hover(
-        function(ev){
-            //HOVER IN
-
-            $(this).addClass("hovering");
-            $(this).next().addClass("hoveringSiblings");
-            $(this).prev().addClass("hoveringSiblings");
-        }, function(ev){
-            // HOVER OUT
-            $(this).removeClass("hovering");
-            $(this).next().removeClass("hoveringSiblings");
-            $(this).prev().removeClass("hoveringSiblings");
-        }
-    )
-
     $("#data-table tr:first-child td").each( (ix, el) => {
         if(ix==0) return true;
         let width = $(el).width();
