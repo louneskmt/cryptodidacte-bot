@@ -35,10 +35,12 @@ let transition = async function(from, to){
 
 let loadViewOnClick = async function(ev){
     let viewName = $(this).attr("open-view");
-    await loadView(viewName);
+    let params = $(this).attr("view-args") || "null";
+    params = JSON.parse(params)
+    await loadView(viewName, params);
 }
 
-let loadView = async function(viewName){
+let loadView = async function(viewName, params){
     let url = `/views/${viewName}.html`;
 
     let request = $("#sect-view").load(url, async function(res, status){
@@ -46,7 +48,7 @@ let loadView = async function(viewName){
         if(status==="error") return showIndex();
         $("body").removeClass("loading");
         await transition("", "#sect-view");    
-        onViewLoaded();
+        onViewLoaded(params);
     });
 
     let newJS = $("<script></script>",{id:"view-js", src:`/views/js/${viewName}.js`})

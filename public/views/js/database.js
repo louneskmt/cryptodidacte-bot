@@ -1,7 +1,45 @@
-onViewLoaded = function(){
-    updateTableRows();
+viewDetails = {}
+onViewLoaded = async function(obj){
+    let {query, title} = obj;
+    
+    viewDetails.query = query;
+    $(".sect-data-header").text(title || "Database");
     $("#data-table-checkall").click(selectAllTabEl);
-    $(".data-table-check").click(selectElementRow)
+
+    $("#data-table tbody").html("");
+    $("body").addClass("loading");
+    $.post("/db/get", query, function(data){
+        let keyOrder = obj.keyOrder || [];
+        if(keyOrder.length === 0){
+            for(const key in data[0]){
+                keyOrder.push(key);
+            }
+        }
+        
+        for(const entry of data){
+            let tr = $(`
+                <tr class="--anim-swipeEnter">
+                    <td class="data-table-check"></td>
+                </tr>
+            `)
+
+            for(const key of keyOrder){
+                if(data.hasOwnProperty(key)){
+                    $(tr).append(`<td>${entry[key]}</td>`)
+                }
+            }
+
+            $("#data-table tbody").append(tr);
+            $("body").removeClass("loading");
+        }
+
+        $("#data-table tr").each(async function(ix, el){
+            await sleep(ix*0.2)
+            $(el).addClass("reveal");
+        })
+
+        updateTableRows();
+    })
 }
 
 
@@ -27,6 +65,7 @@ let selectAllTabEl = function (ev){
 }
 
 let updateTableRows = ()=>{
+    $(".data-table-check").click(selectElementRow)
     $("#data-table tr:first-child td").each( (ix, el) => {
         if(ix==0) return true;
         let width = $(el).width();
