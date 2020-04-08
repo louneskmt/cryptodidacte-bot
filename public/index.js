@@ -48,7 +48,7 @@ let loadView = async function(viewName){
     $("body").addClass("loading");
     let request = $("#sect-view").load(url, async function(){
         // ANIM
-        $("body").removelass("loading");
+        $("body").removeClass("loading");
         await transition("", "#sect-view");    
         onViewLoaded();
     });
