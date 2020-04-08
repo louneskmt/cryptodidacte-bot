@@ -28,22 +28,22 @@ const processEvent = async (event, data) => {
             break;
     }
 
-    await db.find("users", {user_id: data.user_id}).then((docs) => {
+    db.find("users", {user_id: data.user_id}).then(async (docs) => {
         if(typeof docs != undefined || docs.length === 0) {
-            db.insert("users", {
+            await db.insert("users", {
                 user_id: data.user_id,
                 user_name: data.user_name,
                 balance: reward
             });
         } else {
-            db.update("users", {user_id: data.user_id}, {balance: reward}, 'inc');
+            await db.update("users", {user_id: data.user_id}, {balance: reward}, 'inc');
         }
+        await db.disconnect();
     });
-
-    await db.disconnect();
 };
 
 const payout = (user_id) => {
+    let db = new Database("fidelity", `mongodb://${websiteDbConfig.user}:${websiteDbConfig.password}@localhost:27017/fidelity`);
     const CDT = new ethereum.ERC20(contractAddress, CryptodidacteTokenABI);
 
     db.find("users", {user_id: data.user_id}).then((docs) => {
@@ -61,6 +61,8 @@ const payout = (user_id) => {
             await tx.wait();
             __("Done!");
         });
+
+        db.disconnect();
     });
 }
 
