@@ -101,6 +101,7 @@ app.get("/index", function(req, res){
   __(delta);
   if(delta > 1000*60*.1 || !req.session.isValid){ //30mins
     if(req.session){
+      __(req.session)
       req.session.isValid = false;
       req.session.destroy();
       if(req.session.cookie) delete req.session.cookie;
