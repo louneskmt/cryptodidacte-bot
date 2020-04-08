@@ -1,6 +1,8 @@
 viewDetails = {}
 onViewLoaded = async function(obj){
     let {query, title} = obj;
+
+    let hideKeys = obj.hide || ["_id"];
     
     viewDetails.query = query;
     $(".sect-data-header h1").text(title || "Database");
@@ -17,7 +19,7 @@ onViewLoaded = async function(obj){
         `);
         if (keyOrder.length === 0) {
             for(const key in data[0]){
-                if(key === "_id") continue;
+                if(hideKeys.includes(key)) continue;
                 
                 keyOrder.push(key);
             }
@@ -29,7 +31,7 @@ onViewLoaded = async function(obj){
         
         for(const entry of data){
             let tr = $(`
-                <tr class="--anim-swipeEnter">
+                <tr class="--anim-swipeEnter" mongo-id="${entry._id}" >
                     <td class="data-table-check"></td>
                 </tr>
             `)

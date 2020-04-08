@@ -62,9 +62,12 @@ let loadView = async function(viewName, params){
     await transition("#sect-index .whitebox", "");
     $("#sect-index").addClass("dis-none");
     
-   
+    let paramString = params ? "?" : "";
+    for(const key in params){
+        paramString += key+"="+params[key];
+    }
 
-    history.pushState({view: viewName}, viewName, "/view/"+viewName);
+    history.pushState({view: viewName}, viewName, "/view/"+viewName+paramString);
 }
 
 let showIndex = async () => {
