@@ -5,7 +5,7 @@ onViewLoaded = function(){
         collection: "rewards", 
         filter: {}
     }, function(...args){
-        console.log(arg);
+        console.log(args);
         
         let json = JSON.parse(res);
         console.log(json);
