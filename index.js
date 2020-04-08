@@ -85,6 +85,9 @@ app.get('/', function(req, res){
 
 app.get('/connect', function(req, res){
   let continueTo = req.query.continueTo;
+  if(typeof req.session != "undefined" && isSessionValid(req.session)){
+    res.redirect("/index");
+  }
   ejs.renderFile(__dirname + "/public/connect.ejs", {continueTo}, function(err,str){
     if(err) __(err,9);
     res.status(200).send(str);
@@ -97,6 +100,7 @@ app.get("/index", function(req, res){
   
   if(delta > 1000*60*30 || !req.session.isValid){ //30mins
     req.session.isValid = false;
+    req.session.destroy();
     res.redirect("/connect");
   }else{
     ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
@@ -114,6 +118,7 @@ app.get("/view/:viewName", function(req, res){
   
   if(delta > 1000*60*30 || !req.session.isValid){ //30mins
     req.session.isValid = false;
+    req.session.destroy();
     res.redirect(`/connect${viewName ? "?continueTo="+viewName : "" }`);
   }else{
     ejs.renderFile(__dirname + "/public/index.ejs", {view: viewName}, function(err,str){
