@@ -1,16 +1,14 @@
 onViewLoaded = async function(){
     updateTableRows();
 
+    $("#data-table tbody").html("");
+    $("body").addClass("loading");
     let req = $.post("/db/get", {
         collection: "rewards", 
         filter: {}
-    }, function(...args){
-        return console.log(args);
+    }, function(data){
         
-        let json = JSON.parse(res);
-        console.log(json);
-        
-        for(const entry of json){
+        for(const entry of data){
             let tr = $(`
                 <tr>
                     <td class="data-table-check"></td>
@@ -22,6 +20,7 @@ onViewLoaded = async function(){
             `)
 
             $("#data-table tbody").append(tr);
+            $("body").addClass("loading");
         }
 
         updateTableRows();
