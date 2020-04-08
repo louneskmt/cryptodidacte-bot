@@ -142,6 +142,7 @@ h1,h2,h3,h4,h5,h6{
 }
 .--icon{
     font-family: "Material Icons";
+    cursor: pointer;
 }
 .--last-td-red > * td:last-child{
     color: var(--red);
