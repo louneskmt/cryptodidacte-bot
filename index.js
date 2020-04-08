@@ -139,7 +139,7 @@ app.post("/login", async function(req, res){
     return res.status(403).send("-1");
   }else{
     req.session.timestamp = session.timestamp;
-    __(req.session.timestamp,3)
+    __(req.session.timestamp,2)
     req.session.id = session.id;
     req.session.isValid = session.isValid;
   
