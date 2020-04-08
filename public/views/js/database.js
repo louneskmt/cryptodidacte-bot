@@ -3,7 +3,7 @@ onViewLoaded = async function(obj){
     let {query, title} = obj;
     
     viewDetails.query = query;
-    $(".sect-data-header").text(title || "Database");
+    $(".sect-data-header h1").text(title || "Database");
     $("#data-table-checkall").click(selectAllTabEl);
 
     $("#data-table tbody").html("");
@@ -12,6 +12,8 @@ onViewLoaded = async function(obj){
         let keyOrder = obj.keyOrder || [];
         if(keyOrder.length === 0){
             for(const key in data[0]){
+                console.log(key);
+                
                 keyOrder.push(key);
             }
         }
