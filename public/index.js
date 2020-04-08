@@ -20,7 +20,6 @@ sleep = async secs => {
 
 let transition = async function(from, to){
     return new Promise(async (resolve, reject)=>{
-        $(to).removeClass("hideEffect")
         $(from).removeClass("reveal");
         await sleep(.01);
         $(from).addClass("hideEffect");
@@ -29,6 +28,7 @@ let transition = async function(from, to){
         $(to).removeClass("dis-none")
         await sleep(.1);
         $(to).addClass("reveal");
+        $(to).removeClass("hideEffect")
 
         resolve(to);
     })
@@ -70,6 +70,7 @@ let loadView = async function(viewName, params){
 }
 
 let showIndex = async () => {
-    transition("#sect-view", "#sect-index .whitebox, #sect-index");
+    transition("#sect-view", "#sect-index");
+    transition("", "#sect-index .whitebox");
 }
 
