@@ -70,8 +70,8 @@ let loadView = async function(viewName, params){
 
 let showIndex = async () => {
     await sleep(.3);
-    $("#sect-index").removeClass("dis-none");
     transition("#sect-view", "#sect-index .whitebox")
-
+    $("#sect-index").removeClass("dis-none");
+    $("#sect-index .whitebox").addClass("reveal")
 }
 
