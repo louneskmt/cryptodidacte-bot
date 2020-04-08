@@ -1,6 +1,6 @@
 viewDetails = {}
 onViewLoaded = async function(obj){
-    let {collection, filter, title} = obj;
+    let {collection, filter = {}, title} = obj;
 
     let query = {collection, filter};
 

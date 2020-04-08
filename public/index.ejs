@@ -13,11 +13,11 @@
 <body>
     <input type="hidden" id="params-view" value="<%= view %>">
     <section id="sect-index" class="dis-none">
-        <div class="whitebox unselectable" id="index-rewards" open-view="database" view-args='{"title": "Rewards", "collection": "rewards", "filter":{}, "hideKeys": ["user_id"]}'>
+        <div class="whitebox unselectable" id="index-rewards" open-view="database" view-args='{"title": "Rewards", "collection": "rewards"}'>
             <div class="icon">card_giftcard</div>
             <h2>Rewards</h2>
         </div>
-        <div class="whitebox unselectable" id="index-history">
+        <div class="whitebox unselectable" id="index-history" view-args='{"title": "History", "collection": "history"}'>
             <div class="icon">timeline</div>
             <h2>History</h2>
         </div>
