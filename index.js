@@ -86,7 +86,7 @@ app.get('/', function(req, res){
 app.get('/connect', function(req, res){
   let continueTo = req.query.continueTo;
   if(typeof req.session != "undefined" && isSessionValid(req.session)){
-    res.redirect("/index");
+    return res.redirect("/index");
   }
   ejs.renderFile(__dirname + "/public/connect.ejs", {continueTo}, function(err,str){
     if(err) __(err,9);
