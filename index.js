@@ -100,9 +100,11 @@ app.get("/index", function(req, res){
   
   __(delta);
   if(delta > 1000*60*.1 || !req.session.isValid){ //30mins
-    req.session.isValid = false;
-    req.session.destroy();
-    if(req.session.cookie) delete req.session.cookie;
+    if(req.session){
+      req.session.isValid = false;
+      req.session.destroy();
+      delete req.session.cookie;
+    }
     res.redirect("/connect");
   }else{
     ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
