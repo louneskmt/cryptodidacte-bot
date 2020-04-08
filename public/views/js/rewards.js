@@ -1,7 +1,35 @@
 onViewLoaded = function(){
     updateTableRows();
-    $("#data-table-checkall").click(selectAllTabEl);
-    $(".data-table-check").click(selectElementRow)
+
+    let req = $.post("/db/get", {
+        collection: "rewards", 
+        filter: {}
+    });
+
+    req.then(function(res){
+        let json = JSON.parse(res);
+        console.log(json);
+        
+        for(const entry of json){
+            let tr = $(`
+                <tr>
+                    <td class="data-table-check"></td>
+                    <td>${entry.username}</td>
+                    <td>?</td>
+                    <td>?</td>
+                    <td>${entry.reward}</td>
+                </tr>
+            `)
+
+            $("#data-table tbody").append(tr);
+        }
+
+        updateTableRows();
+    });
+
+    req.catch(function(err){
+        console.error(err);
+    })
 }
 
 
@@ -27,6 +55,9 @@ let selectAllTabEl = function (ev){
 }
 
 let updateTableRows = ()=>{
+    $("#data-table-checkall").click(selectAllTabEl);
+    $(".data-table-check").click(selectElementRow)
+
     $("#data-table tr:first-child td").each( (ix, el) => {
         if(ix==0) return true;
         let width = $(el).width();
