@@ -138,10 +138,11 @@ app.post("/login", async function(req, res){
   if(status === -1){
     return res.status(403).send("-1");
   }else{
+    if(req.session) res.status(500).send("-1");
     req.session.timestamp = session.timestamp;
-    __(req.session.timestamp,2)
+    __(session.isValid,2)
     req.session.id = session.id;
-    req.session.isValid = session.isValid;
+    req.session.isValid = true;
   
     return res.status(200).send("0");
   }
