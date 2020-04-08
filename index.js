@@ -98,10 +98,10 @@ app.get("/index", function(req, res){
   let time = req.session.timestamp;
   let delta = now - time;
   
-  if(delta > 1000*60*30 || !req.session.isValid){ //30mins
+  if(delta > 1000*60*1 || !req.session.isValid){ //30mins
     req.session.isValid = false;
     req.session.destroy();
-    __(req.session, 3)
+    __("Session destroyed")
     res.redirect("/connect");
   }else{
     ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
