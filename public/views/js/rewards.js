@@ -28,7 +28,7 @@ onViewLoaded = function(){
         updateTableRows();
     })
     .catch(function(err){
-        console.error(err);
+        console.error("err", err);
     })
 }
 
