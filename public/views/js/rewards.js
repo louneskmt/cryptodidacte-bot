@@ -1,6 +1,8 @@
 onViewLoaded = async function(){
     updateTableRows();
 
+    $("#data-table-checkall").click(selectAllTabEl);
+
     $("#data-table tbody").html("");
     $("body").addClass("loading");
     let req = $.post("/db/get", {
@@ -50,7 +52,6 @@ let selectAllTabEl = function (ev){
 }
 
 let updateTableRows = ()=>{
-    $("#data-table-checkall").click(selectAllTabEl);
     $(".data-table-check").click(selectElementRow)
 
     $("#data-table tr:first-child td").each( (ix, el) => {
