@@ -16,7 +16,7 @@ class Session{
         let {username, password} = this;
         let query = await this.db.find("users", {username, password})
         
-        __(query); // TO BE REMOVED
+        // __(query); // TO BE REMOVED
         if(query.length > 1){
             __("URGENT ERROR : MULTIPLE USERS FOUND AT WEBSITE CONNECTION",9);
             return -1;

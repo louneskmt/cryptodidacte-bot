@@ -6,13 +6,14 @@ const assert = require('assert');
 const { databaseConfig } = require('../config')
 
 class Database {
-  constructor(name, url) {
+  constructor(name, url, debug = false) {
       this.name = name;
       this.db = null;
       this.client = null;
       this.url = url || `mongodb://${databaseConfig.user}:${databaseConfig.password}@localhost:27017/cryptodidacte`
 
       this.connected = false;
+      this.debug = debug;
   }
 
   async connect() {
@@ -26,7 +27,7 @@ class Database {
                   __(err, 9);
                   throw err;
               }
-              __("Connected successfully to server", 1);
+              if(debug) __("Connected successfully to server", 1);
               self.db = client.db(self.name);
               self.connected = true;
               resolve(self);
@@ -63,7 +64,7 @@ class Database {
                   __(err, 9);
                   throw err
               }
-              __(`Inserted ${res.insertedCount} document(s) into ${collection}`);
+              if(debug) __(`Inserted ${res.insertedCount} document(s) into ${collection}`);
               resolve(res);
           });
       })
@@ -86,7 +87,7 @@ class Database {
                   throw err
               }
 
-              __(`Removed ${res.deletedCount} documents from ${collection}`)
+              if(debug) __(`Removed ${res.deletedCount} documents from ${collection}`)
               resolve(res);
           });
       })
@@ -121,7 +122,7 @@ class Database {
                       throw err
                   }
 
-                  __(`Updated ${res.modifiedCount} documents from ${collection}`)
+                  if(debug) __(`Updated ${res.modifiedCount} documents from ${collection}`)
                   resolve(res);
               })
           /*
@@ -141,7 +142,7 @@ class Database {
           __("Couldn't get documents, got following error : ", 9);
           __(err, 9);
         }
-        __("database.js@findDocuments : Found the following documents : \n" + JSON.stringify(docs));
+        if(debug) __("database.js@findDocuments : Found the following documents : \n" + JSON.stringify(docs));
         resolve(docs);
       })
 
