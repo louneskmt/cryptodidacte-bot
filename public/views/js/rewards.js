@@ -6,6 +6,8 @@ onViewLoaded = function(){
         filter: {}
     })
     .then(function(res){
+        console.log(res);
+        
         let json = JSON.parse(res);
         console.log(json);
         
