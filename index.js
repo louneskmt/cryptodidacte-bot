@@ -169,12 +169,9 @@ let isSessionValid = (session)=>{
   if(delta > 1000*60*30 || !session.isValid){ //30mins
     session.isValid = false;
     return false
-  }else{
-    ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
-      if(err) __(err,9);
-      res.status(200).send(str);
-    })
   }
+
+  return true;
 }
 
 /**
