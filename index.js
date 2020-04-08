@@ -161,7 +161,7 @@ app.post("/db/insert/", async function(req, res){
   let collection = req.body.collection || null;
   let entry = req.body.entry || null;
 
-  if(!collection || !entry) res.status(400).send("-1");
+  if(!collection || !entry) return res.status(400).send("-1");
 
   // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
   let queryResponse = await database.insert(collection, entry);
@@ -176,7 +176,7 @@ app.post("/db/update/", async function(req, res){
   let collection = req.body.collection || null;
   let query = req.body.query || null;
 
-  if(!collection || !query) res.status(400).send("-1");
+  if(!collection || !query) return res.status(400).send("-1");
 
   // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
   let queryResponse = await database.update(collection, query);
