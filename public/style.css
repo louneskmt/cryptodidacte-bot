@@ -177,6 +177,13 @@ h1,h2,h3,h4,h5,h6{
     -ms-user-select: none;
     user-select: none;
 }
+section{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+}
 
 
 /****************************************************************/
