@@ -70,7 +70,7 @@ let loadView = async function(viewName, params){
 }
 
 let showIndex = async () => {
-    transition("#sect-view", "#sect-index");
+    await transition("#sect-view", "#sect-index");
     transition("", "#sect-index .whitebox");
 }
 
