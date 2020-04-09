@@ -93,7 +93,7 @@ class Database {
       })
   }
 
-  async update(collection, filter, edit, mode = 'set', many = false) {
+  async update(collection, {filter, edit, mode='set', many=false}) {
       var self = this;
       await this.connectIfNot();
 

@@ -17,6 +17,9 @@ let connect = async function(){
     let username = $("#auth-username").val();   
     let password = $("#auth-password").val();
 
+    $("body").addClass("loading");
+
+
     let nPassword = await hashPassword(password);
 
     $("#sect-auth").addClass("retract");
@@ -45,6 +48,7 @@ let sleep = async secs => {
 
 let retryAuth = ()=>{
     $("#sect-auth").removeClass("retract");
+    $("body").removeClass("loading");
 }
 
 let loadSecureJS = (token)=>{
