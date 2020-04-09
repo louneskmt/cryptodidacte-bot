@@ -101,7 +101,7 @@ app.get("/index", function(req, res){
       res.redirect(`/connect`);
     });
   }else{
-    ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
+    ejs.renderFile(__dirname + "/public/index.ejs", {view: "", viewParams: ""}, function(err,str){
       if(err) __(err,9);
       res.status(200).send(str);
     })
