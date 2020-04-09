@@ -60,7 +60,7 @@ const processEvent = async (eventData) => {
         await db.disconnect();
     });
 
-    check(eventData);
+    // check(eventData);
 };
 
 const payout = (user_id) => {
@@ -85,6 +85,10 @@ const payout = (user_id) => {
 
         db.disconnect();
     });
+}
+
+const check = async (eventData) => {
+    // TODO
 }
 
 module.exports = {
