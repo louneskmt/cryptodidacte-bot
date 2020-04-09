@@ -121,6 +121,7 @@ app.get("/view/:viewName/:viewParams*?", function(req, res){
       res.redirect(`/connect${viewName ? "?continueTo="+viewName : "" }${viewParams ? "&nextParams="+viewParams : "" }`);
     });
   }else{
+    console.log(viewParams)
     viewParams = Buffer.from(viewParams, "base64").toString();
     console.log(viewParams)
     ejs.renderFile(__dirname + "/public/index.ejs", {view: viewName, viewParams: viewParams}, function(err,str){
