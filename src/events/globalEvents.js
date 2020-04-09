@@ -43,6 +43,7 @@ globalEvents.on('cryptodidacte', (body) => {
           user_id: user_id,
           user_name: user_name,
           tweet_id: tweet_id,
+          type: 'quote',
           quoted_tweet_id: tweet.quoted_status.id_str,
           timestamp: tweet.timestamp_ms
         });
@@ -52,6 +53,7 @@ globalEvents.on('cryptodidacte', (body) => {
           user_id: user_id,
           user_name: user_name,
           tweet_id: tweet_id,
+          type: 'reply',
           in_reply_to_status_id: tweet.in_reply_to_status_id_str,
           timestamp: tweet.timestamp_ms
         });
@@ -61,6 +63,7 @@ globalEvents.on('cryptodidacte', (body) => {
           user_id: user_id,
           user_name: user_name,
           tweet_id: tweet_id,
+          type: 'retweet',
           retweeted_tweet_id: tweet.retweeted_status.id_str,
           timestamp: tweet.timestamp_ms
         });
@@ -81,6 +84,7 @@ globalEvents.on('cryptodidacte', (body) => {
     fidelity.processEvent('favorite', {
       user_id: user_id,
       user_name: user_name,
+      type: 'favorite',
       favorited_tweet_id: favorite.favorited_status.id_str,
       timestamp: favorite.timestamp_ms
     });

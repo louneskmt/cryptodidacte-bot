@@ -1,7 +1,12 @@
 $(function(){
-    showIndex();
+    let defView = $("#params-view").val();
+    if(defView){
+        loadView(defView);
+    }else{
+        showIndex();
+    }
 
-    $(".whitebox[open-view]").click(loadPage);
+    $(".whitebox[open-view]").click(loadViewOnClick);
 });
 
 // GLOBAL
@@ -16,10 +21,12 @@ sleep = async secs => {
 let transition = async function(from, to){
     return new Promise(async (resolve, reject)=>{
         $(from).removeClass("reveal");
+        $(to).removeClass("hideEffect");
         await sleep(.01);
         $(from).addClass("hideEffect");
         await sleep(1);
         $(from).addClass("dis-none")
+
         $(to).removeClass("dis-none")
         await sleep(.1);
         $(to).addClass("reveal");
@@ -28,25 +35,35 @@ let transition = async function(from, to){
     })
 }
 
-let loadPage = async function(ev){
+let loadViewOnClick = async function(ev){
     let viewName = $(this).attr("open-view");
-    let url = `./views/${viewName}.html`;
-    let newJS = $("<script></script>",{id:"view-js", src:`./views/js/${viewName}.js`})
-    $("#view-js").replaceWith(newJS);
-    let request = $("#sect-view").load(url, async function(){
+    let params = $(this).attr("view-args") || "null";
+    params = JSON.parse(params)
+    await loadView(viewName, params);
+}
+
+let loadView = async function(viewName, params){
+    $("body").addClass("loading");
+    let url = `/views/${viewName}.html`;
+
+    let request = $("#sect-view").load(url, async function(res, status){
         // ANIM
-        await transition("#sect-index .whitebox", "#sect-view");
-        $("#sect-index").addClass("dis-none");
-        onViewLoaded();
+        if(status==="error") return showIndex();
+        $("body").removeClass("loading");
+        await transition("", "#sect-view");    
+        onViewLoaded(params);
     });
 
-    history.pushState({view: viewName}, viewName, "/view/"+viewName);
+    let newJS = $("<script></script>",{id:"view-js", src:`/views/js/${viewName}.js`})
+    $("#view-js").replaceWith(newJS);
+    await transition("#sect-index .whitebox", "");
+    $("#sect-index").addClass("dis-none");
     
+    history.pushState({view: viewName}, viewName, "/view/"+viewName+"/"+btoa(params));
 }
 
 let showIndex = async () => {
-    await sleep(.3);
+    transition("#sect-view", "#sect-index .whitebox")
     $("#sect-index").removeClass("dis-none");
-    $("#sect-index .whitebox").addClass("reveal")
 }
 
