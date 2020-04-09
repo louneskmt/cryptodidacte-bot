@@ -187,6 +187,7 @@ onViewLoaded = async function (params) {
             if(Object.keys(entry).length>0) data.push(entry);
         })
 
+        setMode("view");
         if (data.length<=0) return;
 
         let req = $.post("/db/insert", {
@@ -199,7 +200,6 @@ onViewLoaded = async function (params) {
             console.log(err);
         });
 
-        setMode("view");
     }
 
     $("*[click-role=showIndex]").click(showIndex);
