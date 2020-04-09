@@ -201,7 +201,7 @@ app.post("/db/removeAllById/", async function(req, res){
     or.push({_id: id})
   }
   let resp = await database.remove(collection, {$or: or}, true);
-  resp.status(200).send(res);
+  res.status(200).send(resp);
 });
 
 let isSessionValid = (session)=>{
