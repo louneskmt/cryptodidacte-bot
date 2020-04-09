@@ -19,8 +19,6 @@ botEvents.on('tweet', (tweet) => {
       }
       interactions.addWinners(params);
     }
-  } else {
-    // Twitter.sendTextMessage(user_id, "I got your tweet, but I have no information about how to process it, sorry.");
   }
 });
 
