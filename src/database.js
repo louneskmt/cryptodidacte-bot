@@ -1,6 +1,7 @@
 const {__} = require("./logger.js");
 
-const MongoClient = require('mongodb').MongoClient;
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 const assert = require('assert');
 
 const { databaseConfig } = require('../config')
@@ -70,12 +71,20 @@ class Database {
       })
   }
 
-  async remove(collection, query, many = false) {
+  async remove(collection, query, many = false, {idList = null}) {
       var self = this;
       await this.connectIfNot();
 
       var coll = this.db.collection(collection);
       var fn = null;
+
+      if(idList){
+        let idObjects = [];
+        for(const id of idList){
+          idObjects.push(new mongodb.ObjectID(id));
+        }
+        query = {_id: {$in: idObject}};
+      }
 
       fn = many ? coll.deleteMany : coll.deleteOne;
 

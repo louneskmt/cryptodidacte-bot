@@ -194,13 +194,9 @@ app.post("/db/removeAllById/", async function(req, res){
 
   let collection = req.body.collection || null;
   let idList = req.body.idList || null;
-  if(!idList) return res.status(400).send("-1");
+  if(!idList || !collection) return res.status(400).send("-1");
 
-  let or = [];
-  for(const id of idList){
-    or.push({_id: id})
-  }
-  let resp = await database.remove(collection, {$or: or}, true);
+  let resp = await database.remove(collection, null, true, {idList});
   res.status(200).send(resp);
 });
 
