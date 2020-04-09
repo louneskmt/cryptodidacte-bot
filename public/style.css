@@ -1,5 +1,6 @@
 :root{
     --red: #FF103D;
+    --rgb-red: 255, 15, 59;
     --grey: #404E5C;
     --box-size: 200px;
 }
@@ -232,6 +233,90 @@ section{
 }
 
 
+
+@keyframes sizeAdjust{
+    0%{
+        opacity: 0;
+        transform: scale(0.4);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/****************************************************************/
+/*************************** POPUP ******************************/
+/****************************************************************/
+#sect-popup{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    background: #0005;
+    z-index: 15;
+}
+
+#sect-popup > main{
+    padding: 20px;
+    min-width: 400px;
+
+    background: #FFF;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+    border-top: 10px solid transparent;
+}
+#sect-popup.reveal > main{
+    animation: sizeAdjust .3s ease 0s 1;
+}
+#sect-popup.warn > main{
+    border-top-color: var(--red);
+}
+#sect-popup h3{
+    font-size: 130%;
+    margin-bottom: 4s0px;
+}
+#sect-popup p{
+    font-size: 90%;
+}
+.popup-buttons{
+    text-align: right;
+}
+.popup-buttons button{
+    transition: background-color .3s ease;
+    padding: 10px;
+    margin-top: 30px;
+    margin-left: 10px;
+
+
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 90%;
+
+    text-transform: uppercase;
+    background: transparent;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.popup-buttons button.--button-fill{
+    background: var(--red);
+    color: #FFF;
+}
+.popup-buttons button:hover{
+    background: rgba(var(--rgb-red),.5);
+}
+.popup-buttons button.--button-fill:hover{
+    background: rgba(var(--rgb-red),.5);
+}
+
+
+/****************************************************************/
+/*************************** AUTH *******************************/
+/****************************************************************/
 
 #sect-auth{
     transition: transform 1s ease, opacity .3s ease;
