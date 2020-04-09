@@ -79,9 +79,9 @@ class Database {
       var fn = null;
 
       if(idList){
-        let idObjects = [];
+        let idObject = [];
         for(const id of idList){
-          idObjects.push(new mongodb.ObjectID(id));
+          idObject.push(new mongodb.ObjectID(id));
         }
         query = {_id: {$in: idObject}};
       }
