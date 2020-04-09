@@ -207,6 +207,29 @@ section{
     opacity: 1;
     animation: swipeEnter 1s ease 0s 1;
 }
+@keyframes swipeExit{
+    from{
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to{
+        opacity: 0;
+        transform: translateX(25%);
+    }
+}
+.--anim-swipeExit{
+    opacity: 0;
+}
+.--anim-swipeExit.reveal{
+    opacity: 1;
+    animation: swipeExit 1s ease 0s 1;
+}
+.--anim-reverse{
+    animation-direction: reverse;
+}
+.--anim-fill{
+    animation-fill-mode: forwards;
+}
 
 
 
@@ -489,16 +512,16 @@ section{
     cursor: pointer;
 }
 #data-table tr td{
+    position: relative;
     transition: border-color .3s ease;
     width: auto;
     background: white;
 }
 #data-table tr td:hover{
     transition: border-color .3s ease;
-    width: auto;
     background: white;
 }
-#data-table tr td:first-child::before{
+#data-table tr td.data-table-check::before{
     transition: opacity .3s ease;
     content: "check_circle";
     font-family: "Material Icons";
@@ -513,10 +536,10 @@ section{
     cursor: pointer;
 }
 
-#data-table tr:hover td:first-child::before{
+#data-table tr:hover td.data-table-check::before{
     opacity: .3;
 }
-#data-table tr.selected td:first-child::before{
+#data-table tr.selected td.data-table-check::before{
     opacity: 1;
 }
 .sect-data-footer{
@@ -544,4 +567,19 @@ section{
     box-shadow: 0 0 20px #0005;
     border-radius: 60px;
     background: var(--grey);
+}
+.footer-cont{
+    animation-duration: .5s !important;
+}
+* input.--input-in-table {
+    width: 100% !important;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    
+    font-size: 100%;
+    color: #000000 !important;
+    text-align: left !important;
+
+    border: none;
 }
