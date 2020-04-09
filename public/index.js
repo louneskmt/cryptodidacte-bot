@@ -76,3 +76,7 @@ let showIndex = async () => {
     history.pushState({view: "index", params: ""}, "Cryptodidacte - admin", "/index");
 }
 
+
+let reloadView = function(){
+    onViewLoaded(JSON.stringify(viewDetails.query))
+}
