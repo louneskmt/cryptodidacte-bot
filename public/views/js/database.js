@@ -156,19 +156,37 @@ onViewLoaded = async function (params) {
         setMode("view");
     }
 
+    let deleteElements = function(){
+        let ids = [];
+        $(`#data-table .selected[mongo-id]`).each(function(ix, el){
+            ids.push($(this).attr("mongo-id"));
+        })
+
+        let req = $.post("/db/deleteAllById", {
+            collection: viewDetails.query.collection,
+            idList: ids
+        }, function(data){
+            reloadView();
+        });
+        req.fail(err => console.log(err));
+    }
+
     sendNewElements = function(ev){
         let data = [];
-        console.log("ji");
         
         $("#data-table tr[form-entry]").each(function(ix, el){
             let entry = {} ;
             $(el).find("*[entry-name]").each(function(iy, child){
                 let key = $(child).attr("entry-name");
-                entry[key] = $(child).val();
+                let val = $(child).val();
+                if(!val) return true; // continue;
+                entry[key] = val;
             })
 
             data.push(entry);
         })
+
+        if (data.length<=0) return;
 
         let req = $.post("/db/insert", {
             collection: viewDetails.query.collection,
@@ -178,7 +196,9 @@ onViewLoaded = async function (params) {
         });
         req.fail(function(err){
             console.log(err);
-        })
+        });
+
+        setMode("view");
     }
 
     $("*[click-role=showIndex]").click(showIndex);

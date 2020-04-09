@@ -78,7 +78,7 @@ class Database {
       var coll = this.db.collection(collection);
       var fn = null;
 
-      if(idList){
+      if(idList && !query){
         let idObject = [];
         for(const id of idList){
           idObject.push(new mongodb.ObjectID(id));
