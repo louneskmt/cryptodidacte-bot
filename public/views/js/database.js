@@ -1,5 +1,7 @@
 viewDetails = {}
 onViewLoaded = async function (params) {
+    let mode = "view";
+
     let obj = JSON.parse(params);
     let selectElementRow = function (ev) {
         $(this).parents("tr").toggleClass("selected");
@@ -63,9 +65,11 @@ onViewLoaded = async function (params) {
     $("body").addClass("loading");
 
     let receivedData;
+    let keyOrder;
     $.post("/db/get", query, function (data) {
         receivedData = data;
-        let keyOrder = obj.keyOrder || [];
+
+        keyOrder = obj.keyOrder || [];
 
         let headTarget = $(".data-thead table tr");
         $(headTarget).html(`
@@ -108,5 +112,50 @@ onViewLoaded = async function (params) {
         updateTableRows();
     });
 
+    let addElement = function(){
+        let newEl = $(`<tr class="data-table-newElement" form-entry entry-type="tableRow"><td class="--icon">error_outline</td></tr>`);
+        for(const key of keyOrder){
+            $(newEl).append(`
+                <td><input entry-name="${key}" placeholder="${key}" class="--input-in-table" contentEditable/></td>
+            `)
+        }
+
+        $("#data-table tbody").prepend(newEl) 
+        setMode("edit")
+    }
+
+    let setMode = function(newMode){
+        if(newMode === mode) return false;
+        mode = newMode;
+        if(mode === "edit"){
+            setFooterTools(`
+                <span class="--icon" click-role="addElement">playlist_add</span>
+                <span class="--icon">clear</span>
+                <span class="--icon" click-role="done">save</span>
+            `)
+        }
+        if(mode === "view"){
+            setFooterTools(`
+                <span class="--icon" click-role="addElement">playlist_add</span>
+                <span class="--icon">delete</span>
+                <span class="--icon" click-role="edit">edit</span>
+            `)
+        }
+    }
+
+    let setFooterTools = async function(html){
+        $(".sect-data-footer .footer-cont").addClass("--anim-swipeExit reveal --anim-fill");
+        await sleep(.5);
+        $(".sect-data-footer .footer-cont").removeClass("--anim-swipeExit");
+        $(".sect-data-footer .footer-cont").html(html);
+        $(".sect-data-footer .footer-cont").addClass("--anim-swipeEnter reveal");
+    }
+
+    let doAction = function(){
+        setMode("view");
+    }
+
     $("*[click-role=showIndex]").click(showIndex);
+    $("footer").on("click", "*[click-role=addElement]", addElement);
+    $("footer").on("click", "*[click-role=done]", doAction);
 }
