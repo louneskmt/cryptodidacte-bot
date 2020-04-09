@@ -86,4 +86,18 @@ botEvents.on('dm', (user_id, message_create_object) => {
   });
 });
 
+botEvents.on('logs', eventData => {
+  if (eventData.event_type == 'direct_message') {
+    let {sender, recipient, content} = eventData;
+
+    if (sender == twitterConfig.user_id_bot) {
+      sender = "BOT";
+    } else {
+      recipient = "BOT";
+    }
+
+    __(`BOT - Message from ${sender} to ${recipient} : ${content}`);
+  }
+});
+
 module.exports = botEvents;
