@@ -19,6 +19,7 @@
     "helmet": "^3.21.3",
     "json-beautify": "^1.1.1",
     "mongodb": "^3.5.5",
+    "mongoose": "^5.9.7",
     "qrcode": "^1.4.4",
     "socks5-https-client": "^1.2.1",
     "twit": "git+https://github.com/lounes-kmt/twit.git"
