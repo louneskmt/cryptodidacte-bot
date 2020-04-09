@@ -179,11 +179,12 @@ onViewLoaded = async function (params) {
             $(el).find("*[entry-name]").each(function(iy, child){
                 let key = $(child).attr("entry-name");
                 let val = $(child).val();
-                if(!val) return true; // continue;
+                console.log(val.length)
+                if(val.length <= 0) return true; // continue;
                 entry[key] = val;
             })
 
-            data.push(entry);
+            if(Object.keys(entry).length>0) data.push(entry);
         })
 
         if (data.length<=0) return;
@@ -192,7 +193,7 @@ onViewLoaded = async function (params) {
             collection: viewDetails.query.collection,
             entry: data
         }, function(data, status){
-            window.location.reload();
+            reloadView();
         });
         req.fail(function(err){
             console.log(err);
