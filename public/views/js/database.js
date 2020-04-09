@@ -22,8 +22,17 @@ onViewLoaded = async function (params) {
         }
     }
 
+    let checkIfAllSelected = function(){
+        let total = $("#data-table tr").get().length;
+        let selected = $("#data-table tr.selected").get().length;
+
+        if(total === selected)$("#data-table-checkall").addClass("selected");
+        else $("#data-table-checkall").removeClass("selected");
+    }
+
     let updateTableRows = () => {
         $(".data-table-check").click(selectElementRow)
+        $("#data-table-checkall").click(selectAllTabEl);
         $("#data-table tr:first-child td").each((ix, el) => {
             if (ix == 0) return true;
             let width = $(el).width();
@@ -49,11 +58,13 @@ onViewLoaded = async function (params) {
 
     viewDetails.query = query;
     $(".sect-data-header h1").text(title || "Database");
-    $("#data-table-checkall").click(selectAllTabEl);
 
     $("#data-table tbody").html("");
     $("body").addClass("loading");
+
+    let receivedData;
     $.post("/db/get", query, function (data) {
+        receivedData = data;
         let keyOrder = obj.keyOrder || [];
 
         let headTarget = $(".data-thead table tr");
