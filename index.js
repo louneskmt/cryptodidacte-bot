@@ -187,6 +187,22 @@ app.post("/db/update/", async function(req, res){
   res.status(200).send(queryResponse);
 })
 
+app.post("/db/removeAllById/", async function(req, res){
+  if( !isSessionValid(req.session) && req.body.isTest==false ){
+    return res.status(403).send("-1");
+  }
+
+  let collection = req.body.collection || null;
+  let idList = req.body.query || null;
+  if(!idList) return res.status(400).send("-1");
+
+  let or = [];
+  for(const id of idList){
+    or.push({_id: id})
+  }
+  database.remove(collection, {$or: or}, true);
+});
+
 let isSessionValid = (session)=>{
   if(typeof session === "undefined" || !session.timestamp) return false;
   
