@@ -2,6 +2,7 @@ viewDetails = {}
 onViewLoaded = async function (params) {
     let mode = "view";
 
+
     let obj = JSON.parse(params);
     let selectElementRow = function (ev) {
         $(this).parents("tr").toggleClass("selected");
@@ -33,8 +34,6 @@ onViewLoaded = async function (params) {
     }
 
     let updateTableRows = () => {
-        $(".data-table-check").click(selectElementRow)
-        $("#data-table-checkall").click(selectAllTabEl);
         $("#data-table tr:first-child td").each((ix, el) => {
             if (ix == 0) return true;
             let width = $(el).width();
@@ -43,6 +42,9 @@ onViewLoaded = async function (params) {
                 width
             })
         })
+
+        $(".data-table-check").click(selectElementRow)
+        $("#data-table-checkall").click(selectAllTabEl);
     }
 
     let {
@@ -137,7 +139,7 @@ onViewLoaded = async function (params) {
         if(mode === "view"){
             setFooterTools(`
                 <span class="--icon" click-role="addElement">playlist_add</span>
-                <span class="--icon">delete</span>
+                <span class="--icon" click-role="deleteElements">delete</span>
                 <span class="--icon" click-role="edit">edit</span>
             `)
         }
@@ -156,32 +158,55 @@ onViewLoaded = async function (params) {
         setMode("view");
     }
 
+    let deleteElements = function(){
+        let ids = [];
+        $(`#data-table .selected[mongo-id]`).each(function(ix, el){
+            ids.push($(this).attr("mongo-id"));
+        })
+
+        let req = $.post("/db/removeAllById", {
+            collection: viewDetails.query.collection,
+            idList: ids
+        }, function(data){
+            reloadView();
+        });
+        req.fail(err => console.log(err));
+    }
+
     sendNewElements = function(ev){
         let data = [];
-        console.log("ji");
         
         $("#data-table tr[form-entry]").each(function(ix, el){
             let entry = {} ;
             $(el).find("*[entry-name]").each(function(iy, child){
                 let key = $(child).attr("entry-name");
-                entry[key] = $(child).val();
+                let val = $(child).val();
+                
+                if(val.length <= 0) return true; // continue;
+                entry[key] = val;
             })
 
-            data.push(entry);
+            if(Object.keys(entry).length>0) data.push(entry);
         })
+
+        setMode("view");
+        if (data.length<=0) return;
 
         let req = $.post("/db/insert", {
             collection: viewDetails.query.collection,
             entry: data
         }, function(data, status){
-            window.location.reload();
+            reloadView();
         });
         req.fail(function(err){
             console.log(err);
-        })
+        });
+
     }
 
     $("*[click-role=showIndex]").click(showIndex);
+    $("footer").off("click");
     $("footer").on("click", "*[click-role=addElement]", addElement);
     $("footer").on("click", "*[click-role=sendNewElements]", sendNewElements);
+    $("footer").on("click", "*[click-role=deleteElements]", deleteElements);
 }

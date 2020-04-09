@@ -78,10 +78,10 @@ class Database {
       var coll = this.db.collection(collection);
       var fn = null;
 
-      if(idList){
-        let idObjects = [];
+      if(idList && !query){
+        let idObject = [];
         for(const id of idList){
-          idObjects.push(new mongodb.ObjectID(id));
+          idObject.push(new mongodb.ObjectID(id));
         }
         query = {_id: {$in: idObject}};
       }
