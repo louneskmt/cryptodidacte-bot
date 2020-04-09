@@ -84,11 +84,12 @@ app.get('/', function(req, res){
 });
 
 app.get('/connect', function(req, res){
-  let continueTo = req.query.continueTo;
+  let continueTo = req.query.continueTo || "";
+  let nextParams = req.query.newtParams || "";
   if(typeof req.session != "undefined" && isSessionValid(req.session)){
     return res.redirect("/index");
   }
-  ejs.renderFile(__dirname + "/public/connect.ejs", {continueTo}, function(err,str){
+  ejs.renderFile(__dirname + "/public/connect.ejs", {continueTo, nextParams}, function(err,str){
     if(err) __(err,9);
     res.status(200).send(str);
   })
@@ -106,20 +107,22 @@ app.get("/index", function(req, res){
     })
   }
 })
-app.get("/view/:viewName", function(req, res){
+app.get("/view/:viewName/:viewParams*?", function(req, res){
   let now = new Date();
   let time = req.session.timestamp;
   let delta = now - time;
   let viewName = req.params.viewName || null;
+  let viewParams = req.params.viewParams || "";
+  viewParams = Buffer.from(viewParams, "base64").toString();
 
   
   if(isSessionValid(req.session) === false){ 
     req.session.destroy(function(err){
       if(err) return __(err,9);
-      res.redirect(`/connect${viewName ? "?continueTo="+viewName : "" }`);
+      res.redirect(`/connect${viewName ? "?continueTo="+viewName : "" }${viewParams ? "&nextParams="+viewParams : "" }`);
     });
   }else{
-    ejs.renderFile(__dirname + "/public/index.ejs", {view: viewName}, function(err,str){
+    ejs.renderFile(__dirname + "/public/index.ejs", {view: viewName, viewParams: viewParams}, function(err,str){
       res.status(200).send(str);
     })
   }
