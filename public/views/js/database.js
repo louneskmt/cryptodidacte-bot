@@ -131,7 +131,7 @@ onViewLoaded = async function (params) {
             setFooterTools(`
                 <span class="--icon" click-role="addElement">playlist_add</span>
                 <span class="--icon">clear</span>
-                <span class="--icon" click-role="done">save</span>
+                <span class="--icon" click-role="sendNewElements">save</span>
             `)
         }
         if(mode === "view"){
@@ -151,11 +151,37 @@ onViewLoaded = async function (params) {
         $(".sect-data-footer .footer-cont").addClass("--anim-swipeEnter reveal");
     }
 
+
     let doAction = function(){
         setMode("view");
     }
 
+    sendNewElements = function(ev){
+        let data = [];
+        console.log("ji");
+        
+        $("#data-table tr[form-entry]").each(function(ix, el){
+            let entry = {} ;
+            $(el).find("*[entry-name]").each(function(iy, child){
+                let key = $(child).attr("entry-name");
+                entry[key] = $(child).val();
+            })
+
+            data.push(entry);
+        })
+
+        let req = $.post("/db/insert", {
+            collection: viewDetails.query.collection,
+            entry: data
+        }, function(data, status){
+            window.location.reload();
+        });
+        req.fail(function(err){
+            console.log(err);
+        })
+    }
+
     $("*[click-role=showIndex]").click(showIndex);
     $("footer").on("click", "*[click-role=addElement]", addElement);
-    $("footer").on("click", "*[click-role=done]", doAction);
+    $("footer").on("click", "*[click-role=sendNewElements]", sendNewElements);
 }
