@@ -2,6 +2,7 @@ viewDetails = {}
 onViewLoaded = async function (params) {
     let mode = "view";
 
+
     let obj = JSON.parse(params);
     let selectElementRow = function (ev) {
         $(this).parents("tr").toggleClass("selected");
@@ -204,6 +205,7 @@ onViewLoaded = async function (params) {
     }
 
     $("*[click-role=showIndex]").click(showIndex);
+    $("footer").off("click");
     $("footer").on("click", "*[click-role=addElement]", addElement);
     $("footer").on("click", "*[click-role=sendNewElements]", sendNewElements);
     $("footer").on("click", "*[click-role=deleteElements]", deleteElements);
