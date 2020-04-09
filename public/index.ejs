@@ -7,12 +7,25 @@
     <link rel="stylesheet" href="/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script type="text/javascript"src="" id="view-js"></script>
+    <script type="text/javascript" defer src="/classes/popup.js"></script>
+    <script type="text/javascript" src="" id="view-js"></script>
     <script type="text/javascript" defer src="/index.js"></script>
 </head>
 <body>
     <input type="hidden" id="params-view" value="<%= view %>">
     <input type="hidden" id="params-viewParams" value="<%= viewParams %>">
+    <section id="sect-popup" class="dis-none reveal">
+        <main>
+            <h3>Alerte</h3>
+            <p>
+            Are you sure you want to continue?
+            </p>
+            <div class="popup-buttons">
+                <button popup-role="no">No</button>
+                <button class="--button-fill" popup-role="yes">Yes</button>
+            </div>
+        </main>
+    </section>
     <section id="sect-index" class="dis-none">
         <div class="whitebox unselectable" id="index-rewards" open-view="database" view-args='{"title": "Rewards", "collection": "rewards"}'>
             <div class="icon">card_giftcard</div>
