@@ -87,6 +87,18 @@ const payout = (user_id) => {
     });
 }
 
+const linkETHAddress = async (user_id, address) => {
+    let db = new Database("fidelity", `mongodb://${websiteDbConfig.user}:${websiteDbConfig.password}@localhost:27017/fidelity`);
+
+    await db.update("users", { 
+        filter: {user_id: user_id},
+        edit:{address: address},
+        mode: 'set'
+    });
+
+    await db.disconnect();
+}
+
 const check = async (eventData) => {
     // TODO
 }
