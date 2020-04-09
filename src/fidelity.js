@@ -20,7 +20,7 @@ const processEvent = async (eventData) => {
     let db = new Database("fidelity", `mongodb://${websiteDbConfig.user}:${websiteDbConfig.password}@localhost:27017/fidelity`);
     await db.connect();
 
-    let research = await db.find("history", {user_id: eventData.user_id, type: eventData.type, target_tweet_id: eventData.target_tweet_id});
+    let research = await db.find("history", {user_id: eventData.user_id, type: eventData.event_type, target_tweet_id: eventData.target_tweet_id});
     if(research.length != 0) return;
     await db.insert("history", eventData);
 

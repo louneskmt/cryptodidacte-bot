@@ -43,11 +43,9 @@ app.post('/webhook/twitter', function(req, res) {
   switch (for_user_id) {
     case twitterConfig.user_id_bot:
       globalEvents.emit('bot', req.body);
-      globalEvents.emit('logs', 'bot', req.body);
       break;
     case twitterConfig.user_id_cryptodidacte:
       globalEvents.emit('cryptodidacte', req.body);
-      globalEvents.emit('logs', 'cryptodidacte', req.body);
       break;
     default:
       __('Unknow request target');
