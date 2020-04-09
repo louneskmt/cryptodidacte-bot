@@ -1,12 +1,19 @@
 $(function(){
     let defView = $("#params-view").val();
+    let viewParams = $("#params-viewParams").val() || null;
     if(defView){
-        loadView(defView);
+        loadView(defView, viewParams);
     }else{
         showIndex();
     }
 
     $(".whitebox[open-view]").click(loadViewOnClick);
+
+    window.onpopstate = function(ev){
+        let {state} = ev;
+        if(state.view === "index") return showIndex();
+        loadView(state.view, state.params);
+    }
 });
 
 // GLOBAL
@@ -38,7 +45,6 @@ let transition = async function(from, to){
 let loadViewOnClick = async function(ev){
     let viewName = $(this).attr("open-view");
     let params = $(this).attr("view-args") || "null";
-    params = JSON.parse(params)
     await loadView(viewName, params);
 }
 
@@ -59,11 +65,14 @@ let loadView = async function(viewName, params){
     await transition("#sect-index .whitebox", "");
     $("#sect-index").addClass("dis-none");
     
-    history.pushState({view: viewName}, viewName, "/view/"+viewName+"/"+atob(params));
+    let paramsString = "";
+    if(params) paramsString = "/"+btoa(params)
+    history.pushState({view: viewName, params}, viewName, "/view/"+viewName+paramsString);
 }
 
 let showIndex = async () => {
     transition("#sect-view", "#sect-index .whitebox")
     $("#sect-index").removeClass("dis-none");
+    history.pushState({view: "index", params: ""}, "Cryptodidacte - admin", "/index");
 }
 

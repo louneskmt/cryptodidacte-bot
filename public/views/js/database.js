@@ -1,5 +1,6 @@
 viewDetails = {}
-onViewLoaded = async function (obj) {
+onViewLoaded = async function (params) {
+    let obj = JSON.parse(params);
     let selectElementRow = function (ev) {
         $(this).parents("tr").toggleClass("selected");
         checkIfAllSelected();
@@ -88,7 +89,7 @@ onViewLoaded = async function (obj) {
         }
 
         $("#data-table tr").each(async function (ix, el) {
-            await sleep(ix * 0.2)
+            await sleep(ix * 0.1)
             $(el).addClass("reveal");
         })
 

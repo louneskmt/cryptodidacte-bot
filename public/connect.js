@@ -30,6 +30,7 @@ let connect = async function(){
         if(res === "-1") return retryAuth();
 
         let next = $("#params-next").val();
+        next += $("#params-nextParams").val() ? ("/"+ $("#params-nextParams").val()) : ""
         let href = next ? "/view/"+next : "/index";
         window.location.href = href
     });
