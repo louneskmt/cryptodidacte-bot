@@ -1,8 +1,6 @@
 viewDetails = {}
 onViewLoaded = async function (params) {
-    let mode = "view";
-
-
+    let mode = null;
     let obj = JSON.parse(params);
     let selectElementRow = function (ev) {
         $(this).parents("tr").toggleClass("selected");
@@ -132,7 +130,7 @@ onViewLoaded = async function (params) {
         if(mode === "edit"){
             setFooterTools(`
                 <span class="--icon" click-role="addElement">playlist_add</span>
-                <span class="--icon">clear</span>
+                <span class="--icon" click-role="cancelEdit">clear</span>
                 <span class="--icon" click-role="sendNewElements">save</span>
             `)
         }
@@ -164,6 +162,30 @@ onViewLoaded = async function (params) {
             ids.push($(this).attr("mongo-id"));
         })
 
+        if(ids.length === 0) return;
+
+        let p = new Popup({
+            title:"Delete?",
+            content: `You are about to delete ${ids.length} entries`,
+            buttons: [
+                {
+                    text: "Cancel",
+                    onclick: pop=>pop.destroy()
+                },{
+                    text: "Delete",
+                    classes: "--button-fill",
+                    onclick: function(){
+                        this.destroy();
+                        reallyDeleteElements(ids);
+                    }
+                }
+            ]
+        })
+        p.show();
+    }
+
+    let reallyDeleteElements = function(ids){
+        if(ids.length===0) return;
         let req = $.post("/db/removeAllById", {
             collection: viewDetails.query.collection,
             idList: ids
@@ -204,9 +226,38 @@ onViewLoaded = async function (params) {
 
     }
 
+    let cancelEdit = function(){
+        // TODO : Modal to confirm
+        let p = new Popup({
+            title:"Cancel?",
+            content: `All non-saved changes will be definitely lost. `,
+            buttons: [
+                {
+                    text: "Return",
+                    onclick: pop=>pop.destroy()
+                },{
+                    text: "Discard",
+                    classes: "--button-fill",
+                    onclick: function(){
+                        this.destroy();
+                        reallyCancel();
+                    }
+                }
+            ]
+        })
+
+    }
+
+    let reallyCancel = function(){
+        $("#data-table tr[form-entry]").remove();
+        setMode("view")
+    }
+
     $("*[click-role=showIndex]").click(showIndex);
     $("footer").off("click");
     $("footer").on("click", "*[click-role=addElement]", addElement);
     $("footer").on("click", "*[click-role=sendNewElements]", sendNewElements);
     $("footer").on("click", "*[click-role=deleteElements]", deleteElements);
+    $("footer").on("click", "*[click-role=cancelEdit]", cancelEdit);
+    setMode("view");
 }

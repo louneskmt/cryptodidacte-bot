@@ -1,4 +1,6 @@
-$(function(){
+let popupShowing = false;
+
+$(async function(){
     let defView = $("#params-view").val();
     let viewParams = $("#params-viewParams").val() || null;
     if(defView){
@@ -40,6 +42,8 @@ let transition = async function(from, to){
 
         resolve(to);
     })
+
+    
 }
 
 let loadViewOnClick = async function(ev){
@@ -78,5 +82,5 @@ let showIndex = async () => {
 
 
 let reloadView = function(){
-    onViewLoaded(JSON.stringify(viewDetails.query))
+    onViewLoaded(JSON.stringify(viewDetails.query));
 }
