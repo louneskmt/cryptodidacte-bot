@@ -17,6 +17,9 @@ let connect = async function(){
     let username = $("#auth-username").val();   
     let password = $("#auth-password").val();
 
+    $("body").addClass("loading");
+
+
     let nPassword = await hashPassword(password);
 
     $("#sect-auth").addClass("retract");
@@ -27,6 +30,7 @@ let connect = async function(){
         if(res === "-1") return retryAuth();
 
         let next = $("#params-next").val();
+        next += $("#params-nextParams").val() ? ("/"+ $("#params-nextParams").val()) : ""
         let href = next ? "/view/"+next : "/index";
         window.location.href = href
     });
@@ -45,6 +49,7 @@ let sleep = async secs => {
 
 let retryAuth = ()=>{
     $("#sect-auth").removeClass("retract");
+    $("body").removeClass("loading");
 }
 
 let loadSecureJS = (token)=>{

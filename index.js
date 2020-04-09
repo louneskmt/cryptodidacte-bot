@@ -32,7 +32,7 @@ app.use(expressSession({
   secret: process.env.SALT,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true, expires: new Date(Date.now() + 30*60*1000)}
+  cookie: { secure: true, expires: null}
 }))
 /**
  * Receives Account Activity events
@@ -84,46 +84,51 @@ app.get('/', function(req, res){
 });
 
 app.get('/connect', function(req, res){
-  let continueTo = req.query.continueTo;
-  ejs.renderFile(__dirname + "/public/connect.ejs", {continueTo}, function(err,str){
+  let continueTo = req.query.continueTo || "";
+  let nextParams = req.query.nextParams || "";
+  if(typeof req.session != "undefined" && isSessionValid(req.session)){
+    return res.redirect("/index");
+  }
+  ejs.renderFile(__dirname + "/public/connect.ejs", {continueTo, nextParams}, function(err,str){
     if(err) __(err,9);
     res.status(200).send(str);
   })
 });
 app.get("/index", function(req, res){
-  let now = new Date();
-  let time = req.session.timestamp;
-  let delta = now - time;
-  
-  if(delta > 1000*60*30 || !req.session.isValid){ //30mins
-    req.session.isValid = false;
-    res.redirect("/connect");
+  if( !isSessionValid(req.session) ){ //30mins
+    req.session.destroy(function(err){
+      if(err) return __(err,9);
+      res.redirect(`/connect`);
+    });
   }else{
-    ejs.renderFile(__dirname + "/public/index.ejs", {view: ""}, function(err,str){
+    ejs.renderFile(__dirname + "/public/index.ejs", {view: "", viewParams: ""}, function(err,str){
       if(err) __(err,9);
       res.status(200).send(str);
     })
   }
 })
-app.get("/view/:viewName", function(req, res){
+app.get("/view/:viewName/:viewParams*?", function(req, res){
   let now = new Date();
   let time = req.session.timestamp;
   let delta = now - time;
   let viewName = req.params.viewName || null;
+  let viewParams = req.params.viewParams || "";
 
   
-  if(delta > 1000*60*30 || !req.session.isValid){ //30mins
-    req.session.isValid = false;
-    res.redirect(`/connect${viewName ? "?continueTo="+viewName : "" }`);
+  if(isSessionValid(req.session) === false){ 
+    req.session.destroy(function(err){
+      if(err) return __(err,9);
+      res.redirect(`/connect${viewName ? "?continueTo="+viewName : "" }${viewParams ? "&nextParams="+viewParams : "" }`);
+    });
   }else{
-    ejs.renderFile(__dirname + "/public/index.ejs", {view: viewName}, function(err,str){
+    viewParams = Buffer.from(viewParams, "base64").toString();
+    console.log(viewParams)
+    ejs.renderFile(__dirname + "/public/index.ejs", {view: viewName, viewParams: viewParams}, function(err,str){
       res.status(200).send(str);
     })
   }
 });
-
 app.post("/login", async function(req, res){
-  __(req.body)
   let username = req.body.username || "";
   let password = req.body.password || "";
   let session = new Session({username, password});
@@ -133,12 +138,72 @@ app.post("/login", async function(req, res){
     return res.status(403).send("-1");
   }else{
     req.session.timestamp = session.timestamp;
-    req.session.id = session.id;
-    req.session.isValid = session.isValid;
+    req.session.token = session.id;
+    req.session.isValid = true;
   
     return res.status(200).send("0");
   }
 })
+
+app.post("/db/get/", async function(req, res){
+  if( !isSessionValid(req.session) && req.body.isTest==false){
+    return res.status(403).send("-1");
+  }
+
+  let collection = req.body.collection || null;
+  let filter = req.body.filter || {};
+
+  if(!collection) return res.status(400).send("-1");
+
+  // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
+  let queryResponse = await database.find(collection, filter);
+  res.status(200).send(queryResponse);
+})
+app.post("/db/insert/", async function(req, res){
+  if( !isSessionValid(req.session) && req.body.isTest==false){
+    return res.status(403).send("-1");
+  }
+
+  let collection = req.body.collection || null;
+  let entry = req.body.entry || null;
+
+  if(!collection || !entry) return res.status(400).send("-1");
+
+  // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
+  let queryResponse = await database.insert(collection, entry);
+  res.status(200).send(queryResponse);
+})
+
+app.post("/db/update/", async function(req, res){
+  if( !isSessionValid(req.session) && req.body.isTest==false ){
+    return res.status(403).send("-1");
+  }
+
+  let collection = req.body.collection || null;
+  let query = req.body.query || null;
+
+  if(!collection || !query) return res.status(400).send("-1");
+
+  // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
+  let queryResponse = await database.update(collection, query);
+  res.status(200).send(queryResponse);
+})
+
+let isSessionValid = (session)=>{
+  if(typeof session === "undefined" || !session.timestamp) return false;
+  
+  let now = (new Date()).getTime();
+  let time = (new Date(session.timestamp)).getTime();
+  let delta = now - time;
+
+  //*** TEST ***//
+  if(delta > 1000*60*30 || !session.isValid){ //30mins
+    session.isValid = false;
+    return false
+  }
+
+  return true;
+}
 
 /**
  * Serve static files from directory public

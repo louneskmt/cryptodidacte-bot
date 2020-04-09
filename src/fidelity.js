@@ -36,7 +36,11 @@ const processEvent = async (event, data) => {
                 balance: reward
             });
         } else {
-            await db.update("users", {user_id: data.user_id}, {balance: reward}, 'inc');
+            await db.update("users", { 
+                filter: {user_id: data.user_id},
+                edit:{balance: reward},
+                mode: 'inc'
+            });
         }
         await db.disconnect();
     });
