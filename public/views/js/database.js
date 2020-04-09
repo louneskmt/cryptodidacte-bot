@@ -137,7 +137,7 @@ onViewLoaded = async function (params) {
         if(mode === "view"){
             setFooterTools(`
                 <span class="--icon" click-role="addElement">playlist_add</span>
-                <span class="--icon">delete</span>
+                <span class="--icon" click-role="deleteElements">delete</span>
                 <span class="--icon" click-role="edit">edit</span>
             `)
         }
@@ -205,4 +205,5 @@ onViewLoaded = async function (params) {
     $("*[click-role=showIndex]").click(showIndex);
     $("footer").on("click", "*[click-role=addElement]", addElement);
     $("footer").on("click", "*[click-role=sendNewElements]", sendNewElements);
+    $("footer").on("click", "*[click-role=deleteElements]", deleteElements);
 }
