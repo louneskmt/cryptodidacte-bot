@@ -162,7 +162,7 @@ onViewLoaded = async function (params) {
             ids.push($(this).attr("mongo-id"));
         })
 
-        let req = $.post("/db/deleteAllById", {
+        let req = $.post("/db/removeAllById", {
             collection: viewDetails.query.collection,
             idList: ids
         }, function(data){
@@ -179,7 +179,7 @@ onViewLoaded = async function (params) {
             $(el).find("*[entry-name]").each(function(iy, child){
                 let key = $(child).attr("entry-name");
                 let val = $(child).val();
-                console.log(val.length)
+                
                 if(val.length <= 0) return true; // continue;
                 entry[key] = val;
             })
