@@ -9,6 +9,8 @@ const { twitterConfig } = require('../../config.js');
 var interactions = require('../interactions.js');
 var userStatus = require('../userStatus.js');
 
+var messageTemplates = require('../data/message_templates.json');
+
 botEvents.on('tweet', (tweet) => {
   var user_id = tweet.user.id_str;
   if(twitterConfig.admin.includes(user_id)) {
@@ -57,7 +59,7 @@ botEvents.on('dm', (user_id, message_create_object) => {
     if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
       userStatus.deleteStatus(user_id);
       __("Sending admin menu...")
-      return Twitter.sendMessage(user_id, message_templates.admin_menu);
+      return Twitter.sendMessage(user_id, messageTemplates.admin_menu);
     }
   
     if(message === "start"){

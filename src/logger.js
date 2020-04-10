@@ -53,7 +53,7 @@ var date = date.getDate()+"/"+(date.getMonth()+1)+" "+date.getHours()+":"+date.g
 
 main.write(`\n\n\n------------------------ ${date} ------------------------`)
 
-__`Logger has started`
+__(`Logger has started`);
 
 module.exports = {
     __

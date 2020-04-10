@@ -6,13 +6,13 @@ var QRCode = require('./qrcode.js');
 var lnquiz = require('./lnquiz.js');
 var userStatus = require('./userStatus.js');
 
-var message_templates = require('../data/message_templates.json');
+var messageTemplates = require('../data/message_templates.json');
 
 
 function start(params){
     let {user_id} = params;
 
-    Twitter.sendMessage(user_id, message_templates.menu);
+    Twitter.sendMessage(user_id, messageTemplates.menu);
 }
   
 async function tryAddWinners(params){
