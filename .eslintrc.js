@@ -16,7 +16,8 @@ module.exports = {
         "ecmaVersion": 2018
     },
     "rules": {
-        "no-restricted-syntax": ["off"],
-        "consistent-return": ["off"]
+        "no-restricted-syntax": "off",
+        "consistent-return": "off",
+        "no-console": "off",
     }
 };
