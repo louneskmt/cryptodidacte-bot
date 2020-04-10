@@ -613,18 +613,28 @@ section{
     vertical-align: inherit;
     opacity: 0;
 }
+#data-table.data-edit tr td.data-table-check::before{
+    content: "edit";
+    opacity: 1;
+}
 #data-table tr{
     transition: border-color .5s ease;
     border-width: 0;
     border-color: transparent;
     border-style: solid;
+    cursor: text;
+}
+#data-table.data-edit tr{
     cursor: pointer;
 }
 
-#data-table tr:hover td.data-table-check::before{
+#data-table.data-edit tr.--tr-editing{
+    display: none;
+}
+#data-table:not(.data-edit) tr:hover td.data-table-check::before{
     opacity: .3;
 }
-#data-table tr.selected td.data-table-check::before{
+#data-table:not(.data-edit) tr.selected td.data-table-check::before{
     opacity: 1;
 }
 .sect-data-footer{
