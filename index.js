@@ -69,11 +69,6 @@ app.get('/webhook/twitter', function(req, res) {
   }
 });
 
-app.get('/done', function(req, res) {
-  console.log(req.query);
-  console.log(req.body);
-});
-
 /**
  * Returns index HTML page
  */
