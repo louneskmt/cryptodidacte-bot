@@ -2,7 +2,11 @@ viewDetails = {}
 onViewLoaded = async function (params) {
     let mode = null;
     let obj = JSON.parse(params);
+    let isEditing = false;
+
     let selectElementRow = function (ev) {
+        if(mode === "edit") return editEntry.call(this, ev);
+
         $(this).parents("tr").toggleClass("selected");
         checkIfAllSelected();
     }
@@ -43,6 +47,51 @@ onViewLoaded = async function (params) {
 
         $(".data-table-check").click(selectElementRow)
         $("#data-table-checkall").click(selectAllTabEl);
+    }
+
+    let editEntry = async function(ev){
+        let self = this;
+        console.log(self);
+        
+        
+        if(isEditing){
+            return new Popup({
+                title:"Save?",
+                content: `Do you want to save your edit?`,
+                buttons: [
+                    {
+                        text: "Cancel",
+                        onclick: pop=>pop.destroy()
+                    },{
+                        text: "Discard",
+                        onclick: function(pop){pop.destroy(); reallyCancel(); isEditing=false; setMode("edit"); editEntry.call(self,ev)}
+                    },{
+                        text: "Save",
+                        classes: "--button-fill",
+                        onclick: function(){
+                            this.destroy();
+                            reallyDeleteElements(ids);
+                        }
+                    }
+                ]
+            })
+        }
+        isEditing = true;
+        
+        let tr = $(this).parent();
+        await sleep(.1)
+        $(tr).addClass("--tr-editing");
+
+        let newEl = $(`<tr class="data-table-newElement" form-entry entry-type="tableRow"><td class="--icon">error_outline</td></tr>`);
+        for(let i = 0; i < keyOrder.length; i++){
+            let value = $($(tr).find("td")[i+1]).text();
+            let key = keyOrder[i];
+            $(newEl).append(`
+                <td><input entry-name="${key}" placeholder="${value}" class="--input-in-table" contentEditable/></td>
+            `)
+        }
+
+        $(newEl).insertAfter(tr);
     }
 
     let {
@@ -121,13 +170,13 @@ onViewLoaded = async function (params) {
         }
 
         $("#data-table tbody").prepend(newEl) 
-        setMode("edit")
+        setMode("add")
     }
 
     let setMode = function(newMode){
         if(newMode === mode) return false;
         mode = newMode;
-        if(mode === "edit"){
+        if(mode === "add"){
             setFooterTools(`
                 <span class="--icon" click-role="addElement">playlist_add</span>
                 <span class="--icon" click-role="cancelEdit">clear</span>
@@ -135,10 +184,18 @@ onViewLoaded = async function (params) {
             `)
         }
         if(mode === "view"){
+            $("#data-table").removeClass("data-edit");
             setFooterTools(`
                 <span class="--icon" click-role="addElement">playlist_add</span>
                 <span class="--icon" click-role="deleteElements">delete</span>
-                <span class="--icon" click-role="edit">edit</span>
+                <span class="--icon" click-role="startEdit">edit</span>
+            `)
+        }
+        if(mode === "edit"){
+            $("#data-table").addClass("data-edit");
+            setFooterTools(`
+                <span class="--icon" click-role="cancelEdit">clear</span>
+                <span class="--icon" click-role="sendEdit">save</span>
             `)
         }
     }
@@ -181,7 +238,6 @@ onViewLoaded = async function (params) {
                 }
             ]
         })
-        p.show();
     }
 
     let reallyDeleteElements = function(ids){
@@ -226,7 +282,7 @@ onViewLoaded = async function (params) {
 
     }
 
-    let cancelEdit = function(){
+    let cancelAdd = function(){
         // TODO : Modal to confirm
         let p = new Popup({
             title:"Cancel?",
@@ -250,7 +306,38 @@ onViewLoaded = async function (params) {
 
     let reallyCancel = function(){
         $("#data-table tr[form-entry]").remove();
+        $(".--tr-editing").removeClass("--tr-editing");
+        isEditing = false;
         setMode("view")
+    }
+
+
+    let sendEdit = function(){
+        let el = $("#data-table tr[form-entry]");
+        if($(el).get().length>1){
+            return console.error("More than one entry to edit. Aborting...")
+        }
+
+        let id = $(el).attr("mongo-id");
+        let data = {};
+        $(el).find("input[entry-name]").each(function(ix,child){
+            let key = $(child).attr("entry-name");
+            let val = $(child).val();
+            
+            if(val.length<=0 || !val) return true;
+            data[key] = val;
+        })
+
+        let req = $.post("/db/updateById/", {
+            collection: viewDetails.query.collection,
+            query: data
+        }, function(data){
+            reloadView();
+        })
+        req.fail(function(err){
+            console.error(err);
+        })
+        
     }
 
     $("*[click-role=showIndex]").click(showIndex);
@@ -258,6 +345,8 @@ onViewLoaded = async function (params) {
     $("footer").on("click", "*[click-role=addElement]", addElement);
     $("footer").on("click", "*[click-role=sendNewElements]", sendNewElements);
     $("footer").on("click", "*[click-role=deleteElements]", deleteElements);
-    $("footer").on("click", "*[click-role=cancelEdit]", cancelEdit);
+    $("footer").on("click", "*[click-role=cancelEdit]", cancelAdd);
+    $("footer").on("click", "*[click-role=startEdit]", ()=>setMode("edit"));
+    $("footer").on("click", "*[click-role=sendEdit]", sendEdit);
     setMode("view");
 }
