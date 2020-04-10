@@ -1,101 +1,102 @@
-const {__} = require("../logger.js");
-
 const events = require('events');
-var botEvents = new events.EventEmitter();
+const { __ } = require('../logger.js');
+
+const botEvents = new events.EventEmitter();
 
 // Twitter modules
-var Twitter = require('../Twit.js');
+const Twitter = require('../Twit.js');
 const { twitterConfig } = require('../../config.js');
-var interactions = require('../interactions.js');
-var userStatus = require('../userStatus.js');
+const interactions = require('../interactions.js');
+const userStatus = require('../userStatus.js');
 
-var messageTemplates = require('../data/message_templates.json');
+const messageTemplates = require('../../data/message_templates.json');
 
 botEvents.on('tweet', (tweet) => {
-  var user_id = tweet.user.id_str;
-  if(twitterConfig.admin.includes(user_id)) {
-    if(tweet.text.includes("Félicitations aux gagnants")) {
-      var params = {
-        user_id: user_id,
-        winners: tweet.entities.user_mentions.slice(0,3)
-      }
+  const userId = tweet.user.id_str;
+  if (twitterConfig.admin.includes(userId)) {
+    if (tweet.text.includes('Félicitations aux gagnants')) {
+      const params = {
+        userId,
+        winners: tweet.entities.user_mentions.slice(0, 3),
+      };
       interactions.addWinners(params);
     }
   }
 });
 
 
-botEvents.on('dm', (user_id, message_create_object) => {
-  var message = message_create_object.message_data.text.toLowerCase();
-  var message_data = message_create_object.message_data;
+botEvents.on('dm', (userId, messageObject) => {
+  const message = messageObject.message_data.text.toLowerCase();
+  const { messageData } = messageObject;
 
-  const fn_exact = {
-    "adding_winners": interactions.tryAddWinners,
-    "add_winners": interactions.waitForWinners,
-    "generating_invoice": interactions.generatingInvoice,
-    "update_rewards": interactions.updateRewards,
-    "updating_rewards": interactions.updatingRewards,
-    "cancel": interactions.end,
-    "start": interactions.start,
-    "receive_sats": interactions.receiveSats,
-    "claim_rewards": interactions.countRewards,
-    "generate_invoice": interactions.generateInvoice,
-    "get_rewards_info": interactions.sendRewardsInfo
-  }
-
-  const fn_startsWith = {
-    "claim_rewards_": interactions.claimRewards
-  }
-
-  const params = {
-    user_id, message, message_data
+  const fnExact = {
+    adding_winners: interactions.tryAddWinners,
+    add_winners: interactions.waitForWinners,
+    generating_invoice: interactions.generatingInvoice,
+    update_rewards: interactions.updateRewards,
+    updating_rewards: interactions.updatingRewards,
+    cancel: interactions.end,
+    start: interactions.start,
+    receive_sats: interactions.receiveSats,
+    claim_rewards: interactions.countRewards,
+    generate_invoice: interactions.generateInvoice,
+    get_rewards_info: interactions.sendRewardsInfo,
   };
 
-  if(message === "cancel") return interactions.end(params);
+  const fnStartsWith = {
+    claim_rewards_: interactions.claimRewards,
+  };
 
-  userStatus.getStatus(user_id, (status) => {
+  const params = {
+    userId, message, messageData,
+  };
+
+  if (message === 'cancel') return interactions.end(params);
+
+  userStatus.getStatus(userId, (status) => {
     params.status = status;
 
-    if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
-      userStatus.deleteStatus(user_id);
-      __("Sending admin menu...")
-      return Twitter.sendMessage(user_id, messageTemplates.admin_menu);
+    if (message === 'start admin' && twitterConfig.admin.includes(userId)) {
+      userStatus.deleteStatus(userId);
+      __('Sending admin menu...');
+      return Twitter.sendMessage(userId, messageTemplates.admin_menu);
     }
-  
-    if(message === "start"){
-      userStatus.deleteStatus(user_id);
+
+    if (message === 'start') {
+      userStatus.deleteStatus(userId);
       return interactions.start(params);
     }
-    
-    if(message_data.hasOwnProperty("quick_reply_response")) {
-      let metadata = message_data.quick_reply_response.metadata;
-  
-      if(fn_exact.hasOwnProperty(metadata)){
-        return fn_exact[metadata](params);
+
+    if (Object.prototype.hasOwnProperty.call(messageData, 'quick_reply_response')) {
+      const { metadata } = messageData.quick_reply_response;
+
+      if (Object.prototype.hasOwnProperty.call(fnExact, metadata)) {
+        return fnExact[metadata](params);
       }
+
+      return undefined;
     }
 
-    if(status === undefined) return;
-    
-    if(fn_exact.hasOwnProperty(status)){
-      fn_exact[status](params);
-    } else {
-      for (const key in fn_startsWith) {
-        if(status.startsWith(key))  fn_startsWith[key](params)
-      }
-    }
+    if (status === undefined) return undefined;
 
+    if (Object.prototype.hasOwnProperty.call(fnExact, status)) {
+      return fnExact[status](params);
+    }
+    for (const key in fnStartsWith) {
+      if (status.startsWith(key)) return fnStartsWith[key](params);
+    }
   });
 });
 
-botEvents.on('logs', eventData => {
-  if (eventData.event_type == 'direct_message') {
-    let {sender, recipient, content} = eventData;
+botEvents.on('logs', (eventData) => {
+  if (eventData.event_type === 'direct_message') {
+    const { content } = eventData;
+    let { sender, recipient } = eventData;
 
-    if (sender == twitterConfig.user_id_bot) {
-      sender = "BOT";
+    if (sender === twitterConfig.user_id_bot) {
+      sender = 'BOT';
     } else {
-      recipient = "BOT";
+      recipient = 'BOT';
     }
 
     __(`BOT - Message from ${sender} to ${recipient} : ${content}`);
