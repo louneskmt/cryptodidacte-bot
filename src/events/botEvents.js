@@ -57,7 +57,7 @@ botEvents.on('dm', (user_id, message_create_object) => {
     if(message === "start admin" && twitterConfig.admin.includes(user_id)) {
       userStatus.deleteStatus(user_id);
       __("Sending admin menu...")
-      return Twitter.sendAdminMenu(user_id)
+      return Twitter.sendMessage(user_id, message_templates.admin_menu);
     }
   
     if(message === "start"){

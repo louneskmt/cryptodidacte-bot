@@ -47,76 +47,6 @@ const sendMessageWithImage = (user_id, text, filePath) => {
   })
 }
 
-const sendMenu = (user_id) => {
-  var message_create_object = {
-    text: "👋 Hey ! What do you want to do ?",
-    quick_reply: {
-      type: "options",
-      options: [
-        {
-          label: "🎁 Claim rewards",
-          description: "Claim #LNQuiz rewards if you won",
-          metadata: "claim_rewards"
-        },
-        {
-          label: "💸 Tip Cryptodidacte",
-          description: "Generate an LN invoice to tip Cryptodidacte",
-          metadata: "generate_invoice"
-        }
-        // {
-        //   label: "🏦 See CDT Balance",
-        //   description: "Display your CryptoDidacteTokens balance",
-        //   metadata: "display_cdt_balance"
-        // },
-        // {
-        //   label: "📥 Receive sats",
-        //   description: "Test option for sats sending",
-        //   metadata: "receive_sats"
-        // }
-      ]
-    }
-  }
-
-  sendMessage(user_id, message_create_object);
-}
-
-const sendAdminMenu = (user_id) => {
-  var message_create_object = {
-    text: "👋 Hey, admin ! What do you want to do ? 🤔",
-    quick_reply: {
-      type: "options",
-      options: [
-        {
-          label: "🏅 Add new #LNQuiz winners",
-          description: "Set Twitter accounts as winners",
-          metadata: "add_winners"
-        },
-        {
-          label: "ℹ️ Get #LNQuiz Rewards info",
-          description: "See the current rewards amounts",
-          metadata: "get_rewards_info"
-        },
-        {
-          label: "🔄 Update #LNQuiz Rewards",
-          description: "Set new rewards amounts",
-          metadata: "update_rewards"
-        },
-        {
-          label: "💸 Send CDT",
-          description: "Send CDT to an ETH address or Twitter account",
-          metadata: "send_cdt"
-        },
-        {
-          label: "Refill Lightning node",
-          description: "Generate an invoice to refill LN node",
-          metadata: "refill_node"
-        }
-      ]
-    }
-  }
-  sendMessage(user_id, message_create_object);
-}
-
 const uploadImage = (filePath, callback) => {
   Twitter.postMediaChunked({ file_path: filePath, media_category: "dm_image" }, function (err, data, response) {
     if(err) __(err, 9)
@@ -151,8 +81,6 @@ const getUserInfo = ({user_id, user_name} = {}) => {
 module.exports = {
   Twitter,
   sendTextMessage,
-  sendAdminMenu,
-  sendMenu,
   uploadImage,
   sendMessageWithImage,
   getUserInfo,
