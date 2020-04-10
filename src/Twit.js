@@ -131,6 +131,23 @@ const uploadImage = (filePath, callback) => {
   });
 }
 
+const getUserInfo = ({user_id, user_name} = {}) => {
+  let query;
+  if(user_id) query = {user_id: user_id};
+  else if (user_name) query = {screen_name: user_name};
+  else return;
+
+  return new Promise((resolve, reject) => {
+    Twitter.get('users/show', query, function (err, data, response) {
+      if(err) {
+        reject(err);
+        __(err, 9);
+      }
+      resolve(data);
+    });
+  });
+}
+
 module.exports = {
   Twitter,
   sendTextMessage,
@@ -138,5 +155,6 @@ module.exports = {
   sendMenu,
   uploadImage,
   sendMessageWithImage,
+  getUserInfo,
   botId: "1235621426125774850"
 };
