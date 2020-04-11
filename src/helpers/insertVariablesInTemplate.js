@@ -5,7 +5,7 @@ const insertVariablesInTemplate = (messageData, params) => {
   const clone = Object.assign(messageData, {});
 
   for (const key in params) {
-    __(clone.text, 2);
+    __(key, 2);
     const regex = new RegExp(`%{(${key.toString()})}`, 'gm');
     clone.text = clone.text.replace(regex, params[key]);
   }
