@@ -66,7 +66,7 @@ class Database {
     });
   }
 
-  async remove(collection, query, many = false, { idList = null }) {
+  async remove(collection, query, many = false, { idList = null } = {}) {
     const self = this;
     await this.connectIfNot();
 
