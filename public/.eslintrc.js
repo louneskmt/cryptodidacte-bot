@@ -3,7 +3,7 @@ module.exports = {
         "browser": true,
         "commonjs": true,
         "es6": true,
-        "node": true
+        "jquery": true
     },
     "extends": [
         "airbnb-base"
@@ -19,9 +19,14 @@ module.exports = {
         "no-restricted-syntax": "off",
         "consistent-return": "off",
         "no-console": "off",
-        "no-unused-vars": ['warn', { "argsIgnorePattern": "reject" }],
+        "no-unused-vars": "off",
         "max-len": ["error", { "code": 200 }],
         "guard-for-in": "off",
         "no-underscore-dangle": "off",
+        "no-undef": "off",
+        "no-use-before-define": "off",
+        "func-names": "off",
+        "no-restricted-globals": "off",
+        "no-async-promise-executor": "off",
     }
 };
