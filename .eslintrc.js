@@ -19,5 +19,6 @@ module.exports = {
         "no-restricted-syntax": "off",
         "consistent-return": "off",
         "no-console": "off",
+        "no-unused-vars": ['error', { "argsIgnorePattern": "reject" }]
     }
 };
