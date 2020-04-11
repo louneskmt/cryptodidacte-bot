@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 const insertVariablesInTemplate = (messageData, params) => {
-  const clone = {...messageData}
+  const clone = { ...messageData };
 
   for (const key in params) {
     const regex = new RegExp(`%{(${key.toString()})}`, 'gm');
