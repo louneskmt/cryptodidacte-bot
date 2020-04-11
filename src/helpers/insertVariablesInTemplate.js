@@ -3,7 +3,8 @@ const { __ } = require('../logger.js');
 
 const insertVariablesInTemplate = (messageData, params) => {
   for (const key in params) {
-    __(messageData, key);
+    __(messageData, 2);
+    __(key, 2)
     const regex = new RegExp(`%{(${key.toString()})}`, 'gm');
     messageData.text = messageData.text.replace(regex, params[key]);
   }
