@@ -37,7 +37,6 @@ botEvents.on('dm', (userId, messageObject) => {
     updating_rewards: interactions.updatingRewards,
     cancel: interactions.end,
     start: interactions.start,
-    receive_sats: interactions.receiveSats,
     claim_rewards: interactions.countRewards,
     generate_invoice: interactions.generateInvoice,
     get_rewards_info: interactions.sendRewardsInfo,
@@ -59,7 +58,7 @@ botEvents.on('dm', (userId, messageObject) => {
     if (message === 'start admin' && twitterConfig.admin.includes(userId)) {
       userStatus.deleteStatus(userId);
       __('Sending admin menu...');
-      return Twitter.sendMessage(userId, messageTemplates.admin_menu);
+      return Twitter.sendMessage(userId, messageTemplates.menu.admin);
     }
 
     if (message === 'start') {

@@ -7,13 +7,13 @@ const lnquiz = require('./lnquiz.js');
 const userStatus = require('./userStatus.js');
 const Database = require('./database.js');
 
-const messageTemplates = require('../data/message_templates.json');
+const messageTemplates = require('../data/message_templates');
 
 
 function start(params) {
   const { userId } = params;
 
-  Twitter.sendMessage(userId, messageTemplates.menu);
+  Twitter.sendMessage(userId, messageTemplates.menu.standard);
 }
 
 // INTERACTIONS
@@ -23,11 +23,12 @@ function end(params, description, { resetStatus = true, endMessage = true } = {}
 
   if (resetStatus) userStatus.deleteStatus(userId);
 
-  if (description) Twitter.sendTextMessage(userId, description);
+  if (description && typeof description === 'string') Twitter.sendTextMessage(userId, description);
+  else if (description && typeof description === 'object') Twitter.sendMessage(userId, description);
 
   if (endMessage) {
     setTimeout(() => {
-      Twitter.sendTextMessage(userId, 'End of action 🙃');
+      Twitter.sendMessage(userId, messageTemplates.global.end);
     }, 1000);
   }
 
@@ -38,10 +39,11 @@ function end(params, description, { resetStatus = true, endMessage = true } = {}
 function retry(params, description) {
   const { userId } = params;
 
-  if (description) Twitter.sendTextMessage(userId, description);
+  if (description && typeof description === 'string') Twitter.sendTextMessage(userId, description);
+  else if (description && typeof description === 'object') Twitter.sendMessage(userId, description);
 
   setTimeout(() => {
-    Twitter.sendTextMessage(userId, "❌ Please try again, or send 'Cancel'.");
+    Twitter.sendMessage(userId, messageTemplates.global.retry);
   }, 1000);
 }
 
@@ -51,11 +53,11 @@ async function addWinners(params) {
 
   if (errCode === 0) {
     for (const winner of newEntries) {
-      Twitter.sendTextMessage(winner.userId, `🥳 You have been added as a new LNQuiz winner ! You can now claim ${winner.reward} sats, by sending 'Start' and choosing option '🎁 Claim rewards' !`);
+      Twitter.sendMessage(winner.userId, messageTemplates.lnquiz.notify(winner.reward));
     }
-    end(params, `✅ You successfully added this three winners : \n\n🏁 @${newEntries[0].username}\n✍️ @${newEntries[1].username}\n🎲 @${newEntries[2].username}`, { endMessage: false });
+    end(params, messageTemplates.lnquiz.confirmAddition(newEntries), { endMessage: false });
   } else {
-    end(params, 'Sorry, something went wrong', false);
+    end(params, messageTemplates.global.error, { endMessage: false });
   }
 }
 
@@ -69,7 +71,7 @@ async function tryAddWinners(params) {
     };
     addWinners(newParams);
   } else {
-    retry(params, "You didn't enter three winners.");
+    retry(params, messageTemplates.lnquiz.retry);
   }
 }
 
@@ -84,21 +86,20 @@ function generatingInvoice(params) {
 
 function waitForWinners(params) {
   const { userId } = params;
-  Twitter.sendTextMessage(userId, 'Please, send the new winners in the following order : question-writing-random.');
+  Twitter.sendMessage(userId, messageTemplates.lnquiz.askForWinners);
   return userStatus.setStatus(userId, 'adding_winners');
 }
 
 function generateInvoice(params) {
   const { userId } = params;
 
-  Twitter.sendTextMessage(userId, 'Thank you for choosing to tip Cryptodidacte');
   __('events.js@generateInvoice : Generating an invoice (tip) ');
 
-  Twitter.sendTextMessage(userId, 'Generating invoice...');
+  Twitter.sendMessage(userId, messageTemplates.tip.wip);
   userStatus.setStatus(userId, 'generating_invoice');
 
-  lightning.generateInvoice(200, 'Test', (invoice) => {
-    Twitter.sendTextMessage(userId, '✅ Done!');
+  lightning.generateInvoice(200, '@Cryptodidacte Tip', (invoice) => {
+    Twitter.sendMessage(userId, messageTemplates.global.done);
 
     QRCode.generateQRCode(invoice, (QRCodePath) => {
       __(`QRCodePath :${QRCodePath}`);
@@ -107,14 +108,13 @@ function generateInvoice(params) {
       } else {
         Twitter.sendTextMessage(userId, invoice);
       }
-
-      end(params);
+      end(params, messageTemplates.tip.thanks, { endMessage: false });
     });
   }, (err) => {
     __('events.js@generateInvoice : Could not generate invoice, got following', 9);
     __(err, 9);
 
-    end(params, '❌ Error generating invoice... Please try later.');
+    end(params, messageTemplates.tip.error);
   });
 }
 
@@ -129,7 +129,7 @@ function claimRewards(params) {
 
       (result) => {
         if (result.num_satoshis === amount) {
-          Twitter.sendTextMessage(userId, 'Paying invoice...');
+          Twitter.sendMessage(userId, messageTemplates.lnquiz.wip);
           __('events.js@claimRewars : An invoice is being paid');
 
           lightning.payInvoice(invoice, () => {
@@ -138,17 +138,17 @@ function claimRewards(params) {
             __('events.js@claimRewars : Reward paid, document(s) removed !', 2);
 
             //* ** TODO : Should I send message "end of action" ?***//
-            return end(params, '✅ Paid!');
+            return end(userId, messageTemplates.lnquiz.paid);
           }, (err) => {
           // Cannot pay invoice
-            Twitter.sendTextMessage(userId, '❌ Error paying invoice... Please try again later.');
+            Twitter.sendMessage(userId, messageTemplates.lnquiz.error);
             __('Could not pay invoice, got following error : ', 9);
             __(err.payment_error, 9);
             return end(params, `Error log : ${err.payment_error}`);
           });
         } else {
         // / Amounts not corresponding
-          return retry(params, `Your invoice is for ${result.num_satoshis.toString()} sats. Please generate an invoice for ${amount.toString()} sats.`);
+          return retry(params, messageTemplates.lnquiz.badAmount(result.num_satoshis, amount));
         }
       },
 
@@ -157,7 +157,7 @@ function claimRewards(params) {
       //* * CANCELLATION (?) **/
         __("events.js@claimRewards:lightning.getInvoiceData : Couldn't get invoice data, got following error : ", 9);
         __(err, 9);
-        return end(params, 'Could not get invoice data');
+        return end(params, messageTemplates.lnquiz.error);
       });
   } else {
     return retry(params);
@@ -166,12 +166,12 @@ function claimRewards(params) {
 
 function sendRewardsInfo(params) {
   const { userId } = params;
-  Twitter.sendTextMessage(userId, `Current #LNQuiz Rewards :\n\n🏁 ${lnquiz.rewards.question} sats\n✍️ ${lnquiz.rewards.writing} sats \n🎲 ${lnquiz.rewards.random} sats`);
+  Twitter.sendMessage(userId, messageTemplates.lnquiz.currentRewards(lnquiz.rewards));
 }
 
 function updateRewards(params) {
   const { userId } = params;
-  Twitter.sendTextMessage(userId, 'Please, send the new rewards ammounts in the following order : question-writing-random, separated with a space and in sats (e.g. "150 300 150").');
+  Twitter.sendMessage(userId, messageTemplates.lnquiz.askForRewards);
   return userStatus.setStatus(userId, 'updating_rewards');
 }
 
@@ -196,7 +196,7 @@ function updatingRewards(params) {
         return retry(params);
       }
 
-      end(params, '✅ Updated!', { endMessage: false });
+      end(params, messageTemplates.global.done, { endMessage: false });
       return sendRewardsInfo(params);
     });
   } else {
@@ -205,17 +205,13 @@ function updatingRewards(params) {
   }
 }
 
-function receiveSats(params) {
-  end(params, 'You have chosen to receive sats');
-}
-
 function countRewards(params) {
   lnquiz.countRewards(params.userId, (amount) => {
     if (amount) {
-      Twitter.sendTextMessage(params.userId, `Please, send an invoice for ${amount} sats.`);
+      Twitter.sendMessage(params.userId, messageTemplates.lnquiz.askForInvoice(amount));
       return userStatus.setStatus(params.userId, `claim_rewards_${amount}_sats`);
     }
-    return end(params, 'You have nothing to claim.');
+    return end(params, messageTemplates.lnquiz.nothing);
   });
 }
 
@@ -228,7 +224,6 @@ module.exports = {
   waitForWinners,
   countRewards,
   claimRewards,
-  receiveSats,
   generateInvoice,
   generatingInvoice,
   updateRewards,
