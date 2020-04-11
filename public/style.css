@@ -11,62 +11,6 @@
          url('./fonts/MaterialIcons-Regular.ttf');
     font-display: block;
 }
-/*
-@font-face{
-    font-family: 'Montserrat';
-    font-weight: 100;
-    src: url(https://fonts.gstatic.com/s/montserrat/v14/JTUQjIg1_i6t8kCHKm45_QpRxy7m0dR9pBOi.woff2) format('woff2'), 
-         url(./fonts/Montserrat-Thin.ttf);
-    font-display: auto;
-
-}
-/* @font-face{
-    font-family: Montserrat;
-    font-weight: 200;
-    src: url(./fonts/Montserrat-ExtraLight.ttf)
-}
-@font-face{
-    font-family: 'Montserrat';
-    font-weight: 300;
-    src: url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3gTD_vx3rCubqg.woff2) format('woff2'), 
-         url(./fonts/Montserrat-Light.ttf);
-} 
-@font-face{
-    font-family: 'Montserrat';
-    font-weight: 400;
-    src: url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459WRhyyTh89ZNpQ.woff2) format('woff2'), 
-         url(./fonts/Montserrat-Regular.ttf);
-}
-@font-face{
-    font-family: 'Montserrat';
-    font-weight: 500;
-    src: url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_ZpC3gTD_vx3rCubqg.woff2) format('woff2'), 
-         url(./fonts/Montserrat-Medium.ttf);
-}
-@font-face{
-    font-family: 'Montserrat';
-    font-weight: 600;
-    src: url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_bZF3gTD_vx3rCubqg.woff2) format('woff2'), 
-         url(./fonts/Montserrat-SemiBold.ttf);
-}
-@font-face{
-    font-family: 'Montserrat';
-    font-weight: 700;
-    src: url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gTD_vx3rCubqg.woff2) format('woff2'), 
-         url(./fonts/Montserrat-Bold.ttf);
-}
-@font-face{
-    font-family: 'Montserrat';
-    font-weight: 800;
-    src: url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_c5H3gTD_vx3rCubqg.woff2) format('woff2'), 
-         url(./fonts/Montserrat-ExtraBold.ttf);
-}
-@font-face{
-    font-family: 'Montserrat';
-    font-weight: 900;
-    src: url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_epG3g3D_vx3rCubqg.woff2) format('woff2'), 
-         url(./fonts/Montserrat-Black.ttf);
-} */
 
 *{
     outline: none !important;
@@ -170,6 +114,11 @@ h1,h2,h3,h4,h5,h6{
 .--ta-right{
     text-align: right;
 }
+.--na-value{
+    color: var(--grey) !important;
+    opacity: .5;
+}
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -590,7 +539,7 @@ section{
     display: none;
 }
 
-#data-table tr *:first-child, .data-thead tr *:first-child{
+#data-table tr > *:first-child, .data-thead tr > *:first-child{
     color: var(--red);
     width: 50px;
     text-align: center;
@@ -613,18 +562,28 @@ section{
     vertical-align: inherit;
     opacity: 0;
 }
+#data-table.data-edit tr td.data-table-check::before{
+    content: "edit";
+    opacity: 1;
+}
 #data-table tr{
     transition: border-color .5s ease;
     border-width: 0;
     border-color: transparent;
     border-style: solid;
+    cursor: text;
+}
+#data-table.data-edit tr{
     cursor: pointer;
 }
 
-#data-table tr:hover td.data-table-check::before{
+#data-table.data-edit tr.--tr-editing{
+    display: none;
+}
+#data-table:not(.data-edit) tr:hover td.data-table-check::before{
     opacity: .3;
 }
-#data-table tr.selected td.data-table-check::before{
+#data-table:not(.data-edit) tr.selected td.data-table-check::before{
     opacity: 1;
 }
 .sect-data-footer{

@@ -1,8 +1,41 @@
 viewDetails = {};
 onViewLoaded = async function (params) {
+  /* ****************************************************************
+  * ************************ DECLARING VIEW ************************ *
+  **************************************************************** */
+
   let mode = null;
+  let isEditing = false;
   const obj = JSON.parse(params);
+  const {
+    collection,
+    filter = {},
+    title,
+  } = obj;
+
+  const query = {
+    collection,
+    filter,
+  };
+
+  const hideKeys = obj.hideKeys || ['_id'];
+
+  viewDetails.query = query;
+  $('.sect-data-header h1').text(title || 'Database');
+
+  $('#data-table tbody').html('');
+  $('body').addClass('loading');
+
+  /* ****************************************************************
+  * ************************** FUNCTIONS ************************** *
+  **************************************************************** */
+
+  let receivedData;
+  let keyOrder;
+
   const selectElementRow = function (ev) {
+    if (mode === 'edit') return editEntry.call(this, ev);
+
     $(this).parents('tr').toggleClass('selected');
     checkIfAllSelected();
   };
@@ -45,71 +78,6 @@ onViewLoaded = async function (params) {
     $('#data-table-checkall').click(selectAllTabEl);
   };
 
-  const {
-    collection,
-    filter = {},
-    title,
-  } = obj;
-
-  const query = {
-    collection,
-    filter,
-  };
-
-  const hideKeys = obj.hideKeys || ['_id'];
-
-  viewDetails.query = query;
-  $('.sect-data-header h1').text(title || 'Database');
-
-  $('#data-table tbody').html('');
-  $('body').addClass('loading');
-
-  let receivedData;
-  let keyOrder;
-  $.post('/db/get', query, (data) => {
-    receivedData = data;
-
-    keyOrder = obj.keyOrder || [];
-
-    const headTarget = $('.data-thead table tr');
-    $(headTarget).html(`
-            <th id="data-table-checkall" class="--icon"></th>
-        `);
-    if (keyOrder.length === 0) {
-      for (const key in data[0]) {
-        if (!hideKeys.includes(key)) keyOrder.push(key);
-      }
-    }
-
-    for (const key of keyOrder) {
-      $(headTarget).append(`<th>${key}</th>`);
-    }
-
-    for (const entry of data) {
-      const tr = $(`
-                <tr class="--anim-swipeEnter" mongo-id="${entry._id}" >
-                    <td class="data-table-check"></td>
-                </tr>
-            `);
-
-      for (const key of keyOrder) {
-        if (Object.prototype.hasOwnProperty.call(entry, key)) {
-          $(tr).append(`<td>${entry[key]}</td>`);
-        }
-      }
-
-      $('#data-table tbody').append(tr);
-    }
-
-    $('#data-table tr').each(async (ix, el) => {
-      await sleep(ix * 0.1);
-      $(el).addClass('reveal');
-    });
-
-    $('body').removeClass('loading');
-    updateTableRows();
-  });
-
   const addElement = function () {
     const newEl = $('<tr class="data-table-newElement" form-entry entry-type="tableRow"><td class="--icon">error_outline</td></tr>');
     for (const key of keyOrder) {
@@ -125,19 +93,27 @@ onViewLoaded = async function (params) {
   let setMode = function (newMode) {
     if (newMode === mode) return false;
     mode = newMode;
-    if (mode === 'edit') {
+    if (mode === 'add') {
       setFooterTools(`
-                <span class="--icon" click-role="addElement">playlist_add</span>
-                <span class="--icon" click-role="cancelEdit">clear</span>
-                <span class="--icon" click-role="sendNewElements">save</span>
-            `);
+            <span class="--icon" click-role="addElement">playlist_add</span>
+            <span class="--icon" click-role="cancelEdit">clear</span>
+            <span class="--icon" click-role="sendNewElements">save</span>
+        `);
     }
     if (mode === 'view') {
+      $('#data-table').removeClass('data-edit');
       setFooterTools(`
-                <span class="--icon" click-role="addElement">playlist_add</span>
-                <span class="--icon" click-role="deleteElements">delete</span>
-                <span class="--icon" click-role="edit">edit</span>
-            `);
+            <span class="--icon" click-role="addElement">playlist_add</span>
+            <span class="--icon" click-role="deleteElements">delete</span>
+            <span class="--icon" click-role="startEdit">edit</span>
+        `);
+    }
+    if (mode === 'edit') {
+      $('#data-table').addClass('data-edit');
+      setFooterTools(`
+            <span class="--icon" click-role="cancelEdit">clear</span>
+            <span class="--icon" click-role="sendEdit">save</span>
+        `);
     }
   };
 
@@ -147,11 +123,6 @@ onViewLoaded = async function (params) {
     $('.sect-data-footer .footer-cont').removeClass('--anim-swipeExit');
     $('.sect-data-footer .footer-cont').html(html);
     $('.sect-data-footer .footer-cont').addClass('--anim-swipeEnter reveal');
-  };
-
-
-  const doAction = function () {
-    setMode('view');
   };
 
   const deleteElements = function () {
@@ -179,7 +150,6 @@ onViewLoaded = async function (params) {
         },
       ],
     });
-    p.show();
   };
 
   let reallyDeleteElements = function (ids) {
@@ -193,7 +163,7 @@ onViewLoaded = async function (params) {
     req.fail((err) => console.log(err));
   };
 
-  sendNewElements = function (ev) {
+  const sendNewElements = function (ev) {
     const data = [];
 
     $('#data-table tr[form-entry]').each((ix, el) => {
@@ -223,6 +193,51 @@ onViewLoaded = async function (params) {
     });
   };
 
+
+  const editEntry = async function (ev) {
+    const self = this;
+
+    if (isEditing) {
+      return new Popup({
+        title: 'Save?',
+        content: 'Do you want to save your edit?',
+        buttons: [
+          {
+            text: 'Cancel',
+            onclick: (pop) => pop.destroy(),
+          }, {
+            text: 'Discard',
+            onclick(pop) { pop.destroy(); reallyCancel(); isEditing = false; setMode('edit'); editEntry.call(self, ev); },
+          }, {
+            text: 'Save',
+            classes: '--button-fill',
+            onclick() {
+              this.destroy();
+              reallyDeleteElements(ids);
+            },
+          },
+        ],
+      });
+    }
+    isEditing = true;
+
+    const tr = $(this).parent();
+    await sleep(0.1);
+    $(tr).addClass('--tr-editing');
+
+    const newEl = $('<tr class="data-table-newElement" form-entry entry-type="tableRow"><td class="--icon">error_outline</td></tr>');
+
+    for (let i = 0; i < keyOrder.length; i += 1) {
+      const value = $($(tr).find('td')[i + 1]).text();
+      const key = keyOrder[i];
+      $(newEl).append(`
+            <td><input entry-name="${key}" placeholder="${value}" class="--input-in-table" contentEditable/></td>
+        `);
+    }
+
+    $(newEl).insertAfter(tr);
+  };
+
   const cancelEdit = function () {
     // TODO : Modal to confirm
     const p = new Popup({
@@ -249,11 +264,106 @@ onViewLoaded = async function (params) {
     setMode('view');
   };
 
+  /* ****************************************************************
+  * ************************ LOADING VIEW ************************* *
+  **************************************************************** */
+
+  $.post('/db/get', query, (data) => {
+    receivedData = data;
+
+    keyOrder = obj.keyOrder || [];
+
+    const headTarget = $('.data-thead table tr');
+    $(headTarget).html(`
+            <th id="data-table-checkall" class="--icon"></th>
+        `);
+    if (keyOrder.length === 0) {
+      for (const key in data[0]) {
+        if (!hideKeys.includes(key)) keyOrder.push(key);
+      }
+    }
+
+    for (const key of keyOrder) {
+      $(headTarget).append(`<th>${key}</th>`);
+    }
+
+    for (const entry of data) {
+      const tr = $(`
+                <tr class="--anim-swipeEnter" mongo-id="${entry._id}" >
+                    <td class="data-table-check"></td>
+                </tr>
+            `);
+
+      for (const key of keyOrder) {
+        $(tr).append(`<td>${entry[key] || '<span class="--na-value">?</span>'}</td>`);
+      }
+
+      $('#data-table tbody').append(tr);
+    }
+
+    $('#data-table tr').each(async (ix, el) => {
+      await sleep(ix * 0.1);
+      $(el).addClass('reveal');
+    });
+
+    $('body').removeClass('loading');
+    updateTableRows();
+  });
+
+  const startEdit = function () {
+    setMode('edit');
+  };
+
+  const sendEdit = function () {
+    const el = $('#data-table tr[form-entry]');
+    if ($(el).get().length > 1) {
+      return console.error('More than one entry to edit. Aborting...');
+    }
+
+    const id = $(el).attr('mongo-id');
+    const data = {};
+    $(el).find('input[entry-name]').each((ix, child) => {
+      const key = $(child).attr('entry-name');
+      const val = $(child).val();
+
+      if (val.length <= 0 || !val) return true;
+      data[key] = val;
+    });
+
+    const req = $.post('/db/updateById/', {
+      collection: viewDetails.query.collection,
+      query: data,
+    }, () => {
+      reloadView();
+    });
+    req.fail((err) => {
+      console.error(err);
+    });
+  };
+
+  /* ****************************************************************
+  * *********************** EVENT LISTENERS ************************ *
+  **************************************************************** */
+
+  const roleMap = {
+    showIndex,
+    addElement,
+    sendNewElements,
+    deleteElements,
+    cancelEdit,
+    startEdit,
+    sendEdit,
+  };
+
   $('*[click-role=showIndex]').click(showIndex);
   $('footer').off('click');
-  $('footer').on('click', '*[click-role=addElement]', addElement);
-  $('footer').on('click', '*[click-role=sendNewElements]', sendNewElements);
-  $('footer').on('click', '*[click-role=deleteElements]', deleteElements);
-  $('footer').on('click', '*[click-role=cancelEdit]', cancelEdit);
+  $('footer').on('click', '*[click-role]', function (ev) {
+    console.log(this);
+    const role = $(this).attr('click-role');
+    if (Object.prototype.hasOwnProperty.call(roleMap, role)) {
+      roleMap[role].call(this);
+    }
+  });
+
   setMode('view');
 };
