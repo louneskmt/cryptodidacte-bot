@@ -66,6 +66,7 @@ botEvents.on('dm', (userId, messageObject) => {
       return interactions.start(params);
     }
 
+    console.log(messageObject);
     if (Object.prototype.hasOwnProperty.call(messageObject, 'quick_reply_response')) {
       const { metadata } = messageObject.quick_reply_response;
 
