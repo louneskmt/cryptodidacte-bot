@@ -73,8 +73,6 @@ botEvents.on('dm', (userId, messageObject) => {
       if (Object.prototype.hasOwnProperty.call(fnExact, metadata)) {
         return fnExact[metadata](params);
       }
-
-      return undefined;
     }
 
     if (status === undefined) return undefined;
@@ -89,7 +87,7 @@ botEvents.on('dm', (userId, messageObject) => {
 });
 
 botEvents.on('logs', (eventData) => {
-  if (eventData.event_type === 'direct_message') {
+  if (eventData.eventType === 'direct_message') {
     const { content } = eventData;
     let { sender, recipient } = eventData;
 
