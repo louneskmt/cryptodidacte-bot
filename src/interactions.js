@@ -8,6 +8,7 @@ const userStatus = require('./userStatus.js');
 const Database = require('./database.js');
 
 const messageTemplates = require('../data/message_templates');
+const insertVariablesInTemplate = require('./helpers/insertVariablesInTemplate.js');
 
 
 function start(params) {
@@ -53,9 +54,11 @@ async function addWinners(params) {
 
   if (errCode === 0) {
     for (const winner of newEntries) {
-      Twitter.sendMessage(winner.userId, messageTemplates.lnquiz.notify(winner.reward));
+      Twitter.sendMessage(winner.userId, insertVariablesInTemplate(messageTemplates.lnquiz.notify, { reward: winner.reward }));
     }
-    end(params, messageTemplates.lnquiz.confirmAddition(newEntries), { endMessage: false });
+    end(params, insertVariablesInTemplate(messageTemplates.lnquiz.confirmAddition, {
+      winner1: newEntries[0].username, winner2: newEntries[1].username, winner3: newEntries[2].username,
+    }), { endMessage: false });
   } else {
     end(params, messageTemplates.global.error, { endMessage: false });
   }
@@ -148,7 +151,7 @@ function claimRewards(params) {
           });
         } else {
         // / Amounts not corresponding
-          return retry(params, messageTemplates.lnquiz.badAmount(result.num_satoshis, amount));
+          return retry(params, insertVariablesInTemplate(messageTemplates.lnquiz.badAmount, { amount: result.num_satoshis, expectedAmount: amount }));
         }
       },
 
@@ -166,7 +169,7 @@ function claimRewards(params) {
 
 function sendRewardsInfo(params) {
   const { userId } = params;
-  Twitter.sendMessage(userId, messageTemplates.lnquiz.currentRewards(lnquiz.rewards));
+  Twitter.sendMessage(userId, insertVariablesInTemplate(messageTemplates.lnquiz.currentRewards, lnquiz.rewards));
 }
 
 function updateRewards(params) {
@@ -208,7 +211,7 @@ function updatingRewards(params) {
 function countRewards(params) {
   lnquiz.countRewards(params.userId, (amount) => {
     if (amount) {
-      Twitter.sendMessage(params.userId, messageTemplates.lnquiz.askForInvoice(amount));
+      Twitter.sendMessage(params.userId, insertVariablesInTemplate(messageTemplates.lnquiz.askForInvoice, { amount }));
       return userStatus.setStatus(params.userId, `claim_rewards_${amount}_sats`);
     }
     return end(params, messageTemplates.lnquiz.nothing);
