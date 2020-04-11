@@ -2,15 +2,14 @@ const { __ } = require('../logger.js');
 
 /* eslint-disable no-param-reassign */
 const insertVariablesInTemplate = (messageData, params) => {
-  let { text } = messageData;
+  const clone = Object.assign(messageData, {});
 
   for (const key in params) {
-    __(text, 2);
+    __(clone.text, 2);
     const regex = new RegExp(`%{(${key.toString()})}`, 'gm');
-    text = text.replace(regex, params[key]);
+    clone.text = clone.text.replace(regex, params[key]);
   }
-  messageData.text = text;
-  return messageData;
+  return clone;
 };
 
 module.exports = insertVariablesInTemplate;
