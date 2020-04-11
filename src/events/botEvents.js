@@ -9,7 +9,7 @@ const { twitterConfig } = require('../../config.js');
 const interactions = require('../interactions.js');
 const userStatus = require('../userStatus.js');
 
-const messageTemplates = require('../../data/message_templates.json');
+const messageTemplates = require('../../data/message_templates');
 
 botEvents.on('tweet', (tweet) => {
   const userId = tweet.user.id_str;
