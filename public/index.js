@@ -44,7 +44,7 @@ const transition = async function transition(from, to) {
 
 let loadViewOnClick = async function (ev) {
   const viewName = $(this).attr('open-view');
-  const params = $(this).attr('view-args') || 'null';
+  const params = $(this).attr('view-args') || null;
   await loadView(viewName, params);
 };
 
