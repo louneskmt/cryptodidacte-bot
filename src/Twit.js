@@ -80,6 +80,7 @@ const getUserInfo = ({ userId, username } = {}) => {
 module.exports = {
   Twitter,
   sendTextMessage,
+  sendMessage,
   uploadImage,
   sendMessageWithImage,
   getUserInfo,
