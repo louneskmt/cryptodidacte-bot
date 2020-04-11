@@ -1,263 +1,259 @@
-viewDetails = {}
+viewDetails = {};
 onViewLoaded = async function (params) {
-    let mode = null;
-    let obj = JSON.parse(params);
-    let selectElementRow = function (ev) {
-        $(this).parents("tr").toggleClass("selected");
-        checkIfAllSelected();
+  let mode = null;
+  const obj = JSON.parse(params);
+  const selectElementRow = function (ev) {
+    $(this).parents('tr').toggleClass('selected');
+    checkIfAllSelected();
+  };
+
+  const selectAllTabEl = function (ev) {
+    $(this).toggleClass('selected');
+
+    if ($(this).hasClass('selected')) {
+      $('#data-table').children('tbody').children('tr').each(async (ix, el) => {
+        await sleep(ix * 0.05);
+        $(el).addClass('selected');
+      });
+    } else {
+      $('#data-table').children('tbody').children('tr').each(async (ix, el) => {
+        await sleep(ix * 0.05);
+        $(el).removeClass('selected');
+      });
     }
+  };
 
-    let selectAllTabEl = function (ev) {
-        $(this).toggleClass("selected");
+  let checkIfAllSelected = function () {
+    const total = $('#data-table tr').get().length;
+    const selected = $('#data-table tr.selected').get().length;
 
-        if ($(this).hasClass("selected")) {
-            $("#data-table").children("tbody").children("tr").each(async function (ix, el) {
-                await sleep(ix * 0.05);
-                $(el).addClass("selected")
-            });
-        } else {
-            $("#data-table").children("tbody").children("tr").each(async function (ix, el) {
-                await sleep(ix * 0.05);
-                $(el).removeClass("selected")
-            });
-        }
-    }
+    if (total === selected)$('#data-table-checkall').addClass('selected');
+    else $('#data-table-checkall').removeClass('selected');
+  };
 
-    let checkIfAllSelected = function(){
-        let total = $("#data-table tr").get().length;
-        let selected = $("#data-table tr.selected").get().length;
+  const updateTableRows = () => {
+    $('#data-table tr:first-child td').each((ix, el) => {
+      if (ix === 0) return true;
+      const width = $(el).width();
 
-        if(total === selected)$("#data-table-checkall").addClass("selected");
-        else $("#data-table-checkall").removeClass("selected");
-    }
+      $(`.data-thead tr th:nth-child(${ix + 1})`).css({
+        width,
+      });
+    });
 
-    let updateTableRows = () => {
-        $("#data-table tr:first-child td").each((ix, el) => {
-            if (ix == 0) return true;
-            let width = $(el).width();
+    $('.data-table-check').click(selectElementRow);
+    $('#data-table-checkall').click(selectAllTabEl);
+  };
 
-            $(`.data-thead tr th:nth-child(${ix+1})`).css({
-                width
-            })
-        })
+  const {
+    collection,
+    filter = {},
+    title,
+  } = obj;
 
-        $(".data-table-check").click(selectElementRow)
-        $("#data-table-checkall").click(selectAllTabEl);
-    }
+  const query = {
+    collection,
+    filter,
+  };
 
-    let {
-        collection,
-        filter = {},
-        title
-    } = obj;
+  const hideKeys = obj.hideKeys || ['_id'];
 
-    let query = {
-        collection,
-        filter
-    };
+  viewDetails.query = query;
+  $('.sect-data-header h1').text(title || 'Database');
 
-    let hideKeys = obj.hideKeys || ["_id"];
+  $('#data-table tbody').html('');
+  $('body').addClass('loading');
 
-    viewDetails.query = query;
-    $(".sect-data-header h1").text(title || "Database");
+  let receivedData;
+  let keyOrder;
+  $.post('/db/get', query, (data) => {
+    receivedData = data;
 
-    $("#data-table tbody").html("");
-    $("body").addClass("loading");
+    keyOrder = obj.keyOrder || [];
 
-    let receivedData;
-    let keyOrder;
-    $.post("/db/get", query, function (data) {
-        receivedData = data;
-
-        keyOrder = obj.keyOrder || [];
-
-        let headTarget = $(".data-thead table tr");
-        $(headTarget).html(`
+    const headTarget = $('.data-thead table tr');
+    $(headTarget).html(`
             <th id="data-table-checkall" class="--icon"></th>
         `);
-        if (keyOrder.length === 0) {
-            for (const key in data[0]) {
-                if (hideKeys.includes(key)) continue;
+    if (keyOrder.length === 0) {
+      for (const key in data[0]) {
+        if (!hideKeys.includes(key)) keyOrder.push(key);
+      }
+    }
 
-                keyOrder.push(key);
-            }
-        }
+    for (const key of keyOrder) {
+      $(headTarget).append(`<th>${key}</th>`);
+    }
 
-        for (const key of keyOrder) {
-            $(headTarget).append(`<th>${key}</th>`)
-        }
-
-        for (const entry of data) {
-            let tr = $(`
+    for (const entry of data) {
+      const tr = $(`
                 <tr class="--anim-swipeEnter" mongo-id="${entry._id}" >
                     <td class="data-table-check"></td>
                 </tr>
-            `)
+            `);
 
-            for (const key of keyOrder) {
-                if (entry.hasOwnProperty(key)) {
-                    $(tr).append(`<td>${entry[key]}</td>`)
-                }
-            }
-
-            $("#data-table tbody").append(tr);
+      for (const key of keyOrder) {
+        if (Object.prototype.hasOwnProperty.call(entry, key)) {
+          $(tr).append(`<td>${entry[key]}</td>`);
         }
+      }
 
-        $("#data-table tr").each(async function (ix, el) {
-            await sleep(ix * 0.1)
-            $(el).addClass("reveal");
-        })
-
-        $("body").removeClass("loading");
-        updateTableRows();
-    });
-
-    let addElement = function(){
-        let newEl = $(`<tr class="data-table-newElement" form-entry entry-type="tableRow"><td class="--icon">error_outline</td></tr>`);
-        for(const key of keyOrder){
-            $(newEl).append(`
-                <td><input entry-name="${key}" placeholder="${key}" class="--input-in-table" contentEditable/></td>
-            `)
-        }
-
-        $("#data-table tbody").prepend(newEl) 
-        setMode("edit")
+      $('#data-table tbody').append(tr);
     }
 
-    let setMode = function(newMode){
-        if(newMode === mode) return false;
-        mode = newMode;
-        if(mode === "edit"){
-            setFooterTools(`
+    $('#data-table tr').each(async (ix, el) => {
+      await sleep(ix * 0.1);
+      $(el).addClass('reveal');
+    });
+
+    $('body').removeClass('loading');
+    updateTableRows();
+  });
+
+  const addElement = function () {
+    const newEl = $('<tr class="data-table-newElement" form-entry entry-type="tableRow"><td class="--icon">error_outline</td></tr>');
+    for (const key of keyOrder) {
+      $(newEl).append(`
+                <td><input entry-name="${key}" placeholder="${key}" class="--input-in-table" contentEditable/></td>
+            `);
+    }
+
+    $('#data-table tbody').prepend(newEl);
+    setMode('edit');
+  };
+
+  let setMode = function (newMode) {
+    if (newMode === mode) return false;
+    mode = newMode;
+    if (mode === 'edit') {
+      setFooterTools(`
                 <span class="--icon" click-role="addElement">playlist_add</span>
                 <span class="--icon" click-role="cancelEdit">clear</span>
                 <span class="--icon" click-role="sendNewElements">save</span>
-            `)
-        }
-        if(mode === "view"){
-            setFooterTools(`
+            `);
+    }
+    if (mode === 'view') {
+      setFooterTools(`
                 <span class="--icon" click-role="addElement">playlist_add</span>
                 <span class="--icon" click-role="deleteElements">delete</span>
                 <span class="--icon" click-role="edit">edit</span>
-            `)
-        }
+            `);
     }
+  };
 
-    let setFooterTools = async function(html){
-        $(".sect-data-footer .footer-cont").addClass("--anim-swipeExit reveal --anim-fill");
-        await sleep(.5);
-        $(".sect-data-footer .footer-cont").removeClass("--anim-swipeExit");
-        $(".sect-data-footer .footer-cont").html(html);
-        $(".sect-data-footer .footer-cont").addClass("--anim-swipeEnter reveal");
-    }
+  let setFooterTools = async function (html) {
+    $('.sect-data-footer .footer-cont').addClass('--anim-swipeExit reveal --anim-fill');
+    await sleep(0.5);
+    $('.sect-data-footer .footer-cont').removeClass('--anim-swipeExit');
+    $('.sect-data-footer .footer-cont').html(html);
+    $('.sect-data-footer .footer-cont').addClass('--anim-swipeEnter reveal');
+  };
 
 
-    let doAction = function(){
-        setMode("view");
-    }
+  const doAction = function () {
+    setMode('view');
+  };
 
-    let deleteElements = function(){
-        let ids = [];
-        $(`#data-table .selected[mongo-id]`).each(function(ix, el){
-            ids.push($(this).attr("mongo-id"));
-        })
+  const deleteElements = function () {
+    const ids = [];
+    $('#data-table .selected[mongo-id]').each(function (ix, el) {
+      ids.push($(this).attr('mongo-id'));
+    });
 
-        if(ids.length === 0) return;
+    if (ids.length === 0) return;
 
-        let p = new Popup({
-            title:"Delete?",
-            content: `You are about to delete ${ids.length} entries`,
-            buttons: [
-                {
-                    text: "Cancel",
-                    onclick: pop=>pop.destroy()
-                },{
-                    text: "Delete",
-                    classes: "--button-fill",
-                    onclick: function(){
-                        this.destroy();
-                        reallyDeleteElements(ids);
-                    }
-                }
-            ]
-        })
-        p.show();
-    }
+    const p = new Popup({
+      title: 'Delete?',
+      content: `You are about to delete ${ids.length} entries`,
+      buttons: [
+        {
+          text: 'Cancel',
+          onclick: (pop) => pop.destroy(),
+        }, {
+          text: 'Delete',
+          classes: '--button-fill',
+          onclick() {
+            this.destroy();
+            reallyDeleteElements(ids);
+          },
+        },
+      ],
+    });
+    p.show();
+  };
 
-    let reallyDeleteElements = function(ids){
-        if(ids.length===0) return;
-        let req = $.post("/db/removeAllById", {
-            collection: viewDetails.query.collection,
-            idList: ids
-        }, function(data){
-            reloadView();
-        });
-        req.fail(err => console.log(err));
-    }
+  let reallyDeleteElements = function (ids) {
+    if (ids.length === 0) return;
+    const req = $.post('/db/removeAllById', {
+      collection: viewDetails.query.collection,
+      idList: ids,
+    }, (data) => {
+      reloadView();
+    });
+    req.fail((err) => console.log(err));
+  };
 
-    sendNewElements = function(ev){
-        let data = [];
-        
-        $("#data-table tr[form-entry]").each(function(ix, el){
-            let entry = {} ;
-            $(el).find("*[entry-name]").each(function(iy, child){
-                let key = $(child).attr("entry-name");
-                let val = $(child).val();
-                
-                if(val.length <= 0) return true; // continue;
-                entry[key] = val;
-            })
+  sendNewElements = function (ev) {
+    const data = [];
 
-            if(Object.keys(entry).length>0) data.push(entry);
-        })
+    $('#data-table tr[form-entry]').each((ix, el) => {
+      const entry = {};
+      $(el).find('*[entry-name]').each((iy, child) => {
+        const key = $(child).attr('entry-name');
+        const val = $(child).val();
 
-        setMode("view");
-        if (data.length<=0) return;
+        if (val.length <= 0) return true; // continue;
+        entry[key] = val;
+      });
 
-        let req = $.post("/db/insert", {
-            collection: viewDetails.query.collection,
-            entry: data
-        }, function(data, status){
-            reloadView();
-        });
-        req.fail(function(err){
-            console.log(err);
-        });
+      if (Object.keys(entry).length > 0) data.push(entry);
+    });
 
-    }
+    setMode('view');
+    if (data.length <= 0) return;
 
-    let cancelEdit = function(){
-        // TODO : Modal to confirm
-        let p = new Popup({
-            title:"Cancel?",
-            content: `All non-saved changes will be definitely lost. `,
-            buttons: [
-                {
-                    text: "Return",
-                    onclick: pop=>pop.destroy()
-                },{
-                    text: "Discard",
-                    classes: "--button-fill",
-                    onclick: function(){
-                        this.destroy();
-                        reallyCancel();
-                    }
-                }
-            ]
-        })
+    const req = $.post('/db/insert', {
+      collection: viewDetails.query.collection,
+      entry: data,
+    }, () => {
+      reloadView();
+    });
+    req.fail((err) => {
+      console.log(err);
+    });
+  };
 
-    }
+  const cancelEdit = function () {
+    // TODO : Modal to confirm
+    const p = new Popup({
+      title: 'Cancel?',
+      content: 'All non-saved changes will be definitely lost. ',
+      buttons: [
+        {
+          text: 'Return',
+          onclick: (pop) => pop.destroy(),
+        }, {
+          text: 'Discard',
+          classes: '--button-fill',
+          onclick() {
+            this.destroy();
+            reallyCancel();
+          },
+        },
+      ],
+    });
+  };
 
-    let reallyCancel = function(){
-        $("#data-table tr[form-entry]").remove();
-        setMode("view")
-    }
+  let reallyCancel = function () {
+    $('#data-table tr[form-entry]').remove();
+    setMode('view');
+  };
 
-    $("*[click-role=showIndex]").click(showIndex);
-    $("footer").off("click");
-    $("footer").on("click", "*[click-role=addElement]", addElement);
-    $("footer").on("click", "*[click-role=sendNewElements]", sendNewElements);
-    $("footer").on("click", "*[click-role=deleteElements]", deleteElements);
-    $("footer").on("click", "*[click-role=cancelEdit]", cancelEdit);
-    setMode("view");
-}
+  $('*[click-role=showIndex]').click(showIndex);
+  $('footer').off('click');
+  $('footer').on('click', '*[click-role=addElement]', addElement);
+  $('footer').on('click', '*[click-role=sendNewElements]', sendNewElements);
+  $('footer').on('click', '*[click-role=deleteElements]', deleteElements);
+  $('footer').on('click', '*[click-role=cancelEdit]', cancelEdit);
+  setMode('view');
+};
