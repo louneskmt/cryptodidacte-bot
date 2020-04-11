@@ -50,8 +50,7 @@ async function addWinners(params) {
   const { newEntries, errCode } = await lnquiz.addWinners(winners);
 
   if (errCode === 0) {
-    for (const winner in newEntries) {
-      console.log(winner)
+    for (const winner of newEntries) {
       Twitter.sendTextMessage(winner.userId, `🥳 You have been added as a new LNQuiz winner ! You can now claim ${winner.reward} sats, by sending 'Start' and choosing option '🎁 Claim rewards' !`);
     }
     end(params, `✅ You successfully added this three winners : \n\n🏁 @${newEntries[0].username}\n✍️ @${newEntries[1].username}\n🎲 @${newEntries[2].username}`, { endMessage: false });
