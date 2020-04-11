@@ -19,6 +19,7 @@ module.exports = {
         "no-restricted-syntax": "off",
         "consistent-return": "off",
         "no-console": "off",
-        "no-unused-vars": ['error', { "argsIgnorePattern": "reject" }]
+        "no-unused-vars": ['warn', { "argsIgnorePattern": "reject" }],
+        "max-len": ["error", { "code": 200, "ingoreStrings": true, "ignoreTemplateLiterals": true }],
     }
 };

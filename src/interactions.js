@@ -45,7 +45,8 @@ function retry(params, description) {
   }, 1000);
 }
 
-async function addWinners(params, winners) {
+async function addWinners(params) {
+  const { winners } = params;
   const errCode = await lnquiz.addWinners(winners);
 
   if (errCode === 0) {
@@ -59,9 +60,11 @@ async function tryAddWinners(params) {
   const { messageData } = params;
 
   if (messageData.entities.user_mentions.length === 3) {
-    const winners = messageData.entities.user_mentions;
-
-    addWinners(params, winners);
+    const newParams = {
+      ...params,
+      winners: messageData.entities.user_mentions,
+    };
+    addWinners(newParams);
   } else {
     retry(params, "You didn't enter three winners.");
   }
