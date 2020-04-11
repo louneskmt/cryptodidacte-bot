@@ -1,8 +1,6 @@
-const { __ } = require('../logger.js');
-
 /* eslint-disable no-param-reassign */
 const insertVariablesInTemplate = (messageData, params) => {
-  const clone = {...messageData};
+  const clone = {...messageData}
 
   for (const key in params) {
     __(key, 2);
