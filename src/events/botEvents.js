@@ -26,7 +26,8 @@ botEvents.on('tweet', (tweet) => {
 
 
 botEvents.on('dm', (userId, messageObject) => {
-  const message = messageObject.message_data.text.toLowerCase();
+  const { message_data: messageData } = messageObject;
+  const message = messageData.text.toLowerCase();
 
   const fnExact = {
     adding_winners: interactions.tryAddWinners,
@@ -47,7 +48,7 @@ botEvents.on('dm', (userId, messageObject) => {
   };
 
   const params = {
-    userId, message, messageObject,
+    userId, message, messageData,
   };
 
   if (message === 'cancel') return interactions.end(params);
@@ -66,9 +67,8 @@ botEvents.on('dm', (userId, messageObject) => {
       return interactions.start(params);
     }
 
-    console.log(messageObject);
-    if (Object.prototype.hasOwnProperty.call(messageObject, 'quick_reply_response')) {
-      const { metadata } = messageObject.quick_reply_response;
+    if (Object.prototype.hasOwnProperty.call(messageData, 'quick_reply_response')) {
+      const { metadata } = messageData.quick_reply_response;
 
       if (Object.prototype.hasOwnProperty.call(fnExact, metadata)) {
         return fnExact[metadata](params);

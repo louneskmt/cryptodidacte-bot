@@ -5,7 +5,7 @@ const { twitterConfig } = require('../config.js');
 
 const Twitter = new Twit(twitterConfig);
 
-const sendMessage = (userId, messageObject) => {
+const sendMessage = (userId, messageData) => {
   const message = {
     event: {
       type: 'message_create',
@@ -13,7 +13,7 @@ const sendMessage = (userId, messageObject) => {
         target: {
           recipient_id: userId,
         },
-        message_data: messageObject,
+        message_data: messageData,
       },
     },
   };
@@ -24,11 +24,11 @@ const sendMessage = (userId, messageObject) => {
 };
 
 const sendTextMessage = (userId, text) => {
-  const messageObject = {
+  const messageData = {
     text,
   };
 
-  sendMessage(userId, messageObject);
+  sendMessage(userId, messageData);
 };
 
 const uploadImage = (filePath, callback) => {
@@ -47,7 +47,7 @@ const uploadImage = (filePath, callback) => {
 
 const sendMessageWithImage = (userId, text, filePath) => {
   uploadImage(filePath, (mediaId) => {
-    const messageObject = {
+    const messageData = {
       text,
       attachment: {
         type: 'media',
@@ -56,7 +56,7 @@ const sendMessageWithImage = (userId, text, filePath) => {
         },
       },
     };
-    sendMessage(userId, messageObject);
+    sendMessage(userId, messageData);
   });
 };
 
