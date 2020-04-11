@@ -60,12 +60,12 @@ async function addWinners(params) {
 }
 
 async function tryAddWinners(params) {
-  const { messageData } = params;
+  const { messageObject } = params;
 
-  if (messageData.entities.user_mentions.length === 3) {
+  if (messageObject.entities.user_mentions.length === 3) {
     const newParams = {
       ...params,
-      winners: messageData.entities.user_mentions,
+      winners: messageObject.entities.user_mentions,
     };
     addWinners(newParams);
   } else {
