@@ -20,6 +20,6 @@ module.exports = {
         "consistent-return": "off",
         "no-console": "off",
         "no-unused-vars": ['warn', { "argsIgnorePattern": "reject" }],
-        "max-len": ["error", { "code": 200, "ingoreStrings": true, "ignoreTemplateLiterals": true }],
+        "max-len": ["error", { "code": 200 }],
     }
 };
