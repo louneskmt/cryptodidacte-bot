@@ -47,9 +47,12 @@ function retry(params, description) {
 
 async function addWinners(params) {
   const { winners } = params;
-  const errCode = await lnquiz.addWinners(winners);
+  const { newEntries, errCode } = await lnquiz.addWinners(winners);
 
   if (errCode === 0) {
+    for (const winner in newEntries) {
+      Twitter.sendTextMessage(winner.user_id, `🥳 You have been added as a new LNQuiz winner ! You can now claim ${winner.reward} sats, by sending 'Start' and choosing option '🎁 Claim rewards' !`);
+    }
     end(params, `✅ You successfully added this three winners : \n\n🏁 @${winners[0].screen_name}\n✍️ @${winners[1].screen_name}\n🎲 @${winners[2].screen_name}`, { endMessage: false });
   } else {
     end(params, 'Sorry, something went wrong', false);

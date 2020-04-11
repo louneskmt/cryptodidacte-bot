@@ -21,5 +21,6 @@ module.exports = {
         "no-console": "off",
         "no-unused-vars": ['warn', { "argsIgnorePattern": "reject" }],
         "max-len": ["error", { "code": 200 }],
+        "guard-for-in": "off",
     }
 };

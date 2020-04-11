@@ -35,9 +35,9 @@ const addWinners = async (winners) => {
     },
   ];
 
-  return new Promise(((resolve, reject) => {
-    db.insert('rewards', newEntries).then(() => resolve(0)).catch(() => resolve(1));
-  }));
+  return new Promise((resolve, reject) => {
+    db.insert('rewards', newEntries).then(() => resolve({ newEntries, errCode: 0 })).catch(() => resolve({ newEntries, errCode: 1 }));
+  });
 };
 
 const updateRewards = (newRewards, callback) => {
