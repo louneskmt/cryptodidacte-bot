@@ -53,9 +53,7 @@ async function addWinners(params) {
   const { newEntries, errCode } = await lnquiz.addWinners(winners);
 
   if (errCode === 0) {
-    __(newEntries, 2);
-    for (const winner of newEntries) { 
-      __(winner, 2);
+    for (const winner of newEntries) {
       Twitter.sendMessage(winner.userId, insertVariablesInTemplate(messageTemplates.lnquiz.notify, { reward: winner.reward }));
     }
     end(params, insertVariablesInTemplate(messageTemplates.lnquiz.confirmAddition, {
