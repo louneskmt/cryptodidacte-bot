@@ -71,16 +71,16 @@ const payout = (userId) => {
 
   db.find('users', { userId }).then((docs) => {
     if (!docs[0].address) {
-      __(`There is not any address linked to this account (@${docs[0].user_name})`);
+      __(`There is not any address linked to this account (@${docs[0].username})`);
       return;
     }
     if (docs[0].balance === 0) {
-      __(`There is not enough funds in this account (@${docs[0].user_name})`);
+      __(`There is not enough funds in this account (@${docs[0].username})`);
       return;
     }
 
     CDT.send(docs[0].address, docs[0].balance).then(async (tx) => {
-      __(`Payout user ID ${docs[0].user_id} - ${docs[0].balance} CDT - Tx hash : ${tx.hash}`);
+      __(`Payout user ID ${docs[0].userId} - ${docs[0].balance} CDT - Tx hash : ${tx.hash}`);
       await tx.wait();
       __('Done!');
     });

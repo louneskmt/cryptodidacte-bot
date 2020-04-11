@@ -6,7 +6,7 @@ const Database = require('./database.js');
 const db = new Database('cryptodidacte');
 
 const countRewards = (userId, callback) => {
-  db.find('rewards', { user_id: userId.toString() }).then((result) => {
+  db.find('rewards', { userId: userId.toString() }).then((result) => {
     let totalToPay = 0;
     result.forEach((elmt) => {
       totalToPay += elmt.reward;
@@ -19,17 +19,17 @@ const countRewards = (userId, callback) => {
 const addWinners = async (winners) => {
   const newEntries = [
     {
-      user_id: winners[0].id_str,
+      userId: winners[0].id_str,
       username: winners[0].screen_name,
       reward: rewards.question,
     },
     {
-      user_id: winners[1].id_str,
+      userId: winners[1].id_str,
       username: winners[1].screen_name,
       reward: rewards.writing,
     },
     {
-      user_id: winners[2].id_str,
+      userId: winners[2].id_str,
       username: winners[2].screen_name,
       reward: rewards.random,
     },
