@@ -9,7 +9,7 @@ const countRewards = (userId, callback) => {
   db.find('rewards', { userId: userId.toString() }).then((result) => {
     let totalToPay = 0;
     result.forEach((elmt) => {
-      totalToPay += elmt.reward;
+      totalToPay += Number(elmt.reward);
     });
 
     if (typeof callback === 'function') callback(totalToPay);
