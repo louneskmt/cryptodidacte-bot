@@ -121,5 +121,3 @@ logs/
 *.log
 
 assets/temp/*
-
-test.js
