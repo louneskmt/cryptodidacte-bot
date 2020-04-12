@@ -153,17 +153,21 @@ app.post('/login', async (req, res) => {
  * API
  * */
 
+const getSchemaFromName = (name) => {
+  const schemasMap = {
+    rewards: schemas.LNQuizReward,
+    // TODO: add other schemas
+  };
+  return (schemasMap[name] || null);
+};
+
 app.post('/api/:schema/get', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest !== true) {
     return res.status(403).send('-1');
   }
 
   const { schema } = req.params;
-  __(schema, 2);
-  const schemasMap = {
-    rewards: schemas.LNQuizReward,
-  };
-  const SchemaObj = schemasMap[schema] || null;
+  const SchemaObj = getSchemaFromName(schema);
 
   if (!SchemaObj) return res.status(400).send('-1');
 
@@ -174,19 +178,23 @@ app.post('/api/:schema/get', async (req, res) => {
   res.status(200).send(queryResponse);
 });
 
-app.post('/db/insert/', async (req, res) => {
+app.post('/api/:schema/insert', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest === false) {
     return res.status(403).send('-1');
   }
 
-  const collection = req.body.collection || null;
+  const { schema } = req.params;
   const entry = req.body.entry || null;
 
-  if (!collection || !entry) return res.status(400).send('-1');
+  const SchemaObj = getSchemaFromName(schema);
 
-  // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
-  const queryResponse = await database.insert(collection, entry);
-  res.status(200).send(queryResponse);
+  if (!SchemaObj) return res.status(400).send('-1');
+
+  const Entry = SchemaObj.create(entry);
+  Entry.save();
+
+  __(Entry, 2)
+  res.status(200).send(Entry);
 });
 
 app.post('/db/update/', async (req, res) => {
