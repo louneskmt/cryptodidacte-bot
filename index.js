@@ -158,12 +158,16 @@ app.post('/api/:schema/get', async (req, res) => {
     return res.status(403).send('-1');
   }
 
-  const { schema } = req.body;
-  const SchemaObj = schemas[schema];
+  const { schemaName } = req.body;
+  const schemasMap = {
+    rewards: schemas.LNQuizReward,
+  };
+  const SchemaObj = schemasMap[schemaName] || null;
+
+  if (!SchemaObj) return res.status(400).send('-1');
 
   const filter = req.body.filter || {};
 
-  if (!SchemaObj) return res.status(400).send('-1');
 
   const queryResponse = await SchemaObj.find(filter);
   res.status(200).send(queryResponse);
