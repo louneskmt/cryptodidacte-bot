@@ -25,5 +25,6 @@ module.exports = {
         "guard-for-in": "off",
         "no-underscore-dangle": "off",
         "func-names": "off",
+        "no-param-reassign": ["error", { "props": false }],
     }
 };
