@@ -1,16 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-class Mongoose {
-    constructor(uri) {
-        this.conn = mongoose.createConnection(uri);
+const { databaseConfig } = require('../../config.js');
 
-        conn.model('User', require('./schemas/user.js'));
-        conn.model('TweetEvent', require('./schemas/tweetEvent.js'));
-        conn.model('Reward', require('./schemas/reward.js'));
-    }
-}
+const conn = mongoose.createConnection(uri);
 
-module.exports = Mongoose;
+const User = conn.model('User', require('./schemas/user.js'));
+const TweetEvent = conn.model('TweetEvent', require('./schemas/tweetEvent.js'));
+const Reward = conn.model('Reward', require('./schemas/reward.js'));
+
+module.exports = {
+    Database: conn,
+    User,
+    TweetEvent,
+    Reward,
+};
 
 
