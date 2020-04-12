@@ -29,6 +29,7 @@ const getReward = (eventType) => {
 const processEvent = async (eventData) => {
   const { userId } = eventData;
 
+  // Check that there's no duplicate
   const research = await TweetEvent.find({
     user: { _id: userId },
     eventType: eventData.eventType,
@@ -48,6 +49,7 @@ const processEvent = async (eventData) => {
 
   const CurrentUser = await User.findByUserId(userId);
   if (!CurrentUser) {
+    // Creates a new user if it doesn't exist
     const NewUser = new User({
       _id: userId,
       username: eventData.username,
@@ -69,7 +71,7 @@ const claimTokens = (userId, amount) => {
     .findByUserId(userId)
     .then(async (user) => {
       if (!user.address) { __(`There is not any address linked to this account (@${user.username})`); }
-      if (user.balance < amount) { __(`There is not enough funds in this account (@${user.username})`); }
+      if (user.balance < amount) { __(`There are not enough funds in this account (@${user.username})`); }
 
       const tx = await CDT.send(user.address, amount);
       await tx.wait();
