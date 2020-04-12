@@ -64,13 +64,6 @@ app.get('/webhook/twitter', (req, res) => {
   }
 });
 
-/**
- * Returns index HTML page
- */
-app.get('/', (req, res) => {
-  res.sendFile(`${__dirname}/index.html`);
-});
-
 const isSessionValid = (session) => {
   if (typeof session === 'undefined' || !session.timestamp) return false;
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 const insertVariablesInTemplate = (messageData, params) => {
   const clone = { ...messageData };
 
