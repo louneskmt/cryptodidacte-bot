@@ -1,60 +1,53 @@
-const beautify = require("json-beautify");
-const colors = require("colors");
+const beautify = require('json-beautify');
+const colors = require('colors');
+const fs = require('fs');
 
-if(typeof fs != "object"){
-    var fs = require("fs");
+const main = fs.createWriteStream('./logs/main.log', { flags: 'a' });
+
+function __(message, lvl = 0) {
+  let newMessage = message;
+
+  if (newMessage && newMessage.toString() === '[object Object]') {
+    try {
+      newMessage = beautify(newMessage, null, 2, 100);
+    } catch (err) {
+      console.dir(newMessage);
+      __("CIRCULAR OBJECTS CAN'T BE LOGGED", 2);
+    }
+  }
+
+  const date = new Date();
+  const formatedDate = `${date.getDate()}/${date.getMonth() + 1} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+
+  const levels = {
+    0: 'VERBOSE',
+    1: 'DEBUG',
+    2: 'IMPORTANT',
+    9: 'ERROR',
+  };
+
+  const colorList = {
+    0: 'grey',
+    1: 'bgWhite',
+    2: 'blue',
+    9: 'red',
+  };
+
+  const level = levels[lvl];
+  const color = colorList[lvl];
+
+  const textRaw = `\n[${formatedDate}] | [${level}] |: ${newMessage}`;
+  const textColor = colors[color](textRaw);
+
+  console.log(textColor);
+  main.write(textRaw);
 }
-var main = fs.createWriteStream("./logs/main.log", {flags: "a"});
 
-function __(message, lvl = 0){
-    if(typeof message != undefined && message.toString() === "[object Object]"){
-        try{
-            message = beautify(message, null, 2, 100);
-        }catch(err){
-            console.dir(message);
-            __("CIRCULAR OBJECTS CAN'T BE LOGGED", 2);
-        }
-    }
+const date = new Date();
+main.write(`\n\n\n------------------------ ${date.getDate()}/${date.getMonth() + 1} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} ------------------------`);
 
-    var date = new Date();
-    var date = date.getDate()+"/"+(date.getMonth()+1)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
-
-    var levels = {
-      0: "VERBOSE",
-      1: "DEBUG",
-      2: "IMPORTANT",
-      9: "ERROR"
-    }
-
-    var color_list = {
-      0: "grey",
-      1: "bgWhite",
-      2: "blue",
-      9: "red"
-    }
-
-    var level = levels[lvl]
-
-    var color = color_list[lvl];
-
-    try{
-      var textRaw = `\n[${date}] | [${level}] |: ${message}`
-      var textColor = colors[color](textRaw)
-    }catch(err){
-      console.log("Couldn't find color n°", lvl)
-    }
-
-    console.log(textColor);
-
-    main.write(textRaw);
-}
-var date = new Date();
-var date = date.getDate()+"/"+(date.getMonth()+1)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
-
-main.write(`\n\n\n------------------------ ${date} ------------------------`)
-
-__`Logger has started`
+__('Logger has started');
 
 module.exports = {
-    __
-}
+  __,
+};
