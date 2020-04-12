@@ -188,7 +188,7 @@ app.post('/api/db/:schema/insert', async (req, res) => {
 
   const SchemaObj = getSchemaFromName(schema);
 
-  if (!SchemaObj || !entry) return res.status(400).send('-1');
+  if (!SchemaObj || !entry) return res.status(400).send('-1');
 
   const Entry = new SchemaObj(entry);
   Entry.save();
@@ -202,7 +202,7 @@ app.post('/api/db/:schema/update', async (req, res) => {
   }
 
   const { schema } = req.params;
-  const query = req.body.entry || null;
+  const query = req.body.query || null;
   const filter = req.body.filter || {};
 
   const SchemaObj = getSchemaFromName(schema);
@@ -211,7 +211,8 @@ app.post('/api/db/:schema/update', async (req, res) => {
 
   // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
   const queryResponse = SchemaObj.update(filter, query);
-  res.status(200).send(queryResponse);
+  console.log(queryResponse);
+  res.status(200).send("0");
 });
 
 // TODO
