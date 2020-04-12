@@ -158,7 +158,7 @@ app.post('/api/:schema/get', async (req, res) => {
     return res.status(403).send('-1');
   }
 
-  const { schema } = req.body;
+  const { schema } = req.params;
   __(schema, 2);
   const schemasMap = {
     rewards: schemas.LNQuizReward,
