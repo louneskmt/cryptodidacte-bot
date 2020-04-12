@@ -184,7 +184,12 @@ app.post('/api/:schema/insert', async (req, res) => {
   }
 
   const { schema } = req.params;
-  const entry = req.body.entry || null;
+  // const entry = req.body.entry || null;
+  const entry = {
+    userId: 1,
+    username: 'cillianklota',
+    amount: 150,
+  };
 
   const SchemaObj = getSchemaFromName(schema);
 
@@ -193,7 +198,7 @@ app.post('/api/:schema/insert', async (req, res) => {
   const Entry = SchemaObj.create(entry);
   Entry.save();
 
-  __(Entry, 2)
+  __(Entry, 2);
   res.status(200).send(Entry);
 });
 
