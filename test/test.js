@@ -81,10 +81,12 @@ describe('User Model', function () {
 
   describe('should be linked to valid events', function () {
     it('user1', async function () {
-      const event = '5e9329810f0297325e827ee2';
-      await User.updateOne({ _id: '123456' }, { $addToSet: { events: mongoose.Schema.Types.ObjectId(event.hexEncode()) } });
+      const events = await TweetEvent.findByUserId('123456');
+      await User.updateOne({ _id: '123456' }, { $addToSet: { events: events[0]._id } });
       const user = await User.findByUserId('123456');
       console.log(user);
+      const pop = await user.populateEvents();
+      console.log(pop);
     });
   });
 });

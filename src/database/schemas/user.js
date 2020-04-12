@@ -16,7 +16,17 @@ userSchema.statics.findByUserId = function findByUserId(_id) {
   return this.findOne({ _id });
 };
 
+userSchema.methods.populateEvents = function populateEvents() {
+  return new Promise((resolve, reject) => {
+    this
+      .populate({ path: 'events', select: '-user -__v' })
+      .execPopulate((err, user) => {
+        if (err) throw err;
+        resolve(user);
+      });
+  });
+};
+
 userSchema.virtual('userId').get(function () { return this._id; });
-userSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = userSchema;
