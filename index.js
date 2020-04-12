@@ -154,11 +154,12 @@ app.post('/login', async (req, res) => {
  * */
 
 app.post('/api/:schema/get', async (req, res) => {
-  if (!isSessionValid(req.session) && req.body.isTest === false) {
+  if (!isSessionValid(req.session) && req.body.isTest !== true) {
     return res.status(403).send('-1');
   }
 
   const { schema } = req.body;
+  __(schema, 2);
   const schemasMap = {
     rewards: schemas.LNQuizReward,
   };
