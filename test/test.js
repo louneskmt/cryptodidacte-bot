@@ -2,22 +2,10 @@
 const assert = require('assert');
 const should = require('should');
 
-const mongoose = require('mongoose');
 const {
   db, TweetEvent, User, LNQuizReward,
 } = require('../src/database/mongoose.js');
 
-// eslint-disable-next-line no-extend-native
-String.prototype.hexEncode = function () { // eslint-disable-line func-names
-  let hex; let
-    i;
-  let result = '';
-  for (i = 0; i < this.length; i += 1) {
-    hex = this.charCodeAt(i).toString(16);
-    result += (`000${hex}`).slice(-4);
-  }
-  return result;
-};
 
 before(async function () {
   await User.deleteMany({});

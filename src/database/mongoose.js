@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { databaseConfig } = require('../../config.js');
 
-const uri = 'mongodb://localhost:27017/test';
+const uri = `mongodb://${databaseConfig.user}:${databaseConfig.password}@localhost:27017/cryptodidacte`;
 
 const connection = mongoose.createConnection(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
