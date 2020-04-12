@@ -210,7 +210,7 @@ app.post('/api/db/:schema/update', async (req, res) => {
   if (!SchemaObj || !query) return res.status(400).send('-1');
 
   // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
-  const queryResponse = await SchemaObj.update(filter, query);
+  const queryResponse = await SchemaObj.updateOne(filter, query);
   res.status(200).send(queryResponse.nModified);
 });
 
