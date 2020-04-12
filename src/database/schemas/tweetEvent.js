@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 const tweetEventSchema = new mongoose.Schema({
-  user: { type: String, ref: 'User', autopopulate: true },
+  user: {
+    type: String, ref: 'User', autopopulate: true, alias: 'userId',
+  },
   eventType: {
     type: String,
     lowercase: true,

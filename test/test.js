@@ -7,6 +7,17 @@ const {
   db, TweetEvent, User, LNQuizReward,
 } = require('../src/database/mongoose.js');
 
+// eslint-disable-next-line no-extend-native
+String.prototype.hexEncode = function () { // eslint-disable-line func-names
+  let hex; let
+    i;
+  let result = '';
+  for (i = 0; i < this.length; i += 1) {
+    hex = this.charCodeAt(i).toString(16);
+    result += (`000${hex}`).slice(-4);
+  }
+  return result;
+};
 
 before(async function () {
   await User.deleteMany({});
@@ -60,11 +71,20 @@ describe('should save without error', function () {
   });
 });
 
-describe('User Model', () => {
+describe('User Model', function () {
   describe('should have a valid id', function () {
     it('user1', async function () {
       const user1 = await User.findByUserId('123456');
       user1.should.have.property('_id', '123456');
+    });
+  });
+
+  describe('should be linked to valid events', function () {
+    it('user1', async function () {
+      const event = '5e9329810f0297325e827ee2';
+      await User.updateOne({ _id: '123456' }, { $addToSet: { events: mongoose.Schema.Types.ObjectId(event.hexEncode()) } });
+      const user = await User.findByUserId('123456');
+      console.log(user);
     });
   });
 });

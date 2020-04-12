@@ -17,7 +17,6 @@ userSchema.statics.findByUserId = function findByUserId(_id) {
 };
 
 userSchema.virtual('userId').get(function () { return this._id; });
-
-// userSchema.plugin(require('mongoose-autopopulate'));
+userSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = userSchema;
