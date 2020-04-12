@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  userId: {
+  _id: {
     type: String,
-    required: true,
-    unique: true,
+    alias: 'userId',
   },
   username: { type: String },
   balance: {
@@ -14,17 +13,12 @@ const userSchema = new mongoose.Schema({
     default: 0,
   },
   events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'TweetEvent' }],
-});
+}, { collection: 'users-test' });
 
 userSchema.statics.findByUserId = function findByUserId(userId) {
-  return this.find({ userId });
+  return this.findOne({ userId });
 };
 
-userSchema.statics.updateHistory = function updateHistory(userId) {
-  return this.find({ userId }).populate({
-    path: 'events',
-    match: { userId },
-  }).exec();
-};
+// userSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = userSchema;

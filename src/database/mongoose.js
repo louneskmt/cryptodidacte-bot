@@ -8,11 +8,11 @@ const connection = mongoose.createConnection(uri);
 
 const User = connection.model('User', require('./schemas/user.js'));
 const TweetEvent = connection.model('TweetEvent', require('./schemas/tweetEvent.js'));
-const Reward = connection.model('Reward', require('./schemas/reward.js'));
+const LNQuizReward = connection.model('LNQuizReward', require('./schemas/reward.js'));
 
 module.exports = {
   Database: connection,
   User,
   TweetEvent,
-  LNQuizReward: Reward,
+  LNQuizReward,
 };

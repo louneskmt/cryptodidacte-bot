@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const findByUserIdPlugin = require('./plugins/findByUserId.js');
+
 const rewardSchema = new mongoose.Schema({
   userId: { type: String },
   username: { type: String },
@@ -10,15 +12,13 @@ const rewardSchema = new mongoose.Schema({
 });
 
 rewardSchema.methods.findSameUser = function findSameUser(cb) {
-  return this.model('Reward').find({ userId: this.userId }, cb);
+  return this.model('LNQuizReward').find({ userId: this.userId }, cb);
 };
 
 rewardSchema.statics.setClaimed = function setClaimed(userId) {
   return this.updateMany({ userId }, { claimed: true, claimDate: Date.now() });
 };
 
-rewardSchema.statics.findByUserId = function findByUserId(userId) {
-  return this.find({ userId });
-};
+rewardSchema.plugin(findByUserIdPlugin);
 
 module.exports = rewardSchema;
