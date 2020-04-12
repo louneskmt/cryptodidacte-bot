@@ -118,7 +118,7 @@ app.get('/view/:viewName/:viewParams*?', (req, res) => {
     });
   } else {
     viewParams = Buffer.from(viewParams, 'base64').toString();
-    console.log(viewParams);
+
     ejs.renderFile(`${__dirname}/public/index.ejs`, { view: viewName, viewParams }, (err, str) => {
       res.status(200).send(str);
     });
@@ -217,5 +217,5 @@ https.createServer({
   cert: fs.readFileSync('./certs/fullchain.pem'),
 }, app)
   .listen(app.get('port'), () => {
-    console.log('Node app is running on port', app.get('port'));
+    __(`Node app is running on port ${app.get('port')}`);
   });

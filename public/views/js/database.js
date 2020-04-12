@@ -189,7 +189,7 @@ onViewLoaded = async function (params) {
       reloadView();
     });
     req.fail((err) => {
-      console.log(err);
+      __(err, 9);
     });
   };
 
@@ -358,7 +358,6 @@ onViewLoaded = async function (params) {
   $('*[click-role=showIndex]').click(showIndex);
   $('footer').off('click');
   $('footer').on('click', '*[click-role]', function (ev) {
-    console.log(this);
     const role = $(this).attr('click-role');
     if (Object.prototype.hasOwnProperty.call(roleMap, role)) {
       roleMap[role].call(this);
