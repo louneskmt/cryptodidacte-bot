@@ -196,6 +196,7 @@ app.post('/api/:schema/insert', async (req, res) => {
   if (!SchemaObj) return res.status(400).send('-1');
 
   const Entry = SchemaObj.create(entry);
+  __(Entry, 2);
   Entry.save();
 
   __(Entry, 2);
