@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { __ } = require('../logger.js');
 
 const { databaseConfig } = require('../../config.js');
 
@@ -7,7 +8,7 @@ const uri = `mongodb://${databaseConfig.user}:${databaseConfig.password}@localho
 const connection = mongoose.createConnection(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 connection.on('open', () => {
-  console.log('Connected !\n\n');
+  __('Connected to Mongoose');
 });
 
 const User = connection.model('User', require('./schemas/user.js'));

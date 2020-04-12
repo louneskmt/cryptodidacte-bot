@@ -9,6 +9,7 @@ const { __ } = require('./src/logger.js');
 const security = require('./src/security.js');
 const { twitterConfig } = require('./config.js');
 const globalEvents = require('./src/events/globalEvents.js');
+const schemas = require('./src/database/schemas.js')
 
 const Session = require('./endpoints/session.js');
 const Database = require('./src/database.js');
@@ -148,18 +149,23 @@ app.post('/login', async (req, res) => {
   return res.status(200).send('0');
 });
 
-app.post('/db/get/', async (req, res) => {
+/*
+ * API
+ * */
+
+app.post('/api/:schema/get', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest === false) {
     return res.status(403).send('-1');
   }
 
-  const collection = req.body.collection || null;
+  const { schema } = req.body;
+  const SchemaObj = schemas[schema];
+
   const filter = req.body.filter || {};
 
-  if (!collection) return res.status(400).send('-1');
+  if (!SchemaObj) return res.status(400).send('-1');
 
-  // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
-  const queryResponse = await database.find(collection, filter);
+  const queryResponse = await SchemaObj.find(filter);
   res.status(200).send(queryResponse);
 });
 
