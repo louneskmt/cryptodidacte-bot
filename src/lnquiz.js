@@ -1,19 +1,22 @@
 const fs = require('fs');
 const rewards = require('../data/rewards.json');
 const { __ } = require('./logger.js');
-const Database = require('./database.js');
+const {
+  LNQuizReward,
+} = require('./database/mongoose.js');
 
-const db = new Database('cryptodidacte');
 
 const countRewards = (userId, callback) => {
-  db.find('rewards', { userId: userId.toString() }).then((result) => {
-    let totalToPay = 0;
-    result.forEach((elmt) => {
-      totalToPay += Number(elmt.amount);
-    });
+  LNQuizReward
+    .findByUserId(userId)
+    .then((result) => {
+      let totalToPay = 0;
+      result.forEach((elmt) => {
+        totalToPay += elmt.amount;
+      });
 
-    if (typeof callback === 'function') callback(totalToPay);
-  });
+      if (typeof callback === 'function') callback(totalToPay);
+    });
 };
 
 const addWinners = async (winners) => {
@@ -36,7 +39,10 @@ const addWinners = async (winners) => {
   ];
 
   return new Promise((resolve, reject) => {
-    db.insert('rewards', newEntries).then(() => resolve({ newEntries, errCode: 0 })).catch(() => resolve({ newEntries, errCode: 1 }));
+    LNQuizReward
+      .create(newEntries)
+      .then(() => resolve({ newEntries, errCode: 0 }))
+      .catch(() => resolve({ newEntries, errCode: 1 }));
   });
 };
 

@@ -8,7 +8,7 @@ const rewardSchema = new mongoose.Schema({
   amount: { type: Number, min: 0 },
   added: { type: Date, default: () => Date.now() },
   claimed: { type: Boolean, default: false },
-  claimDate: Date,
+  claimDate: { type: Date },
 });
 
 rewardSchema.methods.findSameUser = function findSameUser(cb) {

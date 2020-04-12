@@ -1,11 +1,11 @@
 const { __ } = require('./logger.js');
 const {
-  db, TweetEvent, User, LNQuizReward,
+  TweetEvent, User,
 } = require('./database/mongoose.js');
 const ethereum = require('./ethereum.js');
 const Twitter = require('./Twit.js');
 
-const { websiteDbConfig, ethereumConfig } = require('../config.js');
+const { ethereumConfig } = require('../config.js');
 
 const events = require('../data/events.json');
 

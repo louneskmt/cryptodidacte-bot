@@ -89,6 +89,20 @@ describe('User Model', function () {
       console.log(pop);
     });
   });
+
+  describe('random tests', function () {
+    it('first', function () {
+      User
+        .findByUserId('123456')
+        .then(async (user) => {
+          user.balance += 20;
+          user.save(async () => {
+            const user2 = await User.findByUserId('123456');
+            console.log(user2);
+          });
+        });
+    });
+  });
 });
 
 describe('TweetEvent Model', function () {
