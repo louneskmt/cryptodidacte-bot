@@ -161,7 +161,7 @@ const getSchemaFromName = (name) => {
   return (schemasMap[name] || null);
 };
 
-app.post('/api/:schema/get', async (req, res) => {
+app.post('/api/db/:schema/get', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest !== true) {
     return res.status(403).send('-1');
   }
@@ -178,46 +178,43 @@ app.post('/api/:schema/get', async (req, res) => {
   res.status(200).send(queryResponse);
 });
 
-app.post('/api/:schema/insert', async (req, res) => {
+app.post('/api/db/:schema/insert', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest === false) {
     return res.status(403).send('-1');
   }
 
   const { schema } = req.params;
-  // const entry = req.body.entry || null;
-  const entry = {
-    userId: 1,
-    username: 'cillianklota',
-    amount: 150,
-  };
+  const entry = req.body.entry || null;
 
   const SchemaObj = getSchemaFromName(schema);
 
-  if (!SchemaObj) return res.status(400).send('-1');
+  if (!SchemaObj || !entry) return res.status(400).send('-1');
 
   const Entry = new SchemaObj(entry);
-  __(Entry, 2);
   Entry.save();
 
-  __(Entry, 2);
   res.status(200).send(Entry);
 });
 
-app.post('/db/update/', async (req, res) => {
+app.post('/api/db/:schema/update', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest === false) {
     return res.status(403).send('-1');
   }
 
-  const collection = req.body.collection || null;
-  const query = req.body.query || null;
+  const { schema } = req.params;
+  const query = req.body.entry || null;
+  const filter = req.body.filter || {};
 
-  if (!collection || !query) return res.status(400).send('-1');
+  const SchemaObj = getSchemaFromName(schema);
+
+  if (!SchemaObj || !query) return res.status(400).send('-1');
 
   // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
-  const queryResponse = await database.update(collection, query);
+  const queryResponse = SchemaObj.update(filter, query);
   res.status(200).send(queryResponse);
 });
 
+// TODO
 app.post('/db/removeAllById/', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest === false) {
     return res.status(403).send('-1');
