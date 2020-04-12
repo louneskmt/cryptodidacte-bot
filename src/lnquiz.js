@@ -9,7 +9,7 @@ const countRewards = (userId, callback) => {
   db.find('rewards', { userId: userId.toString() }).then((result) => {
     let totalToPay = 0;
     result.forEach((elmt) => {
-      totalToPay += Number(elmt.reward);
+      totalToPay += Number(elmt.amount);
     });
 
     if (typeof callback === 'function') callback(totalToPay);
@@ -21,17 +21,17 @@ const addWinners = async (winners) => {
     {
       userId: winners[0].id_str,
       username: winners[0].screen_name,
-      reward: rewards.question,
+      amount: rewards.question,
     },
     {
       userId: winners[1].id_str,
       username: winners[1].screen_name,
-      reward: rewards.writing,
+      amount: rewards.writing,
     },
     {
       userId: winners[2].id_str,
       username: winners[2].screen_name,
-      reward: rewards.random,
+      amount: rewards.random,
     },
   ];
 
