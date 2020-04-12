@@ -153,52 +153,67 @@ app.post('/login', async (req, res) => {
  * API
  * */
 
-app.post('/api/:schema/get', async (req, res) => {
-  if (!isSessionValid(req.session) && req.body.isTest === false) {
+const getSchemaFromName = (name) => {
+  const schemasMap = {
+    rewards: schemas.LNQuizReward,
+    // TODO: add other schemas
+  };
+  return (schemasMap[name] || null);
+};
+
+app.post('/api/db/:schema/get', async (req, res) => {
+  if (!isSessionValid(req.session) && req.body.isTest !== true) {
     return res.status(403).send('-1');
   }
 
-  const { schema } = req.body;
-  const SchemaObj = schemas[schema];
+  const { schema } = req.params;
+  const SchemaObj = getSchemaFromName(schema);
+
+  if (!SchemaObj) return res.status(400).send('-1');
 
   const filter = req.body.filter || {};
 
-  if (!SchemaObj) return res.status(400).send('-1');
 
   const queryResponse = await SchemaObj.find(filter);
   res.status(200).send(queryResponse);
 });
 
-app.post('/db/insert/', async (req, res) => {
+app.post('/api/db/:schema/insert', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest === false) {
     return res.status(403).send('-1');
   }
 
-  const collection = req.body.collection || null;
+  const { schema } = req.params;
   const entry = req.body.entry || null;
 
-  if (!collection || !entry) return res.status(400).send('-1');
+  const SchemaObj = getSchemaFromName(schema);
 
-  // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
-  const queryResponse = await database.insert(collection, entry);
-  res.status(200).send(queryResponse);
+  if (!SchemaObj || !entry) return res.status(400).send('-1');
+
+  const Entry = new SchemaObj(entry);
+  Entry.save();
+
+  res.status(200).send(Entry);
 });
 
-app.post('/db/update/', async (req, res) => {
+app.post('/api/db/:schema/update', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest === false) {
     return res.status(403).send('-1');
   }
 
-  const collection = req.body.collection || null;
+  const { schema } = req.params;
   const query = req.body.query || null;
+  const filter = req.body.filter || {};
 
-  if (!collection || !query) return res.status(400).send('-1');
+  const SchemaObj = getSchemaFromName(schema);
 
-  // TODO: TO BE CHANGED : The default DB is now Cryptodidacte
-  const queryResponse = await database.update(collection, query);
-  res.status(200).send(queryResponse);
+  if (!SchemaObj || !query) return res.status(400).send('-1');
+
+  const queryResponse = await SchemaObj.updateOne(filter, query);
+  res.status(200).send(queryResponse.nModified.toString()); // SHOULD SEND ONE
 });
 
+// TODO
 app.post('/db/removeAllById/', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest === false) {
     return res.status(403).send('-1');
