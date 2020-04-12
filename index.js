@@ -9,7 +9,7 @@ const { __ } = require('./src/logger.js');
 const security = require('./src/security.js');
 const { twitterConfig } = require('./config.js');
 const globalEvents = require('./src/events/globalEvents.js');
-const schemas = require('./src/database/schemas.js')
+const schemas = require('./src/database/mongoose.js');
 
 const Session = require('./endpoints/session.js');
 const Database = require('./src/database.js');
