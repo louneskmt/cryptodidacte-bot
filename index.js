@@ -218,7 +218,7 @@ app.post('/api/db/:schema/update', async (req, res) => {
 });
 
 // TODO
-app.post('/api/:schema/remove/idList', async (req, res) => {
+app.post('/api/db/:schema/remove/idList', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest === false) {
     return res.status(403).send('-1');
   }
