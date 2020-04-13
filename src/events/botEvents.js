@@ -7,7 +7,7 @@ const botEvents = new events.EventEmitter();
 const Twitter = require('../Twit.js');
 const { twitterConfig } = require('../../config.js');
 const interactions = require('../interactions.js');
-const userStatus = require('../userStatus.js');
+const { UserStatus } = require('../database/mongoose.js');
 
 const messageTemplates = require('../../data/message_templates');
 
@@ -52,37 +52,39 @@ botEvents.on('dm', (userId, messageObject) => {
 
   if (message === 'cancel') return interactions.end(params);
 
-  userStatus.getStatus(userId, (status) => {
-    params.status = status;
+  UserStatus
+    .get(userId)
+    .then((status) => {
+      params.status = status;
 
-    if (message === 'start admin' && twitterConfig.admin.includes(userId)) {
-      userStatus.deleteStatus(userId);
-      __('Sending admin menu...');
-      return Twitter.sendMessage(userId, messageTemplates.menu.admin);
-    }
-
-    if (message === 'start') {
-      userStatus.deleteStatus(userId);
-      return interactions.start(params);
-    }
-
-    if (Object.prototype.hasOwnProperty.call(messageData, 'quick_reply_response')) {
-      const { metadata } = messageData.quick_reply_response;
-
-      if (Object.prototype.hasOwnProperty.call(fnExact, metadata)) {
-        return fnExact[metadata](params);
+      if (message === 'start admin' && twitterConfig.admin.includes(userId)) {
+        UserStatus.del(userId);
+        __('Sending admin menu...');
+        return Twitter.sendMessage(userId, messageTemplates.menu.admin);
       }
-    }
 
-    if (status === undefined) return undefined;
+      if (message === 'start') {
+        UserStatus.del(userId);
+        return interactions.start(params);
+      }
 
-    if (Object.prototype.hasOwnProperty.call(fnExact, status)) {
-      return fnExact[status](params);
-    }
-    for (const key in fnStartsWith) {
-      if (status.startsWith(key)) return fnStartsWith[key](params);
-    }
-  });
+      if (Object.prototype.hasOwnProperty.call(messageData, 'quick_reply_response')) {
+        const { metadata } = messageData.quick_reply_response;
+
+        if (Object.prototype.hasOwnProperty.call(fnExact, metadata)) {
+          return fnExact[metadata](params);
+        }
+      }
+
+      if (status === undefined) return undefined;
+
+      if (Object.prototype.hasOwnProperty.call(fnExact, status)) {
+        return fnExact[status](params);
+      }
+      for (const key in fnStartsWith) {
+        if (status.startsWith(key)) return fnStartsWith[key](params);
+      }
+    });
 });
 
 botEvents.on('logs', (eventData) => {
