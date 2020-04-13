@@ -191,7 +191,7 @@ app.post('/api/db/:schema/insert', async (req, res) => {
   if (!SchemaObj || !entry) return res.status(400).send('-1');
 
   const Entry = new SchemaObj(entry);
-  Entry.save();
+  await Entry.save();
 
   res.status(200).send(Entry);
 });
