@@ -80,9 +80,9 @@ onViewLoaded = async function (params) {
 
   const addElement = function () {
     const newEl = $('<tr class="data-table-newElement" form-entry entry-type="tableRow"><td class="--icon">error_outline</td></tr>');
-    for (const key of keyOrder) {
+    for (const key of viewDetails.schemaDescription) {
       $(newEl).append(`
-                <td><input entry-name="${key}" placeholder="${key}" class="--input-in-table" contentEditable/></td>
+                <td><input entry-name="${key.field}" placeholder="${key.title}" class="--input-in-table" contentEditable/></td>
             `);
     }
 
