@@ -189,13 +189,21 @@ app.post('/api/db/:schema/insert', async (req, res) => {
 
   const { schema } = req.params;
   const entry = req.body.entry || null;
+  __(entry, 2);
+
 
   const SchemaObj = getSchemaFromName(schema);
 
   if (!SchemaObj || !entry) return res.status(400).send('-1');
 
-  const Entry = new SchemaObj(entry);
-  await Entry.save();
+  let entries = [];
+
+  for (const element of entry) {
+    const Entry = new SchemaObj(element);
+    // eslint-disable-next-line no-await-in-loop
+    const saved = await Entry.save();
+    entries.push(saved);
+  }
 
   res.status(200).send(Entry);
 });
