@@ -1,0 +1,9 @@
+{
+  "eventTypes": ["favorite", "retweet", "quote", "reply"],
+  "rewards": {
+    "favorite": 2,
+    "retweet": 4,
+    "quote": 6,
+    "reply": 3
+  }
+}

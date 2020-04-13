@@ -1,8 +1,13 @@
 const { __ } = require('./logger.js');
-const Database = require('./database.js');
+const {
+  TweetEvent, User,
+} = require('./database/mongoose.js');
 const ethereum = require('./ethereum.js');
+const Twitter = require('./Twit.js');
 
-const { websiteDbConfig, ethereumConfig } = require('../config.js');
+const { ethereumConfig } = require('../config.js');
+
+const events = require('../data/events.json');
 
 /*
 eventData Object sample:
@@ -15,92 +20,87 @@ eventData Object sample:
     timestamp
 }
 */
-const processEvent = async (eventData) => {
-  // Connect to DB
-  const db = new Database('fidelity', `mongodb://${websiteDbConfig.user}:${websiteDbConfig.password}@localhost:27017/fidelity`);
-  await db.connect();
 
-  const research = await db.find('history', {
-    userId: eventData.userId,
+const getReward = (eventType) => {
+  if (events.eventTypes.includes(eventType)) return events.reward[eventType];
+  return 0;
+};
+
+const processEvent = async (eventData) => {
+  const { userId } = eventData;
+
+  // Check that there's no duplicate
+  const research = await TweetEvent.find({
+    user: { _id: userId },
     eventType: eventData.eventType,
     targetTweetId: eventData.targetTweetId,
   });
   if (research.length !== 0) return;
-  await db.insert('history', eventData);
 
-  let reward;
-  switch (eventData.eventType) {
-    case 'favorite':
-      reward = 2;
-      break;
-    case 'retweet':
-      reward = 5;
-      break;
-    case 'quote':
-      reward = 6;
-      break;
-    case 'reply':
-      reward = 3;
-      break;
-    default:
-      reward = 0;
-      break;
+  const Event = new TweetEvent({
+    user: eventData.userId,
+    eventType: eventData.eventType,
+    tweetId: eventData.tweetId,
+    targetTweetId: eventData.targetTweetId,
+    date: eventData.timestamp,
+  });
+
+  Event.save();
+
+  const CurrentUser = await User.findByUserId(userId);
+  if (!CurrentUser) {
+    // Creates a new user if it doesn't exist
+    const NewUser = new User({
+      _id: userId,
+      username: eventData.username,
+      balance: getReward(eventData.eventType),
+    });
+    NewUser.save();
+    return;
   }
 
-  db.find('users', { userId: eventData.userId }).then(async (docs) => {
-    if (docs.length === 0) {
-      await db.insert('users', {
-        userId: eventData.userId,
-        username: eventData.username,
-        balance: reward,
-      });
-    } else {
-      await db.update('users', {
-        filter: { userId: eventData.userId },
-        edit: { balance: reward },
-        mode: 'inc',
-      });
-    }
-    await db.disconnect();
-  });
+  User
+    .addToBalance(userId, getReward(eventData.eventType))
+    .catch((err) => __(`Error while adding reward to balance of user ${userId}: ${err}`));
 };
 
-const payout = (userId) => {
-  const db = new Database('fidelity', `mongodb://${websiteDbConfig.user}:${websiteDbConfig.password}@localhost:27017/fidelity`);
+const claimTokens = (userId, amount) => {
   const CDT = new ethereum.ERC20(ethereumConfig.contractAddress, ethereumConfig.CryptodidacteTokenABI);
 
-  db.find('users', { userId }).then((docs) => {
-    if (!docs[0].address) {
-      __(`There is not any address linked to this account (@${docs[0].username})`);
-      return;
-    }
-    if (docs[0].balance === 0) {
-      __(`There is not enough funds in this account (@${docs[0].username})`);
-      return;
-    }
+  User
+    .findByUserId(userId)
+    .then(async (user) => {
+      if (!user.address) { __(`There is not any address linked to this account (@${user.username})`); }
+      if (user.balance < amount) { __(`There are not enough funds in this account (@${user.username})`); }
 
-    CDT.send(docs[0].address, docs[0].balance).then(async (tx) => {
-      __(`Payout user ID ${docs[0].userId} - ${docs[0].balance} CDT - Tx hash : ${tx.hash}`);
+      const tx = await CDT.send(user.address, amount);
       await tx.wait();
-      __('Done!');
+      __(`Payout user ID ${userId} - ${amount} CDT - Tx hash : ${tx.hash}`);
+      user.balance -= amount;
+      user.save();
     });
-
-    db.disconnect();
-  });
 };
 
 const linkETHAddress = async (userId, address) => {
-  const db = new Database('fidelity', `mongodb://${websiteDbConfig.user}:${websiteDbConfig.password}@localhost:27017/fidelity`);
+  const CurrentUser = await User.findByUserId(userId);
+  if (!CurrentUser) {
+    const userInfo = await Twitter.getUserInfo({ userId });
+    const NewUser = new User({
+      _id: userId,
+      username: userInfo.screen_name,
+      address,
+    });
+    NewUser.save();
+    return;
+  }
 
-  await db.update('users', {
-    filter: { userId },
-    edit: { address },
-    mode: 'set',
-  });
-
-  await db.disconnect();
+  User
+    .updateAddress(userId, address)
+    .catch((err) => __(`Error while updating address of user ${userId}: ${err}`));
 };
 
 module.exports = {
   processEvent,
+  linkETHAddress,
+  claimTokens,
 };

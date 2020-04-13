@@ -80,14 +80,16 @@ onViewLoaded = async function (params) {
 
   const addElement = function () {
     const newEl = $('<tr class="data-table-newElement" form-entry entry-type="tableRow"><td class="--icon">error_outline</td></tr>');
-    for (const key of keyOrder) {
+    for (const key of viewDetails.schemaDescription) {
+      const i = viewDetails.schemaDescription.indexOf(key);
+      const width = $(`.data-thead tr th:nth-child(${i + 2})`).width();
       $(newEl).append(`
-                <td><input entry-name="${key}" placeholder="${key}" class="--input-in-table" contentEditable/></td>
+                <td style="width: ${width}px"><input entry-name="${key.field}" placeholder="${key.title}" class="--input-in-table" contentEditable/></td>
             `);
     }
 
     $('#data-table tbody').prepend(newEl);
-    setMode('edit');
+    setMode('add');
   };
 
   let setMode = function (newMode) {
@@ -154,8 +156,7 @@ onViewLoaded = async function (params) {
 
   let reallyDeleteElements = function (ids) {
     if (ids.length === 0) return;
-    const req = $.post('/db/removeAllById', {
-      collection: viewDetails.query.collection,
+    const req = $.post(`/api/db/${viewDetails.query.collection}/remove/idList`, {
       idList: ids,
     }, (data) => {
       reloadView();
@@ -164,26 +165,41 @@ onViewLoaded = async function (params) {
   };
 
   const sendNewElements = function (ev) {
-    const data = [];
+    let data = [];
 
     $('#data-table tr[form-entry]').each((ix, el) => {
-      const entry = {};
+      let entry = {};
       $(el).find('*[entry-name]').each((iy, child) => {
         const key = $(child).attr('entry-name');
         const val = $(child).val();
 
+        let desc;
+        for (const element of viewDetails.schemaDescription) {
+          if (element.field === key) {
+            desc = element;
+            break;
+          }
+        }
+
         if (val.length <= 0) return true; // continue;
-        entry[key] = val;
+
+        entry[key] = encodeValue(desc, val);
+
+        if (entry[key] === null) {
+          cannotParseKey(desc, val);
+          entry = null;
+          return false;
+        }
       });
 
+      if (entry === false) data = [];
       if (Object.keys(entry).length > 0) data.push(entry);
     });
 
     setMode('view');
     if (data.length <= 0) return;
 
-    const req = $.post('/db/insert', {
-      collection: viewDetails.query.collection,
+    const req = $.post(`/api/db/${viewDetails.query.collection}/insert`, {
       entry: data,
     }, () => {
       reloadView();
@@ -227,12 +243,19 @@ onViewLoaded = async function (params) {
 
     const newEl = $('<tr class="data-table-newElement" form-entry entry-type="tableRow"><td class="--icon">error_outline</td></tr>');
 
-    for (let i = 0; i < keyOrder.length; i += 1) {
+    for (const desc of viewDetails.schemaDescription) {
+      const i = viewDetails.schemaDescription.indexOf(desc);
       const value = $($(tr).find('td')[i + 1]).text();
-      const key = keyOrder[i];
-      $(newEl).append(`
-            <td><input entry-name="${key}" placeholder="${value}" class="--input-in-table" contentEditable/></td>
+      const { field, editable = true } = desc;
+      const width = $(`.data-thead tr th:nth-child(${i + 2})`).width();
+
+      if (editable) {
+        $(newEl).append(`
+            <td style="width: ${width}px;"><input entry-name="${field}" placeholder="${decodeValue(desc, value) || ''}" class="--input-in-table"/></td>
         `);
+      } else {
+        $(newEl).append(`<td>${decodeValue(desc, value) || '<span class="--na-value">?</span>'}</td>`);
+      }
     }
 
     $(newEl).insertAfter(tr);
@@ -259,43 +282,85 @@ onViewLoaded = async function (params) {
     });
   };
 
-  let reallyCancel = function () {
+  const reallyCancel = function () {
     $('#data-table tr[form-entry]').remove();
     setMode('view');
+  };
+
+  const decodeValue = function (desc, value) {
+    if (typeof value === 'undefined') return null;
+
+    switch (desc.type) {
+      case 'string':
+        return value;
+
+      case 'boolean':
+        if (desc.values) return value ? desc.values.true : desc.values.false;
+        return (value ? 'Yes' : 'No');
+
+      case 'date': {
+        const date = new Date(value);
+        return `${date.getFullYear().toString().padStart(4, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+      }
+
+      case 'number':
+        return value.toString();
+
+      default:
+        return null;
+    }
+  };
+
+  const encodeValue = function (desc, value) {
+    if (typeof value === 'undefined') return undefined;
+
+    switch (desc.type) {
+      case 'string':
+        return value;
+
+      case 'boolean':
+        if (desc.values) return value === desc.values.true;
+        return null;
+
+      case 'date': {
+        return new Date(value).getTime() || null;
+      }
+
+      case 'number':
+        return +value || null;
+
+      default:
+        return null;
+    }
   };
 
   /* ****************************************************************
   * ************************ LOADING VIEW ************************* *
   **************************************************************** */
 
-  $.post('/db/get', query, (data) => {
-    receivedData = data;
+  $.post(`/api/db/${query.collection}/get`, query.filter, (data) => {
+    const { queryResponse, schemaDescription } = data;
+    viewDetails.schemaDescription = schemaDescription;
 
-    keyOrder = obj.keyOrder || [];
 
+    // Add table head row
     const headTarget = $('.data-thead table tr');
     $(headTarget).html(`
             <th id="data-table-checkall" class="--icon"></th>
         `);
-    if (keyOrder.length === 0) {
-      for (const key in data[0]) {
-        if (!hideKeys.includes(key)) keyOrder.push(key);
-      }
+    for (const key of schemaDescription) {
+      $(headTarget).append(`<th>${key.title}</th>`);
     }
 
-    for (const key of keyOrder) {
-      $(headTarget).append(`<th>${key}</th>`);
-    }
-
-    for (const entry of data) {
+    for (const entry of queryResponse) {
       const tr = $(`
                 <tr class="--anim-swipeEnter" mongo-id="${entry._id}" >
                     <td class="data-table-check"></td>
                 </tr>
             `);
 
-      for (const key of keyOrder) {
-        $(tr).append(`<td>${entry[key] || '<span class="--na-value">?</span>'}</td>`);
+      for (const desc of schemaDescription) {
+        $(tr).append(`<td>${decodeValue(desc, entry[desc.field]) || '<span class="--na-value">?</span>'}</td>`);
       }
 
       $('#data-table tbody').append(tr);
@@ -314,6 +379,19 @@ onViewLoaded = async function (params) {
     setMode('edit');
   };
 
+  const cannotParseKey = function (desc, val) {
+    const p = new Popup({
+      title: 'Wrong format',
+      content: `The entered value for <kbd>${desc.title}</kbd> is not correct.<br/>You must enter a valid <kbd>${desc.type}</kbd> instead of <kbd>${val}</kbd>`,
+      buttons: [
+        {
+          text: 'Ok',
+          onclick: (pop) => pop.destroy(),
+        },
+      ],
+    });
+  };
+
   const sendEdit = function () {
     const el = $('#data-table tr[form-entry]');
     if ($(el).get().length > 1) {
@@ -321,17 +399,34 @@ onViewLoaded = async function (params) {
     }
 
     const id = $(el).attr('mongo-id');
-    const data = {};
+    let data = {};
     $(el).find('input[entry-name]').each((ix, child) => {
       const key = $(child).attr('entry-name');
       const val = $(child).val();
 
+      // Find key index
+      let desc;
+      for (const element of viewDetails.schemaDescription) {
+        if (element.field === key) {
+          desc = element;
+          break;
+        }
+      }
+
       if (val.length <= 0 || !val) return true;
-      data[key] = val;
+      data[key] = encodeValue(desc, val);
+
+      if (data[key] === null) {
+        cannotParseKey(desc, val);
+        data = null;
+        return false;
+      }
     });
 
-    const req = $.post('/db/updateById/', {
-      collection: viewDetails.query.collection,
+    if (data === null) return false;
+
+    const req = $.post(`/api/db/${viewDetails.query.collection}/update/`, {
+      filter: { _id: id },
       query: data,
     }, () => {
       reloadView();

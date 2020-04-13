@@ -135,6 +135,14 @@ section{
     width: 100vw;
 }
 
+kbd{
+    display: inline-block;
+    padding: 2px 5px;
+
+    background: #DDD;
+    border-radius: 5px;
+}
+
 
 /****************************************************************/
 /************************* KEYFRAMES ****************************/
