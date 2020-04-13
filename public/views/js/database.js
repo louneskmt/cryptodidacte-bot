@@ -87,7 +87,7 @@ onViewLoaded = async function (params) {
     }
 
     $('#data-table tbody').prepend(newEl);
-    setMode('edit');
+    setMode('add');
   };
 
   let setMode = function (newMode) {
