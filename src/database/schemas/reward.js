@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Twit = require('../../Twit.js'); // To fetch user info
 
 const findByUserIdPlugin = require('./plugins/findByUserId.js');
+const loadUIDescriptionPlugin = require('./plugins/loadUIDescription.js');
 
 /* *** *** *** *** *** */
 /* ***    SCHEMA   *** */
@@ -33,42 +34,11 @@ rewardSchema.methods.findSameUser = function findSameUser(cb) {
   return this.model('LNQuizReward').find({ userId: this.userId }, cb);
 };
 
-// MANDATORY METHOD
-rewardSchema.statics.getSchemaDescription = function () {
-  return [
-    {
-      title: 'Username',
-      field: 'username',
-      type: 'string',
-      editable: false,
-    },
-    {
-      title: 'Added',
-      field: 'added',
-      type: 'date',
-      editable: false,
-    },
-    {
-      title: 'Claimed',
-      field: 'claimed',
-      type: 'boolean',
-      values: {
-        true: 'Yes',
-        false: 'No',
-      },
-    },
-    {
-      title: 'Amount',
-      field: 'amount',
-      type: 'number',
-    },
-  ];
-};
 rewardSchema.statics.setClaimed = function setClaimed(userId) {
   return this.updateMany({ userId }, { claimed: true, claimDate: Date.now() });
 };
 
-
 rewardSchema.plugin(findByUserIdPlugin);
+rewardSchema.plugin(loadUIDescriptionPlugin);
 
 module.exports = rewardSchema;

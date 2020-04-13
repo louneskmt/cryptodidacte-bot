@@ -72,9 +72,7 @@ describe('User Model', function () {
       const events = await TweetEvent.findByUserId('123456');
       await User.updateOne({ _id: '123456' }, { $addToSet: { events: events[0]._id } });
       const user = await User.findByUserId('123456');
-      console.log(user);
       const pop = await user.populateEvents();
-      console.log(pop);
     });
   });
 
@@ -115,5 +113,11 @@ describe('TweetEvent Model', function () {
         event.user.should.not.have.property('_id', '654321');
       }
     });
+  });
+});
+
+describe('LNQuizReward', function () {
+  it('#loadUIDescription', function () {
+    console.log(LNQuizReward.loadUIDescription().test);
   });
 });
