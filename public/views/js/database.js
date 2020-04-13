@@ -292,7 +292,7 @@ onViewLoaded = async function (params) {
   * ************************ LOADING VIEW ************************* *
   **************************************************************** */
 
-  $.post('/db/get', query, (data) => {
+  $.post(`/api/db/${query.collection}/get`, query.filter, (data) => {
     const { queryResponse, schemaDescription } = data;
 
 
