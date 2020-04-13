@@ -218,16 +218,19 @@ app.post('/api/db/:schema/update', async (req, res) => {
 });
 
 // TODO
-app.post('/db/removeAllById/', async (req, res) => {
+app.post('/api/:schema/remove/idList', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest === false) {
     return res.status(403).send('-1');
   }
 
-  const collection = req.body.collection || null;
+  const { schema } = req.params;
   const idList = req.body.idList || null;
-  if (!idList || !collection) return res.status(400).send('-1');
 
-  const resp = await database.remove(collection, null, true, { idList });
+  const SchemaObj = getSchemaFromName(schema);
+
+  if (!idList || !SchemaObj) return res.status(400).send('-1');
+
+  const resp = await SchemaObj.deleteMany({ $in: idList });
   res.status(200).send(resp);
 });
 

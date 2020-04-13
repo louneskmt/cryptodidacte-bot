@@ -154,8 +154,7 @@ onViewLoaded = async function (params) {
 
   let reallyDeleteElements = function (ids) {
     if (ids.length === 0) return;
-    const req = $.post('/db/removeAllById', {
-      collection: viewDetails.query.collection,
+    const req = $.post(`/api/db/${viewDetails.query.collection}/remove/`, {
       idList: ids,
     }, (data) => {
       reloadView();
@@ -227,11 +226,12 @@ onViewLoaded = async function (params) {
 
     const newEl = $('<tr class="data-table-newElement" form-entry entry-type="tableRow"><td class="--icon">error_outline</td></tr>');
 
-    for (let i = 0; i < keyOrder.length; i += 1) {
+    for (const desc of viewDetails.schemaDescription) {
+      const i = viewDetails.schemaDescription.indexOf(desc);
       const value = $($(tr).find('td')[i + 1]).text();
-      const key = keyOrder[i];
+      const { field } = desc;
       $(newEl).append(`
-            <td><input entry-name="${key}" placeholder="${value}" class="--input-in-table" contentEditable/></td>
+            <td><input entry-name="${field}" placeholder="${value}" class="--input-in-table" contentEditable/></td>
         `);
     }
 
@@ -294,6 +294,7 @@ onViewLoaded = async function (params) {
 
   $.post(`/api/db/${query.collection}/get`, query.filter, (data) => {
     const { queryResponse, schemaDescription } = data;
+    viewDetails.schemaDescription = schemaDescription;
 
 
     // Add table head row
