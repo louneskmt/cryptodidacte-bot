@@ -154,7 +154,7 @@ onViewLoaded = async function (params) {
 
   let reallyDeleteElements = function (ids) {
     if (ids.length === 0) return;
-    const req = $.post(`/api/db/${viewDetails.query.collection}/remove/`, {
+    const req = $.post(`/api/db/${viewDetails.query.collection}/remove/idList`, {
       idList: ids,
     }, (data) => {
       reloadView();
@@ -181,8 +181,7 @@ onViewLoaded = async function (params) {
     setMode('view');
     if (data.length <= 0) return;
 
-    const req = $.post('/db/insert', {
-      collection: viewDetails.query.collection,
+    const req = $.post(`/api/db/${viewDetails.query.collection}/insert`, {
       entry: data,
     }, () => {
       reloadView();
@@ -349,8 +348,8 @@ onViewLoaded = async function (params) {
       data[key] = val;
     });
 
-    const req = $.post('/db/updateById/', {
-      collection: viewDetails.query.collection,
+    const req = $.post(`/api/db/${viewDetails.query.collection}/update/`, {
+      filter: { _id: id },
       query: data,
     }, () => {
       reloadView();
