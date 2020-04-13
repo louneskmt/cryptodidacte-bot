@@ -13,8 +13,9 @@ const rewardSchema = new mongoose.Schema({
 });
 
 /* *** MIDDLEWARES *** */
-rewardSchema.pre('save', { uery: false, document: true }, async function (data) {
+rewardSchema.pre('save', async function (data) {
   this.userId = '000';
+  __(this, 2);
 });
 
 /* *** METHODS *** */
