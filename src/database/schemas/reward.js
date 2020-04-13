@@ -40,11 +40,13 @@ rewardSchema.statics.getSchemaDescription = function () {
       title: 'Username',
       field: 'username',
       type: 'string',
+      editable: false,
     },
     {
       title: 'Added',
       field: 'added',
       type: 'date',
+      editable: false,
     },
     {
       title: 'Claimed',

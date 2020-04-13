@@ -228,10 +228,14 @@ onViewLoaded = async function (params) {
     for (const desc of viewDetails.schemaDescription) {
       const i = viewDetails.schemaDescription.indexOf(desc);
       const value = $($(tr).find('td')[i + 1]).text();
-      const { field } = desc;
-      $(newEl).append(`
-            <td><input entry-name="${field}" placeholder="${value}" class="--input-in-table" contentEditable/></td>
+      const { field, editable = true } = desc;
+      if (editable) {
+        $(newEl).append(`
+            <td><input entry-name="${field}" placeholder="${decodeValue(desc, value) || ''}" class="--input-in-table"/></td>
         `);
+      } else {
+        $(newEl).append(`<td>${decodeValue(desc, value) || '<span class="--na-value">?</span>'}</td>`);
+      }
     }
 
     $(newEl).insertAfter(tr);
@@ -263,7 +267,7 @@ onViewLoaded = async function (params) {
     setMode('view');
   };
 
-  const formatValue = function (desc, value) {
+  const decodeValue = function (desc, value) {
     if (typeof value === 'undefined') return null;
 
     switch (desc.type) {
@@ -281,6 +285,29 @@ onViewLoaded = async function (params) {
 
       case 'number':
         return value.toString();
+
+      default:
+        return null;
+    }
+  };
+
+  const encodeValue = function (desc, value) {
+    if (typeof value === 'undefined') return undefined;
+
+    switch (desc.type) {
+      case 'string':
+        return value;
+
+      case 'boolean':
+        if (desc.values) return value === desc.values.true;
+        return null;
+
+      case 'date': {
+        return new Date(value).getTime() || null;
+      }
+
+      case 'number':
+        return +value || null;
 
       default:
         return null;
@@ -313,7 +340,7 @@ onViewLoaded = async function (params) {
             `);
 
       for (const desc of schemaDescription) {
-        $(tr).append(`<td>${formatValue(desc, entry[desc.field]) || '<span class="--na-value">?</span>'}</td>`);
+        $(tr).append(`<td>${decodeValue(desc, entry[desc.field]) || '<span class="--na-value">?</span>'}</td>`);
       }
 
       $('#data-table tbody').append(tr);
@@ -332,6 +359,19 @@ onViewLoaded = async function (params) {
     setMode('edit');
   };
 
+  const cannotParseKey = function (desc, val) {
+    const p = new Popup({
+      title: 'Wrong format',
+      content: `The entered value for <kbd>${desc.title}</kbd> is not correct.<br/>You must enter a valid <kbd>${desc.type}</kbd>`,
+      buttons: [
+        {
+          text: 'Ok',
+          onclick: (pop) => pop.destroy(),
+        },
+      ],
+    });
+  };
+
   const sendEdit = function () {
     const el = $('#data-table tr[form-entry]');
     if ($(el).get().length > 1) {
@@ -339,14 +379,31 @@ onViewLoaded = async function (params) {
     }
 
     const id = $(el).attr('mongo-id');
-    const data = {};
+    let data = {};
     $(el).find('input[entry-name]').each((ix, child) => {
       const key = $(child).attr('entry-name');
       const val = $(child).val();
 
+      // Find key index
+      let desc;
+      for (const element of viewDetails.schemaDescription) {
+        if (element.field === key) {
+          desc = element;
+          break;
+        }
+      }
+
       if (val.length <= 0 || !val) return true;
-      data[key] = val;
+      data[key] = encodeValue(desc, val);
+
+      if (data[key] === null) {
+        cannotParseKey(desc, val);
+        data = null;
+        return false;
+      }
     });
+
+    if (data === null) return false;
 
     const req = $.post(`/api/db/${viewDetails.query.collection}/update/`, {
       filter: { _id: id },
