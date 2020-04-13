@@ -81,8 +81,10 @@ onViewLoaded = async function (params) {
   const addElement = function () {
     const newEl = $('<tr class="data-table-newElement" form-entry entry-type="tableRow"><td class="--icon">error_outline</td></tr>');
     for (const key of viewDetails.schemaDescription) {
+      const i = viewDetails.schemaDescription.indexOf(key);
+      const width = $(`.data-thead tr th:nth-child(${i + 2})`).width();
       $(newEl).append(`
-                <td><input entry-name="${key.field}" placeholder="${key.title}" class="--input-in-table" contentEditable/></td>
+                <td style="width: ${width}px"><input entry-name="${key.field}" placeholder="${key.title}" class="--input-in-table" contentEditable/></td>
             `);
     }
 
@@ -229,9 +231,11 @@ onViewLoaded = async function (params) {
       const i = viewDetails.schemaDescription.indexOf(desc);
       const value = $($(tr).find('td')[i + 1]).text();
       const { field, editable = true } = desc;
+      const width = $(`.data-thead tr th:nth-child(${i + 2})`).width();
+
       if (editable) {
         $(newEl).append(`
-            <td><input entry-name="${field}" placeholder="${decodeValue(desc, value) || ''}" class="--input-in-table"/></td>
+            <td style="width: ${width}px;"><input entry-name="${field}" placeholder="${decodeValue(desc, value) || ''}" class="--input-in-table"/></td>
         `);
       } else {
         $(newEl).append(`<td>${decodeValue(desc, value) || '<span class="--na-value">?</span>'}</td>`);
