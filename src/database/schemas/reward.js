@@ -22,6 +22,7 @@ rewardSchema.pre('save', async function () {
   // Fetches the Twitter usedId before saving IF not specified
   if (!this.userId) {
     const userInfo = await Twit.getUserInfo({ username: this.username });
+    console.log(this, userInfo);
     this.userId = userInfo.id_str;
   }
 });
