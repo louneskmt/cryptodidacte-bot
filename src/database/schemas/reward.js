@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { __ } = require('../../logger.js');
+const Twit = require('../../Twit.js'); // To fetch user info
 
 const findByUserIdPlugin = require('./plugins/findByUserId.js');
 
@@ -11,14 +12,22 @@ const rewardSchema = new mongoose.Schema({
   claimed: { type: Boolean, default: false },
   claimDate: { type: Date },
 });
-
+/* *** *** *** *** *** */
 /* *** MIDDLEWARES *** */
+/* *** *** *** *** *** */
 rewardSchema.pre('save', async function (data) {
-  this.userId = '999';
+  /*
+   * Fetches the Twitter usedId before saving
+   * */
+  const userInfo = await Twit.getUserInfo({ username: this.username });
+  __(userInfo, 2);
+  this.userId = userInfo.id_str;
+  __(this.userId, 2);
   __(this, 2);
 });
-
-/* *** METHODS *** */
+/* *** *** *** *** *** */
+/* *** METHODS *** *** */
+/* *** *** *** *** *** */
 rewardSchema.methods.findSameUser = function findSameUser(cb) {
   return this.model('LNQuizReward').find({ userId: this.userId }, cb);
 };
