@@ -172,7 +172,7 @@ app.post('/api/db/:schema/get', async (req, res) => {
   if (!SchemaObj) return res.status(400).send('-1');
 
   const filter = req.body.filter || {};
-  const schemaDescription = SchemaObj.getSchemaDescription();
+  const schemaDescription = SchemaObj.loadUIDescription();
   const queryResponse = await SchemaObj.find(filter);
 
   const toSend = {
@@ -237,7 +237,7 @@ app.post('/api/db/:schema/remove/idList', async (req, res) => {
 
   if (!idList || !SchemaObj) return res.status(400).send('-1');
 
-  const resp = await SchemaObj.deleteMany({ _id: { $in: idList }});
+  const resp = await SchemaObj.deleteMany({ _id: { $in: idList } });
   res.status(200).send(resp);
 });
 

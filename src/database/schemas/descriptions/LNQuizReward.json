@@ -1,3 +1,29 @@
-{
-  "todo": true
-}
+[
+  {
+    "title": "Username",
+    "field": "username",
+    "type": "string",
+    "editable": false
+  },
+  {
+    "title": "Added",
+    "field": "added",
+    "type": "date",
+    "editable": false
+
+  },
+  {
+    "title": "Claimed",
+    "field": "claimed",
+    "type": "boolean",
+    "values": {
+      "true": "Yes",
+      "false": "No"
+    }
+  },
+  {
+    "title": "Amount",
+    "field": "amount",
+    "type": "number"
+  }
+]
