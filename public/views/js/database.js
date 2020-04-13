@@ -165,18 +165,34 @@ onViewLoaded = async function (params) {
   };
 
   const sendNewElements = function (ev) {
-    const data = [];
+    let data = [];
 
     $('#data-table tr[form-entry]').each((ix, el) => {
-      const entry = {};
+      let entry = {};
       $(el).find('*[entry-name]').each((iy, child) => {
         const key = $(child).attr('entry-name');
         const val = $(child).val();
 
+        let desc;
+        for (const element of viewDetails.schemaDescription) {
+          if (element.field === key) {
+            desc = element;
+            break;
+          }
+        }
+
         if (val.length <= 0) return true; // continue;
-        entry[key] = val;
+
+        entry[key] = encodeValue(desc, val);
+
+        if (entry[key] === null) {
+          cannotParseKey(desc, val);
+          entry = null;
+          return false;
+        }
       });
 
+      if (entry === false) data = [];
       if (Object.keys(entry).length > 0) data.push(entry);
     });
 
@@ -366,7 +382,7 @@ onViewLoaded = async function (params) {
   const cannotParseKey = function (desc, val) {
     const p = new Popup({
       title: 'Wrong format',
-      content: `The entered value for <kbd>${desc.title}</kbd> is not correct.<br/>You must enter a valid <kbd>${desc.type}</kbd>`,
+      content: `The entered value for <kbd>${desc.title}</kbd> is not correct.<br/>You must enter a valid <kbd>${desc.type}</kbd> instead of <kbd>${val}</kbd>`,
       buttons: [
         {
           text: 'Ok',
