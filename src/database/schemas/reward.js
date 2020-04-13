@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { __ } = require('../../logger.js');
 
 const findByUserIdPlugin = require('./plugins/findByUserId.js');
 
@@ -10,7 +11,13 @@ const rewardSchema = new mongoose.Schema({
   claimed: { type: Boolean, default: false },
   claimDate: { type: Date },
 });
+/* *** MIDDLEWARES *** */
+rewardSchema.pre('save', async (data) => {
+  __("Presave", 2);
+  __(data, 2);
+});
 
+/* *** METHODS *** */
 rewardSchema.methods.findSameUser = function findSameUser(cb) {
   return this.model('LNQuizReward').find({ userId: this.userId }, cb);
 };
