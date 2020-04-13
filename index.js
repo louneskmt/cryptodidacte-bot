@@ -230,7 +230,7 @@ app.post('/api/db/:schema/remove/idList', async (req, res) => {
 
   if (!idList || !SchemaObj) return res.status(400).send('-1');
 
-  const resp = await SchemaObj.deleteMany({ $in: idList });
+  const resp = await SchemaObj.deleteMany({ _id: {$in: idList });
   res.status(200).send(resp);
 });
 
