@@ -172,10 +172,14 @@ app.post('/api/db/:schema/get', async (req, res) => {
   if (!SchemaObj) return res.status(400).send('-1');
 
   const filter = req.body.filter || {};
-
-
+  const schemaDescription = SchemaObj.getSchemaDescription();
   const queryResponse = await SchemaObj.find(filter);
-  res.status(200).send(queryResponse);
+
+  const toSend = {
+    schemaDescription,
+    queryResponse,
+  };
+  res.status(200).send(toSend);
 });
 
 app.post('/api/db/:schema/insert', async (req, res) => {
@@ -185,15 +189,22 @@ app.post('/api/db/:schema/insert', async (req, res) => {
 
   const { schema } = req.params;
   const entry = req.body.entry || null;
+  __(entry, 2);
+
 
   const SchemaObj = getSchemaFromName(schema);
 
   if (!SchemaObj || !entry) return res.status(400).send('-1');
 
-  const Entry = new SchemaObj(entry);
-  Entry.save();
+  const entries = [];
 
-  res.status(200).send(Entry);
+  for (const element of entry) {
+    const Entry = new SchemaObj(element);
+    // eslint-disable-next-line no-await-in-loop
+    const saved = await Entry.save();
+    entries.push(saved);
+  }
+  res.status(200).send(entries);
 });
 
 app.post('/api/db/:schema/update', async (req, res) => {
@@ -214,16 +225,19 @@ app.post('/api/db/:schema/update', async (req, res) => {
 });
 
 // TODO
-app.post('/db/removeAllById/', async (req, res) => {
+app.post('/api/db/:schema/remove/idList', async (req, res) => {
   if (!isSessionValid(req.session) && req.body.isTest === false) {
     return res.status(403).send('-1');
   }
 
-  const collection = req.body.collection || null;
+  const { schema } = req.params;
   const idList = req.body.idList || null;
-  if (!idList || !collection) return res.status(400).send('-1');
 
-  const resp = await database.remove(collection, null, true, { idList });
+  const SchemaObj = getSchemaFromName(schema);
+
+  if (!idList || !SchemaObj) return res.status(400).send('-1');
+
+  const resp = await SchemaObj.deleteMany({ _id: { $in: idList }});
   res.status(200).send(resp);
 });
 
