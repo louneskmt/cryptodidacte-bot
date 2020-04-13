@@ -22,7 +22,7 @@ eventData Object sample:
 */
 
 const getReward = (eventType) => {
-  if (events.eventTypes.includes(eventType)) return events.reward[eventType];
+  if (events.eventTypes.includes(eventType)) return events.rewards[eventType];
   return 0;
 };
 
