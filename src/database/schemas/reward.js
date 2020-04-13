@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { __ } = require('../../logger.js');
 const Twit = require('../../Twit.js'); // To fetch user info
 
 const findByUserIdPlugin = require('./plugins/findByUserId.js');
@@ -19,7 +18,7 @@ const rewardSchema = new mongoose.Schema({
 /* *** *** *** *** *** */
 /* *** MIDDLEWARES *** */
 /* *** *** *** *** *** */
-rewardSchema.pre('save', async function (data) {
+rewardSchema.pre('save', async function () {
   // Fetches the Twitter usedId before saving IF not specified
   if (!this.userId) {
     const userInfo = await Twit.getUserInfo({ username: this.username });
@@ -34,6 +33,7 @@ rewardSchema.methods.findSameUser = function findSameUser(cb) {
   return this.model('LNQuizReward').find({ userId: this.userId }, cb);
 };
 
+// MANDATORY METHOD
 rewardSchema.statics.getSchemaDescription = function () {
   return [
     {

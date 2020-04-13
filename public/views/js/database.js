@@ -259,9 +259,33 @@ onViewLoaded = async function (params) {
     });
   };
 
-  let reallyCancel = function () {
+  const reallyCancel = function () {
     $('#data-table tr[form-entry]').remove();
     setMode('view');
+  };
+
+  const formatValue = function (desc, value) {
+    if (typeof value === 'undefined') return null;
+
+    switch (desc.type) {
+      case 'string':
+        return value;
+
+      case 'boolean':
+        if (desc.values) return value ? desc.values.true : desc.values.false;
+        return (value ? 'Yes' : 'No');
+
+      case 'date': {
+        const date = new Date(value);
+        return `${date.getFullYear().toString().padStart(4, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+      }
+
+      case 'number':
+        return value.toString();
+
+      default:
+        return null;
+    }
   };
 
   /* ****************************************************************
@@ -269,33 +293,27 @@ onViewLoaded = async function (params) {
   **************************************************************** */
 
   $.post('/db/get', query, (data) => {
-    receivedData = data;
+    const { queryResponse, schemaDescription } = data;
 
-    keyOrder = obj.keyOrder || [];
 
+    // Add table head row
     const headTarget = $('.data-thead table tr');
     $(headTarget).html(`
             <th id="data-table-checkall" class="--icon"></th>
         `);
-    if (keyOrder.length === 0) {
-      for (const key in data[0]) {
-        if (!hideKeys.includes(key)) keyOrder.push(key);
-      }
+    for (const key of schemaDescription) {
+      $(headTarget).append(`<th>${key.title}</th>`);
     }
 
-    for (const key of keyOrder) {
-      $(headTarget).append(`<th>${key}</th>`);
-    }
-
-    for (const entry of data) {
+    for (const entry of queryResponse) {
       const tr = $(`
                 <tr class="--anim-swipeEnter" mongo-id="${entry._id}" >
                     <td class="data-table-check"></td>
                 </tr>
             `);
 
-      for (const key of keyOrder) {
-        $(tr).append(`<td>${entry[key] || '<span class="--na-value">?</span>'}</td>`);
+      for (const desc of schemaDescription) {
+        $(tr).append(`<td>${formatValue(desc, entry[desc.field]) || '<span class="--na-value">?</span>'}</td>`);
       }
 
       $('#data-table tbody').append(tr);
