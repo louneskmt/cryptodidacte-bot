@@ -172,10 +172,14 @@ app.post('/api/db/:schema/get', async (req, res) => {
   if (!SchemaObj) return res.status(400).send('-1');
 
   const filter = req.body.filter || {};
-
-
+  const schemaDescription = SchemaObj.getSchemaDescription();
   const queryResponse = await SchemaObj.find(filter);
-  res.status(200).send(queryResponse);
+
+  const toSend = {
+    schemaDescription,
+    queryResponse,
+  };
+  res.status(200).send(toSend);
 });
 
 app.post('/api/db/:schema/insert', async (req, res) => {
