@@ -42,7 +42,7 @@ const emptyTempDir = new CronJob('00 00 04 * * *', (() => {
       });
     }
 
-    __('Temp direcotry successfully deleted');
+    __('Temp directory successfully deleted');
   });
 }), null, true);
 

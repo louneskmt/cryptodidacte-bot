@@ -12,7 +12,7 @@ const countRewards = (userId, callback) => {
     .then((result) => {
       let totalToPay = 0;
       result.forEach((elmt) => {
-        totalToPay += elmt.amount;
+        if (elmt.claimed === false) totalToPay += elmt.amount;
       });
 
       if (typeof callback === 'function') callback(totalToPay);
