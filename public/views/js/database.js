@@ -251,10 +251,10 @@ onViewLoaded = async function (params) {
 
       if (editable) {
         $(newEl).append(`
-            <td style="width: ${width}px;"><input entry-name="${field}" placeholder="${decodeValue(desc, value) || ''}" class="--input-in-table"/></td>
+            <td style="width: ${width}px;"><input entry-name="${field}" placeholder="${value || ''}" class="--input-in-table"/></td>
         `);
       } else {
-        $(newEl).append(`<td>${decodeValue(desc, value) || '<span class="--na-value">?</span>'}</td>`);
+        $(newEl).append(`<td>${value || '<span class="--na-value">?</span>'}</td>`);
       }
     }
 
@@ -284,6 +284,7 @@ onViewLoaded = async function (params) {
 
   const reallyCancel = function () {
     $('#data-table tr[form-entry]').remove();
+    $('.--tr-editing').removeClass('--tr-editing');
     setMode('view');
   };
 

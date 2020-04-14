@@ -22,7 +22,7 @@ eventData Object sample:
 */
 
 const getReward = (eventType) => {
-  if (events.eventTypes.includes(eventType)) return events.reward[eventType];
+  if (events.eventTypes.includes(eventType)) return events.rewards[eventType];
   return 0;
 };
 
@@ -47,20 +47,13 @@ const processEvent = async (eventData) => {
 
   Event.save();
 
-  const CurrentUser = await User.findByUserId(userId);
-  if (!CurrentUser) {
-    // Creates a new user if it doesn't exist
-    const NewUser = new User({
-      _id: userId,
-      username: eventData.username,
-      balance: getReward(eventData.eventType),
-    });
-    NewUser.save();
-    return;
-  }
+  // Find User and create it if it doesn't exist
+  const query = { _id: userId, username: eventData.username };
+  const update = { $inc: { balance: getReward(eventData.eventType) } };
+  const options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
   User
-    .addToBalance(userId, getReward(eventData.eventType))
+    .findOneAndUpdate(query, update, options)
     .catch((err) => __(`Error while adding reward to balance of user ${userId}: ${err}`));
 };
 

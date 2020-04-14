@@ -14,10 +14,12 @@ connection.on('open', () => {
 const User = connection.model('User', require('./schemas/user.js'));
 const TweetEvent = connection.model('TweetEvent', require('./schemas/tweetEvent.js'));
 const LNQuizReward = connection.model('LNQuizReward', require('./schemas/reward.js'));
+const UserStatus = connection.model('UserStatus', require('./schemas/userStatus.js'));
 
 module.exports = {
   db: connection,
   User,
   TweetEvent,
   LNQuizReward,
+  UserStatus,
 };
