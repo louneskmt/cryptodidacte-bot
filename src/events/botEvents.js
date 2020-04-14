@@ -40,6 +40,10 @@ botEvents.on('dm', (userId, messageObject) => {
     claim_rewards: interactions.countRewards,
     generate_invoice: interactions.generateInvoice,
     get_rewards_info: interactions.sendRewardsInfo,
+    send_cdt_menu: interactions.sendFidelityMenu,
+    cdt_withdraw: undefined,
+    cdt_refund: undefined,
+    cdt_link_address: undefined,
   };
 
   const fnStartsWith = {

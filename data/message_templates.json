@@ -107,9 +107,42 @@
             "metadata": "claim_rewards"
           },
           {
+            "label": "CDT Menu",
+            "description": "Enter Cryptodidacte Fidelity menu",
+            "metadata": "send_cdt_menu"
+          },
+          {
             "label": "💸 Tip Cryptodidacte",
             "description": "Generate an LN invoice to tip Cryptodidacte",
             "metadata": "generate_invoice"
+          }
+        ]
+      }
+    },
+    "fidelity": {
+      "text": "Cryptodidacte Token - Chose your action below !",
+      "quick_reply": {
+        "type": "options",
+        "options": [
+          {
+            "label": "🏦 Show CDT balance",
+            "description": "Take a look on your balance",
+            "metadata": "cdt_display_balance"
+          },
+          {
+            "label": "Withdraw your tokens",
+            "description": "",
+            "metadata": "cdt_withdraw"
+          },
+          {
+            "label": "Refund your off-chain balance",
+            "description": "",
+            "metadata": "cdt_refund"
+          },
+          {
+            "label": "Link ETH Address",
+            "description": "Keep your address in memory",
+            "metadata": "cdt_link_address"
           }
         ]
       }

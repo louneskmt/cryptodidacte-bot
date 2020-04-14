@@ -12,8 +12,12 @@ const insertVariablesInTemplate = require('./helpers/insertVariablesInTemplate.j
 
 function start(params) {
   const { userId } = params;
-
   Twitter.sendMessage(userId, messageTemplates.menu.standard);
+}
+
+function sendFidelityMenu(params) {
+  const { userId } = params;
+  Twitter.sendMessage(userId, messageTemplates.menu.fidelity);
 }
 
 // INTERACTIONS
@@ -231,4 +235,5 @@ module.exports = {
   updateRewards,
   updatingRewards,
   sendRewardsInfo,
+  sendFidelityMenu,
 };
