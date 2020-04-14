@@ -4,8 +4,7 @@ const Twitter = require('./Twit');
 const lightning = require('./lightning.rest.js');
 const QRCode = require('./qrcode.js');
 const lnquiz = require('./lnquiz.js');
-const userStatus = require('./userStatus.js');
-const Database = require('./database.js');
+const { LNQuizReward, UserStatus } = require('./database/mongoose.js');
 
 const messageTemplates = require('../data/message_templates');
 const insertVariablesInTemplate = require('./helpers/insertVariablesInTemplate.js');
@@ -19,10 +18,10 @@ function start(params) {
 
 // INTERACTIONS
 
-function end(params, description, { resetStatus = true, endMessage = true } = {}) {
+async function end(params, description, { resetStatus = true, endMessage = true } = {}) {
   const { userId } = params;
 
-  if (resetStatus) userStatus.deleteStatus(userId);
+  if (resetStatus) await UserStatus.del(userId);
 
   if (description && typeof description === 'string') Twitter.sendTextMessage(userId, description);
   else if (description && typeof description === 'object') Twitter.sendMessage(userId, description);
@@ -55,7 +54,7 @@ async function addWinners(params) {
   if (errCode === 0) {
     for (const winner of newEntries) {
       // const clone = Object.assign(messageTemplates.lnquiz.notify, {});
-      Twitter.sendMessage(winner.userId, insertVariablesInTemplate(messageTemplates.lnquiz.notify, { reward: winner.reward }));
+      Twitter.sendMessage(winner.userId, insertVariablesInTemplate(messageTemplates.lnquiz.notify, { reward: winner.amount }));
     }
     end(params, insertVariablesInTemplate(messageTemplates.lnquiz.confirmAddition, {
       winner1: newEntries[0].username, winner2: newEntries[1].username, winner3: newEntries[2].username,
@@ -91,7 +90,7 @@ function generatingInvoice(params) {
 function waitForWinners(params) {
   const { userId } = params;
   Twitter.sendMessage(userId, messageTemplates.lnquiz.askForWinners);
-  return userStatus.setStatus(userId, 'adding_winners');
+  return UserStatus.set(userId, 'adding_winners');
 }
 
 function generateInvoice(params) {
@@ -100,7 +99,7 @@ function generateInvoice(params) {
   __('events.js@generateInvoice : Generating an invoice (tip) ');
 
   Twitter.sendMessage(userId, messageTemplates.tip.wip);
-  userStatus.setStatus(userId, 'generating_invoice');
+  UserStatus.set(userId, 'generating_invoice');
 
   lightning.generateInvoice(200, '@Cryptodidacte Tip', (invoice) => {
     Twitter.sendMessage(userId, messageTemplates.global.done);
@@ -137,8 +136,7 @@ function claimRewards(params) {
           __('events.js@claimRewars : An invoice is being paid');
 
           lightning.payInvoice(invoice, () => {
-            const db = new Database('cryptodidacte');
-            db.remove('rewards', { userId: userId.toString() }, true);
+            LNQuizReward.deleteMany({ userId });
             __('events.js@claimRewars : Reward paid, document(s) removed !', 2);
 
             //* ** TODO : Should I send message "end of action" ?***//
@@ -176,7 +174,7 @@ function sendRewardsInfo(params) {
 function updateRewards(params) {
   const { userId } = params;
   Twitter.sendMessage(userId, messageTemplates.lnquiz.askForRewards);
-  return userStatus.setStatus(userId, 'updating_rewards');
+  return UserStatus.set(userId, 'updating_rewards');
 }
 
 function updatingRewards(params) {
@@ -213,7 +211,7 @@ function countRewards(params) {
   lnquiz.countRewards(params.userId, (amount) => {
     if (amount) {
       Twitter.sendMessage(params.userId, insertVariablesInTemplate(messageTemplates.lnquiz.askForInvoice, { amount }));
-      return userStatus.setStatus(params.userId, `claim_rewards_${amount}_sats`);
+      return UserStatus.set(params.userId, `claim_rewards_${amount}_sats`);
     }
     return end(params, messageTemplates.lnquiz.nothing);
   });

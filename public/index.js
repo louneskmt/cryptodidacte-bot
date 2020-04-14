@@ -10,6 +10,18 @@ $(async () => {
   }
 
   $('.whitebox[open-view]').click(loadViewOnClick);
+  $('.whitebox[oops]').click(() => {
+    const p = new Popup({
+      title: 'You shall not pass!',
+      content: 'This feature is not yet implemented in the MVP version.',
+      buttons: [
+        {
+          text: 'Ok',
+          onclick: (pop) => pop.destroy(),
+        },
+      ],
+    });
+  });
 
   window.onpopstate = function (ev) {
     const { state } = ev;

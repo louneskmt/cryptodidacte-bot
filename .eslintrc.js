@@ -3,7 +3,8 @@ module.exports = {
         "browser": true,
         "commonjs": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "mocha": true
     },
     "extends": [
         "airbnb-base"
@@ -23,5 +24,7 @@ module.exports = {
         "max-len": ["error", { "code": 200 }],
         "guard-for-in": "off",
         "no-underscore-dangle": "off",
+        "func-names": "off",
+        "no-param-reassign": ["error", { "props": false }],
     }
 };
