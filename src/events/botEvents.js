@@ -109,4 +109,27 @@ botEvents.on('logs', (eventData) => {
   }
 });
 
-module.exports = botEvents;
+// GLOBAL HELPERS
+const resolvePending = (params) => {
+  const { userId } = params;
+  const eventName = `pending-${userId}`;
+  console.log(botEvents);
+  botEvents.emit(eventName, params);
+};
+
+const waitForMessage = async (userId) => {
+  UserStatus.set(userId, 'pending');
+  return new Promise((resolve, reject) => {
+    const eventName = `pending-${userId}`;
+    botEvents.once(eventName, (newParams) => {
+      resolve(newParams);
+      UserStatus.del(userId);
+    });
+  });
+};
+
+module.exports = {
+  botEvents,
+  resolvePending,
+  waitForMessage,
+};
