@@ -2,6 +2,8 @@ const { __ } = require('./logger.js');
 const Twitter = require('./Twit');
 const botEvents = require('./events/botEvents.js');
 
+console.log(botEvents);
+
 const lightning = require('./lightning.rest.js');
 const QRCode = require('./qrcode.js');
 const lnquiz = require('./lnquiz.js');
