@@ -25,10 +25,9 @@ function retry(params, description) {
 
   if (description && typeof description === 'string') Twitter.sendTextMessage(userId, description);
   else if (description && typeof description === 'object') Twitter.sendMessage(userId, description);
-
-  setTimeout(() => {
+  else {
     Twitter.sendMessage(userId, messageTemplates.global.retry);
-  }, 1000);
+  }
 }
 
 module.exports = {
