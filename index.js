@@ -12,10 +12,6 @@ const globalEvents = require('./src/events/globalEvents.js');
 const schemas = require('./src/database/mongoose.js');
 
 const Session = require('./endpoints/session.js');
-const Database = require('./src/database.js');
-
-const database = new Database('cryptodidacte');
-database.connect();
 
 // HTTPS Server config
 const app = express();
