@@ -137,7 +137,7 @@
       }
     },
     "fidelity": {
-      "text": "Cryptodidacte Token - Chose your action below !",
+      "text": "Cryptodidacte Token - Choose your action below !",
       "quick_reply": {
         "type": "options",
         "options": [
