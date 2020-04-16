@@ -16,16 +16,14 @@ const waitForPattern = async (userId, { validator = () => true } = {}) => {
     const eventName = `pending-${userId}`;
 
     setTimeout(() => resolve(), 600000);
-    while (true) {
-      botEvents.once(eventName, (newParams) => {
-        if (validator(newParams.message)) {
-          UserStatus.del(userId);
-          return resolve(newParams);
-        }
-        const replyMessage = messageTemplates.validators_errors[validator.name] || messageTemplates.global.reply;
-        retry(newParams, replyMessage);
-      });
-    }
+    botEvents.once(eventName, (newParams) => {
+      if (validator(newParams.message)) {
+        UserStatus.del(userId);
+        return resolve(newParams);
+      }
+      const replyMessage = messageTemplates.validators_errors[validator.name] || messageTemplates.global.reply;
+      retry(newParams, replyMessage);
+    });
   });
 };
 
