@@ -31,13 +31,13 @@ async function linkAddress(params) {
   User
     .updateAddress(userId, address)
     .then(() => {
-      Twitter.sendMessage(userId, );
+      Twitter.sendMessage(userId, messageTemplates.fidelity.linkAddressOk);
       end(params);
     })
     .catch((err) => {
-      __(`Error while updating address of user ${userId}: ${err}`));
+      __(`Error while updating address of user ${userId}: ${err}`);
       end(params, messageTemplates.global.error);
-    };
+    });
 }
 
 module.exports = linkAddress;
