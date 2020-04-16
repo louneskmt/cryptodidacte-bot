@@ -246,7 +246,7 @@ async function withdrawCDT(params) {
   const response = await waitForMessage(userId);
 }
 
-function linkAddress(params) {
+async function linkAddress(params) {
   const { userId } = params;
   Twitter.sendMessage(userId, messageTemplates.fidelity.link);
   const response = await waitForMessage(userId);
