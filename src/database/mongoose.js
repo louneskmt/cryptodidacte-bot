@@ -5,7 +5,7 @@ const { databaseConfig } = require('../../config.js');
 
 const uri = `mongodb://${databaseConfig.user}:${databaseConfig.password}@localhost:27017/cryptodidacte`;
 
-const connection = mongoose.createConnection(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const connection = mongoose.createConnection(uri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 connection.on('open', () => {
   __('Connected to Mongoose');
