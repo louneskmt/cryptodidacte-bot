@@ -5,6 +5,7 @@ const { waitForPattern } = require('../../helpers/pending.js');
 const { end } = require('../global.js');
 
 const messageTemplates = require('../../../data/message_templates.json');
+const insertVariablesInTemplate = require('../../helpers/insertVariablesInTemplate.js');
 const validators = require('../../helpers/validators.js');
 
 async function linkAddress(params) {
@@ -31,7 +32,7 @@ async function linkAddress(params) {
   User
     .updateAddress(userId, address)
     .then(() => {
-      Twitter.sendMessage(userId, messageTemplates.fidelity.linkAddressOk);
+      Twitter.sendMessage(userId, insertVariablesInTemplate(messageTemplates.fidelity.linkAddressOk, { address }));
       end(params);
     })
     .catch((err) => {
