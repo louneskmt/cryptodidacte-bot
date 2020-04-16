@@ -22,13 +22,13 @@ function sendFidelityMenu(params) {
 }
 
 // GLOBAL HELPERS
-function resolvePending(params) {
+const resolvePending = (params) => {
   const { userId } = params;
   const eventName = `pending-${userId}`;
   botEvents.emit(eventName, params);
-}
+};
 
-function waitForMessage(userId) {
+const waitForMessage = async (userId) => {
   UserStatus.set(userId, 'pending');
   return new Promise((resolve, reject) => {
     const eventName = `pending-${userId}`;
@@ -37,7 +37,7 @@ function waitForMessage(userId) {
       UserStatus.del(userId);
     });
   });
-}
+};
 
 // INTERACTIONS
 
