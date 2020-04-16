@@ -109,4 +109,5 @@ botEvents.on('logs', (eventData) => {
   }
 });
 
+console.log(botEvents)
 module.exports = botEvents;
