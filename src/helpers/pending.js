@@ -4,7 +4,6 @@ const { UserStatus } = require('../database/mongoose.js');
 const resolvePending = (params) => {
   const { userId } = params;
   const eventName = `pending-${userId}`;
-  console.log(botEvents);
   botEvents.emit(eventName, params);
 };
 
@@ -16,6 +15,7 @@ const waitForMessage = async (userId) => {
       resolve(newParams);
       UserStatus.del(userId);
     });
+    setTimeout(() => resolve(), 600000);
   });
 };
 

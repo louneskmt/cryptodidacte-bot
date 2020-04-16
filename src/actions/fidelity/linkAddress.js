@@ -8,6 +8,7 @@ async function linkAddress(params) {
   const { userId } = params;
   Twitter.sendMessage(userId, messageTemplates.fidelity.link);
   const response = await waitForMessage(userId);
+  if (!response) return end(params, 'Timeout, please try again');
   Twitter.sendTextMessage(userId, response.message);
   end(params);
 }
