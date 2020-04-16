@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Twit = require('../../Twit.js'); // To fetch user info
+const Twit = require('../../Twitter.js'); // To fetch user info
 
 const findByUserIdPlugin = require('./plugins/findByUserId.js');
 const loadUIDescriptionPlugin = require('./plugins/loadUIDescription.js');

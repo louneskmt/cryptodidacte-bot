@@ -1,15 +1,16 @@
 const events = require('events');
-const { __ } = require('../logger.js');
 
 const botEvents = new events.EventEmitter();
+module.exports = botEvents;
 
-// Twitter modules
-const Twitter = require('../Twit.js');
+// Modules
+const { __ } = require('../logger.js');
 const { twitterConfig } = require('../../config.js');
-const interactions = require('../interactions.js');
 const { UserStatus } = require('../database/mongoose.js');
+const { resolvePending } = require('../helpers/pending.js');
 
-const messageTemplates = require('../../data/message_templates');
+const actions = require('../actions.js');
+
 
 botEvents.on('tweet', (tweet) => {
   const userId = tweet.user.id_str;
@@ -19,7 +20,7 @@ botEvents.on('tweet', (tweet) => {
         userId,
         winners: tweet.entities.user_mentions.slice(0, 3),
       };
-      interactions.addWinners(params);
+      actions.addWinners(params);
     }
   }
 });
@@ -30,33 +31,30 @@ botEvents.on('dm', (userId, messageObject) => {
   const message = messageData.text.toLowerCase();
 
   const fnExact = {
-    pending: interactions.resolvePending,
-    adding_winners: interactions.tryAddWinners,
-    add_winners: interactions.waitForWinners,
-    generating_invoice: interactions.generatingInvoice,
-    update_rewards: interactions.updateRewards,
-    updating_rewards: interactions.updatingRewards,
-    cancel: interactions.end,
-    start: interactions.start,
-    claim_rewards: interactions.countRewards,
-    generate_invoice: interactions.generateInvoice,
-    get_rewards_info: interactions.sendRewardsInfo,
-    send_cdt_menu: interactions.sendFidelityMenu,
-    cdt_withdraw: interactions.withdrawCDT,
+    pending: resolvePending,
+    adding_winners: actions.tryAddWinners,
+    add_winners: actions.waitForWinners,
+    update_rewards: actions.updateRewards,
+    updating_rewards: actions.updatingRewards,
+    cancel: actions.end,
+    claim_rewards: actions.countRewards,
+    generate_invoice: actions.generateInvoice,
+    get_rewards_info: actions.sendRewardsInfo,
+    send_cdt_menu: (params) => actions.sendMenu(params, 'admin'),
+    cdt_withdraw: actions.withdraw,
+    cdt_link_address: actions.linkAddress,
     cdt_refund: undefined,
-    cdt_link_address: interactions.linkAddress,
   };
 
   const fnStartsWith = {
-    claim_rewards_: interactions.claimRewards,
-    withdraw_: interactions.withdrawCDT,
+    claim_rewards_: actions.claimRewards,
   };
 
   const params = {
     userId, message, messageData,
   };
 
-  if (message === 'cancel') return interactions.end(params);
+  if (message === 'cancel') return actions.end(params);
 
   UserStatus
     .get(userId)
@@ -64,14 +62,11 @@ botEvents.on('dm', (userId, messageObject) => {
       params.status = status;
 
       if (message === 'start admin' && twitterConfig.admin.includes(userId)) {
-        UserStatus.del(userId);
-        __('Sending admin menu...');
-        return Twitter.sendMessage(userId, messageTemplates.menu.admin);
+        return actions.sendMenu(params, 'admin');
       }
 
       if (message === 'start') {
-        UserStatus.del(userId);
-        return interactions.start(params);
+        return actions.sendMenu(params, 'standard');
       }
 
       if (Object.prototype.hasOwnProperty.call(messageData, 'quick_reply_response')) {
@@ -108,28 +103,3 @@ botEvents.on('logs', (eventData) => {
     __(`BOT - Message from ${sender} to ${recipient} : ${content}`);
   }
 });
-
-// GLOBAL HELPERS
-const resolvePending = (params) => {
-  const { userId } = params;
-  const eventName = `pending-${userId}`;
-  console.log(botEvents);
-  botEvents.emit(eventName, params);
-};
-
-const waitForMessage = async (userId) => {
-  UserStatus.set(userId, 'pending');
-  return new Promise((resolve, reject) => {
-    const eventName = `pending-${userId}`;
-    botEvents.once(eventName, (newParams) => {
-      resolve(newParams);
-      UserStatus.del(userId);
-    });
-  });
-};
-
-module.exports = {
-  botEvents,
-  resolvePending,
-  waitForMessage,
-};
