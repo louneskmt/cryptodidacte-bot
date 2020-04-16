@@ -155,5 +155,10 @@
         ]
       }
     }
+  },
+  "validators_errors": {
+    "isEthereumAddress": {
+      "text": "❌ This is not a valid Ethereum address, please try again or send 'Cancel'."
+    }
   }
 }
