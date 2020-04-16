@@ -29,6 +29,8 @@ const resolvePending = (params) => {
   console.log(botEvents);
 };
 
+resolvePending({ userId: "000" })
+
 const waitForMessage = async (userId) => {
   UserStatus.set(userId, 'pending');
   return new Promise((resolve, reject) => {
