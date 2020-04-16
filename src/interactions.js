@@ -1,5 +1,6 @@
 const { __ } = require('./logger.js');
 const Twitter = require('./Twit');
+const botEvents = require('./events/botEvents.js');
 
 const lightning = require('./lightning.rest.js');
 const QRCode = require('./qrcode.js');
@@ -18,6 +19,24 @@ function start(params) {
 function sendFidelityMenu(params) {
   const { userId } = params;
   Twitter.sendMessage(userId, messageTemplates.menu.fidelity);
+}
+
+// GLOBAL HELPERS
+function resolvePending(params) {
+  const { userId } = params;
+  const eventName = `pending-${userId}`;
+  botEvents.emit(eventName, params);
+}
+
+function waitForMessage(userId) {
+  UserStatus.set(userId, 'pending');
+  return new Promise((resolve, reject) => {
+    const eventName = `pending-${userId}`;
+    botEvents.once(eventName, (newParams) => {
+      resolve(newParams);
+      UserStatus.del(userId);
+    });
+  });
 }
 
 // INTERACTIONS
@@ -221,6 +240,20 @@ function countRewards(params) {
   });
 }
 
+async function withdrawCDT(params) {
+  const { userId } = params;
+  Twitter.sendMessage(userId, messageTemplates.fidelity.selectWithDrawAddress);
+  const response = await waitForMessage(userId);
+}
+
+function linkAddress(params) {
+  const { userId } = params;
+  Twitter.sendMessage(userId, messageTemplates.fidelity.link);
+  const response = await waitForMessage(userId);
+  Twitter.sendTextMessage(userId, response.message);
+  end(params);
+}
+
 module.exports = {
   start,
   retry,
@@ -236,4 +269,8 @@ module.exports = {
   updatingRewards,
   sendRewardsInfo,
   sendFidelityMenu,
+  waitForMessage,
+  withdrawCDT,
+  linkAddress,
+  resolvePending,
 };

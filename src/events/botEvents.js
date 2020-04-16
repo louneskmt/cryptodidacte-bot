@@ -30,6 +30,7 @@ botEvents.on('dm', (userId, messageObject) => {
   const message = messageData.text.toLowerCase();
 
   const fnExact = {
+    pending: interactions.resolvePending,
     adding_winners: interactions.tryAddWinners,
     add_winners: interactions.waitForWinners,
     generating_invoice: interactions.generatingInvoice,
@@ -41,13 +42,14 @@ botEvents.on('dm', (userId, messageObject) => {
     generate_invoice: interactions.generateInvoice,
     get_rewards_info: interactions.sendRewardsInfo,
     send_cdt_menu: interactions.sendFidelityMenu,
-    cdt_withdraw: undefined,
+    cdt_withdraw: interactions.withdrawCDT,
     cdt_refund: undefined,
-    cdt_link_address: undefined,
+    cdt_link_address: interactions.linkAddress,
   };
 
   const fnStartsWith = {
     claim_rewards_: interactions.claimRewards,
+    withdraw_: interactions.withdrawCDT,
   };
 
   const params = {
@@ -85,6 +87,7 @@ botEvents.on('dm', (userId, messageObject) => {
       if (Object.prototype.hasOwnProperty.call(fnExact, status)) {
         return fnExact[status](params);
       }
+
       for (const key in fnStartsWith) {
         if (status.startsWith(key)) return fnStartsWith[key](params);
       }
