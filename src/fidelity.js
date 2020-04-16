@@ -3,7 +3,7 @@ const {
   TweetEvent, User,
 } = require('./database/mongoose.js');
 const ethereum = require('./ethereum.js');
-const Twitter = require('./Twit.js');
+const Twitter = require('./Twitter.js');
 
 const { ethereumConfig } = require('../config.js');
 
