@@ -13,7 +13,7 @@ const getAddress = (params) => {
     .findByUserId(userId)
     .then((result) => {
       const { address } = result;
-      if (address) Twitter.sendMessage(userId, insertVariablesInTemplate(messageTemplates.fidelity.getAddressOk, { address }));
+      if (address && address !== '') Twitter.sendMessage(userId, insertVariablesInTemplate(messageTemplates.fidelity.getAddressOk, { address }));
       else Twitter.sendMessage(userId, messageTemplates.fidelity.getAddressNone);
       end(params);
     })
