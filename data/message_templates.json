@@ -138,13 +138,13 @@
             "metadata": "cdt_display_balance"
           },
           {
-            "label": "Withdraw your tokens",
-            "description": "",
+            "label": "Withdraw",
+            "description": "Withdraw CDT to your on-chain wallet",
             "metadata": "cdt_withdraw"
           },
           {
-            "label": "Refund your off-chain balance",
-            "description": "",
+            "label": "Refund your balance",
+            "description": "Send CDT to your off-chain wallet",
             "metadata": "cdt_refund"
           },
           {
