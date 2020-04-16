@@ -21,10 +21,8 @@ userSchema.statics.addToBalance = function addToBalance(_id, amount) {
   return new Promise((resolve, reject) => {
     this
       .updateOne({ _id }, { $inc: { balance: amount } })
-      .then((err) => {
-        if (err) reject(err);
-        resolve();
-      });
+      .then(() => resolve())
+      .catch((err) => reject(err));
   });
 };
 
@@ -32,10 +30,8 @@ userSchema.statics.updateAddress = function updateAddress(_id, address) {
   return new Promise((resolve, reject) => {
     this
       .updateOne({ _id }, { $set: { address } })
-      .then((err) => {
-        if (err) reject(err);
-        resolve();
-      });
+      .then(() => resolve())
+      .catch((err) => reject(err));
   });
 };
 
@@ -43,10 +39,9 @@ userSchema.methods.populateEvents = function populateEvents() {
   return new Promise((resolve, reject) => {
     this
       .populate({ path: 'events', select: '-user -__v' })
-      .execPopulate((err, user) => {
-        if (err) throw err;
-        resolve(user);
-      });
+      .execPopulate()
+      .then((user) => resolve(user))
+      .catch((err) => reject(err));
   });
 };
 

@@ -17,9 +17,9 @@ userStatusSchema.statics.set = function set(userId, status) {
   return new Promise((resolve, reject) => {
     this
       .findOneAndUpdate({ userId }, update, options)
-      .then(() => {
+      .then((result) => {
         __(`Updated status of ${userId}`);
-        resolve();
+        resolve(result);
       })
       .catch((err) => {
         __(`Error updating status of ${userId} : ${err}`);
