@@ -62,6 +62,14 @@
       "text": "🙏 Thanks a lot for supporting our work ! See you soon !"
     }
   },
+  "fidelity": {
+    "selectWithDrawAddress": {
+      "text": "Select target address"
+    },
+    "link": {
+      "text": "Please send an Ethereum address to link with your Twitter account."
+    }
+  },
   "menu": {
     "admin": {
       "text": "👋 Hey, admin ! What do you want to do ? 🤔",
