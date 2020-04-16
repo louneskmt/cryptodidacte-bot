@@ -40,7 +40,7 @@ botEvents.on('dm', (userId, messageObject) => {
     claim_rewards: actions.countRewards,
     generate_invoice: actions.generateInvoice,
     get_rewards_info: actions.sendRewardsInfo,
-    send_cdt_menu: (params) => actions.sendMenu(params, 'admin'),
+    send_cdt_menu: (params) => actions.sendMenu(params, 'fidelity'),
     cdt_withdraw: actions.withdraw,
     cdt_link_address: actions.linkAddress,
     cdt_refund: undefined,
