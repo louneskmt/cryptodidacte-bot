@@ -1,5 +1,6 @@
 const { __ } = require('./logger.js');
 const Twitter = require('./Twit');
+const { resolvePending, waitForMessage } = require('./events/botEvents.js');
 
 const lightning = require('./lightning.rest.js');
 const QRCode = require('./qrcode.js');
@@ -12,8 +13,12 @@ const insertVariablesInTemplate = require('./helpers/insertVariablesInTemplate.j
 
 function start(params) {
   const { userId } = params;
-
   Twitter.sendMessage(userId, messageTemplates.menu.standard);
+}
+
+function sendFidelityMenu(params) {
+  const { userId } = params;
+  Twitter.sendMessage(userId, messageTemplates.menu.fidelity);
 }
 
 // INTERACTIONS
@@ -217,6 +222,20 @@ function countRewards(params) {
   });
 }
 
+async function withdrawCDT(params) {
+  const { userId } = params;
+  Twitter.sendMessage(userId, messageTemplates.fidelity.selectWithDrawAddress);
+  const response = await waitForMessage(userId);
+}
+
+async function linkAddress(params) {
+  const { userId } = params;
+  Twitter.sendMessage(userId, messageTemplates.fidelity.link);
+  const response = await waitForMessage(userId);
+  Twitter.sendTextMessage(userId, response.message);
+  end(params);
+}
+
 module.exports = {
   start,
   retry,
@@ -231,4 +250,9 @@ module.exports = {
   updateRewards,
   updatingRewards,
   sendRewardsInfo,
+  sendFidelityMenu,
+  waitForMessage,
+  withdrawCDT,
+  linkAddress,
+  resolvePending,
 };
