@@ -70,10 +70,10 @@
       "text": "Please send an Ethereum address to link with your Twitter account."
     },
     "linkAddressOk": {
-      "text": "➡️ Your Twitter is now linked to the following Ethereum address : %(address) !"
+      "text": "➡️ Your Twitter is now linked to the following Ethereum address : %{address} !"
     },
     "getAddressOk": {
-      "text": "➡️ Your Twitter is linked to the following Ethereum address : %(address) !"
+      "text": "➡️ Your Twitter is linked to the following Ethereum address : %{address} !"
     },
     "getAddressNone": {
       "text": "➡️ You didn't linked yet your Ethereum address."
