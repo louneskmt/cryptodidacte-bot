@@ -26,6 +26,7 @@ const resolvePending = (params) => {
   const { userId } = params;
   const eventName = `pending-${userId}`;
   botEvents.emit(eventName, params);
+  console.log(botEvents);
 };
 
 const waitForMessage = async (userId) => {
