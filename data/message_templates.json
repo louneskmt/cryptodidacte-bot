@@ -7,7 +7,7 @@
       "text": "❌ Please try again, or send 'Cancel'."
     },
     "error": {
-      "text": "Sorry, something went wrong"
+      "text": "Sorry, something went wrong. Please try later or contact @lounes_kmt if the issue persists."
     },
     "done": {
       "text": "✅ Done!"
@@ -66,8 +66,17 @@
     "selectWithDrawAddress": {
       "text": "Select target address"
     },
-    "link": {
+    "linkAddress": {
       "text": "Please send an Ethereum address to link with your Twitter account."
+    },
+    "linkAddressOk": {
+      "text": "➡️ Your Twitter is now linked to the following Ethereum address : %(address) !"
+    },
+    "getAddressOk": {
+      "text": "➡️ Your Twitter is linked to the following Ethereum address : %(address) !"
+    },
+    "getAddressNone": {
+      "text": "➡️ You didn't linked yet your Ethereum address."
     }
   },
   "menu": {
@@ -151,6 +160,11 @@
             "label": "Link ETH Address",
             "description": "Keep your address in memory",
             "metadata": "cdt_link_address"
+          },
+          {
+            "label": "Get current ETH Address",
+            "description": "Display your linked address",
+            "metadata": "cdt_get_address"
           }
         ]
       }

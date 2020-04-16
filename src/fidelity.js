@@ -3,7 +3,6 @@ const {
   TweetEvent, User,
 } = require('./database/mongoose.js');
 const ethereum = require('./ethereum.js');
-const Twitter = require('./Twitter.js');
 
 const { ethereumConfig } = require('../config.js');
 
@@ -74,26 +73,7 @@ const claimTokens = (userId, amount) => {
     });
 };
 
-const linkETHAddress = async (userId, address) => {
-  const CurrentUser = await User.findByUserId(userId);
-  if (!CurrentUser) {
-    const userInfo = await Twitter.getUserInfo({ userId });
-    const NewUser = new User({
-      _id: userId,
-      username: userInfo.screen_name,
-      address,
-    });
-    NewUser.save();
-    return;
-  }
-
-  User
-    .updateAddress(userId, address)
-    .catch((err) => __(`Error while updating address of user ${userId}: ${err}`));
-};
-
 module.exports = {
   processEvent,
-  linkETHAddress,
   claimTokens,
 };

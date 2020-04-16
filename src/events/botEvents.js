@@ -43,6 +43,7 @@ botEvents.on('dm', (userId, messageObject) => {
     send_cdt_menu: (params) => actions.sendMenu(params, 'fidelity'),
     cdt_withdraw: actions.withdraw,
     cdt_link_address: actions.linkAddress,
+    cdt_get_address: actions.getAddress,
     cdt_refund: undefined,
   };
 
