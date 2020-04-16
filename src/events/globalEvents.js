@@ -1,5 +1,5 @@
 const events = require('events');
-const botEvents = require('./botEvents.js');
+const { botEvents } = require('./botEvents.js');
 const cryptodidacteEvents = require('./cryptodidacteEvents.js');
 const fidelity = require('../fidelity.js');
 const { twitterConfig } = require('../../config.js');
