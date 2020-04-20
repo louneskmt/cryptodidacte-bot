@@ -96,13 +96,16 @@ const getInvoiceData = (paymentRequest, successCallback, errorCallback) => {
     },
   };
 
-  request.get(options, (error, response, body) => {
-    console.log(error || body);
-    if (body && typeof successCallback === 'function') {
-      successCallback(body);
-    } else if (error && typeof errorCallback === 'function') {
-      errorCallback(error);
-    }
+  return new Promise((resolve, reject) => {
+    request.get(options, (error, response, body) => {
+      console.log(body);
+      if (Object.prototype.hasOwnProperty.call(body, 'error')) {
+        if (typeof errorCallback === 'function') errorCallback(body);
+        return reject(body);
+      }
+      resolve(body);
+      if (typeof successCallback === 'function') successCallback(body);
+    });
   });
 };
 
