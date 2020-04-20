@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 const { isAddress } = require('web3-utils');
-const lightning = require('../../lightning.rest.js');
+const lightning = require('../lightning.rest.js');
 
 /**
  * Checks if the given string is an address

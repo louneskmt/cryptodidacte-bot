@@ -37,7 +37,7 @@ botEvents.on('dm', (userId, messageObject) => {
     update_rewards: actions.updateRewards,
     updating_rewards: actions.updatingRewards,
     cancel: actions.end,
-    claim_rewards: actions.countRewards,
+    claim_rewards: actions.claimRewards,
     generate_invoice: actions.generateInvoice,
     get_rewards_info: actions.sendRewardsInfo,
     send_cdt_menu: (params) => actions.sendMenu(params, 'fidelity'),

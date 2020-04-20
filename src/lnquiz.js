@@ -6,7 +6,7 @@ const {
 } = require('./database/mongoose.js');
 
 
-const countRewards = (userId, callback) => {
+const countRewards = (userId, callback) => new Promise((resolve, reject) => {
   LNQuizReward
     .findByUserId(userId)
     .then((result) => {
@@ -16,8 +16,13 @@ const countRewards = (userId, callback) => {
       });
 
       if (typeof callback === 'function') callback(totalToPay);
+      resolve(totalToPay);
+    })
+    .catch((err) => {
+      __(`Error counting rewards of ${userId} : ${err}`, 9);
+      resolve(0);
     });
-};
+});
 
 const addWinners = async (winners) => {
   const newEntries = [

@@ -21,7 +21,7 @@
         "text": "✅ You successfully added this three winners : \n\n🏁 @%{winner1}\n✍️ @%{winner2}\n🎲 @%{winner3}"
     },
     "badAmount": {
-        "text": "Your invoice is for %{amount} sats. Please generate an invoice for %{expectedAmount} sats."
+        "text": "Your invoice is for %{amount} sats. Please generate an invoice for %{expectedAmount} sats and retry."
     },
     "currentRewards": {
         "text": "Current #LNQuiz Rewards :\n\n🏁 %{question} sats\n✍️ %{writing} sats \n🎲 %{random} sats"
@@ -173,6 +173,9 @@
   "validators_errors": {
     "isEthereumAddress": {
       "text": "❌ This is not a valid Ethereum address, please try again or send 'Cancel'."
+    },
+    "isLightningInvoice": {
+      "text": "❌ This is not a valid Lightning invoice, please try again or send 'Cancel'."
     }
   }
 }
