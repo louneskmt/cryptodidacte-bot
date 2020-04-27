@@ -67,7 +67,7 @@ const claimTokens = (userId, amount, address) => {
         if (!toAddress) { __(`There is not any address linked to this account (@${user.username})`); }
         if (user.balance < amount) {
           __(`There are not enough funds in this account (@${user.username})`);
-          return reject(new Error('There are not enough funds in this wallet.'));
+          return reject(new Error(`There are not enough funds in this wallet (${user.balance} CDT)`));
         }
 
         const tx = await CDT.send(toAddress, amount);
