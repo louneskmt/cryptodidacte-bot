@@ -64,7 +64,7 @@ const claimTokens = (userId, amount, address) => {
       .findByUserId(userId)
       .then(async (user) => {
         const toAddress = address || user.address;
-        if (toAddress) { __(`There is not any address linked to this account (@${user.username})`); }
+        if (!toAddress) { __(`There is not any address linked to this account (@${user.username})`); }
         if (user.balance < amount) {
           __(`There are not enough funds in this account (@${user.username})`);
           reject(new Error('There are not enough funds in this wallet.'));
