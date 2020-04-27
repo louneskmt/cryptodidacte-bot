@@ -56,24 +56,43 @@ const processEvent = async (eventData) => {
     .catch((err) => __(`Error while adding reward to balance of user ${userId}: ${err}`));
 };
 
-const claimTokens = (userId, amount) => {
+const claimTokens = (userId, amount, address) => {
   const CDT = new ethereum.ERC20(ethereumConfig.contractAddress, ethereumConfig.CryptodidacteTokenABI);
 
+  return new Promise((resolve, reject) => {
+    User
+      .findByUserId(userId)
+      .then(async (user) => {
+        const toAddress = address || user.address;
+        if (toAddress) { __(`There is not any address linked to this account (@${user.username})`); }
+        if (user.balance < amount) {
+          __(`There are not enough funds in this account (@${user.username})`);
+          reject(new Error('There are not enough funds in this wallet.'));
+        }
+
+        const tx = await CDT.send(toAddress, amount);
+        resolve(tx.hash);
+        __(`Payout user ID ${userId} - ${amount} CDT - Tx hash : ${tx.hash}`);
+        await tx.wait();
+        user.balance -= amount;
+        user.save();
+      });
+  });
+};
+
+const getLinkedAddress = (userId) => new Promise((resolve, reject) => {
   User
     .findByUserId(userId)
-    .then(async (user) => {
-      if (!user.address) { __(`There is not any address linked to this account (@${user.username})`); }
-      if (user.balance < amount) { __(`There are not enough funds in this account (@${user.username})`); }
-
-      const tx = await CDT.send(user.address, amount);
-      await tx.wait();
-      __(`Payout user ID ${userId} - ${amount} CDT - Tx hash : ${tx.hash}`);
-      user.balance -= amount;
-      user.save();
-    });
-};
+    .then((result) => {
+      const { address } = result;
+      if (address && address !== '') resolve(address);
+      else resolve();
+    })
+    .catch((err) => __(`Error fetching linked address of user ${userId}: ${err}`));
+});
 
 module.exports = {
   processEvent,
   claimTokens,
+  getLinkedAddress,
 };
