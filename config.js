@@ -2,7 +2,7 @@
 
 const env = require('dotenv').config();
 const crypto = require('crypto');
-const cryptodidacteTokenABI = require('./contracts/CryptodidacteToken.json');
+const cryptodidacteTokenABI = require('./contracts/CryptodidacteToken.json').abi;
 
 if (env.error) {
   throw env.error;
