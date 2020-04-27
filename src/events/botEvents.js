@@ -58,6 +58,7 @@ botEvents.on('dm', (userId, messageObject) => {
     withdraw: commands.withdraw,
     deposit: commands.deposit,
     link: commands.linkAddress,
+    balance: commands.getBalance,
     help: actions.help,
   };
 

@@ -91,8 +91,18 @@ const getLinkedAddress = (userId) => new Promise((resolve, reject) => {
     .catch((err) => __(`Error fetching linked address of user ${userId}: ${err}`));
 });
 
+const getBalance = (userId) => new Promise((resolve, reject) => {
+  User
+    .findByUserId(userId)
+    .then((result) => {
+      resolve(result.balance);
+    })
+    .catch((err) => __(`Error fetching balance of user ${userId}: ${err}`));
+});
+
 module.exports = {
   processEvent,
   claimTokens,
   getLinkedAddress,
+  getBalance,
 };

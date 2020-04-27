@@ -83,6 +83,12 @@
     },
     "claimError": {
       "text": "Error : %{err}"
+    },
+    "getBalance": {
+      "text": "You currently have %{balance} CDT off-chain !"
+    },
+    "getBalanceEmpty": {
+      "text": "Sorry, your off-chain CDT balance is empty !"
     }
   },
   "menu": {
