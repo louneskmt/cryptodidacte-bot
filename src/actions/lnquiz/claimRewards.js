@@ -17,8 +17,9 @@ async function claimRewards(params) {
 
   Twitter.sendMessage(params.userId, insertVariablesInTemplate(messageTemplates.lnquiz.askForInvoice, { amount }));
 
-  const invoice = await waitForPattern(userId);
-  if (!invoice) return end(params, 'Timeout, please try again.');
+  const response = await waitForPattern(userId);
+  if (!response) return end(params, 'Timeout, please try again.');
+  const { message: invoice } = response;
 
   lightning
     .getInvoiceData(invoice)
