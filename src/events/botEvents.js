@@ -8,6 +8,7 @@ const { __ } = require('../logger.js');
 const { twitterConfig } = require('../../config.js');
 const { UserStatus } = require('../database/mongoose.js');
 const { resolvePending } = require('../helpers/pending.js');
+const parseCommand = require('../helpers/parseCommand.js');
 
 const actions = require('../actions.js');
 
@@ -51,6 +52,13 @@ botEvents.on('dm', (userId, messageObject) => {
     claim_rewards_: actions.claimRewards,
   };
 
+  const commands = {
+    start: actions.sendMenu,
+    withdraw: actions.withdraw,
+    deposit: actions.deposit,
+    help: actions.help,
+  };
+
   const params = {
     userId, message, messageData,
   };
@@ -61,6 +69,12 @@ botEvents.on('dm', (userId, messageObject) => {
     .get(userId)
     .then((status) => {
       params.status = status;
+
+      const { command, args } = parseCommand(message);
+
+      if (Object.prototype.hasOwnProperty.call(commands, command)) {
+        return commands[command](params, args);
+      }
 
       if (message === 'start admin' && twitterConfig.admin.includes(userId)) {
         return actions.sendMenu(params, 'admin');

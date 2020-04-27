@@ -77,6 +77,12 @@
     },
     "getAddressNone": {
       "text": "➡️ You didn't linked yet your Ethereum address."
+    },
+    "claimOk": {
+      "text": "➡️ Transaction broadcasted with hash %{hash}. See it now on https://rinkeby.etherscan.io/txt/%{hash} !"
+    },
+    "claimError": {
+      "text": "Error : %{err}"
     }
   },
   "menu": {
