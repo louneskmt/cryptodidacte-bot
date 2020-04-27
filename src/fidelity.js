@@ -57,7 +57,7 @@ const processEvent = async (eventData) => {
 };
 
 const claimTokens = (userId, amount, address) => {
-  const CDT = new ethereum.ERC20(ethereumConfig.contractAddress, ethereumConfig.CryptodidacteTokenABI);
+  const CDT = new ethereum.ERC20(ethereumConfig.contractAddress, ethereumConfig.cryptodidacteTokenABI);
 
   return new Promise((resolve, reject) => {
     User
