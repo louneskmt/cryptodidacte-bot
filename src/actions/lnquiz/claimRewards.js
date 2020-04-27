@@ -24,7 +24,7 @@ async function claimRewards(params) {
   lightning
     .getInvoiceData(invoice)
     .then((result) => {
-      if (result.num_satoshis === amount) {
+      if (result.num_satoshis === amount.toString()) {
         Twitter.sendMessage(userId, messageTemplates.lnquiz.wip);
         __('events.js@claimRewars : An invoice is being paid');
 
