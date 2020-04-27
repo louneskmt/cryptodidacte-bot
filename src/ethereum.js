@@ -23,7 +23,7 @@ class ERC20 {
   }
 
   async send(to, amount) {
-    return this.method('send', to, amount);
+    return this.method('transfer', to, amount);
   }
 
   async mint(amount, to = this.wallet.address) {
