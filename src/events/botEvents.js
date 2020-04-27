@@ -11,6 +11,7 @@ const { resolvePending } = require('../helpers/pending.js');
 const parseCommand = require('../helpers/parseCommand.js');
 
 const actions = require('../actions.js');
+const commands = require('../commands.js');
 
 
 botEvents.on('tweet', (tweet) => {
@@ -41,7 +42,7 @@ botEvents.on('dm', (userId, messageObject) => {
     claim_rewards: actions.claimRewards,
     generate_invoice: actions.generateInvoice,
     get_rewards_info: actions.sendRewardsInfo,
-    send_cdt_menu: (params) => actions.sendMenu(params, 'fidelity'),
+    send_cdt_menu: (params) => actions.sendMenu(params, ['fidelity']),
     cdt_withdraw: actions.withdraw,
     cdt_link_address: actions.linkAddress,
     cdt_get_address: actions.getAddress,
@@ -52,10 +53,11 @@ botEvents.on('dm', (userId, messageObject) => {
     claim_rewards_: actions.claimRewards,
   };
 
-  const commands = {
+  const cmdExact = {
     start: actions.sendMenu,
-    withdraw: actions.withdraw,
-    deposit: actions.deposit,
+    withdraw: commands.withdraw,
+    deposit: commands.deposit,
+    link: commands.linkAddress,
     help: actions.help,
   };
 
@@ -72,16 +74,8 @@ botEvents.on('dm', (userId, messageObject) => {
 
       const { command, args } = parseCommand(message);
 
-      if (Object.prototype.hasOwnProperty.call(commands, command)) {
-        return commands[command](params, args);
-      }
-
-      if (message === 'start admin' && twitterConfig.admin.includes(userId)) {
-        return actions.sendMenu(params, 'admin');
-      }
-
-      if (message === 'start') {
-        return actions.sendMenu(params, 'standard');
+      if (Object.prototype.hasOwnProperty.call(cmdExact, command)) {
+        return cmdExact[command](params, args);
       }
 
       if (Object.prototype.hasOwnProperty.call(messageData, 'quick_reply_response')) {

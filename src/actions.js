@@ -8,7 +8,6 @@ const { addWinners, tryAddWinners, waitForWinners } = require('./actions/lnquiz/
 const { updateRewards, updatingRewards, sendRewardsInfo } = require('./actions/lnquiz/updateRewards.js');
 
 // FIDELITY
-const withdraw = require('./actions/fidelity/withdraw.js');
 const linkAddress = require('./actions/fidelity/linkAddress.js');
 const getAddress = require('./actions/fidelity/getAddress.js');
 
@@ -24,7 +23,6 @@ module.exports = {
   tryAddWinners,
   waitForWinners,
   generateInvoice,
-  withdraw,
   linkAddress,
   updateRewards,
   updatingRewards,
