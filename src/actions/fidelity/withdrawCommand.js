@@ -20,7 +20,7 @@ async function withdraw(params, args) {
       Twitter.sendMessage(userId, insertVariablesInTemplate(messageTemplates.fidelity.claimOk, { hash }));
     })
     .catch((err) => {
-      Twitter.sendMessage(userId, insertVariablesInTemplate(messageTemplates.fidelity.claimErr, { err }));
+      Twitter.sendMessage(userId, insertVariablesInTemplate(messageTemplates.fidelity.claimErr, { err: err.message }));
     });
   return end(params);
 }
