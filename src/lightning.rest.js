@@ -98,7 +98,7 @@ const getInvoiceData = (paymentRequest, successCallback, errorCallback) => {
 
   return new Promise((resolve, reject) => {
     request.get(options, (error, response, body) => {
-      console.log(body);
+      console.log(body || error || response);
       if (Object.prototype.hasOwnProperty.call(body, 'error')) {
         if (typeof errorCallback === 'function') errorCallback(body);
         return reject(body);
