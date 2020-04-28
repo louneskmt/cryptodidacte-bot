@@ -9,6 +9,12 @@ const userSchema = new mongoose.Schema({
     set: (v) => Math.round(v),
     default: 0,
   },
+  points: {
+    type: Number,
+    get: (v) => Math.round(v),
+    set: (v) => Math.round(v),
+    default: 0,
+  },
   address: { type: String },
   events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'TweetEvent' }],
 });
