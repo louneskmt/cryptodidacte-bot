@@ -8,6 +8,20 @@ const {
 
 const countRewards = (userId, callback) => new Promise((resolve, reject) => {
   LNQuizReward
+    .aggregate()
+    .match({ userId, claimed: false })
+    .group({ _id: null, total: { $sum: '$amount' } })
+    .then((result) => {
+      console.log(result);
+      if (typeof callback === 'function') callback(result[0].total);
+      resolve(result[0].total);
+    })
+    .catch((err) => {
+      __(`Error counting rewards of ${userId} : ${err}`, 9);
+      resolve(0);
+    });
+  /*
+  LNQuizReward
     .findByUserId(userId)
     .then((result) => {
       let totalToPay = 0;
@@ -22,6 +36,7 @@ const countRewards = (userId, callback) => new Promise((resolve, reject) => {
       __(`Error counting rewards of ${userId} : ${err}`, 9);
       resolve(0);
     });
+  */
 });
 
 const addWinners = async (winners) => {
