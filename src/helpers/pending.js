@@ -10,7 +10,7 @@ const resolvePending = (params) => {
   botEvents.emit(eventName, params);
 };
 
-const waitForPattern = async (userId, { validator = () => true } = {}) => {
+const waitForPattern = async (userId, validator = () => true) => {
   UserStatus.set(userId, 'pending');
   return new Promise((resolve, reject) => {
     const eventName = `pending-${userId}`;
