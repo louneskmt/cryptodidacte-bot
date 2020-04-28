@@ -7,8 +7,6 @@ async function end(params, description, { resetStatus = true, endMessage = true 
   const { userId } = params;
 
   if (resetStatus) await UserStatus.del(userId);
-  const eventName = `pending-${userId}`;
-  botEvents.removeAllListeners(eventName);
 
   if (description && typeof description === 'string') Twitter.sendTextMessage(userId, description);
   else if (description && typeof description === 'object') Twitter.sendMessage(userId, description);
