@@ -12,9 +12,9 @@ const countRewards = (userId, callback) => new Promise((resolve, reject) => {
     .match({ userId, claimed: false })
     .group({ _id: null, total: { $sum: '$amount' } })
     .then((result) => {
-      console.log(result);
-      if (typeof callback === 'function') callback(result[0].total);
-      resolve(result[0].total);
+      const total = result[0].total || 0;
+      if (typeof callback === 'function') callback(total);
+      resolve(total);
     })
     .catch((err) => {
       __(`Error counting rewards of ${userId} : ${err}`, 9);
