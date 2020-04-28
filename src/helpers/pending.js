@@ -24,7 +24,7 @@ const waitForPattern = async (userId, { validator = () => true } = {}) => {
         botEvents.removeAllListeners(eventName);
         return resolve(newParams);
       }
-      const replyMessage = messageTemplates.validators_errors[validator.name] || messageTemplates.global.reply;
+      const replyMessage = messageTemplates.validators_errors[validator.name] || messageTemplates.global.retry;
       retry(newParams, replyMessage);
 
       clearTimeout(timeout);
