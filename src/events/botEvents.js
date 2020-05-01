@@ -46,6 +46,7 @@ botEvents.on('dm', (userId, messageObject) => {
     cdt_withdraw: actions.withdraw,
     cdt_link_address: actions.linkAddress,
     cdt_get_address: actions.getAddress,
+    cdt_display_balance: commands.getBalance,
     cdt_refund: undefined,
   };
 
