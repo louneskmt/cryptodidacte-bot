@@ -15,6 +15,10 @@ async function claimRewards(params) {
   const amount = await lnquiz.countRewards(userId);
   if (amount === 0) return end(params, messageTemplates.lnquiz.nothing);
 
+  // WIP
+  return end(params, 'We\'re currently facing some problems with our Lightning node, please contact @Cryptodidacte if you won a #LNQuiz.');
+
+  /*
   Twitter.sendMessage(params.userId, insertVariablesInTemplate(messageTemplates.lnquiz.askForInvoice, { amount }));
 
   const response = await waitForPattern(userId);
@@ -51,6 +55,7 @@ async function claimRewards(params) {
       __(err, 9);
       return end(params, messageTemplates.lnquiz.error);
     });
+  */
 }
 
 module.exports = claimRewards;

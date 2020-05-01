@@ -1,5 +1,6 @@
 const { __ } = require('../../logger.js');
 const Twitter = require('../../Twitter.js');
+const linkAddress = require('./linkAddress.js');
 const { User } = require('../../database/mongoose.js');
 const { end } = require('../global.js');
 
@@ -10,6 +11,7 @@ const insertVariablesInTemplate = require('../../helpers/insertVariablesInTempla
 async function linkAddressCommand(params, args) {
   const { userId } = params;
   const address = args[0];
+  if (!address) return linkAddress(params);
 
   const CurrentUser = await User.findByUserId(userId);
   if (!CurrentUser) {

@@ -20,23 +20,6 @@ const countRewards = (userId, callback) => new Promise((resolve, reject) => {
       __(`Error counting rewards of ${userId} : ${err}`, 9);
       resolve(0);
     });
-  /*
-  LNQuizReward
-    .findByUserId(userId)
-    .then((result) => {
-      let totalToPay = 0;
-      result.forEach((elmt) => {
-        if (elmt.claimed === false) totalToPay += elmt.amount;
-      });
-
-      if (typeof callback === 'function') callback(totalToPay);
-      resolve(totalToPay);
-    })
-    .catch((err) => {
-      __(`Error counting rewards of ${userId} : ${err}`, 9);
-      resolve(0);
-    });
-  */
 });
 
 const addWinners = async (winners) => {
