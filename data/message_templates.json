@@ -92,6 +92,9 @@
     },
     "sendOk": {
       "text": "✅ You succesfully sent %{amount} CDT to @%{to} ! Your balance is now %{balance} CDT !"
+    },
+    "received": {
+      "text": "🎁 @%{sender} just sent you %{amount} CDT !"
     }
   },
   "menu": {
