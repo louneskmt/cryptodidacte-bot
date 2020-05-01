@@ -81,7 +81,7 @@
     "claimOk": {
       "text": "➡️ Transaction broadcasted with hash %{hash}. See it now on https://rinkeby.etherscan.io/tx/%{hash} !"
     },
-    "claimError": {
+    "error": {
       "text": "Error : %{err}"
     },
     "getBalance": {
@@ -89,6 +89,9 @@
     },
     "getBalanceEmpty": {
       "text": "Sorry, your off-chain CDT balance is empty !"
+    },
+    "sendOk": {
+      "text": "✅ You succesfully sent %{amount} CDT to @%{to} ! Your balance is now %{balance} CDT !"
     }
   },
   "menu": {
@@ -116,11 +119,6 @@
             "label": "💸 Send CDT",
             "description": "Send CDT to an ETH address or Twitter account",
             "metadata": "send_cdt"
-          },
-          {
-            "label": "Refill Lightning node",
-            "description": "Generate an invoice to refill LN node",
-            "metadata": "refill_node"
           }
         ]
       }
@@ -149,34 +147,44 @@
       }
     },
     "fidelity": {
-      "text": "Cryptodidacte Token - Choose your action below !",
+      "text": "👋 Hey ! What do you want to do ?",
       "quick_reply": {
         "type": "options",
         "options": [
           {
             "label": "🏦 Show CDT balance",
-            "description": "Take a look on your balance",
+            "description": "CMD: 'balance'",
             "metadata": "cdt_display_balance"
           },
           {
-            "label": "Withdraw",
-            "description": "Withdraw CDT to your on-chain wallet",
+            "label": "🏦 Get your stats",
+            "description": "WIP: Not implemented yet",
+            "metadata": "cdt_stats"
+          },
+          {
+            "label": "Withdraw CDT",
+            "description": "CMD: 'withdraw amount address'",
             "metadata": "cdt_withdraw"
           },
           {
-            "label": "Refund your balance",
-            "description": "Send CDT to your off-chain wallet",
+            "label": "Deposit CDT",
+            "description": "WIP: Not implemented yet ", 
             "metadata": "cdt_refund"
           },
           {
             "label": "Link ETH Address",
-            "description": "Keep your address in memory",
+            "description": "CMD: 'link address'",
             "metadata": "cdt_link_address"
           },
           {
-            "label": "Get current ETH Address",
-            "description": "Display your linked address",
+            "label": "Get linked ETH Address",
+            "description": "CMD : 'linked'",
             "metadata": "cdt_get_address"
+          },
+          {
+            "label": "Display help",
+            "description": "CMD : 'help'",
+            "metadata": "cdt_help"
           }
         ]
       }
