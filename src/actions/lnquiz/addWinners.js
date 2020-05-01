@@ -15,15 +15,18 @@ async function addWinners(params) {
       // const clone = Object.assign(messageTemplates.lnquiz.notify, {});
       Twitter.sendMessage(winner.userId, insertVariablesInTemplate(messageTemplates.lnquiz.notify, { reward: winner.amount }));
     }
-    end(params, insertVariablesInTemplate(messageTemplates.lnquiz.confirmAddition, {
-      winner1: newEntries[0].username, winner2: newEntries[1].username, winner3: newEntries[2].username,
-    }), { endMessage: false });
+    end(params, {
+      description: insertVariablesInTemplate(messageTemplates.lnquiz.confirmAddition, {
+        winner1: newEntries[0].username, winner2: newEntries[1].username, winner3: newEntries[2].username,
+      }),
+      endMessage: false,
+    });
   } else {
-    end(params, messageTemplates.global.error, { endMessage: false });
+    end(params, { description: messageTemplates.global.error, endMessage: false });
   }
 }
 
-async function tryAddWinners(params) {
+function tryAddWinners(params) {
   const { messageData } = params;
 
   if (messageData.entities.user_mentions.length === 3) {

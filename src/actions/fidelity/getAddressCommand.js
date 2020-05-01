@@ -5,15 +5,15 @@ const { getLinkedAddress } = require('../../fidelity.js');
 const messageTemplates = require('../../../data/message_templates.json');
 const insertVariablesInTemplate = require('../../helpers/insertVariablesInTemplate.js');
 
-const getAddress = (params) => {
+function getAddressCommand(params, args) {
   const { userId } = params;
 
   getLinkedAddress(userId)
     .then((address) => {
       if (address && address !== '') Twitter.sendMessage(userId, insertVariablesInTemplate(messageTemplates.fidelity.getAddressOk, { address }));
       else Twitter.sendMessage(userId, messageTemplates.fidelity.getAddressNone);
-      end(params);
+      end(params, { endMessage: false });
     });
-};
+}
 
-module.exports = getAddress;
+module.exports = getAddressCommand;

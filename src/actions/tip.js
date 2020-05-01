@@ -25,13 +25,13 @@ function generateInvoice(params) {
       } else {
         Twitter.sendTextMessage(userId, invoice);
       }
-      end(params, messageTemplates.tip.thanks, { endMessage: false });
+      end(params, { description: messageTemplates.tip.thanks, endMessage: false });
     });
   }, (err) => {
     __('events.js@generateInvoice : Could not generate invoice, got following', 9);
     __(err, 9);
 
-    end(params, messageTemplates.tip.error);
+    end(params, { description: messageTemplates.tip.error });
   });
 }
 

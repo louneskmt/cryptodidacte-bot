@@ -16,19 +16,19 @@ async function claimRewards(params) {
   if (amount === 0) return end(params, messageTemplates.lnquiz.nothing);
 
   // WIP
-  return end(params, 'We\'re currently facing some problems with our Lightning node, please contact @Cryptodidacte if you won a #LNQuiz.');
+  return end(params, { description: 'We\'re currently facing some problems with our Lightning node, please contact @Cryptodidacte if you won a #LNQuiz.' });
 
   /*
   Twitter.sendMessage(params.userId, insertVariablesInTemplate(messageTemplates.lnquiz.askForInvoice, { amount }));
 
   const response = await waitForPattern(userId);
-  if (!response) return end(params, 'Timeout, please try again.');
+  if (!response) return end(params, { description: 'Timeout, please try again.' });
   const { message: invoice } = response;
 
   lightning
     .getInvoiceData(invoice)
     .then((result) => {
-      if (result === 'Not Found') return end(params, 'Invoice not found.');
+      if (result === 'Not Found') return end(params, { description: 'Invoice not found.' });
 
       if (result.num_satoshis === amount.toString()) {
         Twitter.sendMessage(userId, messageTemplates.lnquiz.wip);
@@ -37,23 +37,23 @@ async function claimRewards(params) {
         lightning.payInvoice(invoice, () => {
           LNQuizReward.deleteMany({ userId });
           __('events.js@claimRewars : Reward paid, document(s) removed !', 2);
-          return end(userId, messageTemplates.lnquiz.paid);
+          return end(userId, { description: messageTemplates.lnquiz.paid });
         }, (err) => {
           // Cannot pay invoice
           Twitter.sendMessage(userId, messageTemplates.lnquiz.error);
           __('Could not pay invoice, got following error : ', 9);
           __(err.payment_error, 9);
-          return end(params, `Error log : ${err.payment_error}`);
+          return end(params, { description: `Error log : ${err.payment_error}` });
         });
       } else {
         // / Amounts not corresponding
-        return end(params, insertVariablesInTemplate(messageTemplates.lnquiz.badAmount, { amount: result.num_satoshis, expectedAmount: amount }));
+        return end(params, { description: insertVariablesInTemplate(messageTemplates.lnquiz.badAmount, { amount: result.num_satoshis, expectedAmount: amount }) });
       }
     })
     .catch((err) => {
       __("events.js@claimRewards:lightning.getInvoiceData : Couldn't get invoice data, got following error : ", 9);
       __(err, 9);
-      return end(params, messageTemplates.lnquiz.error);
+      return end(params, { description: messageTemplates.lnquiz.error });
     });
   */
 }

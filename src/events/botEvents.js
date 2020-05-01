@@ -45,7 +45,7 @@ botEvents.on('dm', (userId, messageObject) => {
     send_cdt_menu: (params) => actions.sendMenu(params, ['fidelity']),
     cdt_withdraw: actions.withdraw,
     cdt_link_address: actions.linkAddress,
-    cdt_get_address: actions.getAddress,
+    cdt_get_address: commands.getAddress,
     cdt_display_balance: commands.getBalance,
     cdt_refund: undefined,
   };
@@ -59,6 +59,7 @@ botEvents.on('dm', (userId, messageObject) => {
     withdraw: commands.withdraw,
     deposit: commands.deposit,
     link: commands.linkAddress,
+    linked: commands.getAddress,
     balance: commands.getBalance,
     send: commands.send,
     help: actions.help,
@@ -75,12 +76,6 @@ botEvents.on('dm', (userId, messageObject) => {
     .then((status) => {
       params.status = status;
 
-      const { command, args } = parseCommand(message);
-
-      if (Object.prototype.hasOwnProperty.call(cmdExact, command)) {
-        return cmdExact[command](params, args);
-      }
-
       if (Object.prototype.hasOwnProperty.call(messageData, 'quick_reply_response')) {
         const { metadata } = messageData.quick_reply_response;
 
@@ -89,11 +84,12 @@ botEvents.on('dm', (userId, messageObject) => {
         }
       }
 
-      if (status === undefined) return undefined;
+      const { command, args } = parseCommand(message);
 
-      if (Object.prototype.hasOwnProperty.call(fnExact, status)) {
-        return fnExact[status](params);
-      }
+      if (Object.prototype.hasOwnProperty.call(cmdExact, command)) return cmdExact[command](params, args);
+
+      if (status === undefined) return undefined;
+      if (Object.prototype.hasOwnProperty.call(fnExact, status)) return fnExact[status](params);
 
       for (const key in fnStartsWith) {
         if (status.startsWith(key)) return fnStartsWith[key](params);

@@ -12,8 +12,8 @@ async function linkAddress(params) {
   const { userId } = params;
   Twitter.sendMessage(userId, messageTemplates.fidelity.linkAddress);
 
-  const response = await waitForPattern(userId, { validator: validators.isEthereumAddress });
-  if (!response) return end(params, 'Timeout, please try again.');
+  const response = await waitForPattern(userId, validators.isEthereumAddress);
+  if (!response) return end(params, { description: 'Timeout, please try again.' });
 
   const address = response.message;
 
@@ -37,7 +37,7 @@ async function linkAddress(params) {
     })
     .catch((err) => {
       __(`Error while updating address of user ${userId}: ${err}`);
-      end(params, messageTemplates.global.error);
+      end(params, { description: messageTemplates.global.error });
     });
 }
 

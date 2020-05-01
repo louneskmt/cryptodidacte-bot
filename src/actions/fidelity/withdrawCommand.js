@@ -1,4 +1,3 @@
-const Twitter = require('../../Twitter.js');
 const { claimTokens, getLinkedAddress } = require('../../fidelity.js');
 const { end } = require('../global.js');
 
@@ -12,12 +11,12 @@ async function withdraw(params, args) {
   const address = args[1] || await getLinkedAddress(userId);
 
   if (!amount || !address) {
-    return end(params, insertVariablesInTemplate(messageTemplates.fidelity.error, { err: 'Please enter valid amount and address (if you haven\'t linked yet an Ethereum address to your Twitter account).' }));
+    return end(params, { description: insertVariablesInTemplate(messageTemplates.fidelity.error, { err: 'Please enter valid amount and address (if you haven\'t linked yet an Ethereum address to your Twitter account).' }) });
   }
 
   claimTokens(userId, amount, address)
-    .then((hash) => end(params, insertVariablesInTemplate(messageTemplates.fidelity.claimOk, { hash })))
-    .catch((err) => end(params, insertVariablesInTemplate(messageTemplates.fidelity.error, { err: err.message })));
+    .then((hash) => end(params, { description: insertVariablesInTemplate(messageTemplates.fidelity.claimOk, { hash }) }))
+    .catch((err) => end(params, { description: insertVariablesInTemplate(messageTemplates.fidelity.error, { err: err.message }) }));
 }
 
 module.exports = withdraw;

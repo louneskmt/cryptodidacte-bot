@@ -9,7 +9,6 @@ const { updateRewards, updatingRewards, sendRewardsInfo } = require('./actions/l
 
 // FIDELITY
 const linkAddress = require('./actions/fidelity/linkAddress.js');
-const getAddress = require('./actions/fidelity/getAddress.js');
 
 // OTHERS
 const generateInvoice = require('./actions/tip.js');
@@ -27,5 +26,4 @@ module.exports = {
   updateRewards,
   updatingRewards,
   sendRewardsInfo,
-  getAddress,
 };

@@ -3,7 +3,7 @@ const Twitter = require('../Twitter.js');
 const { UserStatus } = require('../database/mongoose.js');
 const messageTemplates = require('../../data/message_templates');
 
-async function end(params, description, { resetStatus = true, endMessage = true } = {}) {
+async function end(params, { description, resetStatus = true, endMessage = true } = {}) {
   const { userId } = params;
 
   if (resetStatus) await UserStatus.del(userId);
