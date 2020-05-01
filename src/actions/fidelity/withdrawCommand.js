@@ -12,17 +12,12 @@ async function withdraw(params, args) {
   const address = args[1] || await getLinkedAddress(userId);
 
   if (!amount || !address) {
-    return end(params, insertVariablesInTemplate(messageTemplates.fidelity.claimError, { err: 'Please enter valid amount and address (if you haven\'t linked yet an Ethereum address to your Twitter account).' }));
+    return end(params, insertVariablesInTemplate(messageTemplates.fidelity.error, { err: 'Please enter valid amount and address (if you haven\'t linked yet an Ethereum address to your Twitter account).' }));
   }
 
   claimTokens(userId, amount, address)
-    .then((hash) => {
-      Twitter.sendMessage(userId, insertVariablesInTemplate(messageTemplates.fidelity.claimOk, { hash }));
-    })
-    .catch((err) => {
-      Twitter.sendMessage(userId, insertVariablesInTemplate(messageTemplates.fidelity.claimError, { err: err.message }));
-    });
-  return end(params);
+    .then((hash) => end(params, insertVariablesInTemplate(messageTemplates.fidelity.claimOk, { hash })))
+    .catch((err) => end(params, insertVariablesInTemplate(messageTemplates.fidelity.error, { err: err.message })));
 }
 
 module.exports = withdraw;

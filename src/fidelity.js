@@ -68,7 +68,7 @@ const claimTokens = (userId, amount, address) => {
         if (!toAddress) { __(`There is not any address linked to this account (@${user.username})`); }
         if (user.balance < amount) {
           __(`There are not enough funds in this account (@${user.username})`);
-          return reject(new Error(`There are not enough funds in this wallet (${user.balance} CDT).`));
+          return reject(new Error(`There are not enough funds in this wallet (currently ${user.balance} CDT).`));
         }
 
         const tx = await CDT.send(toAddress, amount);
@@ -101,9 +101,44 @@ const getBalance = (userId) => new Promise((resolve, reject) => {
     .catch((err) => __(`Error fetching balance of user ${userId}: ${err}`));
 });
 
+const sendTokens = (from, to, amount) => new Promise((resolve, reject) => {
+  const fromId = from.id_str;
+  const toId = to.id_str;
+
+  User
+    .findByUserId(fromId)
+    .then((userFrom) => {
+      if (userFrom.balance < amount || !userFrom) {
+        __(`There are not enough funds in this account (@${userFrom.username})`);
+        return reject(new Error(`There are not enough funds in your wallet (currently ${userFrom.balance} CDT).`));
+      }
+
+      const query = { _id: toId, username: to.screen_name };
+      const update = { $inc: { balance: amount } };
+      const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+      User
+        .findOneAndUpdate(query, update, options)
+        .then(() => {
+          userFrom.balance -= amount;
+          userFrom.save();
+          resolve(userFrom.balance);
+        })
+        .catch((err) => {
+          __(`Error (#2) while sending ${amount} CDT from ${fromId} to ${toId}: ${err}`, 9);
+          return reject(new Error(`Unknow error while sending ${amount} CDT to @${to.screen_name}. Please try again later and contact @lounes_kmt if the issue persists.`));
+        });
+    })
+    .catch((err) => {
+      __(`Error (#1) while sending ${amount} CDT from ${fromId} to ${toId}: ${err}`, 9);
+      return reject(new Error(`Unknow error while sending ${amount} CDT to @${to.screen_name}. Please try again later and contact @lounes_kmt if the issue persists.`));
+    });
+});
+
 module.exports = {
   processEvent,
   claimTokens,
   getLinkedAddress,
   getBalance,
+  sendTokens,
 };
