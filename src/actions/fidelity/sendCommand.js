@@ -20,7 +20,7 @@ async function sendCommand(params, args) {
   const from = await Twitter.getUserInfo({ userId });
   const to = mentions[0];
 
-  if (from.id_tr === to.id_str) return end(params, { description: insertVariablesInTemplate(messageTemplates.fidelity.error, { err: 'You cannot send tokens to yourself.' }) });
+  if (from.id_str === to.id_str) return end(params, { description: insertVariablesInTemplate(messageTemplates.fidelity.error, { err: 'You cannot send tokens to yourself.' }) });
 
   sendTokens(from, to, amount)
     .then((balance) => {
