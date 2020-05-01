@@ -82,7 +82,7 @@
       "text": "➡️ Transaction broadcasted with hash %{hash}. See it now on https://rinkeby.etherscan.io/tx/%{hash} !"
     },
     "error": {
-      "text": "Error : %{err}"
+      "text": "❌ Error : %{err}"
     },
     "getBalance": {
       "text": "You currently have %{balance} CDT off-chain !"
