@@ -39,7 +39,7 @@ function updatingRewards(params) {
         return retry(params);
       }
 
-      end(params, messageTemplates.global.done, { endMessage: false });
+      end(params, { description: messageTemplates.global.done, endMessage: false });
       return sendRewardsInfo(params);
     });
   } else {

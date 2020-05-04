@@ -6,18 +6,21 @@ const {
 } = require('./database/mongoose.js');
 
 
-const countRewards = (userId, callback) => {
+const countRewards = (userId, callback) => new Promise((resolve, reject) => {
   LNQuizReward
-    .findByUserId(userId)
+    .aggregate()
+    .match({ userId, claimed: false })
+    .group({ _id: null, total: { $sum: '$amount' } })
     .then((result) => {
-      let totalToPay = 0;
-      result.forEach((elmt) => {
-        if (elmt.claimed === false) totalToPay += elmt.amount;
-      });
-
-      if (typeof callback === 'function') callback(totalToPay);
+      const total = result[0].total || 0;
+      if (typeof callback === 'function') callback(total);
+      resolve(total);
+    })
+    .catch((err) => {
+      __(`Error counting rewards of ${userId} : ${err}`, 9);
+      resolve(0);
     });
-};
+});
 
 const addWinners = async (winners) => {
   const newEntries = [

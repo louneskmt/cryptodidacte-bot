@@ -2,68 +2,60 @@ const { __ } = require('../../logger.js');
 const Twitter = require('../../Twitter.js');
 const lightning = require('../../lightning.rest.js');
 const lnquiz = require('../../lnquiz.js');
-const { LNQuizReward, UserStatus } = require('../../database/mongoose.js');
-const { end, retry } = require('../global.js');
+const { LNQuizReward } = require('../../database/mongoose.js');
+const { waitForPattern } = require('../../helpers/pending.js');
+const { end } = require('../global.js');
 
 const messageTemplates = require('../../../data/message_templates.json');
 const insertVariablesInTemplate = require('../../helpers/insertVariablesInTemplate.js');
 
-function claimRewards(params) {
-  const { message, userId, status } = params;
+async function claimRewards(params) {
+  const { userId } = params;
 
-  if (message.startsWith('ln')) {
-    const amount = status.split('_')[2];
-    const invoice = message;
+  const amount = await lnquiz.countRewards(userId);
+  if (amount === 0) return end(params, messageTemplates.lnquiz.nothing);
 
-    lightning.getInvoiceData(invoice,
+  // WIP
+  return end(params, { description: 'We\'re currently facing some problems with our Lightning node, please contact @Cryptodidacte if you won a #LNQuiz.' });
 
-      (result) => {
-        if (result.num_satoshis === amount) {
-          Twitter.sendMessage(userId, messageTemplates.lnquiz.wip);
-          __('events.js@claimRewars : An invoice is being paid');
+  /*
+  Twitter.sendMessage(params.userId, insertVariablesInTemplate(messageTemplates.lnquiz.askForInvoice, { amount }));
 
-          lightning.payInvoice(invoice, () => {
-            LNQuizReward.deleteMany({ userId });
-            __('events.js@claimRewars : Reward paid, document(s) removed !', 2);
+  const response = await waitForPattern(userId);
+  if (!response) return end(params, { description: 'Timeout, please try again.' });
+  const { message: invoice } = response;
 
-            //* ** TODO : Should I send message "end of action" ?***//
-            return end(userId, messageTemplates.lnquiz.paid);
-          }, (err) => {
+  lightning
+    .getInvoiceData(invoice)
+    .then((result) => {
+      if (result === 'Not Found') return end(params, { description: 'Invoice not found.' });
+
+      if (result.num_satoshis === amount.toString()) {
+        Twitter.sendMessage(userId, messageTemplates.lnquiz.wip);
+        __('events.js@claimRewars : An invoice is being paid');
+
+        lightning.payInvoice(invoice, () => {
+          LNQuizReward.deleteMany({ userId });
+          __('events.js@claimRewars : Reward paid, document(s) removed !', 2);
+          return end(userId, { description: messageTemplates.lnquiz.paid });
+        }, (err) => {
           // Cannot pay invoice
-            Twitter.sendMessage(userId, messageTemplates.lnquiz.error);
-            __('Could not pay invoice, got following error : ', 9);
-            __(err.payment_error, 9);
-            return end(params, `Error log : ${err.payment_error}`);
-          });
-        } else {
+          Twitter.sendMessage(userId, messageTemplates.lnquiz.error);
+          __('Could not pay invoice, got following error : ', 9);
+          __(err.payment_error, 9);
+          return end(params, { description: `Error log : ${err.payment_error}` });
+        });
+      } else {
         // / Amounts not corresponding
-          return retry(params, insertVariablesInTemplate(messageTemplates.lnquiz.badAmount, { amount: result.num_satoshis, expectedAmount: amount }));
-        }
-      },
-
-      // / ERROR AT GETTING INVOICE DATA
-      (err) => {
-      //* * CANCELLATION (?) **/
-        __("events.js@claimRewards:lightning.getInvoiceData : Couldn't get invoice data, got following error : ", 9);
-        __(err, 9);
-        return end(params, messageTemplates.lnquiz.error);
-      });
-  } else {
-    return retry(params);
-  }
+        return end(params, { description: insertVariablesInTemplate(messageTemplates.lnquiz.badAmount, { amount: result.num_satoshis, expectedAmount: amount }) });
+      }
+    })
+    .catch((err) => {
+      __("events.js@claimRewards:lightning.getInvoiceData : Couldn't get invoice data, got following error : ", 9);
+      __(err, 9);
+      return end(params, { description: messageTemplates.lnquiz.error });
+    });
+  */
 }
 
-function countRewards(params) {
-  lnquiz.countRewards(params.userId, (amount) => {
-    if (amount) {
-      Twitter.sendMessage(params.userId, insertVariablesInTemplate(messageTemplates.lnquiz.askForInvoice, { amount }));
-      return UserStatus.set(params.userId, `claim_rewards_${amount}_sats`);
-    }
-    return end(params, messageTemplates.lnquiz.nothing);
-  });
-}
-
-module.exports = {
-  claimRewards,
-  countRewards,
-};
+module.exports = claimRewards;

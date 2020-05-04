@@ -7,7 +7,7 @@
       "text": "❌ Please try again, or send 'Cancel'."
     },
     "error": {
-      "text": "Sorry, something went wrong"
+      "text": "Sorry, something went wrong. Please try later or contact @lounes_kmt if the issue persists."
     },
     "done": {
       "text": "✅ Done!"
@@ -21,7 +21,7 @@
         "text": "✅ You successfully added this three winners : \n\n🏁 @%{winner1}\n✍️ @%{winner2}\n🎲 @%{winner3}"
     },
     "badAmount": {
-        "text": "Your invoice is for %{amount} sats. Please generate an invoice for %{expectedAmount} sats."
+        "text": "Your invoice is for %{amount} sats. Please generate an invoice for %{expectedAmount} sats and retry."
     },
     "currentRewards": {
         "text": "Current #LNQuiz Rewards :\n\n🏁 %{question} sats\n✍️ %{writing} sats \n🎲 %{random} sats"
@@ -66,8 +66,35 @@
     "selectWithDrawAddress": {
       "text": "Select target address"
     },
-    "link": {
+    "linkAddress": {
       "text": "Please send an Ethereum address to link with your Twitter account."
+    },
+    "linkAddressOk": {
+      "text": "➡️ Your Twitter is now linked to the following Ethereum address : %{address} !"
+    },
+    "getAddressOk": {
+      "text": "➡️ Your Twitter is linked to the following Ethereum address : %{address} !"
+    },
+    "getAddressNone": {
+      "text": "➡️ You didn't linked yet your Ethereum address."
+    },
+    "claimOk": {
+      "text": "➡️ Transaction broadcasted with hash %{hash}. See it now on https://rinkeby.etherscan.io/tx/%{hash} !"
+    },
+    "error": {
+      "text": "❌ Error : %{err}"
+    },
+    "getBalance": {
+      "text": "You currently have %{balance} CDT off-chain !"
+    },
+    "getBalanceEmpty": {
+      "text": "Sorry, your off-chain CDT balance is empty !"
+    },
+    "sendOk": {
+      "text": "✅ You succesfully sent %{amount} CDT to @%{to} ! Your balance is now %{balance} CDT !"
+    },
+    "received": {
+      "text": "🎁 @%{sender} just sent you %{amount} CDT !"
     }
   },
   "menu": {
@@ -95,11 +122,6 @@
             "label": "💸 Send CDT",
             "description": "Send CDT to an ETH address or Twitter account",
             "metadata": "send_cdt"
-          },
-          {
-            "label": "Refill Lightning node",
-            "description": "Generate an invoice to refill LN node",
-            "metadata": "refill_node"
           }
         ]
       }
@@ -128,32 +150,55 @@
       }
     },
     "fidelity": {
-      "text": "Cryptodidacte Token - Chose your action below !",
+      "text": "👋 Hey ! What do you want to do ?",
       "quick_reply": {
         "type": "options",
         "options": [
           {
             "label": "🏦 Show CDT balance",
-            "description": "Take a look on your balance",
+            "description": "CMD: 'balance'",
             "metadata": "cdt_display_balance"
           },
           {
-            "label": "Withdraw",
-            "description": "Withdraw CDT to your on-chain wallet",
+            "label": "🏦 Get your stats",
+            "description": "WIP: Not implemented yet",
+            "metadata": "cdt_stats"
+          },
+          {
+            "label": "Withdraw CDT",
+            "description": "CMD: 'withdraw amount address'",
             "metadata": "cdt_withdraw"
           },
           {
-            "label": "Refund your balance",
-            "description": "Send CDT to your off-chain wallet",
+            "label": "Deposit CDT",
+            "description": "WIP: Not implemented yet ", 
             "metadata": "cdt_refund"
           },
           {
             "label": "Link ETH Address",
-            "description": "Keep your address in memory",
+            "description": "CMD: 'link address'",
             "metadata": "cdt_link_address"
+          },
+          {
+            "label": "Get linked ETH Address",
+            "description": "CMD : 'linked'",
+            "metadata": "cdt_get_address"
+          },
+          {
+            "label": "Display help",
+            "description": "CMD : 'help'",
+            "metadata": "cdt_help"
           }
         ]
       }
+    }
+  },
+  "validators_errors": {
+    "isEthereumAddress": {
+      "text": "❌ This is not a valid Ethereum address, please try again or send 'Cancel'."
+    },
+    "isLightningInvoice": {
+      "text": "❌ This is not a valid Lightning invoice, please try again or send 'Cancel'."
     }
   }
 }

@@ -21,7 +21,7 @@ module.exports = {
         "consistent-return": "off",
         "no-console": "off",
         "no-unused-vars": ['warn', { "argsIgnorePattern": "reject" }],
-        "max-len": ["error", { "code": 200 }],
+        "max-len": "off",
         "guard-for-in": "off",
         "no-underscore-dangle": "off",
         "func-names": "off",

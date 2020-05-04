@@ -8,8 +8,10 @@ const { __ } = require('../logger.js');
 const { twitterConfig } = require('../../config.js');
 const { UserStatus } = require('../database/mongoose.js');
 const { resolvePending } = require('../helpers/pending.js');
+const parseCommand = require('../helpers/parseCommand.js');
 
 const actions = require('../actions.js');
+const commands = require('../commands.js');
 
 
 botEvents.on('tweet', (tweet) => {
@@ -37,17 +39,30 @@ botEvents.on('dm', (userId, messageObject) => {
     update_rewards: actions.updateRewards,
     updating_rewards: actions.updatingRewards,
     cancel: actions.end,
-    claim_rewards: actions.countRewards,
+    claim_rewards: actions.claimRewards,
     generate_invoice: actions.generateInvoice,
     get_rewards_info: actions.sendRewardsInfo,
-    send_cdt_menu: (params) => actions.sendMenu(params, 'admin'),
+    send_cdt_menu: (params) => actions.sendMenu(params, ['fidelity']),
     cdt_withdraw: actions.withdraw,
     cdt_link_address: actions.linkAddress,
+    cdt_get_address: commands.getAddress,
+    cdt_display_balance: commands.getBalance,
     cdt_refund: undefined,
   };
 
   const fnStartsWith = {
     claim_rewards_: actions.claimRewards,
+  };
+
+  const cmdExact = {
+    start: actions.sendMenu,
+    withdraw: commands.withdraw,
+    deposit: commands.deposit,
+    link: commands.linkAddress,
+    linked: commands.getAddress,
+    balance: commands.getBalance,
+    send: commands.send,
+    help: actions.help,
   };
 
   const params = {
@@ -61,14 +76,6 @@ botEvents.on('dm', (userId, messageObject) => {
     .then((status) => {
       params.status = status;
 
-      if (message === 'start admin' && twitterConfig.admin.includes(userId)) {
-        return actions.sendMenu(params, 'admin');
-      }
-
-      if (message === 'start') {
-        return actions.sendMenu(params, 'standard');
-      }
-
       if (Object.prototype.hasOwnProperty.call(messageData, 'quick_reply_response')) {
         const { metadata } = messageData.quick_reply_response;
 
@@ -77,11 +84,12 @@ botEvents.on('dm', (userId, messageObject) => {
         }
       }
 
-      if (status === undefined) return undefined;
+      const { command, args } = parseCommand(message);
 
-      if (Object.prototype.hasOwnProperty.call(fnExact, status)) {
-        return fnExact[status](params);
-      }
+      if (Object.prototype.hasOwnProperty.call(cmdExact, command)) return cmdExact[command](params, args);
+
+      if (status === undefined) return undefined;
+      if (Object.prototype.hasOwnProperty.call(fnExact, status)) return fnExact[status](params);
 
       for (const key in fnStartsWith) {
         if (status.startsWith(key)) return fnStartsWith[key](params);

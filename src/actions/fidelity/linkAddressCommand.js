@@ -1,21 +1,18 @@
 const { __ } = require('../../logger.js');
 const Twitter = require('../../Twitter.js');
+const linkAddress = require('./linkAddress.js');
 const { User } = require('../../database/mongoose.js');
-const { waitForPattern } = require('../../helpers/pending.js');
 const { end } = require('../global.js');
 
 const messageTemplates = require('../../../data/message_templates.json');
 const insertVariablesInTemplate = require('../../helpers/insertVariablesInTemplate.js');
 const validators = require('../../helpers/validators.js');
 
-async function linkAddress(params) {
+async function linkAddressCommand(params, args) {
   const { userId } = params;
-  Twitter.sendMessage(userId, messageTemplates.fidelity.linkAddress);
-
-  const response = await waitForPattern(userId, validators.isEthereumAddress);
-  if (!response) return end(params, { description: 'Timeout, please try again.' });
-
-  const address = response.message;
+  const address = args[0];
+  if (!address) return linkAddress(params);
+  if (!validators.isEthereumAddress(address)) return end(params, { description: '❌ This is not a valid Ethereum address, please try again.', endMessage: false });
 
   const CurrentUser = await User.findByUserId(userId);
   if (!CurrentUser) {
@@ -41,4 +38,4 @@ async function linkAddress(params) {
     });
 }
 
-module.exports = linkAddress;
+module.exports = linkAddressCommand;

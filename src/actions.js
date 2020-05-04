@@ -1,11 +1,17 @@
+// GLOBAL
 const sendMenu = require('./actions/menu.js');
-const generateInvoice = require('./actions/tip.js');
-const { claimRewards, countRewards } = require('./actions/lnquiz/claimRewards.js');
 const { end, retry } = require('./actions/global.js');
+
+// LNQUIZ
+const claimRewards = require('./actions/lnquiz/claimRewards.js');
 const { addWinners, tryAddWinners, waitForWinners } = require('./actions/lnquiz/addWinners.js');
 const { updateRewards, updatingRewards, sendRewardsInfo } = require('./actions/lnquiz/updateRewards.js');
-const withdraw = require('./actions/fidelity/withdraw.js');
+
+// FIDELITY
 const linkAddress = require('./actions/fidelity/linkAddress.js');
+
+// OTHERS
+const generateInvoice = require('./actions/tip.js');
 
 module.exports = {
   sendMenu,
@@ -15,9 +21,7 @@ module.exports = {
   addWinners,
   tryAddWinners,
   waitForWinners,
-  countRewards,
   generateInvoice,
-  withdraw,
   linkAddress,
   updateRewards,
   updatingRewards,

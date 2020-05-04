@@ -27,7 +27,8 @@
     "request": "^2.88.2",
     "should": "^13.2.3",
     "socks5-https-client": "^1.2.1",
-    "twit": "git+https://github.com/lounes-kmt/twit.git"
+    "twit": "git+https://github.com/louneskmt/twit.git",
+    "web3-utils": "^1.2.6"
   },
   "scripts": {
     "start": "node index.js",
