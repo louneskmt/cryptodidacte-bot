@@ -244,9 +244,19 @@ app.get('/logs', (req, res) => {
 
 // Starts server
 https.createServer({
+  key: fs.readFileSync('./certs/bot.cryptodidacte.fr/privkey.pem'),
+  cert: fs.readFileSync('./certs/bot.cryptodidacte.fr/fullchain.pem'),
+}, app)
+  .listen(app.get('port'), () => {
+    __(`Node app is running on port ${app.get('port')}`);
+  });
+  
+/*
+https.createServer({
   key: fs.readFileSync('./certs/privkey.pem'),
   cert: fs.readFileSync('./certs/fullchain.pem'),
 }, app)
   .listen(app.get('port'), () => {
     __(`Node app is running on port ${app.get('port')}`);
   });
+/*
