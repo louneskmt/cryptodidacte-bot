@@ -250,13 +250,3 @@ https.createServer({
   .listen(app.get('port'), () => {
     __(`Node app is running on port ${app.get('port')}`);
   });
-  
-/*
-https.createServer({
-  key: fs.readFileSync('./certs/privkey.pem'),
-  cert: fs.readFileSync('./certs/fullchain.pem'),
-}, app)
-  .listen(app.get('port'), () => {
-    __(`Node app is running on port ${app.get('port')}`);
-  });
-/*
