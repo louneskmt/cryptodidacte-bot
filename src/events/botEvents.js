@@ -13,7 +13,10 @@ const Twitter = require('../Twitter.js');
 
 const actions = require('../actions.js');
 const commands = require('../commands.js');
+const fidelity = require('../fidelity.js');
 
+const messageTemplates = require('../../data/message_templates.json');
+const insertVariablesInTemplate = require('../helpers/insertVariablesInTemplate.js');
 
 botEvents.on('tweet', async (tweet) => {
   const userId = tweet.user.id_str;
@@ -41,10 +44,18 @@ botEvents.on('tweet', async (tweet) => {
     const recipientObject = mentions.find((user) => user.screen_name === resultArray[3]) || await Twitter.getUserInfo({ userId: tweet.in_reply_to_user_id_str });
 
     if (!recipientObject || recipientObject.id_str === twitterConfig.user_id_bot) {
-      Twitter.replyToTweet(tweetId, 'You have to provide one recipient, by replying to someone, or specifying it. Here is an example :\n\n \'@lkmt_test send 1 CDT to @Cryptodidacte\'');
+      return Twitter.replyToTweet(tweetId, 'You have to provide one recipient, by replying to someone, or specifying it. Here is an example :\n\n \'@lkmt_test send 1 CDT to @Cryptodidacte\'');
     }
 
     __(`Tweet : send ${amount} CDT to @${recipientObject.screen_name}`);
+
+    const from = tweet.user;
+    fidelity.sendTokens(from, recipientObject, amount)
+      .then(() => {
+        Twitter.sendMessage(recipientObject.id_str, insertVariablesInTemplate(messageTemplates.fidelity.received, { sender: from.screen_name, amount }));
+        Twitter.replyToTweet(tweetId, insertVariablesInTemplate(messageTemplates.fidelity.sendTweetOk, { to: recipientObject.screen_name, amount }));
+      })
+      .catch((err) => Twitter.sendMessage(userId, { description: insertVariablesInTemplate(messageTemplates.fidelity.error, { err: err.message }) }));
   }
 });
 
