@@ -95,4 +95,5 @@ module.exports = {
   uploadImage,
   sendMessageWithImage,
   getUserInfo,
+  replyToTweet,
 };
