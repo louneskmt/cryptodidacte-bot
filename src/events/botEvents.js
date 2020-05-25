@@ -21,6 +21,7 @@ botEvents.on('tweet', async (tweet) => {
   const content = tweet.text;
   const mentions = tweet.entities.user_mentions;
 
+  if (userId === twitterConfig.user_id_bot) return;
   __(`New tweet from ${userId} :\nID - ${tweetId}\nContent - ${content}`);
 
   if (twitterConfig.admin.includes(userId)) {
@@ -43,7 +44,7 @@ botEvents.on('tweet', async (tweet) => {
       Twitter.replyToTweet(tweetId, 'You have to provide one recipient, by replying to someone, or specifying it. Here is an example :\n\n \'@lkmt_test send 1 CDT to @Cryptodidacte\'');
     }
 
-    __(`Tweet : send ${amount} to ${recipientObject.screen_name}`);
+    __(`Tweet : send ${amount} CDT to @${recipientObject.screen_name}`);
   }
 });
 
