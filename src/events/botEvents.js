@@ -50,6 +50,8 @@ botEvents.on('tweet', async (tweet) => {
     __(`Tweet : send ${amount} CDT to @${recipientObject.screen_name}`);
 
     const from = tweet.user;
+    if (from.id_str === recipientObject.id_str) return Twitter.replyToTweet(tweetId, insertVariablesInTemplate(messageTemplates.fidelity.error, { err: 'You cannot send tokens to yourself.' }).text);
+
     fidelity.sendTokens(from, recipientObject, amount)
       .then(() => {
         Twitter.sendMessage(recipientObject.id_str, insertVariablesInTemplate(messageTemplates.fidelity.received, { sender: from.screen_name, amount }));
