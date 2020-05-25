@@ -53,7 +53,7 @@ botEvents.on('tweet', async (tweet) => {
     fidelity.sendTokens(from, recipientObject, amount)
       .then(() => {
         Twitter.sendMessage(recipientObject.id_str, insertVariablesInTemplate(messageTemplates.fidelity.received, { sender: from.screen_name, amount }));
-        Twitter.replyToTweet(tweetId, insertVariablesInTemplate(messageTemplates.fidelity.sendTweetOk, { to: recipientObject.screen_name, amount }));
+        Twitter.replyToTweet(tweetId, insertVariablesInTemplate(messageTemplates.fidelity.sendTweetOk, { to: recipientObject.screen_name, amount }).text);
       })
       .catch((err) => Twitter.sendMessage(userId, { description: insertVariablesInTemplate(messageTemplates.fidelity.error, { err: err.message }) }));
   }
