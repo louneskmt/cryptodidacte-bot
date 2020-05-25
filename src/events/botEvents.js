@@ -9,21 +9,39 @@ const { twitterConfig } = require('../../config.js');
 const { UserStatus } = require('../database/mongoose.js');
 const { resolvePending } = require('../helpers/pending.js');
 const parseCommand = require('../helpers/parseCommand.js');
+const Twitter = require('../Twitter.js');
 
 const actions = require('../actions.js');
 const commands = require('../commands.js');
 
 
-botEvents.on('tweet', (tweet) => {
+botEvents.on('tweet', async (tweet) => {
   const userId = tweet.user.id_str;
+  const tweetId = tweet.id_str;
+  const content = tweet.text;
+  const mentions = tweet.entities.user_mentions;
+
   if (twitterConfig.admin.includes(userId)) {
-    if (tweet.text.includes('Félicitations aux gagnants')) {
+    if (content.includes('Félicitations aux gagnants')) {
       const params = {
         userId,
         winners: tweet.entities.user_mentions.slice(0, 3),
       };
       actions.addWinners(params);
     }
+  }
+
+  const sendRegex = /@lkmt_test send (\d+) CDT (to @(.+))?/;
+  if (sendRegex.test(content)) {
+    const resultArray = sendRegex.exec(content);
+    const amount = resultArray[1];
+    const recipientObject = mentions.find((user) => user.screen_name === resultArray[3]) || await Twitter.getUserInfo({ userId: tweet.in_reply_to_user_id_str });
+
+    if (!recipientObject) {
+      Twitter.replyToTweet(tweetId, 'You have to provide one recipient, by replying to someone, or specifying it. Here is an example :\n\n \'@lkmt_test send 1 CDT to @Cryptodidacte\'');
+    }
+
+    __(`Tweet : send ${amount} to ${recipientObject.screen_name}`);
   }
 });
 
