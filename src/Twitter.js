@@ -77,6 +77,17 @@ const getUserInfo = ({ userId, username } = {}) => {
   });
 };
 
+const replyToTweet = (tweetId, content) => {
+  const statusData = {
+    status: content,
+    in_reply_to_status_id: tweetId,
+  };
+
+  Twitter.post('statuses/update', statusData, (err) => {
+    if (err) __(err, 9);
+  });
+};
+
 module.exports = {
   Twitter,
   sendTextMessage,
