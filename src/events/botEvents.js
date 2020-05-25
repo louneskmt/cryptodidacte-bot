@@ -21,6 +21,8 @@ botEvents.on('tweet', async (tweet) => {
   const content = tweet.text;
   const mentions = tweet.entities.user_mentions;
 
+  __(`New tweet from ${userId} :\nID - ${tweetId}\nContent - ${content}`);
+
   if (twitterConfig.admin.includes(userId)) {
     if (content.includes('Félicitations aux gagnants')) {
       const params = {
