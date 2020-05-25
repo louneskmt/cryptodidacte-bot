@@ -77,9 +77,20 @@ const getUserInfo = ({ userId, username } = {}) => {
   });
 };
 
-const replyToTweet = (tweetId, content) => {
+const getTweetInfo = (tweetId) => new Promise((resolve, reject) => {
+  Twitter.get('statuses/show/:id', { id: tweetId }, (err, data) => {
+    if (err) {
+      reject(err);
+      __(err, 9);
+    }
+    resolve(data);
+  });
+});
+
+const replyToTweet = async (tweetId, content) => {
+  const originalTweet = await getTweetInfo(tweetId);
   const statusData = {
-    status: content,
+    status: `@${originalTweet.user.screen_name} ${content}`,
     in_reply_to_status_id: tweetId,
   };
 
@@ -95,5 +106,6 @@ module.exports = {
   uploadImage,
   sendMessageWithImage,
   getUserInfo,
+  getTweetInfo,
   replyToTweet,
 };
