@@ -11,10 +11,16 @@ const tweetEventSchema = new mongoose.Schema({
   },
   tweetId: { type: String },
   targetTweetId: { type: String },
-  date: {
+  timestamp: {
     type: Date,
     set: (v) => new Date(0).setUTCSeconds(v),
     get: (v) => v.getTime(),
+  },
+  reward: {
+    type: Number,
+    get: (v) => Math.round(v),
+    set: (v) => Math.round(v),
+    default: 0,
   },
 });
 
@@ -43,29 +49,7 @@ tweetEventSchema.statics.findByDateRange = function findByDateRange(date, range)
   }
   const min = date.getTime() - range.getTime();
   const max = date.getTime() + range.getTime();
-  return this.find({ date: { $gt: min, $lt: max } });
+  return this.find({ timestamp: { $gt: min, $lt: max } });
 };
-
-/*
-const tweetEventSchema = new mongoose.Schema({
-  userId: {
-    type: String,
-    required: true,
-  },
-  username: { type: String },
-  eventType: {
-    type: String,
-    lowercase: true,
-    enum: ['retweet', 'quote', 'reply', 'favorite'],
-  },
-  tweetId: { type: String },
-  targetTweetId: { type: String },
-  date: {
-    type: Date,
-    set: (v) => new Date(0).setUTCSeconds(v),
-    get: (v) => v.getTime(),
-  },
-});
-*/
 
 module.exports = tweetEventSchema;
