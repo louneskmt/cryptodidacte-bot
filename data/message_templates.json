@@ -93,6 +93,9 @@
     "sendOk": {
       "text": "✅ You succesfully sent %{amount} CDT to @%{to} ! Your balance is now %{balance} CDT !"
     },
+    "sendTweetOk": {
+      "text": "✅ You succesfully sent %{amount} CDT to @%{to} !"
+    },
     "received": {
       "text": "🎁 @%{sender} just sent you %{amount} CDT !"
     }

@@ -77,6 +77,28 @@ const getUserInfo = ({ userId, username } = {}) => {
   });
 };
 
+const getTweetInfo = (tweetId) => new Promise((resolve, reject) => {
+  Twitter.get('statuses/show/:id', { id: tweetId }, (err, data) => {
+    if (err) {
+      reject(err);
+      __(err, 9);
+    }
+    resolve(data);
+  });
+});
+
+const replyToTweet = async (tweetId, content) => {
+  const originalTweet = await getTweetInfo(tweetId);
+  const statusData = {
+    status: `@${originalTweet.user.screen_name} ${content}`,
+    in_reply_to_status_id: tweetId,
+  };
+
+  Twitter.post('statuses/update', statusData, (err) => {
+    if (err) __(err, 9);
+  });
+};
+
 module.exports = {
   Twitter,
   sendTextMessage,
@@ -84,4 +106,6 @@ module.exports = {
   uploadImage,
   sendMessageWithImage,
   getUserInfo,
+  getTweetInfo,
+  replyToTweet,
 };
