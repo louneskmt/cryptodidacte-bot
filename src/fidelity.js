@@ -3,10 +3,15 @@ const {
   TweetEvent, User,
 } = require('./database/mongoose.js');
 const ethereum = require('./ethereum.js');
+const Twitter = require('./Twitter.js');
 
-const { ethereumConfig } = require('../config.js');
+const { ethereumConfig, fidelityConfig } = require('../config.js');
 
-const events = require('../data/events.json');
+const status = {
+  valid: 0,
+  invalid: 1,
+  noRewards: 2,
+};
 
 /*
 eventData Object sample:
@@ -21,35 +26,80 @@ eventData Object sample:
 */
 
 const getReward = (eventType) => {
-  if (events.eventTypes.includes(eventType)) return events.rewards[eventType];
+  if (fidelityConfig.eventTypes.includes(eventType)) return fidelityConfig.rewards[eventType];
   return 0;
 };
+
+const checkEvent = (eventData) => new Promise((resolve, reject) => {
+  const { userId } = eventData;
+
+  // Do not process events for old tweets (> 48h)
+  const promiseTweetInfo = Twitter
+    .getTweetInfo(eventData.targetTweetId)
+    .then((tweetData) => {
+      if (Date.now() - tweetData.timestamp_ms > 172800000) {
+        __(`@${eventData.username} - Event ${eventData.eventType}: tweet ${eventData.targetTweetId} is too old. No rewards will be credited.`);
+        resolve(status.noRewards);
+      }
+    });
+
+  // Check that there's no duplicate
+  const promiseSearch = TweetEvent
+    .find({
+      user: { _id: userId },
+      eventType: eventData.eventType,
+      targetTweetId: eventData.targetTweetId,
+    })
+    .then((result) => {
+      if (result.length !== 0) {
+        __(`@${eventData.username} - Couldn't process event ${eventData.eventType}: already exists in database.`);
+        resolve(status.invalid);
+      }
+    });
+
+  // Check the daily limit
+  const promiseDailyLimit = User
+    .findByUserId(eventData.userId)
+    .then((user) => {
+      if (!user) return;
+      if (user.pointsToday >= fidelityConfig.dailyLimit) {
+        __(`@${eventData.username} - Event ${eventData.eventType}: Daily limit reached. No rewards will be credited.`);
+        resolve(status.noRewards);
+      }
+    });
+
+  Promise
+    .all([promiseTweetInfo, promiseSearch, promiseDailyLimit])
+    .finally(() => {
+      resolve(status.valid);
+    });
+});
 
 const processEvent = async (eventData) => {
   const { userId } = eventData;
 
-  // Check that there's no duplicate
-  const research = await TweetEvent.find({
-    user: { _id: userId },
-    eventType: eventData.eventType,
-    targetTweetId: eventData.targetTweetId,
-  });
-  if (research.length !== 0) return;
+  const eventStatus = await checkEvent(eventData);
+
+  if (eventStatus === status.invalid) return;
+
+  let reward;
+  if (eventStatus === status.noRewards) reward = 0;
+  else reward = getReward(eventData.eventType);
 
   const Event = new TweetEvent({
     user: eventData.userId,
     eventType: eventData.eventType,
     tweetId: eventData.tweetId,
     targetTweetId: eventData.targetTweetId,
-    date: eventData.timestamp,
+    timestamp: eventData.timestamp,
+    reward,
   });
 
   Event.save();
 
   // Find User and create it if it doesn't exist
-  const reward = getReward(eventData.eventType);
   const query = { _id: userId, username: eventData.username };
-  const update = { $inc: { balance: reward, points: reward } };
+  const update = { $inc: { balance: reward, points: reward, pointsToday: reward } };
   const options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
   User
