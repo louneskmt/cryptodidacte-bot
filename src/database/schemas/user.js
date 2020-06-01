@@ -47,6 +47,15 @@ userSchema.statics.updateAddress = function updateAddress(_id, address) {
   });
 };
 
+userSchema.statics.resetLimit = function resetLimit() {
+  return new Promise((resolve, reject) => {
+    this
+      .updateMany({}, { $set: { pointsToday: 0 } })
+      .then(() => resolve())
+      .catch((err) => reject(err));
+  });
+};
+
 userSchema.methods.populateEvents = function populateEvents() {
   return new Promise((resolve, reject) => {
     this
