@@ -40,7 +40,7 @@ globalEvents.on('cryptodidacte', (body) => {
       eventType: String,
       tweetId: tweet.id_str,
       targetTweetId: String,
-      timestamp: tweet.timestamp_ms,
+      timestamp: tweet.timestamp_ms / 1000,
     };
 
     if (Object.prototype.hasOwnProperty.call(tweet, 'retweeted_status')) eventData.eventType = 'retweet';
@@ -51,13 +51,13 @@ globalEvents.on('cryptodidacte', (body) => {
 
     switch (eventData.event_type) {
       case 'quote':
-        eventData.target_tweet_id = tweet.quoted_status.id_str;
+        eventData.targetTweetId = tweet.quoted_status.id_str;
         break;
       case 'reply':
-        eventData.target_tweet_id = tweet.in_reply_to_status_id_str;
+        eventData.targetTweetId = tweet.in_reply_to_status_id_str;
         break;
       case 'retweet':
-        eventData.target_tweet_id = tweet.retweeted_status.id_str;
+        eventData.targetTweetId = tweet.retweeted_status.id_str;
         break;
       default:
         return;
