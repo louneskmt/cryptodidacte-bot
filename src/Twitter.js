@@ -78,7 +78,7 @@ const getUserInfo = ({ userId, username } = {}) => {
 };
 
 const getRetweeters = (tweetId) => new Promise((resolve, reject) => {
-  Twitter.get('statuses/retweeters/ids', { id: tweetId }, (err, data) => {
+  Twitter.get('statuses/retweeters/ids', { id: tweetId, stringify_ids: true }, (err, data) => {
     if (err) {
       reject(err);
       __(err, 9);
