@@ -15,9 +15,9 @@ const userSchema = new mongoose.Schema({
       get: (v) => Math.round(v),
       set: (v) => {
         const nb = Math.round(v);
-        this.points.thisDay += nb;
-        this.points.thisWeek += nb;
-        this.points.thisMonth += nb;
+        this.thisDay += nb;
+        this.thisWeek += nb;
+        this.thisMonth += nb;
         return nb;
       },
       default: 0,
