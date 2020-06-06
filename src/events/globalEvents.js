@@ -30,7 +30,6 @@ globalEvents.on('bot', (body) => {
 });
 
 globalEvents.on('cryptodidacte', (body) => {
-  console.log(body);
   if (Object.prototype.hasOwnProperty.call(body, 'tweet_create_events')) {
     const tweet = body.tweet_create_events[0];
     if (tweet.user.id_str === twitterConfig.user_id_cryptodidacte) return;
@@ -50,7 +49,7 @@ globalEvents.on('cryptodidacte', (body) => {
       && tweet.in_reply_to_user_id_str !== twitterConfig.user_id_cryptodidacte) return;
     else if (tweet.is_quote_status) eventData.eventType = 'quote';
 
-    switch (eventData.event_type) {
+    switch (eventData.eventType) {
       case 'quote':
         eventData.targetTweetId = tweet.quoted_status.id_str;
         break;
