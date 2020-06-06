@@ -1,5 +1,5 @@
 const { __ } = require('./logger.js');
-const { User, TweetEvent } = require('./database/mongoose.js');
+const { TweetEvent } = require('./database/mongoose.js');
 const { deleteEvent } = require('./fidelity.js');
 const Twitter = require('./Twitter.js');
 
@@ -66,7 +66,44 @@ const quoteVerification = () => {
     });
 };
 
+const replyVerification = () => {
+  const to = new Date();
+  const from = new Date(to.getTime() - 86400000);
+  TweetEvent
+    .findByDateRange(from, to)
+    .then((results) => {
+      const allReplyEvents = results.filter((event) => event.eventType === 'reply');
+      const allReplyIds = [...new Set(allReplyEvents.map((event) => event.tweetId))];
+
+      Twitter
+        .getManyTweetsInfo(allReplyIds)
+        .then((result) => {
+          const foundIds = [...new Set(result.map((tweet) => tweet.id_str))];
+
+          allReplyIds.forEach((quoteId) => {
+            if (!foundIds.includes(quoteId)) {
+              const correspondingEvent = allReplyEvents.find((event) => event.tweetId === quoteId);
+
+              __(`Event ${correspondingEvent._id} from @${correspondingEvent.user.username} have been detected as removed.`);
+              deleteEvent(correspondingEvent);
+            }
+          });
+
+          foundIds.forEach((foundId) => {
+            const correspondingEvent = allReplyEvents.find((event) => event.tweetId === foundId);
+            const correspondingTweet = result.find((tweet) => tweet.id_str === foundId);
+
+            if (correspondingEvent.targetTweetId !== correspondingTweet.in_reply_to_status_id_str) {
+              __(`Event ${correspondingEvent._id} from @${correspondingEvent.user.username} have been detected as removed.`);
+              deleteEvent(correspondingEvent);
+            }
+          });
+        });
+    });
+};
+
 module.exports = {
   retweetVerification,
   quoteVerification,
+  replyVerification,
 };
