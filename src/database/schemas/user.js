@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
       get: (v) => Math.round(v),
       set: (v) => {
         const nb = Math.round(v);
+        console.log(this);
         this.thisDay += nb;
         this.thisWeek += nb;
         this.thisMonth += nb;
