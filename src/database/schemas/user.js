@@ -13,14 +13,7 @@ const userSchema = new mongoose.Schema({
     allTime: {
       type: Number,
       get: (v) => Math.round(v),
-      set: (v) => {
-        const nb = Math.round(v);
-        console.log(this);
-        this.thisDay += nb;
-        this.thisWeek += nb;
-        this.thisMonth += nb;
-        return nb;
-      },
+      set: (v) => Math.round(v),
       default: 0,
     },
     thisDay: {

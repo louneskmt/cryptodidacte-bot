@@ -99,7 +99,15 @@ const processEvent = async (eventData) => {
 
   // Find User and create it if it doesn't exist
   const query = { _id: userId, username: eventData.username };
-  const update = { $inc: { balance: reward, 'points.allTime': reward } };
+  const update = {
+    $inc: {
+      balance: reward,
+      'points.allTime': reward,
+      'points.thisDay': reward,
+      'points.thisWeek': reward,
+      'points.thisMonth': reward,
+    },
+  };
   const options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
   User
