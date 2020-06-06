@@ -37,7 +37,8 @@ const checkEvent = (eventData) => new Promise((resolve, reject) => {
   const promiseTweetInfo = Twitter
     .getTweetInfo(eventData.targetTweetId)
     .then((tweetData) => {
-      if (Date.now() - tweetData.timestamp_ms > 172800000) {
+      const createdDate = new Date(tweetData.created_at);
+      if (Date.now() - createdDate.getTime() > 172800000) {
         __(`@${eventData.username} - Event ${eventData.eventType}: tweet ${eventData.targetTweetId} is too old. No rewards will be credited.`);
         resolve(status.noRewards);
       }
