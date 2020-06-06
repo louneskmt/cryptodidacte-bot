@@ -97,6 +97,17 @@ const getTweetInfo = (tweetId) => new Promise((resolve, reject) => {
   });
 });
 
+const getManyTweetsInfo = (idArray) => new Promise((resolve, reject) => {
+  const ids = idArray.join(',');
+  Twitter.get('statuses/lookup', { id: ids }, (err, data) => {
+    if (err) {
+      reject(err);
+      __(err, 9);
+    }
+    resolve(data);
+  });
+});
+
 const replyToTweet = async (tweetId, content) => {
   const originalTweet = await getTweetInfo(tweetId);
   const statusData = {
@@ -119,4 +130,5 @@ module.exports = {
   getTweetInfo,
   replyToTweet,
   getRetweeters,
+  getManyTweetsInfo,
 };
