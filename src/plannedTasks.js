@@ -33,8 +33,12 @@ const emptyTempDir = () => {
 // Each day
 const dailyTask = new CronJob('00 00 00 * * *', (() => {
   emptyTempDir();
+
+  // ANTISPAM checks
   antispam.retweetVerification();
   antispam.quoteVerification();
+  antispam.replyVerification();
+
   User.resetDailyPoints().then(() => __('Daily points have been successfully reset'));
 }), null, true, 'UTC');
 
