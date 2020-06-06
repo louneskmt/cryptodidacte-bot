@@ -3,6 +3,7 @@ const {
   TweetEvent, User,
 } = require('./database/mongoose.js');
 const ethereum = require('./ethereum.js');
+const antispam = require('./antispam.js');
 const Twitter = require('./Twitter.js');
 
 const { ethereumConfig, fidelityConfig } = require('../config.js');
@@ -38,7 +39,7 @@ const checkEvent = (eventData) => new Promise((resolve, reject) => {
     .getTweetInfo(eventData.targetTweetId)
     .then((tweetData) => {
       const createdDate = new Date(tweetData.created_at);
-      if (Date.now() - createdDate.getTime() > 172800000) {
+      if (Date.now() - createdDate.getTime() > fidelityConfig.rejectEventParams.tweetMaxAgeInDays * 86400000) {
         __(`@${eventData.username} - Event '${eventData.eventType}': tweet ${eventData.targetTweetId} is too old. No rewards will be credited.`);
         resolve(status.noRewards);
       }
@@ -63,7 +64,7 @@ const checkEvent = (eventData) => new Promise((resolve, reject) => {
     .findByUserId(eventData.userId)
     .then((user) => {
       if (!user) return;
-      if (user.points.thisDay >= fidelityConfig.dailyLimit) {
+      if (user.points.thisDay >= fidelityConfig.rejectEventParams.dailyLimit) {
         __(`@${eventData.username} - Event '${eventData.eventType}': daily limit reached. No rewards will be credited.`);
         resolve(status.noRewards);
       }
@@ -78,10 +79,10 @@ const checkEvent = (eventData) => new Promise((resolve, reject) => {
 
 const processEvent = async (eventData) => {
   const { userId } = eventData;
-
   const eventStatus = await checkEvent(eventData);
 
   if (eventStatus === status.invalid) return;
+  if (!antispam.filterUser(eventData.userObject)) return;
 
   let reward;
   if (eventStatus === status.noRewards) reward = 0;

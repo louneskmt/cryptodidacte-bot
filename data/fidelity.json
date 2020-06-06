@@ -1,10 +1,16 @@
 {
-  "dailyLimit": 30,
   "eventTypes": ["favorite", "retweet", "quote", "reply"],
   "rewards": {
     "favorite": 2,
     "retweet": 4,
     "quote": 6,
     "reply": 3
+  },
+  "rejectEventParams": {
+    "dailyLimit": 30,
+    "userMinAgeInDays": 30,
+    "tweetMaxAgeInDays": 2,
+    "userMinFollowers": 5,
+    "userMinTweets": 10
   }
 }
