@@ -62,7 +62,7 @@ const checkEvent = (eventData) => new Promise((resolve, reject) => {
     .findByUserId(eventData.userId)
     .then((user) => {
       if (!user) return;
-      if (user.pointsToday >= fidelityConfig.dailyLimit) {
+      if (user.points.thisDay >= fidelityConfig.dailyLimit) {
         __(`@${eventData.username} - Event ${eventData.eventType}: Daily limit reached. No rewards will be credited.`);
         resolve(status.noRewards);
       }
@@ -99,7 +99,7 @@ const processEvent = async (eventData) => {
 
   // Find User and create it if it doesn't exist
   const query = { _id: userId, username: eventData.username };
-  const update = { $inc: { balance: reward, points: reward, pointsToday: reward } };
+  const update = { $inc: { balance: reward, 'points.allTime': reward } };
   const options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
   User

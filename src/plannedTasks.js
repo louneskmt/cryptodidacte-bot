@@ -29,12 +29,18 @@ const emptyTempDir = () => {
   });
 };
 
-const resetDailyPoints = () => {
-  User.resetLimit();
-  __('Daily points have been successfully reset');
-};
-
+// Each day
 const dailyTask = new CronJob('00 00 00 * * *', (() => {
   emptyTempDir();
-  resetDailyPoints();
+  User.resetDailyPoints().then(() => __('Daily points have been successfully reset'));
+}), null, true, 'UTC');
+
+// Each Monday at midnight
+const weeklyTask = new CronJob('00 00 00 * * 1', (() => {
+  User.resetWeeklyPoints().then(() => __('Weekly  points have been successfully reset'));
+}), null, true, 'UTC');
+
+// Each month (at midnight on the first day)
+const monthlyTask = new CronJob('00 00 00 1 * *', (() => {
+  User.resetMonthlyPoints().then(() => __('Monthly points have been successfully reset'));
 }), null, true, 'UTC');
