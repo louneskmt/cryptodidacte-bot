@@ -40,7 +40,7 @@ globalEvents.on('cryptodidacte', (body) => {
       eventType: String,
       tweetId: tweet.id_str,
       targetTweetId: String,
-      timestamp: tweet.timestamp_ms / 1000,
+      timestamp: tweet.timestamp_ms,
     };
 
     if (Object.prototype.hasOwnProperty.call(tweet, 'retweeted_status')) eventData.eventType = 'retweet';

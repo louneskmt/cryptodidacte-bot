@@ -39,7 +39,7 @@ const checkEvent = (eventData) => new Promise((resolve, reject) => {
     .then((tweetData) => {
       const createdDate = new Date(tweetData.created_at);
       if (Date.now() - createdDate.getTime() > 172800000) {
-        __(`@${eventData.username} - Event ${eventData.eventType}: tweet ${eventData.targetTweetId} is too old. No rewards will be credited.`);
+        __(`@${eventData.username} - Event '${eventData.eventType}': tweet ${eventData.targetTweetId} is too old. No rewards will be credited.`);
         resolve(status.noRewards);
       }
     });
@@ -53,7 +53,7 @@ const checkEvent = (eventData) => new Promise((resolve, reject) => {
     })
     .then((result) => {
       if (result.length !== 0) {
-        __(`@${eventData.username} - Couldn't process event ${eventData.eventType}: already exists in database.`);
+        __(`@${eventData.username} - Event '${eventData.eventType}': already exists in database. No rewards will be credited.`);
         resolve(status.invalid);
       }
     });
@@ -64,7 +64,7 @@ const checkEvent = (eventData) => new Promise((resolve, reject) => {
     .then((user) => {
       if (!user) return;
       if (user.points.thisDay >= fidelityConfig.dailyLimit) {
-        __(`@${eventData.username} - Event ${eventData.eventType}: Daily limit reached. No rewards will be credited.`);
+        __(`@${eventData.username} - Event '${eventData.eventType}': daily limit reached. No rewards will be credited.`);
         resolve(status.noRewards);
       }
     });
