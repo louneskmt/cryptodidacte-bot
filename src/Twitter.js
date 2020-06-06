@@ -77,6 +77,16 @@ const getUserInfo = ({ userId, username } = {}) => {
   });
 };
 
+const getRetweeters = (tweetId) => new Promise((resolve, reject) => {
+  Twitter.get('statuses/retweeters//ids.json', { id: tweetId }, (err, data) => {
+    if (err) {
+      reject(err);
+      __(err, 9);
+    }
+    resolve(data);
+  });
+});
+
 const getTweetInfo = (tweetId) => new Promise((resolve, reject) => {
   Twitter.get('statuses/show/:id', { id: tweetId }, (err, data) => {
     if (err) {
@@ -108,4 +118,5 @@ module.exports = {
   getUserInfo,
   getTweetInfo,
   replyToTweet,
+  getRetweeters,
 };
