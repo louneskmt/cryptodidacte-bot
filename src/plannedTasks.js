@@ -6,6 +6,7 @@ const { CronJob } = require('cron');
 
 const { __ } = require('./logger.js');
 const { User } = require('./database/mongoose.js');
+const antispam = require('./antispam.js');
 
 const tempDirectory = path.join(__dirname, '../assets/temp');
 
@@ -32,6 +33,8 @@ const emptyTempDir = () => {
 // Each day
 const dailyTask = new CronJob('00 00 00 * * *', (() => {
   emptyTempDir();
+  antispam.retweetVerification();
+  antispam.quoteVerification();
   User.resetDailyPoints().then(() => __('Daily points have been successfully reset'));
 }), null, true, 'UTC');
 

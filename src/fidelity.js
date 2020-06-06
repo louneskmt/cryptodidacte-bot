@@ -116,6 +116,29 @@ const processEvent = async (eventData) => {
     .catch((err) => __(`Error while adding reward to balance of user ${userId}: ${err}`));
 };
 
+// Delete specified event and the associated reward from user balance
+const deleteEvent = (eventToDelete) => {
+  const query = { _id: eventToDelete.user._id };
+  const minus = -1 * eventToDelete.reward;
+  const update = {
+    $inc: {
+      balance: minus,
+      'points.allTime': minus,
+      'points.thisDay': minus,
+      'points.thisWeek': minus,
+      'points.thisMonth': minus,
+    },
+  };
+  const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+  User
+    .findOneAndUpdate(query, update, options)
+    .catch((err) => __(`Error while removing reward to balance of user ${eventToDelete.user._id}: ${err}`));
+  TweetEvent
+    .deleteOne({ _id: eventToDelete._id })
+    .catch((err) => __(`Error while deleting event ${eventToDelete._id} of user ${eventToDelete.user._id}: ${err}`));
+};
+
 const claimTokens = (userId, amount, address) => {
   const CDT = new ethereum.ERC20(ethereumConfig.contractAddress, ethereumConfig.cryptodidacteTokenABI);
 
@@ -200,4 +223,5 @@ module.exports = {
   getLinkedAddress,
   getBalance,
   sendTokens,
+  deleteEvent,
 };
