@@ -30,6 +30,7 @@ globalEvents.on('bot', (body) => {
 });
 
 globalEvents.on('cryptodidacte', (body) => {
+  console.log(body);
   if (Object.prototype.hasOwnProperty.call(body, 'tweet_create_events')) {
     const tweet = body.tweet_create_events[0];
     if (tweet.user.id_str === twitterConfig.user_id_cryptodidacte) return;
