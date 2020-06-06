@@ -3,6 +3,8 @@ const { TweetEvent } = require('./database/mongoose.js');
 const { deleteEvent } = require('./fidelity.js');
 const Twitter = require('./Twitter.js');
 
+const { fidelityConfig } = require('../config.js');
+
 const retweetVerification = () => {
   const to = new Date();
   const from = new Date(to.getTime() - 86400000);
@@ -102,8 +104,21 @@ const replyVerification = () => {
     });
 };
 
+const filterUser = (userObject) => {
+  const createdDate = new Date(userObject.created_at);
+
+  if (Date.now() - createdDate.getTime() > fidelityConfig.rejectEventParams.userMinAgeInDays * 86400000
+    || userObject.followers_count < fidelityConfig.rejectEventParams.userMinFollowers
+    || userObject.statuses_count < fidelityConfig.rejectEventParams.userMinTweets) {
+    return false;
+  }
+
+  return true;
+};
+
 module.exports = {
   retweetVerification,
   quoteVerification,
   replyVerification,
+  filterUser,
 };

@@ -41,6 +41,7 @@ globalEvents.on('cryptodidacte', (body) => {
       tweetId: tweet.id_str,
       targetTweetId: String,
       timestamp: tweet.timestamp_ms,
+      userObject: tweet.user,
     };
 
     if (Object.prototype.hasOwnProperty.call(tweet, 'retweeted_status')) eventData.eventType = 'retweet';
@@ -78,6 +79,7 @@ globalEvents.on('cryptodidacte', (body) => {
       tweetId: undefined,
       targetTweetId: favorite.favorited_status.id_str,
       timestamp: favorite.timestamp_ms,
+      userObject: favorite.user,
     };
 
     fidelity.processEvent(eventData);
