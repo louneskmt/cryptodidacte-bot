@@ -147,8 +147,11 @@ const claimTokens = (userId, amount, address) => {
     User
       .findByUserId(userId)
       .then(async (user) => {
-        const balance = user.balance || 0;
-        if (!user || balance < amount) {
+        let balance;
+        if (!user) balance = 0;
+        else balance = user.balance;
+
+        if (balance < amount) {
           __(`There are not enough funds in the wallet of ${userId} (currently ${balance} CDT).`);
           return reject(new Error(`There are not enough funds in this wallet (currently ${balance} CDT).`));
         }

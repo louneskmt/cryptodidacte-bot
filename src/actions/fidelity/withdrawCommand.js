@@ -10,7 +10,7 @@ async function withdraw(params, args) {
   const amount = args[0];
   const address = args[1] || await getLinkedAddress(userId);
 
-  if (!amount || !address) {
+  if (!amount || amount <= 0 || !address) {
     return end(params, { description: insertVariablesInTemplate(messageTemplates.fidelity.error, { err: 'Please enter valid amount and address (if you haven\'t linked yet an Ethereum address to your Twitter account).' }) });
   }
 
