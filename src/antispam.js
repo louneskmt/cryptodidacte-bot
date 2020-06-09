@@ -16,17 +16,23 @@ const retweetVerification = () => {
 
       allRetweetedIds.forEach((tweetId) => {
         Twitter
-          .getRetweeters(tweetId)
-          .then((data) => {
-            const retweeters = data.ids;
-            const retweetEvents = allRetweetEvents.filter((event) => event.targetTweetId === tweetId);
+          .getTweetInfo(tweetId)
+          .then((tweetInfo) => {
+            if (tweetInfo.retweet_count > 100) return;
 
-            retweetEvents.forEach((retweetEvent) => {
-              if (!retweeters.includes(retweetEvent.user._id)) {
-                __(`Event ${retweetEvent._id} from @${retweetEvent.user.username} have been detected as removed.`);
-                deleteEvent(retweetEvent);
-              }
-            });
+            Twitter
+              .getRetweeters(tweetId)
+              .then((data) => {
+                const retweeters = data.ids;
+                const retweetEvents = allRetweetEvents.filter((event) => event.targetTweetId === tweetId);
+
+                retweetEvents.forEach((retweetEvent) => {
+                  if (!retweeters.includes(retweetEvent.user._id)) {
+                    __(`Event ${retweetEvent._id} from @${retweetEvent.user.username} have been detected as removed.`);
+                    deleteEvent(retweetEvent);
+                  }
+                });
+              });
           });
       });
     });
