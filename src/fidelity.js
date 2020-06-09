@@ -147,8 +147,16 @@ const claimTokens = (userId, amount, address) => {
     User
       .findByUserId(userId)
       .then(async (user) => {
+        if (!user) {
+          __(`There are not enough funds in this account (@${user.username})`);
+          return reject(new Error(`There are not enough funds in this wallet (currently ${user.balance} CDT).`));
+        }
+
         const toAddress = address || user.address;
-        if (!toAddress) { __(`There is not any address linked to this account (@${user.username})`); }
+        if (!toAddress) { 
+          __(`There is not any address linked to this account (@${user.username})`);
+          return reject(new Error(`There is not any address linked to this account (@${user.username})`));
+        }
         if (user.balance < amount) {
           __(`There are not enough funds in this account (@${user.username})`);
           return reject(new Error(`There are not enough funds in this wallet (currently ${user.balance} CDT).`));
@@ -168,6 +176,8 @@ const getLinkedAddress = (userId) => new Promise((resolve, reject) => {
   User
     .findByUserId(userId)
     .then((result) => {
+      if (!result) resolve();
+
       const { address } = result;
       if (address && address !== '') resolve(address);
       else resolve();
@@ -179,7 +189,8 @@ const getBalance = (userId) => new Promise((resolve, reject) => {
   User
     .findByUserId(userId)
     .then((result) => {
-      resolve(result.balance);
+      if (result) resolve(result.balance);
+      else resolve(0);
     })
     .catch((err) => __(`Error fetching balance of user ${userId}: ${err}`));
 });
@@ -191,7 +202,7 @@ const sendTokens = (from, to, amount) => new Promise((resolve, reject) => {
   User
     .findByUserId(fromId)
     .then((userFrom) => {
-      if (userFrom.balance < amount || !userFrom) {
+      if (!userFrom || userFrom.balance < amount) {
         __(`There are not enough funds in this account (@${userFrom.username})`);
         return reject(new Error(`There are not enough funds in your wallet (currently ${userFrom.balance} CDT).`));
       }
