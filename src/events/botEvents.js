@@ -44,7 +44,7 @@ botEvents.on('tweet', async (tweet) => {
     const recipientObject = mentions.find((user) => user.screen_name === resultArray[3]) || await Twitter.getUserInfo({ userId: tweet.in_reply_to_user_id_str });
 
     if (!recipientObject || recipientObject.id_str === twitterConfig.user_id_bot) {
-      return Twitter.replyToTweet(tweetId, 'You have to provide one recipient, by replying to someone, or specifying it. Here is an example :\n\n \'@lkmt_test send 1 CDT to @Cryptodidacte\'');
+      return Twitter.replyToTweet(tweetId, messageTemplates.fidelity.sendTweetNoRecipient);
     }
 
     __(`Tweet : send ${amount} CDT to @${recipientObject.screen_name}`);
@@ -81,6 +81,7 @@ botEvents.on('dm', (userId, messageObject) => {
     cdt_link_address: actions.linkAddress,
     cdt_get_address: commands.getAddress,
     cdt_display_balance: commands.getBalance,
+    cdt_help: commands.help,
     cdt_refund: undefined,
   };
 
@@ -96,7 +97,7 @@ botEvents.on('dm', (userId, messageObject) => {
     linked: commands.getAddress,
     balance: commands.getBalance,
     send: commands.send,
-    help: actions.help,
+    help: commands.help,
   };
 
   const params = {

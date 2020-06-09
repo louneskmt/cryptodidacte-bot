@@ -18,8 +18,11 @@ const sendMessage = (userId, messageData) => {
     },
   };
 
-  Twitter.post('direct_messages/events/new', message, (err) => {
-    if (err) __(err, 9);
+  return new Promise((resolve, reject) => {
+    Twitter
+      .post('direct_messages/events/new', message)
+      .then(() => resolve())
+      .catch((err) => __(err, 9));
   });
 };
 
