@@ -10,8 +10,9 @@ const security = require('./src/security.js');
 const { twitterConfig } = require('./config.js');
 const globalEvents = require('./src/events/globalEvents.js');
 const schemas = require('./src/database/mongoose.js');
-
 const Session = require('./endpoints/session.js');
+
+require('./src/plannedTasks.js');
 
 // HTTPS Server config
 const app = express();
