@@ -239,9 +239,11 @@ app.use(express.static('public'));
 /**
  * Returns logs
  */
+/*
 app.get('/logs', (req, res) => {
   res.sendFile(`${__dirname}/logs/main.log`);
 });
+*/
 
 // Starts server
 https.createServer({
