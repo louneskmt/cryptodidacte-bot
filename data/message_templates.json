@@ -82,7 +82,7 @@
       "text": "➡️ Transaction diffusée avec le hash %{hash}. Suivez là maintenant sur https://etherscan.io/tx/%{hash} !"
     },
     "error": {
-      "text": "❌ Erreur : %{err}"
+      "text": "❌ Erreur - %{err}"
     },
     "getBalance": {
       "text": "Vous avez actuellement %{balance} CDT off-chain !"
