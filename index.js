@@ -249,6 +249,11 @@ app.get('/', (req, res) => {
   res.redirect('/connect');
 });
 
+app.get('/done', (req, res) => {
+  console.log(req.query);
+  console.log(req.body);
+});
+
 // Starts server
 https.createServer({
   key: fs.readFileSync('./certs/privkey.pem'),
