@@ -1,4 +1,5 @@
 const ethers = require('ethers');
+const web3 = require('web3-utils');
 
 const { mnemonic, projectId } = require('../config.js').ethereumConfig;
 
@@ -31,6 +32,18 @@ class ERC20 {
   }
 }
 
+/**
+ * Checks if the given string is an address
+ *
+ * @method isEthereumAddress
+ * @param {String} address the given HEX address
+ * @return {Boolean}
+ */
+const isEthereumAddress = function (address) {
+  return web3.isAddress(address);
+};
+
 module.exports = {
   ERC20,
+  isEthereumAddress,
 };

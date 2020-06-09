@@ -77,6 +77,16 @@ const getUserInfo = ({ userId, username } = {}) => {
   });
 };
 
+const getRetweeters = (tweetId) => new Promise((resolve, reject) => {
+  Twitter.get('statuses/retweeters/ids', { id: tweetId, stringify_ids: true }, (err, data) => {
+    if (err) {
+      reject(err);
+      __(err, 9);
+    }
+    resolve(data);
+  });
+});
+
 const getTweetInfo = (tweetId) => new Promise((resolve, reject) => {
   Twitter.get('statuses/show/:id', { id: tweetId }, (err, data) => {
     if (err) {
@@ -85,6 +95,36 @@ const getTweetInfo = (tweetId) => new Promise((resolve, reject) => {
     }
     resolve(data);
   });
+});
+
+const getManyTweetsInfo = (idsArray) => new Promise((resolve, reject) => {
+  const MAX_TWEETS = 100;
+  const resultArrayOfArrays = [];
+  const promisesArray = [];
+
+  for (let i = 0; i < idsArray.length; i += MAX_TWEETS) {
+    const ids = idsArray.slice(i, i + MAX_TWEETS).join(',');
+
+    const lookupPromise = Twitter.get('statuses/lookup', { id: ids });
+
+    lookupPromise
+      .then((result) => {
+        resultArrayOfArrays.push(result.data);
+      })
+      .catch((err) => {
+        reject(err);
+        __(err, 9);
+      });
+
+    promisesArray.push(lookupPromise);
+  }
+
+  Promise
+    .all(promisesArray)
+    .then(() => {
+      const resultArray = Array.prototype.concat(...resultArrayOfArrays);
+      resolve(resultArray);
+    });
 });
 
 const replyToTweet = async (tweetId, content) => {
@@ -108,4 +148,6 @@ module.exports = {
   getUserInfo,
   getTweetInfo,
   replyToTweet,
+  getRetweeters,
+  getManyTweetsInfo,
 };

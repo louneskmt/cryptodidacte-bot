@@ -11,10 +11,12 @@ const tweetEventSchema = new mongoose.Schema({
   },
   tweetId: { type: String },
   targetTweetId: { type: String },
-  date: {
-    type: Date,
-    set: (v) => new Date(0).setUTCSeconds(v),
-    get: (v) => v.getTime(),
+  timestamp: { type: String },
+  reward: {
+    type: Number,
+    get: (v) => Math.round(v),
+    set: (v) => Math.round(v),
+    default: 0,
   },
 });
 
@@ -36,36 +38,14 @@ tweetEventSchema.statics.findByTarget = function findByTarget(targetTweetId) {
   return this.find({ targetTweetId });
 };
 
-tweetEventSchema.statics.findByDateRange = function findByDateRange(date, range) {
-  if ((date && Object.prototype.toString.call(date) !== '[object Date]')
-  || (range && Object.prototype.toString.call(range) !== '[object Date]')) {
+tweetEventSchema.statics.findByDateRange = function findByDateRange(from, to) {
+  if ((from && Object.prototype.toString.call(from) !== '[object Date]')
+  || (to && Object.prototype.toString.call(to) !== '[object Date]')) {
     throw new Error('Arguments must be of type Date');
   }
-  const min = date.getTime() - range.getTime();
-  const max = date.getTime() + range.getTime();
-  return this.find({ date: { $gt: min, $lt: max } });
+  const min = from.getTime();
+  const max = to.getTime();
+  return this.find({ timestamp: { $gt: min, $lt: max } });
 };
-
-/*
-const tweetEventSchema = new mongoose.Schema({
-  userId: {
-    type: String,
-    required: true,
-  },
-  username: { type: String },
-  eventType: {
-    type: String,
-    lowercase: true,
-    enum: ['retweet', 'quote', 'reply', 'favorite'],
-  },
-  tweetId: { type: String },
-  targetTweetId: { type: String },
-  date: {
-    type: Date,
-    set: (v) => new Date(0).setUTCSeconds(v),
-    get: (v) => v.getTime(),
-  },
-});
-*/
 
 module.exports = tweetEventSchema;

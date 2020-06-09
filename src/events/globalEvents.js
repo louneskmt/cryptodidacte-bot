@@ -41,6 +41,7 @@ globalEvents.on('cryptodidacte', (body) => {
       tweetId: tweet.id_str,
       targetTweetId: String,
       timestamp: tweet.timestamp_ms,
+      userObject: tweet.user,
     };
 
     if (Object.prototype.hasOwnProperty.call(tweet, 'retweeted_status')) eventData.eventType = 'retweet';
@@ -49,15 +50,15 @@ globalEvents.on('cryptodidacte', (body) => {
       && tweet.in_reply_to_user_id_str !== twitterConfig.user_id_cryptodidacte) return;
     else if (tweet.is_quote_status) eventData.eventType = 'quote';
 
-    switch (eventData.event_type) {
+    switch (eventData.eventType) {
       case 'quote':
-        eventData.target_tweet_id = tweet.quoted_status.id_str;
+        eventData.targetTweetId = tweet.quoted_status.id_str;
         break;
       case 'reply':
-        eventData.target_tweet_id = tweet.in_reply_to_status_id_str;
+        eventData.targetTweetId = tweet.in_reply_to_status_id_str;
         break;
       case 'retweet':
-        eventData.target_tweet_id = tweet.retweeted_status.id_str;
+        eventData.targetTweetId = tweet.retweeted_status.id_str;
         break;
       default:
         return;
@@ -78,6 +79,7 @@ globalEvents.on('cryptodidacte', (body) => {
       tweetId: undefined,
       targetTweetId: favorite.favorited_status.id_str,
       timestamp: favorite.timestamp_ms,
+      userObject: favorite.user,
     };
 
     fidelity.processEvent(eventData);

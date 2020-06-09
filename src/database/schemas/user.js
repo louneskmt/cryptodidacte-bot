@@ -10,10 +10,30 @@ const userSchema = new mongoose.Schema({
     default: 0,
   },
   points: {
-    type: Number,
-    get: (v) => Math.round(v),
-    set: (v) => Math.round(v),
-    default: 0,
+    allTime: {
+      type: Number,
+      get: (v) => Math.round(v),
+      set: (v) => Math.round(v),
+      default: 0,
+    },
+    thisDay: {
+      type: Number,
+      get: (v) => Math.round(v),
+      set: (v) => Math.round(v),
+      default: 0,
+    },
+    thisWeek: {
+      type: Number,
+      get: (v) => Math.round(v),
+      set: (v) => Math.round(v),
+      default: 0,
+    },
+    thisMonth: {
+      type: Number,
+      get: (v) => Math.round(v),
+      set: (v) => Math.round(v),
+      default: 0,
+    },
   },
   address: { type: String },
   events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'TweetEvent' }],
@@ -36,6 +56,33 @@ userSchema.statics.updateAddress = function updateAddress(_id, address) {
   return new Promise((resolve, reject) => {
     this
       .updateOne({ _id }, { $set: { address } })
+      .then(() => resolve())
+      .catch((err) => reject(err));
+  });
+};
+
+userSchema.statics.resetDailyPoints = function resetLimit() {
+  return new Promise((resolve, reject) => {
+    this
+      .updateMany({}, { $set: { 'points.thisDay': 0 } })
+      .then(() => resolve())
+      .catch((err) => reject(err));
+  });
+};
+
+userSchema.statics.resetWeeklyPoints = function resetLimit() {
+  return new Promise((resolve, reject) => {
+    this
+      .updateMany({}, { $set: { 'points.thisWeek': 0 } })
+      .then(() => resolve())
+      .catch((err) => reject(err));
+  });
+};
+
+userSchema.statics.resetMonthlyPoints = function resetLimit() {
+  return new Promise((resolve, reject) => {
+    this
+      .updateMany({}, { $set: { 'points.thisMonth': 0 } })
       .then(() => resolve())
       .catch((err) => reject(err));
   });

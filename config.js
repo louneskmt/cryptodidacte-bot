@@ -37,9 +37,12 @@ const ethereumConfig = {
   cryptodidacteTokenABI,
 };
 
+const fidelityConfig = require('./data/fidelity.json');
+
 module.exports = {
   twitterConfig,
   databaseConfig,
   ethereumConfig,
   websiteDbConfig,
+  fidelityConfig,
 };

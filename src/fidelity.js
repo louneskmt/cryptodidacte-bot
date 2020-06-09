@@ -3,10 +3,16 @@ const {
   TweetEvent, User,
 } = require('./database/mongoose.js');
 const ethereum = require('./ethereum.js');
+const antispam = require('./antispam.js');
+const Twitter = require('./Twitter.js');
 
-const { ethereumConfig } = require('../config.js');
+const { ethereumConfig, fidelityConfig } = require('../config.js');
 
-const events = require('../data/events.json');
+const status = {
+  valid: 0,
+  invalid: 1,
+  noRewards: 2,
+};
 
 /*
 eventData Object sample:
@@ -21,40 +27,117 @@ eventData Object sample:
 */
 
 const getReward = (eventType) => {
-  if (events.eventTypes.includes(eventType)) return events.rewards[eventType];
+  if (fidelityConfig.eventTypes.includes(eventType)) return fidelityConfig.rewards[eventType];
   return 0;
 };
 
-const processEvent = async (eventData) => {
+const checkEvent = (eventData) => new Promise((resolve, reject) => {
   const { userId } = eventData;
 
+  // Do not process events for old tweets (> 48h)
+  const promiseTweetInfo = Twitter
+    .getTweetInfo(eventData.targetTweetId)
+    .then((tweetData) => {
+      const createdDate = new Date(tweetData.created_at);
+      if (Date.now() - createdDate.getTime() > fidelityConfig.rejectEventParams.tweetMaxAgeInDays * 86400000) {
+        __(`@${eventData.username} - Event '${eventData.eventType}': tweet ${eventData.targetTweetId} is too old. No rewards will be credited.`);
+        resolve(status.noRewards);
+      }
+    });
+
   // Check that there's no duplicate
-  const research = await TweetEvent.find({
-    user: { _id: userId },
-    eventType: eventData.eventType,
-    targetTweetId: eventData.targetTweetId,
-  });
-  if (research.length !== 0) return;
+  const promiseSearch = TweetEvent
+    .find({
+      user: { _id: userId },
+      eventType: eventData.eventType,
+      targetTweetId: eventData.targetTweetId,
+    })
+    .then((result) => {
+      if (result.length !== 0) {
+        __(`@${eventData.username} - Event '${eventData.eventType}': already exists in database. No rewards will be credited.`);
+        resolve(status.invalid);
+      }
+    });
+
+  // Check the daily limit
+  const promiseDailyLimit = User
+    .findByUserId(eventData.userId)
+    .then((user) => {
+      if (!user) return;
+      if (user.points.thisDay >= fidelityConfig.rejectEventParams.dailyLimit) {
+        __(`@${eventData.username} - Event '${eventData.eventType}': daily limit reached. No rewards will be credited.`);
+        resolve(status.noRewards);
+      }
+    });
+
+  Promise
+    .all([promiseTweetInfo, promiseSearch, promiseDailyLimit])
+    .finally(() => {
+      resolve(status.valid);
+    });
+});
+
+const processEvent = async (eventData) => {
+  const { userId } = eventData;
+  const eventStatus = await checkEvent(eventData);
+
+  if (eventStatus === status.invalid) return;
+  if (!antispam.filterUser(eventData.userObject)) return;
+
+  let reward;
+  if (eventStatus === status.noRewards) reward = 0;
+  else reward = getReward(eventData.eventType);
 
   const Event = new TweetEvent({
     user: eventData.userId,
     eventType: eventData.eventType,
     tweetId: eventData.tweetId,
     targetTweetId: eventData.targetTweetId,
-    date: eventData.timestamp,
+    timestamp: eventData.timestamp,
+    reward,
   });
 
   Event.save();
 
   // Find User and create it if it doesn't exist
-  const reward = getReward(eventData.eventType);
   const query = { _id: userId, username: eventData.username };
-  const update = { $inc: { balance: reward, points: reward } };
+  const update = {
+    $inc: {
+      balance: reward,
+      'points.allTime': reward,
+      'points.thisDay': reward,
+      'points.thisWeek': reward,
+      'points.thisMonth': reward,
+    },
+  };
   const options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
   User
     .findOneAndUpdate(query, update, options)
     .catch((err) => __(`Error while adding reward to balance of user ${userId}: ${err}`));
+};
+
+// Delete specified event and the associated reward from user balance
+const deleteEvent = (eventToDelete) => {
+  const query = { _id: eventToDelete.user._id };
+  const minus = -1 * eventToDelete.reward;
+  const update = {
+    $inc: {
+      balance: minus,
+      'points.allTime': minus,
+      'points.thisDay': minus,
+      'points.thisWeek': minus,
+      'points.thisMonth': minus,
+    },
+  };
+  const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+  User
+    .findOneAndUpdate(query, update, options)
+    .catch((err) => __(`Error while removing reward to balance of user ${eventToDelete.user._id}: ${err}`));
+  TweetEvent
+    .deleteOne({ _id: eventToDelete._id })
+    .catch((err) => __(`Error while deleting event ${eventToDelete._id} of user ${eventToDelete.user._id}: ${err}`));
 };
 
 const claimTokens = (userId, amount, address) => {
@@ -64,11 +147,21 @@ const claimTokens = (userId, amount, address) => {
     User
       .findByUserId(userId)
       .then(async (user) => {
+        const balance = user ? user.balance : 0;
+
+        if (balance < amount) {
+          __(`There are not enough funds in the wallet of ${user ? `@${user.username}` : userId} (currently ${balance} CDT).`);
+          return reject(new Error(`There are not enough funds in this wallet (currently ${balance} CDT).`));
+        }
+
         const toAddress = address || user.address;
-        if (!toAddress) { __(`There is not any address linked to this account (@${user.username})`); }
-        if (user.balance < amount) {
-          __(`There are not enough funds in this account (@${user.username})`);
-          return reject(new Error(`There are not enough funds in this wallet (currently ${user.balance} CDT).`));
+        if (!toAddress) {
+          __(`There is not any address linked to this account (@${user.username})`);
+          return reject(new Error(`There is not any address linked to this account (@${user.username})`));
+        }
+        if (!ethereum.isEthereumAddress(toAddress)) {
+          __(`${toAddress} is not a valid Ethereum address (@${user.username})`);
+          return reject(new Error('Please enter or link a valid Ethereum address.'));
         }
 
         const tx = await CDT.send(toAddress, amount);
@@ -85,6 +178,8 @@ const getLinkedAddress = (userId) => new Promise((resolve, reject) => {
   User
     .findByUserId(userId)
     .then((result) => {
+      if (!result) return resolve();
+
       const { address } = result;
       if (address && address !== '') resolve(address);
       else resolve();
@@ -96,7 +191,8 @@ const getBalance = (userId) => new Promise((resolve, reject) => {
   User
     .findByUserId(userId)
     .then((result) => {
-      resolve(result.balance);
+      if (result) resolve(result.balance);
+      else resolve(0);
     })
     .catch((err) => __(`Error fetching balance of user ${userId}: ${err}`));
 });
@@ -108,9 +204,9 @@ const sendTokens = (from, to, amount) => new Promise((resolve, reject) => {
   User
     .findByUserId(fromId)
     .then((userFrom) => {
-      if (userFrom.balance < amount || !userFrom) {
-        __(`There are not enough funds in this account (@${userFrom.username})`);
-        return reject(new Error(`There are not enough funds in your wallet (currently ${userFrom.balance} CDT).`));
+      if (!userFrom || userFrom.balance < amount) {
+        __(`There are not enough funds in this account (@${userFrom ? userFrom.username : ''})`);
+        return reject(new Error(`There are not enough funds in your wallet (currently ${userFrom ? userFrom.balance : 0} CDT).`));
       }
 
       const query = { _id: toId, username: to.screen_name };
@@ -141,4 +237,5 @@ module.exports = {
   getLinkedAddress,
   getBalance,
   sendTokens,
+  deleteEvent,
 };
