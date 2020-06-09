@@ -107,7 +107,7 @@ const replyVerification = () => {
 const filterUser = (userObject) => {
   const createdDate = new Date(userObject.created_at);
 
-  if (Date.now() - createdDate.getTime() > fidelityConfig.rejectEventParams.userMinAgeInDays * 86400000
+  if (Date.now() - createdDate.getTime() < fidelityConfig.rejectEventParams.userMinAgeInDays * 86400000
     || userObject.followers_count < fidelityConfig.rejectEventParams.userMinFollowers
     || userObject.statuses_count < fidelityConfig.rejectEventParams.userMinTweets) {
     return false;
