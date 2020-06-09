@@ -147,12 +147,10 @@ const claimTokens = (userId, amount, address) => {
     User
       .findByUserId(userId)
       .then(async (user) => {
-        let balance;
-        if (!user) balance = 0;
-        else balance = user.balance;
+        const balance = user ? user.balance : 0;
 
         if (balance < amount) {
-          __(`There are not enough funds in the wallet of ${userId} (currently ${balance} CDT).`);
+          __(`There are not enough funds in the wallet of ${user ? `@${user.username}` : userId} (currently ${balance} CDT).`);
           return reject(new Error(`There are not enough funds in this wallet (currently ${balance} CDT).`));
         }
 
@@ -207,8 +205,8 @@ const sendTokens = (from, to, amount) => new Promise((resolve, reject) => {
     .findByUserId(fromId)
     .then((userFrom) => {
       if (!userFrom || userFrom.balance < amount) {
-        __(`There are not enough funds in this account (@${userFrom.username})`);
-        return reject(new Error(`There are not enough funds in your wallet (currently ${userFrom.balance} CDT).`));
+        __(`There are not enough funds in this account (@${userFrom ? userFrom.username : ''})`);
+        return reject(new Error(`There are not enough funds in your wallet (currently ${userFrom ? userFrom.balance : 0} CDT).`));
       }
 
       const query = { _id: toId, username: to.screen_name };
