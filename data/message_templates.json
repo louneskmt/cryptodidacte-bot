@@ -16,10 +16,10 @@
       "text": "Délai dépassé, veuillez réessayer. (timeout)"
     },
     "intro": {
-      "text": "👋 Bienvenue ! \n\nCe bot est une interface entre vous et le programme de fidelité de @Cryptodidacte. À terme, un site web sera disponible.\n\nIl y a plusieurs manières d'utiliser ce bot : premièrement, vous pouvez avoir accès aux différentes options en envoyant 'Start' pour lancer le menu. Si vous cliquez sur une option dans ce menu, vous serez guidé dans l'action (dans le cas d'informations nécessaires, le bot vous les demandera). Il existe également des commandes 'raccourcis' vous permettant d'être le plus efficace possible : par exemple, 'send 10 CDT to @lounes_kmt'. Enfin, si vous utilisez une commande nécessitant des paramètres, sans les spécifier, cela lancera alors la procédure guidée.\n\nVous pouvez à tout moment envoyer 'Cancel' pour annuler l'action en cours (ne fonctionne pas pour les commandes instantannées).\n\nEn cas d'un quelconque bug, ou simplement pour nous faire un retour, n'hésitez pas à contacter @lounes_kmt via messages privés ou dev@louneskmt.com"
+      "text": "👋 Bienvenue ! \n\nCe bot est une interface entre vous et le programme de fidelité de @Cryptodidacte. À terme, un site web sera disponible.\n\nIl y a plusieurs manières d'utiliser ce bot : premièrement, vous pouvez avoir accès aux différentes options en envoyant 'Start' pour lancer le menu. Si vous cliquez sur une option dans ce menu, vous serez guidé dans l'action (dans le cas d'informations nécessaires, le bot vous les demandera). Il existe également des commandes 'raccourcis' vous permettant d'être le plus efficace possible : par exemple, 'send 10 CDT to @lounes_kmt'. Enfin, si vous utilisez une commande nécessitant des paramètres, sans les spécifier, cela lancera alors la procédure guidée.\n\nEnvoyez 'help' pour afficher les commandes disponibles'.\n\nVous pouvez à tout moment envoyer 'Cancel' pour annuler l'action en cours (ne fonctionne pas pour les commandes instantannées).\n\nEn cas d'un quelconque bug, ou simplement pour nous faire un retour, n'hésitez pas à contacter @lounes_kmt via messages privés ou dev@louneskmt.com"
     },
     "helpCommands": {
-      "text": "Commandes disponibles :\n\n  - 'balance' : obtenir son solde off-chain\n  - 'send <amount> CDT @<destinataire>' : envoyer des CDT à un compte Twitter\n  - 'link <address>' : associer une adresse Ethereum à votre compte Twitter\n  - 'linked' : voir l'adresse actuellement associée\n  - 'withdraw <amount> <address>' : transférer des tokens de votre wallet off-chain à votre adresse Ethereum. Il n'est pas nécessaire de spécifier <address> si vous avez déjà associé une adresse.\n  - 'help' : affiche cette aide\n\nCommandes en développement :\n  - 'deposit' : vous permettra d'envoyer des tokens directement sur votre compte Twitter\n  - 'stats' : affichage de toutes vos statistiques quant à vos interactions avec le compte @Cryptodidacte"
+      "text": "Commandes disponibles :\n\n  - 'balance' : obtenir son solde off-chain\n  - 'send <amount> CDT @<destinataire>' : envoyer des CDT à un compte Twitter\n  - 'link <address>' : associer une adresse Ethereum à votre compte Twitter\n  - 'linked' : voir l'adresse actuellement associée\n  - 'withdraw <amount> <address>' : transférer des tokens de votre wallet off-chain à votre adresse Ethereum. Il n'est pas nécessaire de spécifier <address> si vous avez déjà associé une adresse.\n  - 'help' : affiche cette aide\n\nCommandes en développement :\n\n  - 'deposit' : vous permettra d'envoyer des tokens directement sur votre compte Twitter\n  - 'stats' : affichage de toutes vos statistiques quant à vos interactions avec le compte @Cryptodidacte"
     }
   },
   "lnquiz": {
@@ -122,7 +122,7 @@
         "type": "options",
         "options": [
           {
-            "label": "🏅 Ajouter de nouveaux gagnants #LNQuiz",
+            "label": "🏅 Ajouter des gagnants #LNQuiz",
             "description": "Set Twitter accounts as winners",
             "metadata": "add_winners"
           },
@@ -183,7 +183,7 @@
             "metadata": "cdt_stats"
           },
           {
-            "label": "📤 Retirer mes CDT vers une adresse ETH",
+            "label": "📤 Retirer des CDT",
             "description": "CMD: 'withdraw <amount> <address>'",
             "metadata": "cdt_withdraw"
           },
