@@ -37,7 +37,7 @@ botEvents.on('tweet', async (tweet) => {
     }
   }
 
-  const sendRegex = /@lkmt_test send (\d+) CDT( to @(.+))?/;
+  const sendRegex = /@CDidacteBot send (\d+) CDT( to @(.+))?/;
   if (sendRegex.test(content)) {
     const resultArray = sendRegex.exec(content);
     const amount = resultArray[1];
