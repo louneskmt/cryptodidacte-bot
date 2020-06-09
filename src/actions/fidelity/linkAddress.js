@@ -13,7 +13,7 @@ async function linkAddress(params) {
   Twitter.sendMessage(userId, messageTemplates.fidelity.linkAddress);
 
   const response = await waitForPattern(userId, validators.isEthereumAddress);
-  if (!response) return end(params, { description: 'Timeout, please try again.' });
+  if (!response) return end(params, { description: messageTemplates.global.timeout });
 
   const address = response.message;
 

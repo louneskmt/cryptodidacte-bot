@@ -6,6 +6,10 @@ const ethereum = require('./ethereum.js');
 const antispam = require('./antispam.js');
 const Twitter = require('./Twitter.js');
 
+const messageTemplates = require('../data/message_templates.json');
+const insertVariablesInTemplate = require('./helpers/insertVariablesInTemplate.js');
+
+
 const { ethereumConfig, fidelityConfig } = require('../config.js');
 
 const status = {
@@ -151,17 +155,17 @@ const claimTokens = (userId, amount, address) => {
 
         if (balance < amount) {
           __(`There are not enough funds in the wallet of ${user ? `@${user.username}` : userId} (currently ${balance} CDT).`);
-          return reject(new Error(`There are not enough funds in this wallet (currently ${balance} CDT).`));
+          return reject(new Error(insertVariablesInTemplate(messageTemplates.fidelity.sendAmountTooHigh, { balance }, true)));
         }
 
         const toAddress = address || user.address;
         if (!toAddress) {
           __(`There is not any address linked to this account (@${user.username})`);
-          return reject(new Error(`There is not any address linked to this account (@${user.username})`));
+          return reject(new Error(messageTemplates.fidelity.isEthereumAddress));
         }
         if (!ethereum.isEthereumAddress(toAddress)) {
           __(`${toAddress} is not a valid Ethereum address (@${user.username})`);
-          return reject(new Error('Please enter or link a valid Ethereum address.'));
+          return reject(new Error(messageTemplates.fidelity.isEthereumAddress));
         }
 
         const tx = await CDT.send(toAddress, amount);
@@ -206,7 +210,7 @@ const sendTokens = (from, to, amount) => new Promise((resolve, reject) => {
     .then((userFrom) => {
       if (!userFrom || userFrom.balance < amount) {
         __(`There are not enough funds in this account (@${userFrom ? userFrom.username : ''})`);
-        return reject(new Error(`There are not enough funds in your wallet (currently ${userFrom ? userFrom.balance : 0} CDT).`));
+        return reject(new Error(insertVariablesInTemplate(messageTemplates.fidelity.sendAmountTooHigh, { balance: userFrom ? userFrom.balance : 0 }, true)));
       }
 
       const query = { _id: toId, username: to.screen_name };
@@ -222,12 +226,12 @@ const sendTokens = (from, to, amount) => new Promise((resolve, reject) => {
         })
         .catch((err) => {
           __(`Error (#2) while sending ${amount} CDT from ${fromId} to ${toId}: ${err}`, 9);
-          return reject(new Error(`Unknow error while sending ${amount} CDT to @${to.screen_name}. Please try again later and contact @lounes_kmt if the issue persists.`));
+          return reject(new Error(messageTemplates.global.error));
         });
     })
     .catch((err) => {
       __(`Error (#1) while sending ${amount} CDT from ${fromId} to ${toId}: ${err}`, 9);
-      return reject(new Error(`Unknow error while sending ${amount} CDT to @${to.screen_name}. Please try again later and contact @lounes_kmt if the issue persists.`));
+      return reject(new Error(messageTemplates.global.error));
     });
 });
 

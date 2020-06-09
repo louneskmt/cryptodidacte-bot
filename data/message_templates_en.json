@@ -1,0 +1,207 @@
+{
+  "global": {
+    "end": {
+      "text": "End of action 🙃"
+    },
+    "retry": {
+      "text": "❌ Please try again, or send 'Cancel'."
+    },
+    "error": {
+      "text": "Sorry, something went wrong. Please try later or contact @lounes_kmt if the issue persists."
+    },
+    "done": {
+      "text": "✅ Done!"
+    }
+  },
+  "lnquiz": {
+    "notify": {
+        "text": "🥳 You have been added as a new LNQuiz winner ! You can now claim %{reward} sats, by sending 'Start' and choosing option '🎁 Claim rewards' !"
+    },
+    "confirmAddition": {
+        "text": "✅ You successfully added this three winners : \n\n🏁 @%{winner1}\n✍️ @%{winner2}\n🎲 @%{winner3}"
+    },
+    "badAmount": {
+        "text": "Your invoice is for %{amount} sats. Please generate an invoice for %{expectedAmount} sats and retry."
+    },
+    "currentRewards": {
+        "text": "Current #LNQuiz Rewards :\n\n🏁 %{question} sats\n✍️ %{writing} sats \n🎲 %{random} sats"
+    },
+    "askForInvoice": {
+        "text": "Please, send an invoice for %{amount} sats."
+    },
+    "askForWinners": {
+      "text": "➡️ Please, send the new winners in the following order : 🏁 Question - ✍️ Writing - 🎲 Random."
+    },
+    "askForRewards": {
+      "text": "➡️ Please, send the new rewards amount in the following order : 🏁 Question - ✍️ Writing - 🎲 Random, separated with a space and in sats (e.g. '150 300 150')."
+    },
+    "retry": {
+      "text": "You didn't enter three winners."
+    },
+    "wip": {
+      "text": "Paying invoice..."
+    },
+    "paid": {
+      "text": "✅ Paid!"
+    },
+    "error": {
+      "text": "❌ Error paying invoice or getting invoice data... Please try again later."
+    },
+    "nothing": {
+      "text": "You have nothing to claim."
+    }
+  },
+  "tip": {
+    "wip": {
+      "text": "Generating invoice..."
+    },
+    "error": {
+      "text": "❌ Error generating invoice... Please try later."
+    },
+    "thanks": {
+      "text": "🙏 Thanks a lot for supporting our work ! See you soon !"
+    }
+  },
+  "fidelity": {
+    "selectWithDrawAddress": {
+      "text": "Select target address"
+    },
+    "linkAddress": {
+      "text": "Please send an Ethereum address to link with your Twitter account."
+    },
+    "linkAddressOk": {
+      "text": "➡️ Your Twitter is now linked to the following Ethereum address : %{address} !"
+    },
+    "getAddressOk": {
+      "text": "➡️ Your Twitter is linked to the following Ethereum address : %{address} !"
+    },
+    "getAddressNone": {
+      "text": "➡️ You didn't linked yet your Ethereum address."
+    },
+    "claimOk": {
+      "text": "➡️ Transaction broadcasted with hash %{hash}. See it now on https://rinkeby.etherscan.io/tx/%{hash} !"
+    },
+    "error": {
+      "text": "❌ Error : %{err}"
+    },
+    "getBalance": {
+      "text": "You currently have %{balance} CDT off-chain !"
+    },
+    "getBalanceEmpty": {
+      "text": "Sorry, your off-chain CDT balance is empty !"
+    },
+    "sendOk": {
+      "text": "✅ You succesfully sent %{amount} CDT to @%{to} ! Your balance is now %{balance} CDT !"
+    },
+    "sendTweetOk": {
+      "text": "✅ You succesfully sent %{amount} CDT to @%{to} !"
+    },
+    "received": {
+      "text": "🎁 @%{sender} just sent you %{amount} CDT !"
+    }
+  },
+  "menu": {
+    "admin": {
+      "text": "👋 Hey, admin ! What do you want to do ? 🤔",
+      "quick_reply": {
+        "type": "options",
+        "options": [
+          {
+            "label": "🏅 Add new #LNQuiz winners",
+            "description": "Set Twitter accounts as winners",
+            "metadata": "add_winners"
+          },
+          {
+            "label": "ℹ️ Get #LNQuiz Rewards info",
+            "description": "See the current rewards amounts",
+            "metadata": "get_rewards_info"
+          },
+          {
+            "label": "🔄 Update #LNQuiz Rewards",
+            "description": "Set new rewards amounts",
+            "metadata": "update_rewards"
+          },
+          {
+            "label": "💸 Send CDT",
+            "description": "Send CDT to an ETH address or Twitter account",
+            "metadata": "send_cdt"
+          }
+        ]
+      }
+    },
+    "standard": {
+      "text": "👋 Hey ! What do you want to do ?",
+      "quick_reply": {
+        "type": "options",
+        "options": [
+          {
+            "label": "🎁 Claim rewards",
+            "description": "Claim #LNQuiz rewards if you won",
+            "metadata": "claim_rewards"
+          },
+          {
+            "label": "CDT Menu",
+            "description": "Enter Cryptodidacte Fidelity menu",
+            "metadata": "send_cdt_menu"
+          },
+          {
+            "label": "💸 Tip Cryptodidacte",
+            "description": "Generate an LN invoice to tip Cryptodidacte",
+            "metadata": "generate_invoice"
+          }
+        ]
+      }
+    },
+    "fidelity": {
+      "text": "👋 Hey ! What do you want to do ?",
+      "quick_reply": {
+        "type": "options",
+        "options": [
+          {
+            "label": "🏦 Show CDT balance",
+            "description": "CMD: 'balance'",
+            "metadata": "cdt_display_balance"
+          },
+          {
+            "label": "🏦 Get your stats",
+            "description": "WIP: Not implemented yet",
+            "metadata": "cdt_stats"
+          },
+          {
+            "label": "Withdraw CDT",
+            "description": "CMD: 'withdraw amount address'",
+            "metadata": "cdt_withdraw"
+          },
+          {
+            "label": "Deposit CDT",
+            "description": "WIP: Not implemented yet ", 
+            "metadata": "cdt_refund"
+          },
+          {
+            "label": "Link ETH Address",
+            "description": "CMD: 'link address'",
+            "metadata": "cdt_link_address"
+          },
+          {
+            "label": "Get linked ETH Address",
+            "description": "CMD : 'linked'",
+            "metadata": "cdt_get_address"
+          },
+          {
+            "label": "Display help",
+            "description": "CMD : 'help'",
+            "metadata": "cdt_help"
+          }
+        ]
+      }
+    }
+  },
+  "validators_errors": {
+    "isEthereumAddress": {
+      "text": "❌ This is not a valid Ethereum address, please try again or send 'Cancel'."
+    },
+    "isLightningInvoice": {
+      "text": "❌ This is not a valid Lightning invoice, please try again or send 'Cancel'."
+    }
+  }
+}

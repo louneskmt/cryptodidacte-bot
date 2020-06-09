@@ -11,7 +11,7 @@ async function withdraw(params, args) {
   const address = args[1] || await getLinkedAddress(userId);
 
   if (!amount || amount <= 0 || !address) {
-    return end(params, { description: insertVariablesInTemplate(messageTemplates.fidelity.error, { err: 'Please enter valid amount and address (if you haven\'t linked yet an Ethereum address to your Twitter account).' }) });
+    return end(params, { description: insertVariablesInTemplate(messageTemplates.fidelity.error, { err: messageTemplates.fidelity.noValidAmountOrAddress }) });
   }
 
   claimTokens(userId, amount, address)

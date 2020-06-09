@@ -12,7 +12,7 @@ async function linkAddressCommand(params, args) {
   const { userId } = params;
   const address = args[0];
   if (!address) return linkAddress(params);
-  if (!validators.isEthereumAddress(address)) return end(params, { description: '❌ This is not a valid Ethereum address, please try again.', endMessage: false });
+  if (!validators.isEthereumAddress(address)) return end(params, { description: messageTemplates.validators_errors.isEthereumAddress, endMessage: false });
 
   const CurrentUser = await User.findByUserId(userId);
   if (!CurrentUser) {

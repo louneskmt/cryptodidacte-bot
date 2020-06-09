@@ -5,8 +5,7 @@ const messageTemplates = require('../../../data/message_templates.json');
 
 async function withdrawCDT(params) {
   const { userId } = params;
-  Twitter.sendMessage(userId, messageTemplates.fidelity.selectWithDrawAddress);
-  const response = await waitForMessage(userId);
+  
   end(params);
 }
 

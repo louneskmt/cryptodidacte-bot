@@ -18,7 +18,7 @@ function getBalanceCommand(params, args) {
     })
     .catch((err) => {
       __(`Error while fetching balance of user ${userId} : ${err}`, 9);
-      end(params, { description: 'Unknow error while fetching balance. Please try again later and contact @lounes_kmt if the issue persists.', endMessage: false });
+      end(params, { description: messageTemplates.global.error, endMessage: false });
     });
 }
 
