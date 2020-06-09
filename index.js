@@ -245,6 +245,10 @@ app.get('/logs', (req, res) => {
 });
 */
 
+app.get('/', (req, res) => {
+  res.redirect('/connect');
+});
+
 // Starts server
 https.createServer({
   key: fs.readFileSync('./certs/privkey.pem'),
