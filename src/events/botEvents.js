@@ -81,6 +81,7 @@ botEvents.on('dm', (userId, messageObject) => {
     cdt_link_address: actions.linkAddress,
     cdt_get_address: commands.getAddress,
     cdt_display_balance: commands.getBalance,
+    cdt_help: commands.help,
     cdt_refund: undefined,
   };
 
@@ -96,7 +97,7 @@ botEvents.on('dm', (userId, messageObject) => {
     linked: commands.getAddress,
     balance: commands.getBalance,
     send: commands.send,
-    help: actions.help,
+    help: commands.help,
   };
 
   const params = {
