@@ -147,19 +147,20 @@ const claimTokens = (userId, amount, address) => {
     User
       .findByUserId(userId)
       .then(async (user) => {
-        if (!user) {
-          __(`There are not enough funds in this account (@${user.username})`);
-          return reject(new Error(`There are not enough funds in this wallet (currently ${user.balance} CDT).`));
+        if (!user || user.balance < amount) {
+          const balance = user.balance || 0;
+          __(`There are not enough funds in the wallet of ${userId} (currently ${balance} CDT).`);
+          return reject(new Error(`There are not enough funds in this wallet (currently ${balance} CDT).`));
         }
 
         const toAddress = address || user.address;
-        if (!toAddress) { 
+        if (!toAddress) {
           __(`There is not any address linked to this account (@${user.username})`);
           return reject(new Error(`There is not any address linked to this account (@${user.username})`));
         }
-        if (user.balance < amount) {
-          __(`There are not enough funds in this account (@${user.username})`);
-          return reject(new Error(`There are not enough funds in this wallet (currently ${user.balance} CDT).`));
+        if (!ethereum.isEthereumAddress(toAddress)) {
+          __(`${toAddress} is not a valid Ethereum address (@${user.username})`);
+          return reject(new Error('Please enter or link a valid Ethereum address.'));
         }
 
         const tx = await CDT.send(toAddress, amount);
@@ -176,7 +177,7 @@ const getLinkedAddress = (userId) => new Promise((resolve, reject) => {
   User
     .findByUserId(userId)
     .then((result) => {
-      if (!result) resolve();
+      if (!result) return resolve();
 
       const { address } = result;
       if (address && address !== '') resolve(address);
