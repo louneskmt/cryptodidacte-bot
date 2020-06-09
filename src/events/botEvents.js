@@ -44,7 +44,7 @@ botEvents.on('tweet', async (tweet) => {
     const recipientObject = mentions.find((user) => user.screen_name === resultArray[3]) || await Twitter.getUserInfo({ userId: tweet.in_reply_to_user_id_str });
 
     if (!recipientObject || recipientObject.id_str === twitterConfig.user_id_bot) {
-      return Twitter.replyToTweet(tweetId, 'You have to provide one recipient, by replying to someone, or specifying it. Here is an example :\n\n \'@lkmt_test send 1 CDT to @Cryptodidacte\'');
+      return Twitter.replyToTweet(tweetId, messageTemplates.fidelity.sendTweetNoRecipient);
     }
 
     __(`Tweet : send ${amount} CDT to @${recipientObject.screen_name}`);

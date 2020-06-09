@@ -102,6 +102,9 @@
     "sendTweetOk": {
       "text": "✅ Vous avez envoyé %{amount} CDT à @%{to} avec succès !"
     },
+    "sendTweetNoRecipient": {
+      "text": "Vous devez spécifier un destinataire, en répondant à quelqu'un, ou en le mentionnant. Voici un exemple :\n\n'@CDidacteBot send 1 CDT to @Cryptodidacte'"
+    },
     "received": {
       "text": "🎁 @%{sender} vient tout juste de vous envoyer %{amount} CDT !"
     },
