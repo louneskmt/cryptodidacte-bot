@@ -174,7 +174,6 @@ app.post('/api/db/:schema/get', async (req, res) => {
   if (!SchemaObj) return res.status(400).send('-1');
 
   const filter = req.body.filter || {};
-  console.log(filter);
   const schemaDescription = (typeof SchemaObj.loadUIDescription === 'function') ? SchemaObj.loadUIDescription : undefined;
   const queryResponse = await SchemaObj.find(filter);
 
