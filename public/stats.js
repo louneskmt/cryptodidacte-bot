@@ -16,9 +16,7 @@ function formatDate(date) {
   return `${day.slice(-2)}/${month.slice(-2)}/${date.getFullYear()}`;
 }
 
-$(document).ready(() => {
-  console.log('Ready!');
-
+$(() => {
   $('#reportrange').daterangepicker({
     startDate: moment().subtract(29, 'days'),
     endDate: moment(),
@@ -73,8 +71,8 @@ $(document).ready(() => {
 const displayCharts = (start, end) => {
   const requestTweets = $.post('/api/db/tweetevents/get', { timestamp: { $gt: start, $lt: end } }, (res) => {
     if (res === '-1') return console.log('Error while fetching TweetEvents collection.');
-    console.log(res);
     tweets = res.queryResponse;
+    console.log(tweets);
     displayDayDistribChart($('#dayChart'), tweets);
     displayHourDistribChart($('#hourChart'), tweets);
     displayEventTypeChart($('#eventTypeChart'), tweets);
