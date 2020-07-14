@@ -10,6 +10,8 @@ window.chartColors = {
 
 Chart.plugins.unregister(ChartDataLabels);
 
+let displayPercentages = false;
+
 function formatDate(date) {
   const day = `0${date.getDate()}`;
   const month = `0${date.getMonth() + 1}`;
@@ -27,6 +29,14 @@ $(document).ready(() => {
     $('#reportrange span').html(`${formatDate(startDate)} - ${formatDate(endDate)}`);
     updateCharts(startDate, endDate);
   }
+
+  $('#button-percentages').on('click', () => {
+    displayPercentages = !displayPercentages;
+    window.dayDistrib.options.plugins.datalabels.display = displayPercentages;
+    window.hourDistrib.options.plugins.datalabels.display = displayPercentages;
+    window.dayDistrib.update();
+    window.hourDistrib.update();
+  });
 
   $('#reportrange').daterangepicker({
     startDate: moment().subtract(29, 'days'),
@@ -83,7 +93,19 @@ $(document).ready(() => {
         borderWidth: 1,
       }],
     },
+    plugins: [ChartDataLabels],
     options: {
+      plugins: {
+        datalabels: {
+          display: displayPercentages,
+          formatter(value, context) {
+            return `${Math.round((value * 100) / context.dataset.data.reduce((a, b) => a + b, 0))}%`;
+          },
+          anchor: 'end',
+          align: 'bottom',
+          clip: true,
+        },
+      },
       scales: {
         yAxes: [{
           ticks: {
@@ -115,7 +137,20 @@ $(document).ready(() => {
         borderWidth: 1,
       }],
     },
+    plugins: [ChartDataLabels],
     options: {
+      plugins: {
+        datalabels: {
+          display: displayPercentages,
+          formatter(value, context) {
+            return `${((value * 100) / context.dataset.data.reduce((a, b) => a + b, 0)).toFixed(1)}%`;
+          },
+          anchor: 'end',
+          align: 'right',
+          clip: true,
+          clamp: true,
+        },
+      },
       scales: {
         yAxes: [{
           ticks: {
