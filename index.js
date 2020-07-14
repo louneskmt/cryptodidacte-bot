@@ -11,6 +11,7 @@ const { twitterConfig } = require('./config.js');
 const globalEvents = require('./src/events/globalEvents.js');
 const schemas = require('./src/database/mongoose.js');
 const Session = require('./endpoints/session.js');
+const Twitter = require('./src/Twitter.js');
 
 require('./src/plannedTasks.js');
 
@@ -26,6 +27,11 @@ app.use(expressSession({
   saveUninitialized: true,
   cookie: { secure: true, expires: null },
 }));
+
+/**
+ * Serve static files from directory public
+ */
+app.use(express.static('public'));
 
 /**
  * Receives Account Activity events
@@ -79,6 +85,24 @@ const isSessionValid = (session) => {
   return true;
 };
 
+/**
+ * Returns logs
+ */
+/*
+app.get('/logs', (req, res) => {
+  res.sendFile(`${__dirname}/logs/main.log`);
+});
+*/
+
+app.get('/', (req, res) => {
+  res.redirect('/connect');
+});
+
+app.get('/done', (req, res) => {
+  console.log(req.query);
+  console.log(req.body);
+});
+
 app.get('/connect', (req, res) => {
   const continueTo = req.query.continueTo || '';
   const nextParams = req.query.nextParams || '';
@@ -109,7 +133,7 @@ app.get('/stats', (req, res) => {
   if (!isSessionValid(req.session)) { // 30mins
     req.session.destroy((err) => {
       if (err) return __(err, 9);
-      res.redirect('/connect');
+      res.redirect('/connect?continueTo=stats');
     });
   } else {
     res.status(200).sendFile(`${__dirname}/public/stats.html`);
@@ -120,7 +144,7 @@ app.get('/view/:viewName/:viewParams*?', (req, res) => {
   const viewName = req.params.viewName || null;
   let viewParams = req.params.viewParams || '';
 
-  if (isSessionValid(req.session) === false) {
+  if (!isSessionValid(req.session)) {
     req.session.destroy((err) => {
       if (err) return __(err, 9);
       res.redirect(`/connect${viewName ? `?continueTo=${viewName}` : ''}${viewParams ? `&nextParams=${viewParams}` : ''}`);
@@ -163,11 +187,14 @@ const getSchemaFromName = (name) => {
   return (schemasMap[name] || null);
 };
 
-app.post('/api/db/:schema/get', async (req, res) => {
-  if (!isSessionValid(req.session) && req.body.isTest !== true) {
+app.use((req, res, next) => {
+  if (!isSessionValid(req.session)) {
     return res.status(403).send('-1');
   }
+  next();
+});
 
+app.post('/api/db/:schema/get', async (req, res) => {
   const { schema } = req.params;
   const SchemaObj = getSchemaFromName(schema);
 
@@ -185,10 +212,6 @@ app.post('/api/db/:schema/get', async (req, res) => {
 });
 
 app.post('/api/db/:schema/insert', async (req, res) => {
-  if (!isSessionValid(req.session) && req.body.isTest === false) {
-    return res.status(403).send('-1');
-  }
-
   const { schema } = req.params;
   const entry = req.body.entry || null;
   __(entry, 2);
@@ -210,10 +233,6 @@ app.post('/api/db/:schema/insert', async (req, res) => {
 });
 
 app.post('/api/db/:schema/update', async (req, res) => {
-  if (!isSessionValid(req.session) && req.body.isTest === false) {
-    return res.status(403).send('-1');
-  }
-
   const { schema } = req.params;
   const query = req.body.query || null;
   const filter = req.body.filter || {};
@@ -228,10 +247,6 @@ app.post('/api/db/:schema/update', async (req, res) => {
 
 // TODO
 app.post('/api/db/:schema/remove/idList', async (req, res) => {
-  if (!isSessionValid(req.session) && req.body.isTest === false) {
-    return res.status(403).send('-1');
-  }
-
   const { schema } = req.params;
   const idList = req.body.idList || null;
 
@@ -244,26 +259,60 @@ app.post('/api/db/:schema/remove/idList', async (req, res) => {
 });
 
 /**
- * Serve static files from directory public
+ * API TWITTER
  */
-app.use(express.static('public'));
+app.post('/api/twitter/users/show', async (req, res) => {
+  const { userId = undefined, username = undefined } = req.body;
 
-/**
- * Returns logs
- */
-/*
-app.get('/logs', (req, res) => {
-  res.sendFile(`${__dirname}/logs/main.log`);
+  if (!userId && !username) return res.status(400);
+
+  Twitter
+    .getUserInfo({ userId, username })
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      res.status(502).send(err);
+    });
 });
-*/
 
-app.get('/', (req, res) => {
-  res.redirect('/connect');
+app.post('/api/twitter/tweets/show', async (req, res) => {
+  const { tweetId } = req.body;
+
+  Twitter
+    .getTweetInfo(tweetId)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      res.status(502).send(err);
+    });
 });
 
-app.get('/done', (req, res) => {
-  console.log(req.query);
-  console.log(req.body);
+app.post('/api/twitter/tweets/lookup', async (req, res) => {
+  const { idsArray } = req.body;
+
+  Twitter
+    .getManyTweetsInfo(idsArray)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      res.status(502).send(err);
+    });
+});
+
+app.post('/api/twitter/tweets/retweeters', async (req, res) => {
+  const { tweetId } = req.body;
+
+  Twitter
+    .getRetweeters(tweetId)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      res.status(502).send(err);
+    });
 });
 
 // Starts server
