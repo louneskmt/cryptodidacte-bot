@@ -16,23 +16,25 @@ let tweets;
 const requestUsers = $.post('/api/db/users/get', {}, (res) => {
   if (res === '-1') return console.log('Error while fetching Users collection.');
   console.log(res);
-  users = res.body.queryResponse;
+  users = res.queryResponse;
 });
 requestUsers.fail((err) => console.log('Error while fetching Users collection : ', err));
 
 const requestTweets = $.post('/api/db/tweetevents/get', {}, (res) => {
   if (res === '-1') return console.log('Error while fetching TweetEvents collection.');
   console.log(res);
-  tweets = res.body.queryResponse;
+  tweets = res.queryResponse;
 });
 requestTweets.fail((err) => console.log('Error while fetching TweetEvents collection : ', err));
 
 $(document).ready(() => {
   console.log('Ready!');
 
-  displayDayDistribChart($('#dayChart'));
-  displayHourDistribChart($('#hourChart'));
-  displayEventTypeChart($('#eventTypeChart'));
+  Promise.all([requestTweets, requestUsers]).then(() => {
+    displayDayDistribChart($('#dayChart'));
+    displayHourDistribChart($('#hourChart'));
+    displayEventTypeChart($('#eventTypeChart'));
+  });
 });
 
 const displayDayDistribChart = (ctx) => {
