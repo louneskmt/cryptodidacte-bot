@@ -105,6 +105,17 @@ app.get('/index', (req, res) => {
   }
 });
 
+app.get('/stats', (req, res) => {
+  if (!isSessionValid(req.session)) { // 30mins
+    req.session.destroy((err) => {
+      if (err) return __(err, 9);
+      res.redirect('/connect');
+    });
+  } else {
+    res.status(200).sendFile(`${__dirname}/public/stats.html`);
+  }
+});
+
 app.get('/view/:viewName/:viewParams*?', (req, res) => {
   const viewName = req.params.viewName || null;
   let viewParams = req.params.viewParams || '';
@@ -146,7 +157,8 @@ app.post('/login', async (req, res) => {
 const getSchemaFromName = (name) => {
   const schemasMap = {
     rewards: schemas.LNQuizReward,
-    // TODO: add other schemas
+    users: schemas.User,
+    tweetevents: schemas.TweetEvent,
   };
   return (schemasMap[name] || null);
 };
