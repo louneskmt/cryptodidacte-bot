@@ -16,11 +16,24 @@ function formatDate(date) {
   return `${day.slice(-2)}/${month.slice(-2)}/${date.getFullYear()}`;
 }
 
-$(() => {
+$(document).ready(() => {
+  console.log('Ready!');
+
+  function cb(start, end) {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    console.log(`${startDate.getTime()} - ${endDate.getTime()}`);
+    $('#reportrange span').html(`${formatDate(startDate)} - ${formatDate(endDate)}`);
+    displayCharts(start, end);
+  }
+
   $('#reportrange').daterangepicker({
     startDate: moment().subtract(29, 'days'),
     endDate: moment(),
     ranges: {
+      'Aujourd\'hui': [moment(), moment()],
+      '\\Hier': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
       '7 derniers jours': [moment().subtract(6, 'days'), moment()],
       '30 derniers jours': [moment().subtract(29, 'days'), moment()],
       'Ce mois-ci': [moment().startOf('month'), moment().endOf('month')],
@@ -58,14 +71,9 @@ $(() => {
       ],
       firstDay: 1,
     },
-  }, (start, end) => {
-    const startDate = new Date(start);
-    const endDate = new Date(end);
+  }, cb);
 
-    console.log(`${startDate.getTime()} - ${endDate.getTime()}`);
-    $('#reportrange span').html(`${formatDate(startDate)} - ${formatDate(endDate)}`);
-    displayCharts(start, end);
-  });
+  cb(moment().subtract(29, 'days'), moment());
 });
 
 const displayCharts = (start, end) => {
