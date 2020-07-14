@@ -10,34 +10,79 @@ window.chartColors = {
 
 Chart.plugins.unregister(ChartDataLabels);
 
-let users;
-let tweets;
-
-const requestUsers = $.post('/api/db/users/get', {}, (res) => {
-  if (res === '-1') return console.log('Error while fetching Users collection.');
-  console.log(res);
-  users = res.queryResponse;
-});
-requestUsers.fail((err) => console.log('Error while fetching Users collection : ', err));
-
-const requestTweets = $.post('/api/db/tweetevents/get', {}, (res) => {
-  if (res === '-1') return console.log('Error while fetching TweetEvents collection.');
-  console.log(res);
-  tweets = res.queryResponse;
-});
-requestTweets.fail((err) => console.log('Error while fetching TweetEvents collection : ', err));
+function formatDate(date) {
+  const day = `0${date.getDate()}`;
+  const month = `0${date.getMonth()}`;
+  return `${day.slice(-2)}/${month.slice(-2)}/${date.getFullYear()}`;
+}
 
 $(document).ready(() => {
   console.log('Ready!');
 
-  Promise.all([requestTweets, requestUsers]).then(() => {
-    displayDayDistribChart($('#dayChart'));
-    displayHourDistribChart($('#hourChart'));
-    displayEventTypeChart($('#eventTypeChart'));
+  $('#reportrange').daterangepicker({
+    startDate: moment().subtract(29, 'days'),
+    endDate: moment(),
+    ranges: {
+      '7 derniers jours': [moment().subtract(6, 'days'), moment()],
+      '30 derniers jours': [moment().subtract(29, 'days'), moment()],
+      'Ce mois-ci': [moment().startOf('month'), moment().endOf('month')],
+      'Le mois dernier': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+    },
+    locale: {
+      format: 'DD/MM/YYYY',
+      cancelLabel: 'Fermer',
+      applyLabel: 'Appliquer',
+      customRangeLabel: 'Personnaliser',
+      fromLabel: 'Du',
+      toLabel: 'au',
+      daysOfWeek: [
+        'Dim',
+        'Lun',
+        'Mar',
+        'Mer',
+        'Jeu',
+        'Ven',
+        'Sam',
+      ],
+      monthNames: [
+        'Janvier',
+        'Février',
+        'Mars',
+        'Avril',
+        'Mai',
+        'Juin',
+        'Juillet',
+        'Août',
+        'Septembre',
+        'Octobre',
+        'Novembre',
+        'Décembre',
+      ],
+      firstDay: 1,
+    },
+  }, (start, end) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    console.log(`${startDate.getTime()} - ${endDate.getTime()}`);
+    $('#reportrange span').html(`${formatDate(startDate)} - ${formatDate(endDate)}`);
+    displayCharts(start, end);
   });
 });
 
-const displayDayDistribChart = (ctx) => {
+const displayCharts = (start, end) => {
+  const requestTweets = $.post('/api/db/tweetevents/get', { timestamp: { $gt: start, $lt: end } }, (res) => {
+    if (res === '-1') return console.log('Error while fetching TweetEvents collection.');
+    console.log(res);
+    tweets = res.queryResponse;
+    displayDayDistribChart($('#dayChart'), tweets);
+    displayHourDistribChart($('#hourChart'), tweets);
+    displayEventTypeChart($('#eventTypeChart'), tweets);
+  });
+  requestTweets.fail((err) => console.log('Error while fetching TweetEvents collection : ', err));
+};
+
+const displayDayDistribChart = (ctx, tweets) => {
   const tweetsDates = tweets.map((tweet) => new Date(Number(tweet.timestamp)));
   const tweetsDays = tweetsDates.map((date) => date.getDay());
 
@@ -77,7 +122,7 @@ const displayDayDistribChart = (ctx) => {
   });
 };
 
-const displayHourDistribChart = (ctx) => {
+const displayHourDistribChart = (ctx, tweets) => {
   const tweetsDates = tweets.map((tweet) => new Date(Number(tweet.timestamp)));
   const tweetsHours = tweetsDates.map((date) => date.getHours());
 
@@ -117,7 +162,7 @@ const displayHourDistribChart = (ctx) => {
   });
 };
 
-const displayEventTypeChart = (ctx) => {
+const displayEventTypeChart = (ctx, tweets) => {
   const tweetsType = tweets.map((tweet) => tweet.eventType.capitalize());
 
   console.log(tweetsType);
