@@ -20,7 +20,7 @@ const requestUsers = $.post('/api/db/users/get', {}, (res) => {
 });
 requestUsers.fail((err) => console.log('Error while fetching Users collection : ', err));
 
-const requestTweets = $.post('/api/db/tweets/get', {}, (res) => {
+const requestTweets = $.post('/api/db/tweetevents/get', {}, (res) => {
   if (res === '-1') return console.log('Error while fetching TweetEvents collection.');
   console.log(res);
   tweets = res.body.queryResponse;
