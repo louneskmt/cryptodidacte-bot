@@ -133,10 +133,25 @@ app.get('/stats', (req, res) => {
   if (!isSessionValid(req.session)) { // 30mins
     req.session.destroy((err) => {
       if (err) return __(err, 9);
-      res.redirect('/connect?continueTo=stats');
+      res.redirect('/connect');
     });
   } else {
     res.status(200).sendFile(`${__dirname}/public/stats.html`);
+  }
+});
+
+app.get('/stats/tweet/:id', (req, res) => {
+  if (!isSessionValid(req.session)) { // 30mins
+    req.session.destroy((err) => {
+      if (err) return __(err, 9);
+      res.redirect('/connect');
+    });
+  } else {
+    const { id } = req.params;
+
+    ejs.renderFile(`${__dirname}/public/tweetStats.ejs`, { id }, (err, str) => {
+      res.status(200).send(str);
+    });
   }
 });
 

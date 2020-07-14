@@ -213,20 +213,20 @@ $(document).ready(() => {
 });
 
 const updateCharts = (startDate, endDate) => {
-  const requestTweets = $.post('/api/db/tweetevents/get', { filter: { timestamp: { $gt: startDate.getTime(), $lt: endDate.getTime() } } }, (res) => {
+  const requestEvents = $.post('/api/db/tweetevents/get', { filter: { timestamp: { $gt: startDate.getTime(), $lt: endDate.getTime() } } }, (res) => {
     if (res === '-1') return console.log('Error while fetching TweetEvents collection.');
-    tweets = res.queryResponse;
+    events = res.queryResponse;
 
-    const tweetsDates = tweets.map((tweet) => new Date(Number(tweet.timestamp)));
-    const tweetsType = tweets.map((tweet) => tweet.eventType.capitalize());
-    const tweetsDays = tweetsDates.map((date) => date.getDay());
-    const tweetsHours = tweetsDates.map((date) => date.getHours());
+    const eventsDates = events.map((event) => new Date(Number(event.timestamp)));
+    const eventsType = events.map((event) => event.eventType.capitalize());
+    const eventsDays = eventsDates.map((date) => date.getDay());
+    const eventsHours = eventsDates.map((date) => date.getHours());
 
     const perDay = [];
     for (let i = 0; i < 7; i += 1) {
       // Monday = 0, Sunday = 6
       const dayNumber = (i === 0) ? 6 : i - 1;
-      perDay[dayNumber] = tweetsDays.filter((e) => e === i).length;
+      perDay[dayNumber] = eventsDays.filter((e) => e === i).length;
     }
 
     window.dayDistrib.data.datasets[0].data = perDay;
@@ -235,7 +235,7 @@ const updateCharts = (startDate, endDate) => {
 
     const perHour = [];
     for (let i = 0; i < 24; i += 1) {
-      perHour[i] = tweetsHours.filter((e) => e === i).length;
+      perHour[i] = eventsHours.filter((e) => e === i).length;
     }
 
     window.hourDistrib.data.datasets[0].data = perHour;
@@ -243,10 +243,10 @@ const updateCharts = (startDate, endDate) => {
     window.hourDistrib.options.title.text = `Nombre d'interactions selon l'heure du ${formatDate(startDate)} au ${formatDate(endDate)}`;
     window.hourDistrib.update();
 
-    const eventTypes = [...new Set(tweetsType)];
+    const eventTypes = [...new Set(eventsType)];
     const perEventTypes = [];
     eventTypes.forEach((eventType) => {
-      perEventTypes.push(tweetsType.filter((type) => type === eventType).length);
+      perEventTypes.push(eventsType.filter((type) => type === eventType).length);
     });
 
     window.eventTypesDistrib.data.datasets[0].data = perEventTypes;
@@ -254,7 +254,7 @@ const updateCharts = (startDate, endDate) => {
     window.eventTypesDistrib.options.title.text = `Nombre d'évènements en fonction du type d'interaction du ${formatDate(startDate)} au ${formatDate(endDate)}`;
     window.eventTypesDistrib.update();
   });
-  requestTweets.fail((err) => console.log('Error while fetching TweetEvents collection : ', err));
+  requestEvents.fail((err) => console.log('Error while fetching TweetEvents collection : ', err));
 };
 
 // eslint-disable-next-line no-extend-native

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cryptodidacte Stats</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="/tweetStats.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/stats.css" />
+  <style>
+    canvas {
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+    </style>
+</head>
+<body>
+  <input type="hidden" id="params-id" value="<%= id %>">
+  <h1 id="title">Cryptodidacte Tweet Stats</h1>
+  <button id="button-percentages">Toggle percentages display</button>
+  <div class="chart-container" style="width:800px">
+    <canvas id="chart"></canvas>
+  </div>
+  <div class="chart-container" style="width:800px">
+    <canvas id="eventTypeChart"></canvas>
+  </div>
+</body>
+</html>
