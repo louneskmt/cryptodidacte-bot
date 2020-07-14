@@ -12,7 +12,7 @@ Chart.plugins.unregister(ChartDataLabels);
 
 function formatDate(date) {
   const day = `0${date.getDate()}`;
-  const month = `0${date.getMonth()}`;
+  const month = `0${date.getMonth() + 1}`;
   return `${day.slice(-2)}/${month.slice(-2)}/${date.getFullYear()}`;
 }
 
