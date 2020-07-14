@@ -25,7 +25,7 @@ $(document).ready(() => {
 
     console.log(`${startDate.getTime()} - ${endDate.getTime()}`);
     $('#reportrange span').html(`${formatDate(startDate)} - ${formatDate(endDate)}`);
-    displayCharts(start, end);
+    displayCharts(startDate.getTime(), endDate.getTime());
   }
 
   $('#reportrange').daterangepicker({
@@ -33,7 +33,7 @@ $(document).ready(() => {
     endDate: moment(),
     ranges: {
       'Aujourd\'hui': [moment(), moment()],
-      '\\Hier': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+      Hier: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
       '7 derniers jours': [moment().subtract(6, 'days'), moment()],
       '30 derniers jours': [moment().subtract(29, 'days'), moment()],
       'Ce mois-ci': [moment().startOf('month'), moment().endOf('month')],
@@ -77,7 +77,7 @@ $(document).ready(() => {
 });
 
 const displayCharts = (start, end) => {
-  const requestTweets = $.post('/api/db/tweetevents/get', { timestamp: { $gt: start, $lt: end } }, (res) => {
+  const requestTweets = $.post('/api/db/tweetevents/get', { filter: { timestamp: { $gt: start, $lt: end } } }, (res) => {
     if (res === '-1') return console.log('Error while fetching TweetEvents collection.');
     tweets = res.queryResponse;
     console.log(tweets);
