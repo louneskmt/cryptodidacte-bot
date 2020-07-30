@@ -103,22 +103,18 @@
         "options": [
           {
             "label": "🏦 Gérer mes CDT",
-            "description": "",
             "metadata": "global_menu_manage_token"
           },
           {
             "label": "📊 Statistiques",
-            "description": "",
             "metadata": "global_menu_stats"
           },
           {
             "label": "⚙️ Paramètres",
-            "description": "",
             "metadata": "global_menu_settings"
           },
           {
             "label": "🆘 Aide",
-            "description": "",
             "metadata": "cdt_help"
           }
         ]
