@@ -155,7 +155,7 @@ const claimTokens = (userId, amount, address) => {
 
         if (balance < amount) {
           __(`There are not enough funds in the wallet of ${user ? `@${user.username}` : userId} (currently ${balance} CDT).`);
-          return reject(new Error(insertVariablesInTemplate(messageTemplates.fidelity.sendAmountTooHigh, { balance }, true)));
+          return reject(new Error(insertVariablesInTemplate(messageTemplates.fidelity.sendAmountTooHigh, { balance })));
         }
 
         const toAddress = address || user.address;
@@ -210,7 +210,7 @@ const sendTokens = (from, to, amount) => new Promise((resolve, reject) => {
     .then((userFrom) => {
       if (!userFrom || userFrom.balance < amount) {
         __(`There are not enough funds in this account (@${userFrom ? userFrom.username : ''})`);
-        return reject(new Error(insertVariablesInTemplate(messageTemplates.fidelity.sendAmountTooHigh, { balance: userFrom ? userFrom.balance : 0 }, true)));
+        return reject(new Error(insertVariablesInTemplate(messageTemplates.fidelity.sendAmountTooHigh, { balance: userFrom ? userFrom.balance : 0 })));
       }
 
       const query = { _id: toId, username: to.screen_name };

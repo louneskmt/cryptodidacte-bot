@@ -1,12 +1,14 @@
-const insertVariablesInTemplate = (messageData, params, text = false) => {
-  const clone = { ...messageData };
+const insertVariablesInTemplate = (messageData, params) => {
+  let clone;
+  if (typeof messageData === 'object') clone = { ...messageData };
+  else if (typeof messageData === 'string') clone = { text: messageData };
 
   for (const key in params) {
     const regex = new RegExp(`%{(${key.toString()})}`, 'gm');
     clone.text = clone.text.replace(regex, params[key]);
   }
 
-  if (text) return clone.text;
+  if (typeof messageData === 'string') return clone.text;
   return clone;
 };
 
