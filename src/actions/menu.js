@@ -2,7 +2,7 @@ const { __ } = require('../logger.js');
 const Twitter = require('../Twitter.js');
 const messageTemplates = require('../../data/message_templates.json');
 
-const DEFAULT = 'fidelity';
+const DEFAULT = 'global';
 
 module.exports = function sendMenu(params, args) {
   const { userId } = params;

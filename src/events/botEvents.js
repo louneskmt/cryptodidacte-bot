@@ -117,6 +117,8 @@ botEvents.on('dm', (userId, messageObject) => {
         if (Object.prototype.hasOwnProperty.call(fnExact, metadata)) {
           return fnExact[metadata](params);
         }
+
+        if (metadata.startsWith('global_menu_')) return actions.sendMenu(params, [metadata.substring('global_menu_'.length)]);
       }
 
       const { command, args } = parseCommand(message);
