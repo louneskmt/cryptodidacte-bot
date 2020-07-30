@@ -7,9 +7,7 @@ async function end(params, { description, resetStatus = true, endMessage = true 
   const { userId } = params;
 
   if (resetStatus) await UserStatus.del(userId);
-
-  Twitter.sendMessage(userId, description);
-
+  if (description) Twitter.sendMessage(userId, description);
   if (endMessage) {
     setTimeout(() => {
       Twitter.sendMessage(userId, messageTemplates.global.end);
