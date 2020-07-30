@@ -7,8 +7,9 @@ const Twitter = new Twit(twitterConfig);
 
 const sendMessage = (userId, data) => {
   let messageData;
-  if (typeof data === 'object') messageData = data;
-  else if (typeof data === 'string') messageData = { text: data };
+  if (typeof data === 'string') messageData = { text: data };
+  else if (typeof data === 'object') messageData = data;
+  else throw new Error('Please provide a valid message data.');
 
   const message = {
     event: {
