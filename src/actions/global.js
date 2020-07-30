@@ -8,8 +8,7 @@ async function end(params, { description, resetStatus = true, endMessage = true 
 
   if (resetStatus) await UserStatus.del(userId);
 
-  if (description && typeof description === 'string') Twitter.sendTextMessage(userId, description);
-  else if (description && typeof description === 'object') Twitter.sendMessage(userId, description);
+  Twitter.sendMessage(userId, description);
 
   if (endMessage) {
     setTimeout(() => {
@@ -23,8 +22,7 @@ async function end(params, { description, resetStatus = true, endMessage = true 
 function retry(params, description) {
   const { userId } = params;
 
-  if (description && typeof description === 'string') Twitter.sendTextMessage(userId, description);
-  else if (description && typeof description === 'object') Twitter.sendMessage(userId, description);
+  if (description) Twitter.sendMessage(userId, description);
   else {
     Twitter.sendMessage(userId, messageTemplates.global.retry);
   }

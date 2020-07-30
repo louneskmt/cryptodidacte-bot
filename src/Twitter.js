@@ -5,7 +5,11 @@ const { twitterConfig } = require('../config.js');
 
 const Twitter = new Twit(twitterConfig);
 
-const sendMessage = (userId, messageData) => {
+const sendMessage = (userId, data) => {
+  let messageData;
+  if (typeof data === 'object') messageData = data;
+  else if (typeof data === 'string') messageData = { text: data };
+
   const message = {
     event: {
       type: 'message_create',

@@ -1,122 +1,48 @@
 {
   "global": {
-    "end": {
-      "text": "Fin de l'action 🙃"
-    },
-    "retry": {
-      "text": "❌ Veuillez réessayer ou entrez 'Cancel' pour annuler."
-    },
-    "error": {
-      "text": "Oups, quelque chose n'a pas fonctionné. Veuillez réassyer plus tard ou contacter @lounes_kmt si l'issue persiste."
-    },
-    "done": {
-      "text": "✅ Terminé!"
-    },
-    "timeout": {
-      "text": "Délai dépassé, veuillez réessayer. (timeout)"
-    },
-    "intro": {
-      "text": "👋 Bienvenue ! \n\nCe bot est une interface entre vous et le programme de fidelité de @Cryptodidacte. À terme, un site web sera disponible.\n\nIl y a plusieurs manières d'utiliser ce bot : premièrement, vous pouvez avoir accès aux différentes options en envoyant 'Start' pour lancer le menu. Si vous cliquez sur une option dans ce menu, vous serez guidé dans l'action (dans le cas d'informations nécessaires, le bot vous les demandera). Il existe également des commandes 'raccourcis' vous permettant d'être le plus efficace possible : par exemple, 'send 10 CDT to @lounes_kmt'. Enfin, si vous utilisez une commande nécessitant des paramètres, sans les spécifier, cela lancera alors la procédure guidée.\n\nEnvoyez 'help' pour afficher les commandes disponibles'.\n\nVous pouvez à tout moment envoyer 'Cancel' pour annuler l'action en cours (ne fonctionne pas pour les commandes instantannées).\n\nEn cas d'un quelconque bug, ou simplement pour nous faire un retour, n'hésitez pas à contacter @lounes_kmt via messages privés ou dev@louneskmt.com"
-    },
-    "helpCommands": {
-      "text": "Commandes disponibles :\n\n  - 'balance' : obtenir son solde off-chain\n  - 'send <amount> CDT @<destinataire>' : envoyer des CDT à un compte Twitter\n  - 'link <address>' : associer une adresse Ethereum à votre compte Twitter\n  - 'linked' : voir l'adresse actuellement associée\n  - 'withdraw <amount> <address>' : transférer des tokens de votre wallet off-chain à votre adresse Ethereum. Il n'est pas nécessaire de spécifier <address> si vous avez déjà associé une adresse.\n  - 'help' : affiche cette aide\n\nCommandes en développement :\n\n  - 'deposit' : vous permettra d'envoyer des tokens directement sur votre compte Twitter\n  - 'stats' : affichage de toutes vos statistiques quant à vos interactions avec le compte @Cryptodidacte\n\nPour relire le message d'introduction, envoyer 'help full'."
-    }
+    "end": "Fin de l'action 🙃",
+    "retry": "❌ Veuillez réessayer ou entrez 'Cancel' pour annuler.",
+    "error": "Oups, quelque chose n'a pas fonctionné. Veuillez réassyer plus tard ou contacter @lounes_kmt si l'issue persiste.",
+    "done": "✅ Terminé!",
+    "timeout": "Délai dépassé, veuillez réessayer. (timeout)",
+    "intro": "👋 Bienvenue ! \n\nCe bot est une interface entre vous et le programme de fidelité de @Cryptodidacte. À terme, un site web sera disponible.\n\nIl y a plusieurs manières d'utiliser ce bot : premièrement, vous pouvez avoir accès aux différentes options en envoyant 'Start' pour lancer le menu. Si vous cliquez sur une option dans ce menu, vous serez guidé dans l'action (dans le cas d'informations nécessaires, le bot vous les demandera). Il existe également des commandes 'raccourcis' vous permettant d'être le plus efficace possible : par exemple, 'send 10 CDT to @lounes_kmt'. Enfin, si vous utilisez une commande nécessitant des paramètres, sans les spécifier, cela lancera alors la procédure guidée.\n\nEnvoyez 'help' pour afficher les commandes disponibles'.\n\nVous pouvez à tout moment envoyer 'Cancel' pour annuler l'action en cours (ne fonctionne pas pour les commandes instantannées).\n\nEn cas d'un quelconque bug, ou simplement pour nous faire un retour, n'hésitez pas à contacter @lounes_kmt via messages privés ou dev@louneskmt.com",
+    "helpCommands": "Commandes disponibles :\n\n  - 'balance' : obtenir son solde off-chain\n  - 'send <amount> CDT @<destinataire>' : envoyer des CDT à un compte Twitter\n  - 'link <address>' : associer une adresse Ethereum à votre compte Twitter\n  - 'linked' : voir l'adresse actuellement associée\n  - 'withdraw <amount> <address>' : transférer des tokens de votre wallet off-chain à votre adresse Ethereum. Il n'est pas nécessaire de spécifier <address> si vous avez déjà associé une adresse.\n  - 'help' : affiche cette aide\n\nCommandes en développement :\n\n  - 'deposit' : vous permettra d'envoyer des tokens directement sur votre compte Twitter\n  - 'stats' : affichage de toutes vos statistiques quant à vos interactions avec le compte @Cryptodidacte\n\nPour relire le message d'introduction, envoyer 'help full'." 
   },
   "lnquiz": {
-    "notify": {
-        "text": "🥳 Vous venez d'être ajouté comme gagant d'un LNQuiz ! Vous pouvez dès maintenant récupérer votre récompense de %{reward} sats, en envoyant 'Start' puis en choisissant '🎁 Claim rewards' !"
-    },
-    "confirmAddition": {
-        "text": "✅ Vous avez bien ajouté les trois gagants suivants : \n\n🏁 @%{winner1}\n✍️ @%{winner2}\n🎲 @%{winner3}"
-    },
-    "badAmount": {
-        "text": "Le montant de votre invoice est de %{amount} sats. Merci d'en générer une nouvelle pour %{expectedAmount} sats et réessayer."
-    },
-    "currentRewards": {
-        "text": "Récompenses #LNQuiz actuelles :\n\n🏁 %{question} sats\n✍️ %{writing} sats \n🎲 %{random} sats"
-    },
-    "askForInvoice": {
-        "text": "Veuillez envoyer une invoice pour %{amount} sats."
-    },
-    "askForWinners": {
-      "text": "➡️ Veuillez envoyer les nouveaux gagnants dans l'ordre indiqué : 🏁 Question - ✍️ Writing - 🎲 Random."
-    },
-    "askForRewards": {
-      "text": "➡️ Veuillez envoyer les nouveaux montants de récompenses dans l'ordre indiqué : 🏁 Question - ✍️ Writing - 🎲 Random, séparés par un espace et en satoshis (e.g. '150 300 150')."
-    },
-    "retry": {
-      "text": "Vous n'avez pas entré trois gagnants."
-    },
-    "wip": {
-      "text": "Paiement en cours..."
-    },
-    "paid": {
-      "text": "✅ Envoyé!"
-    },
-    "error": {
-      "text": "❌ Il y a eu une erreur lors du paiement ou de la génération de l'invoice... Veuillez réessayer plus tard."
-    },
-    "nothing": {
-      "text": "Vous n'avez rien à récupérer."
-    }
+    "notify": "🥳 Vous venez d'être ajouté comme gagant d'un LNQuiz ! Vous pouvez dès maintenant récupérer votre récompense de %{reward} sats, en envoyant 'Start' puis en choisissant '🎁 Claim rewards' !",
+    "confirmAddition": "✅ Vous avez bien ajouté les trois gagants suivants : \n\n🏁 @%{winner1}\n✍️ @%{winner2}\n🎲 @%{winner3}",
+    "badAmount": "Le montant de votre invoice est de %{amount} sats. Merci d'en générer une nouvelle pour %{expectedAmount} sats et réessayer.",
+    "currentRewards": "Récompenses #LNQuiz actuelles :\n\n🏁 %{question} sats\n✍️ %{writing} sats \n🎲 %{random} sats",
+    "askForInvoice": "Veuillez envoyer une invoice pour %{amount} sats.",
+    "askForWinners": "➡️ Veuillez envoyer les nouveaux gagnants dans l'ordre indiqué : 🏁 Question - ✍️ Writing - 🎲 Random.",
+    "askForRewards": "➡️ Veuillez envoyer les nouveaux montants de récompenses dans l'ordre indiqué : 🏁 Question - ✍️ Writing - 🎲 Random, séparés par un espace et en satoshis (e.g. '150 300 150').",
+    "retry": "Vous n'avez pas entré trois gagnants.",
+    "wip": "Paiement en cours...",
+    "paid": "✅ Envoyé!",
+    "error": "❌ Il y a eu une erreur lors du paiement ou de la génération de l'invoice... Veuillez réessayer plus tard.",
+    "nothing": "Vous n'avez rien à récupérer." 
   },
   "tip": {
-    "wip": {
-      "text": "Génération de l'invoice en cours..."
-    },
-    "error": {
-      "text": "❌ Il y a eu une erreur lors de la génération de l'invoice... Veuillez réessayer plus tard."
-    },
-    "thanks": {
-      "text": "🙏 Merci beaucoup pour votre soutien ! À bientôt !"
-    }
+    "wip": "Génération de l'invoice en cours...",
+    "error": "❌ Il y a eu une erreur lors de la génération de l'invoice... Veuillez réessayer plus tard.",
+    "thanks": "🙏 Merci beaucoup pour votre soutien ! À bientôt !" 
   },
   "fidelity": {
-    "linkAddress": {
-      "text": "Veuillez envoyer une adresse Ethereum à associer à votre compte Twitter."
-    },
-    "linkAddressOk": {
-      "text": "➡️ Votre compte Twitter est maintenant associé à l'adresse Ethereum suivante : %{address} !"
-    },
-    "getAddressOk": {
-      "text": "➡️ Votre compte Twitter est actuellement associé à l'adresse Ethereum suivante : %{address} !"
-    },
-    "getAddressNone": {
-      "text": "➡️ Vous n'avez pas encore associé d'adresse Ethereum à votre compte Twitter. Vous pouvez cependant le faire dès maintenant en utilisant les commandes 'link' ou 'link <address>'."
-    },
-    "claimOk": {
-      "text": "➡️ Transaction diffusée avec le hash %{hash}. Suivez là maintenant sur https://etherscan.io/tx/%{hash} !"
-    },
-    "error": {
-      "text": "❌ Erreur - %{err}"
-    },
-    "getBalance": {
-      "text": "Vous avez actuellement %{balance} CDT off-chain !"
-    },
-    "getBalanceEmpty": {
-      "text": "Désolé, votre wallet est vide ! Commencer à récolter dès maintenant des Cryptotidacte Tokens en interagissant avec le compte de @Cryptodidacte !"
-    },
-    "sendOk": {
-      "text": "✅ Vous avez envoyé %{amount} CDT à @%{to} avec succès ! Votre solde est maintenant de %{balance} CDT !"
-    },
-    "sendTweetOk": {
-      "text": "✅ Vous avez envoyé %{amount} CDT à @%{to} avec succès !"
-    },
-    "sendTweetNoRecipient": {
-      "text": "Vous devez spécifier un destinataire, en répondant à quelqu'un, ou en le mentionnant. Voici un exemple :\n\n'@CDidacteBot send 1 CDT to @Cryptodidacte'"
-    },
-    "received": {
-      "text": "🎁 @%{sender} vient tout juste de vous envoyer %{amount} CDT !"
-    },
-    "noValidAmountOrAddress": {
-      "text": "Veuillez entrer un montant et une adresse valides (si vous n'en avez pas encore associé une)."
-    },
-    "sendAmountTooHigh": {
-      "text": "Il n'y a pas assez de fonds sur votre compte pour effectuer ce transfert : vous possèdez actuellement %{balance} CDT."
-    },
-    "isEthereumAddress": {
-      "text": "Veuillez entrer ou associer une adresse Ethereum valide."
-    }
+    "linkAddress": "Veuillez envoyer une adresse Ethereum à associer à votre compte Twitter.",
+    "linkAddressOk": "➡️ Votre compte Twitter est maintenant associé à l'adresse Ethereum suivante : %{address} !",
+    "getAddressOk": "➡️ Votre compte Twitter est actuellement associé à l'adresse Ethereum suivante : %{address} !",
+    "getAddressNone": "➡️ Vous n'avez pas encore associé d'adresse Ethereum à votre compte Twitter. Vous pouvez cependant le faire dès maintenant en utilisant les commandes 'link' ou 'link <address>'.",
+    "claimOk": "➡️ Transaction diffusée avec le hash %{hash}. Suivez là maintenant sur https://etherscan.io/tx/%{hash} !",
+    "error": "❌ Erreur - %{err}",
+    "getBalance": "Vous avez actuellement %{balance} CDT off-chain !",
+    "getBalanceEmpty": "Désolé, votre wallet est vide ! Commencer à récolter dès maintenant des Cryptotidacte Tokens en interagissant avec le compte de @Cryptodidacte !",
+    "sendOk": "✅ Vous avez envoyé %{amount} CDT à @%{to} avec succès ! Votre solde est maintenant de %{balance} CDT !",
+    "sendTweetOk": "✅ Vous avez envoyé %{amount} CDT à @%{to} avec succès !",
+    "sendTweetNoRecipient": "Vous devez spécifier un destinataire, en répondant à quelqu'un, ou en le mentionnant. Voici un exemple :\n\n'@CDidacteBot send 1 CDT to @Cryptodidacte'",
+    "received": "🎁 @%{sender} vient tout juste de vous envoyer %{amount} CDT !",
+    "noValidAmountOrAddress": "Veuillez entrer un montant et une adresse valides (si vous n'en avez pas encore associé une).",
+    "sendAmountTooHigh": "Il n'y a pas assez de fonds sur votre compte pour effectuer ce transfert : vous possèdez actuellement %{balance} CDT.",
+    "isEthereumAddress": "Veuillez entrer ou associer une adresse Ethereum valide." 
   },
   "menu": {
     "admin": {
@@ -215,23 +141,11 @@
     }
   },
   "validators_errors": {
-    "isEthereumAddress": {
-      "text": "❌ Il ne s'agit pas d'une adresse Ethereum valide, veuillez réessayer ou entrez 'Cancel' pour annuler."
-    },
-    "isLightningInvoice": {
-      "text": "❌ Il ne s'agit pas d'une invoice Lightning valide, veuillez réessayer ou entrez 'Cancel' pour annuler."
-    },
-    "onlyOneRecipient": {
-      "text": "Veuillez spécifier un seul destinataire en le taguant."
-    },
-    "oneRecipient": {
-      "text": "Veuillez spécifier un destinataire en le taguant."
-    },
-    "validAmount": {
-      "text": "Veuillez réessayez en spécifiant un montant valide."
-    },
-    "noSelfSending": {
-      "text": "Vous ne pouvez pas envoyer des CDT à vous-même (c'est inutile et ils ne se dédoubleront pas par magie 😁)."
-    }
+    "isEthereumAddress": "❌ Il ne s'agit pas d'une adresse Ethereum valide, veuillez réessayer ou entrez 'Cancel' pour annuler.",
+    "isLightningInvoice": "❌ Il ne s'agit pas d'une invoice Lightning valide, veuillez réessayer ou entrez 'Cancel' pour annuler.",
+    "onlyOneRecipient": "Veuillez spécifier un seul destinataire en le taguant.",
+    "oneRecipient": "Veuillez spécifier un destinataire en le taguant.",
+    "validAmount": "Veuillez réessayez en spécifiant un montant valide.",
+    "noSelfSending": "Vous ne pouvez pas envoyer des CDT à vous-même (c'est inutile et ils ne se dédoubleront pas par magie 😁)." 
   }
 }

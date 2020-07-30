@@ -23,7 +23,7 @@ function generateInvoice(params) {
       if (QRCodePath !== 'None') {
         Twitter.sendMessageWithImage(userId, invoice, QRCodePath);
       } else {
-        Twitter.sendTextMessage(userId, invoice);
+        Twitter.sendMessage(userId, invoice);
       }
       end(params, { description: messageTemplates.tip.thanks, endMessage: false });
     });
