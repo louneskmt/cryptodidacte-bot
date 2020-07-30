@@ -96,8 +96,54 @@
         ]
       }
     },
-    "fidelity": {
+    "global": {
       "text": "👋 Bienvenue à vous ! Que désireriez-vous faire ?",
+      "quick_reply": {
+        "type": "options",
+        "options": [
+          {
+            "label": "🏦 Gérer mes CDT",
+            "description": "",
+            "metadata": "global_menu_manage_token"
+          },
+          {
+            "label": "📊 Statistiques",
+            "description": "",
+            "metadata": "global_menu_stats"
+          },
+          {
+            "label": "⚙️ Paramètres",
+            "description": "",
+            "metadata": "global_menu_settings"
+          },
+          {
+            "label": "🆘 Aide",
+            "description": "",
+            "metadata": "cdt_help"
+          }
+        ]
+      }
+    },
+    "settings": {
+      "text": "➡️ Paramètres",
+      "quick_reply": {
+        "type": "options",
+        "options": [
+          {
+            "label": "🔗 Associer une adresse ETH",
+            "description": "CMD: 'link <address>'",
+            "metadata": "cdt_link_address"
+          },
+          {
+            "label": "🖇️ Voir l'adresse ETH associée",
+            "description": "CMD : 'linked'",
+            "metadata": "cdt_get_address"
+          }
+        ]
+      }
+    },
+    "manage_token": {
+      "text": "➡️ Gérer mes CDT",
       "quick_reply": {
         "type": "options",
         "options": [
@@ -105,11 +151,6 @@
             "label": "🏦 Voir mon solde de CDT",
             "description": "CMD: 'balance'",
             "metadata": "cdt_display_balance"
-          },
-          {
-            "label": "📊 Voir mes statistiques",
-            "description": "WIP: Not implemented yet",
-            "metadata": "cdt_stats"
           },
           {
             "label": "📤 Retirer des CDT",
@@ -120,21 +161,24 @@
             "label": "📥 Déposer des CDT",
             "description": "WIP: En cours de développement ", 
             "metadata": "cdt_refund"
+          }
+        ]
+      }
+    },
+    "stats": {
+      "text": "➡️ Statistiques",
+      "quick_reply": {
+        "type": "options",
+        "options": [
+          {
+            "label": "📊 Résumé de mes statistiques",
+            "description": "WIP: Not implemented yet",
+            "metadata": "cdt_stats"
           },
           {
-            "label": "🔗 Associer une adresse ETH",
-            "description": "CMD: 'link <address>'",
-            "metadata": "cdt_link_address"
-          },
-          {
-            "label": "🖇️ Voir l'adresse ETH associée",
-            "description": "CMD : 'linked'",
-            "metadata": "cdt_get_address"
-          },
-          {
-            "label": "🆘 Afficher l'aide",
-            "description": "CMD : 'help'",
-            "metadata": "cdt_help"
+            "label": "🚀 Statistiques détaillées",
+            "description": "WIP: Not implemented yet",
+            "metadata": "cdt_stats_plus"
           }
         ]
       }
