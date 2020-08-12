@@ -13,6 +13,8 @@
   <script type="text/javascript" src="stats.js"></script>
 
   <link rel="stylesheet" type="text/css" href="stats.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
   <style>
     canvas {
       -moz-user-select: none;
@@ -22,20 +24,24 @@
     </style>
 </head>
 <body>
-  <h1>Cryptodidacte Stats</h1>
-  <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px">
-    <i class="fa fa-calendar"></i>&nbsp;
-    <span></span> <i class="fa fa-caret-down"></i>
-  </div>
-  <button id="button-percentages">Toggle percentages display</button>
-  <div class="chart-container" style="width:800px">
-    <canvas id="dayChart"></canvas>
-  </div>
-  <div class="chart-container" style="width:800px">
-    <canvas id="hourChart"></canvas>
-  </div>
-  <div class="chart-container" style="width:800px">
-    <canvas id="eventTypeChart"></canvas>
-  </div>
+  <header>
+    <h1>Cryptodidacte Stats</h1>
+  </header>
+
+  <section id="sect-stats">
+    <div class="chart-container"></div>
+    <div class="chart-container"></div>
+    <div class="chart-container"></div>
+    <div class="chart-container"></div>
+  </section>
+  
+  <footer>
+    <div class="--ta-left"><span class="--icon" click-role="showIndex">first_page</span></div>
+    <div class="--ta-center">
+        <div class="footer-cont">
+        </div>
+    </div>
+    <div class="--ta-right"><span class="--icon">settings</span></div>
+  </footer>
 </body>
 </html>
