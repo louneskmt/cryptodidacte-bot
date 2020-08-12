@@ -98,7 +98,7 @@ userSchema.methods.populateEvents = function populateEvents() {
   });
 };
 
-userSchema.methods.getWeeklyLeaderboard = function getWeeklyLeaderboard() {
+userSchema.statics.getWeeklyLeaderboard = function getWeeklyLeaderboard() {
   return new Promise((resolve, reject) => {
     this
       .find({})
@@ -109,7 +109,7 @@ userSchema.methods.getWeeklyLeaderboard = function getWeeklyLeaderboard() {
   });
 };
 
-userSchema.methods.getMonthlyLeaderboard = function getMonthlyLeaderboard() {
+userSchema.statics.getMonthlyLeaderboard = function getMonthlyLeaderboard() {
   return new Promise((resolve, reject) => {
     this
       .find({})
@@ -120,7 +120,7 @@ userSchema.methods.getMonthlyLeaderboard = function getMonthlyLeaderboard() {
   });
 };
 
-userSchema.methods.getLeaderboard = function getLeaderboard() {
+userSchema.statics.getLeaderboard = function getLeaderboard() {
   return new Promise((resolve, reject) => {
     this
       .find({})
