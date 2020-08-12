@@ -1,8 +1,6 @@
-const moment = require('moment');
-
 const { __ } = require('../logger.js');
 const Twitter = require('../Twitter.js');
-const { TweetEvent, User } = require('../database/mongoose.js');
+const { User } = require('../database/mongoose.js');
 
 const weeklyLeaderboard = () => {
   /*
