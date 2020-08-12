@@ -98,6 +98,7 @@ botEvents.on('dm', (userId, messageObject) => {
     balance: commands.getBalance,
     send: commands.send,
     help: commands.help,
+    test: commands.test,
   };
 
   const params = {

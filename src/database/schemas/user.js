@@ -98,6 +98,39 @@ userSchema.methods.populateEvents = function populateEvents() {
   });
 };
 
+userSchema.methods.getWeeklyLeaderboard = function getWeeklyLeaderboard() {
+  return new Promise((resolve, reject) => {
+    this
+      .find({})
+      .sort({ 'points.thisWeek': -1 })
+      .limit(5)
+      .then((users) => resolve(users))
+      .catch((err) => reject(err));
+  });
+};
+
+userSchema.methods.getMonthlyLeaderboard = function getMonthlyLeaderboard() {
+  return new Promise((resolve, reject) => {
+    this
+      .find({})
+      .sort({ 'points.thisMonth': -1 })
+      .limit(5)
+      .then((users) => resolve(users))
+      .catch((err) => reject(err));
+  });
+};
+
+userSchema.methods.getLeaderboard = function getLeaderboard() {
+  return new Promise((resolve, reject) => {
+    this
+      .find({})
+      .sort({ 'points.allTime': -1 })
+      .limit(5)
+      .then((users) => resolve(users))
+      .catch((err) => reject(err));
+  });
+};
+
 userSchema.virtual('userId').get(function () { return this._id; });
 
 module.exports = userSchema;

@@ -122,9 +122,16 @@ const filterUser = (userObject) => {
   return true;
 };
 
+const check = () => {
+  retweetVerification();
+  quoteVerification();
+  replyVerification();
+};
+
 module.exports = {
   retweetVerification,
   quoteVerification,
   replyVerification,
   filterUser,
+  check,
 };

@@ -5,6 +5,7 @@ const getBalanceCommand = require('./actions/fidelity/getBalanceCommand.js');
 const getAddressCommand = require('./actions/fidelity/getAddressCommand.js');
 const sendCommand = require('./actions/fidelity/sendCommand.js');
 const helpCommand = require('./actions/helpCommand.js');
+const testCommand = require('./actions/testCommand.js');
 
 module.exports = {
   withdraw: withdrawCommand,
@@ -13,4 +14,5 @@ module.exports = {
   getAddress: getAddressCommand,
   send: sendCommand,
   help: helpCommand,
+  test: testCommand,
 };

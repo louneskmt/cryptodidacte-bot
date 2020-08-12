@@ -19,6 +19,7 @@
     "express-session": "^1.17.0",
     "helmet": "^3.21.3",
     "json-beautify": "^1.1.1",
+    "moment": "^2.27.0",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
     "mongoose-autopopulate": "^0.12.1",
