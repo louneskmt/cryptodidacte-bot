@@ -22,6 +22,8 @@ onViewLoaded = async function (params) {
     if (way === 'right') nextIndex = (selectedIndex + 1 >= children.length) ? 0 : selectedIndex + 1;
     else if (way === 'left') nextIndex = (selectedIndex - 1 < 0) ? 2 : selectedIndex - 1;
 
+    $('#inp--data-filter').text(`Page ${nextIndex + 1}`);
+
     console.log('next', nextIndex);
     children.eq(selectedIndex).removeClass('selected');
     children.eq(nextIndex).addClass('selected');
