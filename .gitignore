@@ -123,3 +123,4 @@ logs/
 assets/temp/*
 
 test.js
+local_index.js

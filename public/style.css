@@ -696,3 +696,20 @@ kbd{
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+
+#sect-view > .stats-container{
+    position: static;
+    padding: 20px 5vw;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.stats-container.--grid-sls aside {
+    display: flex;
+    align-items:  center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    font-size: 150%;
+    color: #FFF;
+}

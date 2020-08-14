@@ -4,29 +4,31 @@ onViewLoaded = async function (params) {
   * ************************ DECLARING VIEW ************************ *
   **************************************************************** */
 
-  let mode = null;
-  let isEditing = false;
-  const obj = JSON.parse(params);
-  const {
-    collection,
-    filter = {},
-    title,
-  } = obj;
+  JSON.parse(params);
 
-  const query = {
-    collection,
-    filter,
-  };
+  $('.sect-data-header h1').text('Statistics');
 
-  const hideKeys = obj.hideKeys || ['_id'];
+  $('body').removeClass('loading');
 
-  viewDetails.query = query;
-  $('.sect-data-header h1').text(title || 'Database');
+  $('.selector').click(function () {
+    const way = this.id.replace('-selector', '');
+    console.log('click', way);
 
-  $('#data-table tbody').html('');
-  $('body').addClass('loading');
+    const children = $('.stats-container > main').children('.intent');
+    const selectedIndex = $('.stats-container > main').find('.selected').index();
+    console.log(selectedIndex);
 
-  let setFooterTools = async function (html) {
+    let nextIndex;
+    if (way === 'right') nextIndex = (selectedIndex + 1 >= children.length) ? 0 : selectedIndex + 1;
+    else if (way === 'left') nextIndex = (selectedIndex - 1 < 0) ? 2 : selectedIndex - 1;
+
+    console.log('next', nextIndex);
+    children.eq(selectedIndex).removeClass('selected');
+    children.eq(nextIndex).addClass('selected');
+  });
+
+
+  const setFooterTools = async function (html) {
     $('.sect-data-footer .footer-cont').addClass('--anim-swipeExit reveal --anim-fill');
     await sleep(0.5);
     $('.sect-data-footer .footer-cont').removeClass('--anim-swipeExit');
@@ -38,15 +40,7 @@ onViewLoaded = async function (params) {
   * *********************** EVENT LISTENERS ************************ *
   **************************************************************** */
 
-  const roleMap = {
-    showIndex,
-    addElement,
-    sendNewElements,
-    deleteElements,
-    cancelEdit,
-    startEdit,
-    sendEdit,
-  };
+  const roleMap = {};
 
   $('*[click-role=showIndex]').click(showIndex);
   $('footer').off('click');
@@ -56,6 +50,4 @@ onViewLoaded = async function (params) {
       roleMap[role].call(this);
     }
   });
-
-  setMode('view');
 };
